@@ -3,17 +3,17 @@ const { StatusCodes } = require('http-status-codes')
 const { json } = require('stream/consumers')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
-const { attachCookiesToResponse } = require('../utils')
+const { attachCookiesToResponse, createTokenUser } = require('../utils')
 require('dotenv').config()
 
 //add Register, Login,  logOut,
 const register = async (req, res) => {
   console.log(req)
-  const { name, email, password, deliveryAddress } = req.body
+  const { name, email, password, deliveryAddress, role } = req.body
 
   //console.log(req.body, 'FROM  REQUEST BODY')
 
-  if (!name || !email || !password || !deliveryAddress) {
+  if (!name || !email || !password || !deliveryAddress || !role) {
     console.log('Registration Error!')
     //  throw new Error('Please fill all the fields')
     return res.status(StatusCodes.BAD_REQUEST).json({ error: res.error })
@@ -27,22 +27,28 @@ const register = async (req, res) => {
   }
   // TODO
   //check  if registered User  is'admin Or 'user''
-  const createUser = await UserSchema.create({
+  const createdUser = await UserSchema.create({
     name,
     email,
     password,
-    deliveryAddress
+    deliveryAddress,
+    role
   })
-  // add UserToken
-  const tokenUser = {
-    name: createUser.name,
-    userId: createUser._id,
-    role: createUser.role
-  }
+  //
 
-  res
-    .status(StatusCodes.CREATED)
-    .json({ user: tokenUser, message: 'User created' })
+  /*
+  const token = jwt.sign(
+    { userId: createUser._id, name: createUser.name, role: createUser.role },
+    process.env.JWT_SECRET,
+    { expiresIn: '1h' }
+  )
+
+  */
+
+  // add UserToken
+  const tokenUser = createTokenUser(createdUser)
+  attachCookiesToResponse({ res, user: tokenUser })
+  res.status(StatusCodes.CREATED).json({ user: tokenUser })
 }
 
 //TODO
@@ -50,6 +56,7 @@ const register = async (req, res) => {
 //add userLogin       Method
 const login = async (req, res) => {
   const { email, password } = req.body
+  console.log(req.body, 'FROM  REQUEST BODY')
   if (!email || !password) {
     console.log('Login Error!')
 
@@ -57,22 +64,18 @@ const login = async (req, res) => {
       .status(StatusCodes.BAD_REQUEST)
       .json({ error: 'Please fill all the fields' })
   }
-  const singleUser = await UserSchema.findOne({ email })
+  const user = await UserSchema.findOne({ email })
 
-  if (!singleUser) {
+  if (!user) {
     throw new Error('no User found!, Invalid credentials')
   }
-  const isPasswordCorrect = await singleUser.checkPassword(password)
+  const isPasswordCorrect = await user.checkPassword(password)
   if (!isPasswordCorrect) {
     throw new Error('Invalid credentials, password does not  Match')
   }
   //if  password Matched,  add   user to Token
-  const tokenUser = {
-    name: singleUser.name,
-    userId: singleUser._id,
-    role: singleUser.role
-  }
-  attachCookiesToResponse({ res, tokenUser })
+  const tokenUser = createTokenUser(user)
+  attachCookiesToResponse({ res, user: tokenUser })
 
   res
     .status(StatusCodes.OK)
@@ -90,7 +93,8 @@ const logout = async (req, res) => {
     expires: new Date(Date.now() + 10 * 1000),
     signed: false
   }),
-    res.status(StatusCodes.OK).json({ message: 'User logged out!' })
+    console.log('user logged Out')
+  res.status(StatusCodes.OK).json({ message: 'User logged out!' })
 }
 
 module.exports = {

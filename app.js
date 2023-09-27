@@ -11,11 +11,21 @@ const dbConnection = require('./db/connectDb')
 //authRouter
 
 const authRouter = require('./routes/authRoute')
+const cookieParser = require('cookie-parser')
+const userRouter = require('./routes/userRoute')
 
 //NOTE!
-app.use(express.json()) // This convert's  the request  to Jason from Postman
+
 // from authRoute
+app.use(express.json()) // This convert's  the request  to Jason from Postman
+
+//ROUTES FOR  AUTH USERS
+//cookieParser("secret") required for signed cookies'
+app.use(cookieParser(process.env.JWT_SECRET))
 app.use('/api/v1/auth', authRouter)
+
+//ROUTE FOR USERS
+app.use('/api/v1/users', userRouter)
 
 //   Add Port
 const port = process.env.PORT || 3000 // if  the Port  is  undefined, use port 3000
