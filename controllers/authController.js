@@ -3,6 +3,7 @@ const { StatusCodes } = require('http-status-codes')
 const { json } = require('stream/consumers')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
+const { attachCookiesToResponse } = require('../utils')
 require('dotenv').config()
 
 //add Register, Login,  logOut,
@@ -71,6 +72,11 @@ const login = async (req, res) => {
     userId: singleUser._id,
     role: singleUser.role
   }
+  attachCookiesToResponse({ res, tokenUser })
+
+  res
+    .status(StatusCodes.OK)
+    .json({ user: tokenUser, message: 'User logged in' })
 }
 
 //TODO
@@ -78,6 +84,17 @@ const login = async (req, res) => {
 //attach Cookies to Response
 
 //addUserLogOut  method
+const logout = async (req, res) => {
+  res.cookie('token', 'logout', {
+    httpOnly: true,
+    expires: new Date(Date.now() + 10 * 1000),
+    signed: false
+  }),
+    res.status(StatusCodes.OK).json({ message: 'User logged out!' })
+}
+
 module.exports = {
-  register
+  register,
+  login,
+  logout
 }
