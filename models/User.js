@@ -2,6 +2,8 @@ const mongoose = require('mongoose')
 
 const validator = require('validator')
 const Bcrypt = require('bcrypt')
+/* The code is defining a Mongoose schema for a user. It specifies the structure and validation rules
+for the user object. */
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -40,8 +42,10 @@ const UserSchema = new mongoose.Schema({
   }
 })
 
+/* The code `UserSchema.pre('save', async function () { ... })` is a pre-save hook in Mongoose. It is a
+middleware function that is executed before saving a user object to the database. */
 UserSchema.pre('save', async function () {
-  //check  if  password  is changed, of  modified
+  //check  if  password  is changed, if  modified
 
   if (!this.isModified('password')) return
   //generate salt and hash password

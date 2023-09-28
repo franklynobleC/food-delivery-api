@@ -28,6 +28,7 @@ app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/users', userRouter)
 
 //   Add Port
+/* This code is setting up the server to listen on a specific port. */
 const port = process.env.PORT || 3000 // if  the Port  is  undefined, use port 3000
 const start = async () => {
   try {
