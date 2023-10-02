@@ -10,7 +10,6 @@
  * resourceUserId converted to a string, then nothing is returned. Otherwise, an error is thrown with
  * the message 'You are not authorized to perform this action'.
  */
-
 const checkPermissions = (requestUser, resourceUserId) => {
   console.log(requestUser)
   console.loh(resourceUserId)

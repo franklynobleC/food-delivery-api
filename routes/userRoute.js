@@ -8,23 +8,42 @@ const {
 //import  all  from  the controller
 
 const {
-  updateSingleUser,
+  updateUserPassword,
+  updateUser,
   getSingleUser,
   getAllUsers
 } = require('../controllers/userController')
 
-//TODO
+//TOD//update user password, (pass in  the new and  old  password)
+
+router.patch(
+  '/updateUserPassword',
+  authenticateUser,
+  authorizedPermissions('admin', 'user'),
+  updateUserPassword
+)
+
+//update user name and Email
+router.patch(
+  '/:id',
+  authenticateUser,
+  authorizedPermissions('admin', 'user'),
+  updateUser
+)
 
 // GET ALL USERS
 router.get(
   '/getAllUsers',
   authenticateUser,
   authorizedPermissions('admin', 'user'),
-  getAllUsers,
+  getAllUsers
 ),
-
-router.get('/:id', authenticateUser,
-  authorizedPermissions('admin', 'user'), getSingleUser)
+  router.get(
+    '/:id',
+    authenticateUser,
+    authorizedPermissions('admin', 'user'),
+    getSingleUser
+  )
 
 //get single user
 //router.get('/:id', getSingleUser)
