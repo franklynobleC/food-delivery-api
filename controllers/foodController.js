@@ -2,9 +2,7 @@ const FoodSchema = require('../models/Food')
 const { StatusCodes } = require('http-status-codes')
 const path = require('path')
 
-const getAllFood = async (req, res) => {
-  req.body.user = req.user.userId
-
+const getAllFoods = async (req, res) => {
   const food = await FoodSchema.find({})
   if (!food) {
     res.status(StatusCodes.BAD_REQUEST).json({ food: 'Product not found' })
@@ -26,20 +24,17 @@ const getSingleFood = async (req, res) => {
   res.status(StatusCodes.OK).json({ food: singleFood })
 }
 const createFood = async (req, res) => {
-  const { name, description, price, category } = req.body
+  req.body.user = req.user.userId
 
-  if (!name || !description || !price || !category) {
+  console.log(req.user, '/n from create food route')
+
+  if (!req.body) {
     res
       .status(StatusCodes.BAD_REQUEST)
       .json({ failed: 'Please fill all fields' })
   }
-  const createdFood = await FoodSchema.create({
-    name,
-    description,
-    price,
-    category
-  })
-  res.status(StatusCodes.CREATED).json({ food: createdFood })
+  const createdFood = await FoodSchema.create({ ...req.body })
+  res.status(StatusCodes.CREATED).json({ createdFood })
 }
 
 const updateFood = async (req, res) => {
@@ -57,7 +52,23 @@ const updateFood = async (req, res) => {
   )
 
   if (!updateFood) {
-res.status(StatusCodes.BAD_REQUEST).json({ failed: 'Product not found in database, please provide a valid  id' })
+    res.status(StatusCodes.BAD_REQUEST).json({
+      failed: 'Product not found in database, please provide a valid  id'
+    })
   }
-  res.status(StatusCodes.OK).json({ food: updateFood, message: "Success! food updated successfully" })
+  res
+    .status(StatusCodes.OK)
+    .json({ food: updateFood, message: 'Success! food updated successfully' })
+}
+
+const deleteFood = async (req, res) => {
+  const { id: foodId } = req.params;
+}
+
+module.exports = {
+  getAllFoods,
+  getSingleFood,
+  createFood,
+  updateFood
+  deleteFood,
 }

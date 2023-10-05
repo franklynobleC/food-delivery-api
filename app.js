@@ -13,6 +13,7 @@ const dbConnection = require('./db/connectDb')
 const authRouter = require('./routes/authRoute')
 const cookieParser = require('cookie-parser')
 const userRouter = require('./routes/userRoute')
+const foodRouter = require('./routes/foodRoute')
 
 //NOTE!
 
@@ -26,6 +27,7 @@ app.use('/api/v1/auth', authRouter)
 
 //ROUTE FOR USERS
 app.use('/api/v1/users', userRouter)
+app.use('/api/v1/foods', foodRouter)
 
 //   Add Port
 /* This code is setting up the server to listen on a specific port. */
