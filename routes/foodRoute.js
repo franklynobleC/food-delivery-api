@@ -4,7 +4,8 @@ const {
   createFood,
   getAllFoods,
   getSingleFood,
-  updateFood
+  updateFood,
+  deleteFood
 } = require('../controllers/foodController')
 
 const {
@@ -29,6 +30,14 @@ router.patch(
   authorizedPermissions('admin', 'user'),
   updateFood
 )
+
+router.delete(
+  '/:id',
+  authenticateUser,
+  authorizedPermissions('admin', 'user'),
+  deleteFood
+)
+
 router.post(
   '/createFood',
   authenticateUser,

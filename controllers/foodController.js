@@ -13,16 +13,25 @@ const getAllFoods = async (req, res) => {
 
 const getSingleFood = async (req, res) => {
   const { id: foodId } = req.params
+
   if (!foodId) {
     res
       .status(StatusCodes.BAD_REQUEST)
-      .json({ failed: 'Product not found, please provide a valid  id' })
+      .json({ failed: 'failed. please provide a valid  id' })
   }
 
   const singleFood = await FoodSchema.findOne({ _id: foodId })
 
+  if (!singleFood || singleFood === null ||singleFood.length === 0) {
+    res.status(StatusCodes.BAD_REQUEST).json({
+      failed: `food with id ${foodId} not found in database, please provide a valid id`
+    })
+
+    return
+  }
   res.status(StatusCodes.OK).json({ food: singleFood })
 }
+
 const createFood = async (req, res) => {
   req.body.user = req.user.userId
 
@@ -51,7 +60,7 @@ const updateFood = async (req, res) => {
     }
   )
 
-  if (!updateFood) {
+  if (!foodId || updateFood.length === 0 || updateFood === null) {
     res.status(StatusCodes.BAD_REQUEST).json({
       failed: 'Product not found in database, please provide a valid  id'
     })
@@ -62,13 +71,26 @@ const updateFood = async (req, res) => {
 }
 
 const deleteFood = async (req, res) => {
-  const { id: foodId } = req.params;
+  const { id: foodId } = req.params
+  const singleFoodToDelete = await FoodSchema.findOneAndDelete({ _id: foodId })
+  if (
+    !singleFoodToDelete ||
+    singleFoodToDelete === null ||
+    singleFoodToDelete.length === 0
+  ) {
+    res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ failed: `failed, could not find  food with  id ${foodId}` })
+  }
+  res
+    .status(StatusCodes.OK)
+    .json({ message: `Success! food with id ${foodId} deleted successfully` })
 }
 
 module.exports = {
   getAllFoods,
   getSingleFood,
   createFood,
-  updateFood
-  deleteFood,
+  updateFood,
+  deleteFood
 }
