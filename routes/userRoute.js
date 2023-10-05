@@ -11,10 +11,18 @@ const {
   updateUserPassword,
   updateUser,
   getSingleUser,
-  getAllUsers
+  getAllUsers,
+  deleteUser,
+  showCurrentUser
 } = require('../controllers/userController')
 
 //TOD//update user password, (pass in  the new and  old  password)
+router.get(
+  '/showCurrentUser',
+  authenticateUser,
+  authorizedPermissions('admin', 'user'),
+  showCurrentUser
+)
 
 router.patch(
   '/updateUserPassword',
@@ -29,6 +37,12 @@ router.patch(
   authenticateUser,
   authorizedPermissions('admin', 'user'),
   updateUser
+)
+router.delete(
+  '/:id',
+  authenticateUser,
+  authorizedPermissions('admin', 'user'),
+  deleteUser
 )
 
 // GET ALL USERS

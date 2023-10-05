@@ -9,12 +9,13 @@ require('dotenv').config()
 const getAllUsers = async (req, res) => {
   const allUsers = await UserSchema.find({})
 
-  if (!allUsers) {
+  if (!allUsers || allUsers.length === 0) {
     //throw new Error("No users Found in User's table")
 
     res
       .status(StatusCodes.NOT_FOUND)
       .json({ message: 'No Data Found In Database' })
+    return
   }
 
   res.status(StatusCodes.OK).json({ users: { allUsers } })
@@ -72,7 +73,7 @@ is updating a single user in the database. */
 const updateUserPassword = async (req, res) => {
   const { newPassword, oldPassword } = req.body
 
-  console.log("newPassword",newPassword,  "OldPassword",oldPassword)
+  console.log('newPassword', newPassword, 'OldPassword', oldPassword)
   if (!newPassword || newPassword.length === 0 || !oldPassword) {
     res
       .status(StatusCodes.BAD_REQUEST)
@@ -81,6 +82,7 @@ const updateUserPassword = async (req, res) => {
   }
   // getThe User using  the UserId, (get  it from the request)
 
+  // add error message to  be  more  readable for  password   change
   const user = await UserSchema.findOne({ _id: req.user.userId })
 
   //check   if  password Matches
@@ -98,9 +100,44 @@ const updateUserPassword = async (req, res) => {
   res.status(StatusCodes.OK).json({ message: 'Success! Password Updated' })
 }
 
+const showCurrentUser = async (req, res) => {
+ // console.log('SHOW CURRENT USER', req.user)
+  console.log('SHOW CURRENT USER')
+  res.status(StatusCodes.OK).json({ user: req.user })
+}
+
+const deleteUser = async (req, res) => {
+  const { id } = req.params
+  console.log('Delete User')
+
+  if (!id || id.length === 0) {
+    res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: 'Failed! please  insert valid id' })
+  }
+
+  const deleteUser = await UserSchema.findOneAndDelete({ _id: id })
+  console.log(deleteUser)
+  //  deleteUser
+  if (!deleteUser || deleteUser === ull) {
+    res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: 'Failed!  user not id not FOUND  in Database' })
+  }
+
+  // deleteUser
+  res.status(StatusCodes.OK).json({
+    message: `"Successful! User with id ${
+      (deleteUser._id, deleteUser.email)
+    } Deleted"`
+  })
+}
+
 module.exports = {
   getAllUsers,
   getSingleUser,
   updateUser,
-  updateUserPassword
+  updateUserPassword,
+  showCurrentUser,
+  deleteUser
 }
