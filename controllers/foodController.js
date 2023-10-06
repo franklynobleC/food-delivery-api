@@ -13,7 +13,7 @@ const getAllFoods = async (req, res) => {
 
 const getSingleFood = async (req, res) => {
   const { id: foodId } = req.params
-
+  console.log(foodId, 'params  id and  added')
   if (!foodId) {
     res
       .status(StatusCodes.BAD_REQUEST)
@@ -22,7 +22,7 @@ const getSingleFood = async (req, res) => {
 
   const singleFood = await FoodSchema.findOne({ _id: foodId })
 
-  if (!singleFood || singleFood === null ||singleFood.length === 0) {
+  if (!singleFood || singleFood === null || singleFood.length === 0) {
     res.status(StatusCodes.BAD_REQUEST).json({
       failed: `food with id ${foodId} not found in database, please provide a valid id`
     })
