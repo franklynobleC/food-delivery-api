@@ -14,6 +14,7 @@ const authRouter = require('./routes/authRoute')
 const cookieParser = require('cookie-parser')
 const userRouter = require('./routes/userRoute')
 const foodRouter = require('./routes/foodRoute')
+const orderRouter = require('./routes/orderRoute')
 
 //NOTE!
 
@@ -28,6 +29,7 @@ app.use('/api/v1/auth', authRouter)
 //ROUTE FOR USERS
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/foods', foodRouter)
+app.use('/api/v1/order', orderRouter)
 
 //   Add Port
 /* This code is setting up the server to listen on a specific port. */
