@@ -8,7 +8,7 @@ const SingleOrderItemSchema = mongoose.Schema({
   image: {
     type: String
   },
-  amount: {
+  price: {
     type: String,
 
     required: [true, 'amount can  not  be Empty please provide amount']
@@ -26,7 +26,12 @@ const SingleOrderItemSchema = mongoose.Schema({
 const OrderSchema = new mongoose.Schema(
   {
     OrderItems: [SingleOrderItemSchema],
-    total: {
+    totalQuantity: {
+      type: Number,
+      required: true
+    },
+
+    totalPrice: {
       type: Number,
       required: true
     },

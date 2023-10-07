@@ -1,21 +1,63 @@
 const OrderSchema = require('../models/Order')
+const FoodSchema = require('../models/Food')
 const { StatusCodes } = require('http-status-codes')
 const { restart } = require('nodemon')
 const { json } = require('stream/consumers')
 
 const createOrder = async (req, res) => {
-  req.user = req.user.userId
+  // req.user = req.user.userId
 
-  const createdOrder = await OrderSchema.create(req.body)
+  const { OrderItems: OrderItems, deliveryFee } = req.body
 
-  if (!createdOrder || createdOrder.length === 0) {
-    res.status(StatusCodes.BAD_REQUEST).json({
-      message:
-        'Failed! could not create   order.  make sure input fields are valid',
-      errors: createdOrder
+  if (!OrderItems || OrderItems.length < 1) {
+    throw new Error({ message: 'OrderItems is required' })
+  }
+  if (!deliveryFee || deliveryFee === null) {
+    throw new Error({
+      message: 'totalQuantity, totalPrice, deliveryFee is required'
     })
   }
-  res.status(StatusCodes.CREATED).json({ order: createdOrder })
+  let orderItems = []
+  let subTotal = 0
+  let totalPriceValue = 0
+
+  for (let i = 0; i < OrderItems.length; i++) {
+    const foodFromDb = await FoodSchema.findOne({ _id: OrderItems[i].food })
+
+    if (!foodFromDb || foodFromDb === null) {
+      throw new Error({
+        message: `Failed! food with id ${OrderItems[i].food} not found`
+      })
+    }
+    //Destructure and  pass  Data from foodDb
+    const { _id, name, image, price } = foodFromDb
+    const singleOrderItem = {
+      food: _id,
+      name,
+      image,
+      price,
+      quantity: OrderItems[i].quantity
+    }
+
+    OrderItems.push[singleOrderItem]
+    //calculateSubTotal
+    subTotal += singleOrderItem.price * singleOrderItem.quantity
+  }
+  //calculate touch-action-delay
+  totalPriceValue = subTotal + deliveryFee
+
+  const createdOrderItem = await OrderItems({
+    orderItems,
+    totalQuantity,
+    totalPrice: totalPriceValue,
+    deliveryFee,
+    user: req.user.userId
+  })
+
+  res.status(StatusCodes.CREATED).json({
+    order: createdOrderItem,
+    message: 'Success! Order created successfully'
+  })
 }
 
 const getAllOrders = async (req, res) => {
