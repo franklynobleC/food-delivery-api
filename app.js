@@ -29,7 +29,7 @@ app.use('/api/v1/auth', authRouter)
 //ROUTE FOR USERS
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/foods', foodRouter)
-app.use('/api/v1/order', orderRouter)
+app.use('/api/v1/orders', orderRouter)
 
 //   Add Port
 /* This code is setting up the server to listen on a specific port. */

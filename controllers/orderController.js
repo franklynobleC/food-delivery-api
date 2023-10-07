@@ -3,13 +3,18 @@ const FoodSchema = require('../models/Food')
 const { StatusCodes } = require('http-status-codes')
 const { restart } = require('nodemon')
 const { json } = require('stream/consumers')
+const { error } = require('console')
+const { STATUS_CODES } = require('http')
 
+//   TODO:       add check Permission,  to rout  authUser and check Permission
 const createOrder = async (req, res) => {
   // req.user = req.user.userId
-
+  console.log(req.user.userId)
   const { OrderItems: OrderItems, deliveryFee } = req.body
 
-  if (!OrderItems || OrderItems.length < 1) {
+  console.log(OrderItems, deliveryFee)
+
+  if (!OrderItems) {
     throw new Error({ message: 'OrderItems is required' })
   }
   if (!deliveryFee || deliveryFee === null) {
@@ -20,15 +25,17 @@ const createOrder = async (req, res) => {
   let orderItems = []
   let subTotal = 0
   let totalPriceValue = 0
-
+  let itemTotalQuantity = 0
   for (let i = 0; i < OrderItems.length; i++) {
+    console.log(OrderItems[i].food)
     const foodFromDb = await FoodSchema.findOne({ _id: OrderItems[i].food })
 
     if (!foodFromDb || foodFromDb === null) {
-      throw new Error({
-        message: `Failed! food with id ${OrderItems[i].food} not found`
-      })
+      res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: `food not found${error.message}` })
     }
+
     //Destructure and  pass  Data from foodDb
     const { _id, name, image, price } = foodFromDb
     const singleOrderItem = {
@@ -39,16 +46,22 @@ const createOrder = async (req, res) => {
       quantity: OrderItems[i].quantity
     }
 
-    OrderItems.push[singleOrderItem]
+    itemTotalQuantity += OrderItems[i].quantity
+    //orderItems.push[singleOrderItem]
+
+    //orderItems += OrderItems[i]
+
+    orderItems = [...orderItems, singleOrderItem]
+
     //calculateSubTotal
     subTotal += singleOrderItem.price * singleOrderItem.quantity
   }
   //calculate touch-action-delay
   totalPriceValue = subTotal + deliveryFee
 
-  const createdOrderItem = await OrderItems({
-    orderItems,
-    totalQuantity,
+  const createdOrderItem = await OrderSchema.create({
+    OrderItems: orderItems,
+    totalQuantity: itemTotalQuantity,
     totalPrice: totalPriceValue,
     deliveryFee,
     user: req.user.userId
