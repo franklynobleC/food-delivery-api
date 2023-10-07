@@ -14,14 +14,14 @@ const {
   getSingleOrder
 } = require('../controllers/orderController')
 
+router.get('/getAllOrders', getAllOrders)
+router.get('/:id', getSingleOrder)
 router.post(
   '/createOrder',
   authenticateUser,
   authorizedPermissions('admin', 'user'),
   createOrder
 )
-router.get('/getAllOrders', getAllOrders)
-router.get('/:id', getSingleOrder)
 router.patch('/:id', updateOrder)
 router.delete('/:id', deleteOrder)
 

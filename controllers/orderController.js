@@ -95,7 +95,7 @@ const getSingleOrder = async (req, res) => {
     })
   }
 
-  restart.status(StatusCodes.OK).json({ order: singleOrder })
+  res.status(StatusCodes.OK).json({ order: singleOrder })
 }
 
 //TODO  in this   function, ensure the UserId,  is  from  the request Object
