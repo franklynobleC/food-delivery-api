@@ -58,6 +58,8 @@ const createOrder = async (req, res) => {
   }
   //calculate touch-action-delay
   totalPriceValue = subTotal + deliveryFee
+  //TODO:
+  //add payment and  amount,
 
   const createdOrderItem = await OrderSchema.create({
     OrderItems: orderItems,
