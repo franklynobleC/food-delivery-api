@@ -1,11 +1,12 @@
 const FoodSchema = require('../models/Food')
 const { StatusCodes } = require('http-status-codes')
 const path = require('path')
-
+//TODO:
+//add Search index to check  if food entered is protein, breakfast, and  dinner
 const getAllFoods = async (req, res) => {
   const food = await FoodSchema.find({})
   if (!food) {
-    res.status(StatusCodes.BAD_REQUEST).json({ food: 'Product not found' })
+    res.status(StatusCodes.BAD_REQUEST).json({ food: 'No product found in database' })
   }
 
   res.status(StatusCodes.OK).json({ allFood: food })
@@ -85,6 +86,13 @@ const deleteFood = async (req, res) => {
   res
     .status(StatusCodes.OK)
     .json({ message: `Success! food with id ${foodId} deleted successfully` })
+}
+//TODO:
+//add search Index for category
+const getFoodCategory = async (req, res) => {
+
+  //const  category =
+
 }
 
 module.exports = {

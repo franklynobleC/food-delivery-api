@@ -98,10 +98,295 @@ db.game.updateOne({ user: 'PlayerOne' }, { $mul: { life: 2 } })
 //   { $nor: [{ type: 'Breakfast' }, { cook_time: { $gt: 30 } }] },
 //   { _id: 0, title: 1, cook_time: 1 }
 // )
+//db.testRecipe.find({ "tags": "quick"} ).count()
+/**========================================================================
+ **                             MATCHING MULTIPLE  ARRAY VALUES
+ *========================================================================**/
+//db.testRecipe.find({ "tags":{$all:["quick","vegetarian"]}}).count()
 /*
-db.getCollection('testRecipe').insertMany(
+/**========================================================================
+ *   ARRAYS AND QUERY  OPERATORS
+ *========================================================================**/
+//db.testRecipe.find({"rating":{$lt:4}},{"type":1,"_id":0} )
+//db.testRecipe.find({ "rating": { $elemMatch: { $lt: 4 } }},{"type":1,"_id":0} ).count()
+//db.testRecipe.find({ "rating": 5 },{"_id":0,"type":1, "title":1})
 
-[
+/**============================================
+ *              TO Know If any recipe have a 5 as  the First Rating
+ *=============================================**/
+//db.testRecipe.find({ "rating.0": 5},{"_id":0,"type":1, "title":1})
+
+/**------------------------------------------------------------------------
+         **                            Querying Embedded Documents(Object,or OBjects  in Object)
+/**----------------------
+ *    document and specifically asked for documents where there is a field called name
+inside ingredients, with a value of “pepper”. This matches three documents. This
+is sometimes referred to as matching an “embedded field”.
+ *------------------------**/
+
+//db.testRecipe.find({ 'ingredients.name': 'pepper' }).count()
+//db.testRecipe.find({ "ingredients.quantity.amount": { $gt: 1 } },{"ingredients.quantity":1,"vegetarian":1})
+// db.testRecipe.find(
+//   { title: 'Eggs Benedict' },
+//   { title: 1, _id: 0, 'ingredients.name': 1 }
+// )
+
+///db.testRecipe.updateMany({}, {$push:{"tags":"free"}})
+
+/**------------------------------------------------------------------------
+ **                            Update||  Appending Multiple Items to Array
+ *------------------------------------------------------------------------**/
+//db.testRecipe.updateMany({ }, {$push: {"tags":["new", "hot"]}})
+//db.testRecipe.find({}, { "_id": 0, "type": 1, "title": 1, "tags": 1 })
+
+/**--------------------------------------------
+ *       Update||  Appending Multiple Items to Array At Once
+ *---------------------------------------------**/
+//db.testRecipe.updateMany({}, { $push: { "tags": { $each: ["new", "hot"] } } })
+
+//db.testRecipe.find({}, {"tags":1,"_id":0,"vegetarian":0,"directions":0})
+
+//db.testRecipe.find({})
+
+/** REMOVING AN ITEM FROM AN ARRAY reflect  on  this (mongodb for JobSeekers) */
+
+/**------------------------------------------------------------------------
+ **                     MONGODB AGGREGATE FUNCTION
+ *------------------------------------------------------------------------**/
+// db.testRecipe.aggregate([{
+//   "$project": {
+// "avgRating": {"$avg":"$rating"}
+// }
+// }])
+
+// db.testRecipe.aggregate([{
+//   "$project": {
+
+//     "avgRating": {
+// "$round":[{"$avg":"$rating"},2]
+//     },
+//      "_id": 0,
+//     "title": 1,
+// }
+// }
+// ])
+
+/**--------------------------------------------
+ **Filtering Document Matching Document
+ *  this would match on   data that  has  rating, and  would  not  display  data  that does not  have rating
+ ---------------------------------------------**/
+// db.testRecipe.aggregate([{
+//   "$match": {
+//     "rating": { "$exists": true }
+//   }
+// },{
+//   "$project": {
+//     "_id": 0,
+//     "title": 1,
+//     "avRating": {
+// "$round":[{"$avg":"$rating"},2]
+//      }
+// }
+// }])
+
+/**--------------------------------------------
+ *                         Aggregate,
+    look for  only "BreakFast" Type recipes that  have a  vegetarian  array field. Or We could  look for only Option boolean field
+ *---------------------------------------------**/
+// db.testRecipe.aggregate([
+//   {
+//     "$match": {
+//       "rating": { "$exists": true },
+//       "type": "Breakfast",
+//       "vegetarian_option": true
+//     }
+//   },
+//   {
+//     "$project": {
+//       "_id": 0,
+//       "title": 1,
+//       "avgRating": {
+//         "$round": [{ "$avg": "$rating"  }, 2]
+//       }
+//     }
+//   }
+// ])
+
+/**--------------------------------------------
+ *                         Aggregate,Multiple Matches
+    using   stages multiple times
+ *---------------------------------------------**/
+// db.testRecipe.aggregate([
+
+//   {
+//     "$match": {
+//       "rating": { "$exists": true },
+// "type":"Breakfast"
+//     }
+//   },
+//   {
+//     "$match": { "vegetarian_option": true },
+
+//   },
+//   {
+//     "$project": {
+//       "_id": 0,
+//       "title":1,
+//       "avgRating": {
+//       "$round": [{ "$avg": "$rating" }, 2]
+// }
+// }
+// }
+// ])
+/* db.getCollection('testRecipe').insertMany(
+/**--------------------------------------------
+ **   AGGREGATE
+
+ making Large Pipeline More Readable
+ *---------------------------------------------**/
+// var matchRecipes = {
+//   "$match": {
+//     "rating": { "$exists": true },
+//     "type": "Breakfast",
+// "vegetarian_option": true,
+// }
+// }
+
+// var projectRecipes = {
+//   "$project": {
+//     "_id": 0,
+//     "title": 1,
+//     "avgRating": {
+//       "$round": [{ "$avg":"$rating"},2]
+// }
+// }
+// }
+
+// db.testRecipe.aggregate([matchRecipes,projectRecipes])
+
+/**--------------------------------------------
+ **   AGGREGATE
+Grouping and Sorting Stages.  Simple Example, grouping  by  Recipe Type and Getting a count of  how  many Recipes Match, Then Sort Alphabetically
+
+Within $group we assign _id: "$type", which is telling MongoDB what field we
+want to “group by”, so here, we are grouping by the type field which is why the
+results now have a _id equal to the type field.
+*---------------------------------------------**/
+// db.testRecipe.aggregate([
+//   {
+// //match  only data  that has  rating
+//     "$match":{
+// "rating":{
+//        "$exists": true }
+//     }
+//   },
+//   //group
+//   {
+//     "$group": {
+//       "_id": "$type",
+//       "recipeCount": { "$count": {} }
+//     },
+
+//   },
+//   //sort  Alphabetically(1 = A-z, -1 = (Z-A))
+// {"$sort":{"_id":1}}
+// ])
+
+// db.testRecipe.aggregate([{
+//   "$match": {
+//   "rating":{"$exists": true}
+// }
+// },
+
+//   //stage two
+
+//   {
+
+//     "$project": {
+//       "type": 1,
+//       "avgRatingRecipe": { "$avg": "$rating" }
+//     }
+//   },
+
+//   //stage three
+//   {
+//     "$group": {
+//       "_id": "$type",
+//       "recipeCount": { "$count": {} },
+//       "avgRatingType": {
+//          "$avg": "$avgRatingRecipe"
+//        }
+//     }
+//   },
+//   // stage four
+//   {
+//     "$project": {
+// "avgRating":{"$round":["$avgRatingType",2]},"recipeCount":1
+//     },
+//   },
+//   // stage five
+//   {"$sort":{"_id":1}
+//   }])
+
+// db.tacos.aggregate([
+
+//   //stage one
+//   {
+//     "$addFields": {
+//       "search_title": {
+//   "$toLower": "$title"
+// }}
+//   },
+//   //stage two
+//   {
+//     "$addFields": {
+//       "search_words": {
+//     "$split":["$search_title"," "]
+//   }
+// }
+//   },
+
+//   {"$match":{"search_words":"tacos"}},
+//   //stage  four
+//   {"$sort":{"search_title":1}
+
+//   },
+//   //stage  five
+// {"$project":{"_id":0,"title":1}}
+// ])
+//If we wanted to change our search string slightly, using two words such as “street
+//tacos”, we could change our $match like so (recalling using $all to match multiple
+//elements in an array field)://
+
+/**  MONGODB    INDEX */
+
+//db.testRecipe.getIndexes()
+
+//*  multiKey Index, technically  it has  two  keys  Or fields(ingredients and name)
+//db.testRecipe.createIndex({"ingredients.name":1})
+
+//compound  index
+/*!SECTION
+This
+index type is composed of two or more fields, and each field can have its own
+direction. The index is then ordered by the keys within it
+*/
+//db.collection.createIndex({"title":1, "type":-1})
+
+/**--------------------------------------------
+ **               INFO HEADER
+Query Plans
+ *---------------------------------------------**/
+// let plan = db.testRecipe.find({ type: 'Dinner' }).explain()
+// console.log(plan)
+//db.testRecipe.find({"title":"Split Pea Soup"}).explain()
+/*{
+"$match": {
+"search_words": {
+"$all" : ["street", "tacos"] }
+}
+},
+ [
   {
   
     title: 'Split Pea Soup',

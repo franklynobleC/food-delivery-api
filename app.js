@@ -1,7 +1,7 @@
 const express = require('express')
 require('dotenv').config()
+// const {sendEmail} = require('./service/mailService')
 
-//app
 const app = express()
 
 //Database connection
@@ -38,6 +38,8 @@ const start = async () => {
   try {
     const db = await dbConnection(process.env.MONGO_URI)
     console.log('connection Successful')
+    //const  ml = sendEmail('testing for  mailGun!','Hello','essienfrankudom@gmail.com')
+    //console.log(ml)
   } catch (error) {
     console.log('connection Failed Error!', error)
   }
@@ -46,3 +48,29 @@ const start = async () => {
   })
 }
 start()
+
+const formData = require('form-data')
+const Mailgun = require('mailgun.js')
+
+console.log('Mail Gun  function')
+const mailgun = new Mailgun(formData)
+const client = mailgun.client({
+  username: 'softwaretestX',
+  key: process.env.EMAIL_API_KEY
+})
+
+const messageData = {
+  from: 'Excited User <me@samples.mailgun.org>',
+  to: 'essienfrankudom@gmail.com',
+  subject: 'hello',
+  text: 'Mail Test MailGun!'
+}
+
+client.messages
+  .create(process.env.EMAIL_DOMAIN_NAME, messageData)
+  .then(res => {
+    console.log(res)
+  })
+  .catch(err => {
+    console.log(err)
+  })

@@ -10,6 +10,7 @@
     "express-rate-limit": "^7.0.1",
     "http-status-codes": "^2.3.0",
     "jsonwebtoken": "^9.0.2",
+    "mailgun.js": "^9.3.0",
     "mongoose": "^7.5.2",
     "morgan": "^1.10.0",
     "node": "^20.6.0",

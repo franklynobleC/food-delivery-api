@@ -74,7 +74,16 @@ const createOrder = async (req, res) => {
     message: 'Success! Order created successfully'
   })
 }
+const getAllPendingOrders = async (req, res) => {
+  const pendingOrders = await OrderSchema.find({ status: 'Pending' })
+  if (!pendingOrders || pendingOrders.length === 0) {
+    res.status(StatusCodes.NOT_FOUND).json({
+      message: `No orders found Or  orders table empty ${Error.message}`
+    })
+  }
 
+  res.status(StatusCodes.OK).json({ orders: pendingOrders })
+}
 const getAllOrders = async (req, res) => {
   const allOrders = await OrderSchema.find({})
 
@@ -116,6 +125,10 @@ const updateOrder = async (req, res) => {
 
   res.status(StatusCodes.OK).json({ orderUpdated: updatedOrder })
 }
+//TODO:
+/**============================================
+ *   add Method  to  show status, either pending,payed,failed  or cancelled
+ *=============================================**/
 const deleteOrder = async (req, res) => {
   const { id: orderId } = req.params
   const deletedOrder = await OrderSchema.findByIdAndDelete({ _id: orderId })
@@ -135,5 +148,6 @@ module.exports = {
   getAllOrders,
   getSingleOrder,
   updateOrder,
-  deleteOrder
+  deleteOrder,
+  getAllPendingOrders,
 }
