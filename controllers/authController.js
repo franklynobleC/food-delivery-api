@@ -3,9 +3,13 @@ const { StatusCodes } = require('http-status-codes')
 const { json } = require('stream/consumers')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
+const  sendMail = require('../service/mailService')
 const { attachCookiesToResponse, createTokenUser } = require('../utils')
 require('dotenv').config()
-
+const emailFunc = async (email, name) => {
+const response = await sendMail(email, name)
+ return JSON.stringify(response)
+}
 //add Register, Login,  logOut,
 const register = async (req, res) => {
   console.log(req)
@@ -27,6 +31,8 @@ const register = async (req, res) => {
   }
   // TODO
   //check  if registered User  is'admin Or 'user''
+  await emailFunc(email,name)
+
   const createdUser = await UserSchema.create({
     name,
     email,
@@ -34,6 +40,7 @@ const register = async (req, res) => {
     deliveryAddress,
     role
   })
+
   //
 
   /*
