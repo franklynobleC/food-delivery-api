@@ -20,6 +20,7 @@ const FoodSchema = new mongoose.Schema(
     },
     //TODO :add image upload function
     image: {
+      name:String,
       type: String
     },
 

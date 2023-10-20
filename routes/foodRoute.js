@@ -5,7 +5,8 @@ const {
   getAllFoods,
   getSingleFood,
   updateFood,
-  deleteFood
+  deleteFood,
+  uploadImage
 } = require('../controllers/foodController')
 
 const {
@@ -43,6 +44,13 @@ router.post(
   authenticateUser,
   authorizedPermissions('admin', 'user'),
   createFood
+)
+
+router.post(
+  '/uploadImage',
+  authenticateUser,
+  authorizedPermissions('admin', 'user'),
+  uploadImage
 )
 
 module.exports = router

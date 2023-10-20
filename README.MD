@@ -30,3 +30,14 @@ This is a food delivery api that allows users to create an account, login, place
 - User Model
 - Food Model
 - Order Model
+
+
+
+
+
+
+
+
+#### upload Images
+ - install package express file  upload
+ - express  to static

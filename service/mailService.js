@@ -1,6 +1,15 @@
 const formData = require('form-data')
 const Mailgun = require('mailgun.js')
+/**
+ * The above function is a JavaScript function that sends an email to a specified email address with a
+ * specified name.
+ * @param email - The `email` parameter is a string that represents the email address of the recipient.
+ * @param name - The `name` parameter is a string that represents the name of the recipient of the
+ * email.
+ */
 
+//TODO:
+//change email, using sendGrid instead of      MailGun
 const sendMail = async (email, name) => {
   console.log('Mail Gun  function')
   const mailgun = new Mailgun(formData)

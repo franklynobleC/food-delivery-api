@@ -1,12 +1,15 @@
 const FoodSchema = require('../models/Food')
 const { StatusCodes } = require('http-status-codes')
 const path = require('path')
+const cloudinary = require('cloudinary').v2
 //TODO:
 //add Search index to check  if food entered is protein, breakfast, and  dinner
 const getAllFoods = async (req, res) => {
   const food = await FoodSchema.find({})
   if (!food) {
-    res.status(StatusCodes.BAD_REQUEST).json({ food: 'No product found in database' })
+    res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ food: 'No product found in database' })
   }
 
   res.status(StatusCodes.OK).json({ allFood: food })
@@ -90,15 +93,50 @@ const deleteFood = async (req, res) => {
 //TODO:
 //add search Index for category
 const getFoodCategory = async (req, res) => {
-
   //const  category =
-
 }
 
+const uploadImageLocal = async (req, res) => {
+  console.log('uploadImage func called')
+  if (!req.files) {
+    throw new Error(`No  File Uploaded${error.name}`)
+  }
+  const productImage = req.files.image
+  if (!productImage.mimetype.startsWith('image')) {
+    throw new error('please upload Image')
+  }
+  const maxSize = 1024 * 1024
+
+  if (productImage.size > maxSize) {
+    throw new error('please upload Image smaller than 1MB')
+  }
+  const imagePath = path.join(
+    __dirname,
+    '../public/uploads/' + `${productImage.name}`
+  )
+  await productImage.mv(imagePath)
+  res.status(StatusCodes.OK).json({
+    image: `/uploads/${productImage.name}`,
+    message: 'Image uploaded successfully'
+  })
+}
+
+const uploadImage = async (req, res) => {
+  console.log(req.files)
+  const result = await cloudinary.uploader.upload(
+    req.files.image.tempFilePath,
+    {
+      use_filename: true,
+      folder: 'file-upload'
+    }
+  )
+  res.status(StatusCodes.OK).json({ image: { src: result.secure_url } })
+}
 module.exports = {
   getAllFoods,
   getSingleFood,
   createFood,
   updateFood,
-  deleteFood
+  deleteFood,
+  uploadImage
 }
