@@ -1,6 +1,7 @@
 const FoodSchema = require('../models/Food')
 const { StatusCodes } = require('http-status-codes')
 const path = require('path')
+const fs = require('fs')
 const cloudinary = require('cloudinary').v2
 //TODO:
 //add Search index to check  if food entered is protein, breakfast, and  dinner
@@ -122,14 +123,38 @@ const uploadImageLocal = async (req, res) => {
 }
 
 const uploadImage = async (req, res) => {
-  console.log(req.files)
+  if (!req.files) {
+    res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ error: 'Failed! no file uploaded,  please  upload  file' })
+    return
+  }
+  const productImage = req.files.image
+  if (!productImage.mimetype.startsWith('image')) {
+    res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ error: 'Failed! please upload filetype image' })
+    return
+  }
+  const maxSize = 1024 * 1024
+
+  if (productImage.size > maxSize) {
+    res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ error: 'Failed! please upload Image smaller than 1MB' })
+  }
+
   const result = await cloudinary.uploader.upload(
-    req.files.image.tempFilePath,
+    productImage.tempFilePath,
     {
       use_filename: true,
       folder: 'file-upload'
     }
   )
+  /* `fs.unlinkSync(req.files.image.tempFilePath)` is a function call to the `unlinkSync` method from
+  the `fs` module in Node.js.  this */
+  fs.unlinkSync(productImage.tempFilePath)
+
   res.status(StatusCodes.OK).json({ image: { src: result.secure_url } })
 }
 module.exports = {
