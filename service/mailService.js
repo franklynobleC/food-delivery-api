@@ -41,11 +41,18 @@ const sendMail = async (email, name) => {
     .create(process.env.EMAIL_DOMAIN_NAME, messageData)
     .then(res => {
       //console.log(res)
-      return  JSON.stringify(res)
+      return JSON.stringify(res)
     })
     .catch(err => {
       console.log(err)
     })
 }
+const emailFunc = async (email, name) => {
+  const response = await sendMail(email, name)
+  return JSON.stringify(response)
+}
 
-module.exports = sendMail
+module.exports = {
+  sendMail,
+  emailFunc
+}

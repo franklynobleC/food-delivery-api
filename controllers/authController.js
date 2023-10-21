@@ -2,14 +2,14 @@ const UserSchema = require('../models/User')
 const { StatusCodes } = require('http-status-codes')
 const { json } = require('stream/consumers')
 const jwt = require('jsonwebtoken')
+const crypto = require('crypto')
 const bcrypt = require('bcrypt')
-const  sendMail = require('../service/mailService')
+const sendMail = require('../service/mailService')
 const { attachCookiesToResponse, createTokenUser } = require('../utils')
+const { error } = require('console')
+const { emailFunc } = require('../service/mailService')
 require('dotenv').config()
-const emailFunc = async (email, name) => {
-const response = await sendMail(email, name)
- return JSON.stringify(response)
-}
+
 //add Register, Login,  logOut,
 const register = async (req, res) => {
   console.log(req)
@@ -31,6 +31,7 @@ const register = async (req, res) => {
   }
   // TODO
   //check  if registered User  is'admin Or 'user''
+  //TODO:  uncomment to send  email
   //await emailFunc(email,name)
 
   const createdUser = await UserSchema.create({
@@ -104,8 +105,38 @@ const logout = async (req, res) => {
   res.status(StatusCodes.OK).json({ message: 'User logged out!' })
 }
 
+const forgotPassword = async (req, res) => {
+  const { email } = req.body
+  if (!email) {
+    throw new error('please provide a  valid  email')
+  }
+  const user = await UserSchema.findOne({ email })
+  if (user) {
+    const passwordToken = crypto.randomBytes(70).toString('hex')
+    //send  email
+    const tenMinutes = 1000 * 60 * 10
+    const passwordTokenExpiresDate = Date.now(Date.now() + tenMinutes)
+    user.passwordToken = passwordToken
+    user.passwordTokenExpirationDate = passwordTokenExpiresDate
+    await user.save()
+  }
+  //**Note wether  or  not  the  email exists,  still send  a success message,  should  there be  any problem, with someone  trying  to hack  through  sending  mails through  user, the success  message would  give a  hard  time
+  res
+    .status(StatusCodes.OK)
+    .json({
+      message: 'Successful! please check your email for password reset link'
+    })
+}
+const resetPassword = async (req, res) => {
+  console.log('rest pass')
+
+  res.send('reset password')
+}
+
 module.exports = {
   register,
   login,
-  logout
+  logout,
+  resetPassword,
+  forgotPassword
 }

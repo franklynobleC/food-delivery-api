@@ -127,13 +127,6 @@ const FoodSchema = new mongoose.Schema(
 
 module.exports = mongoose.model('Food', FoodSchema)
 
-```
-
-
-
-
-
-
-#### upload Images
+```#### upload Images
  - install package express file  upload
  - express  to static
