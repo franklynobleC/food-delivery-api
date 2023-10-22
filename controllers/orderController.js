@@ -60,7 +60,7 @@ const createOrder = async (req, res) => {
   totalPriceValue = subTotal + deliveryFee
   //TODO:
   //add payment and  amount,
-
+//send Email for Order placement. this email should contain, food name, quantity,and price of  the  total  Food
   const createdOrderItem = await OrderSchema.create({
     OrderItems: orderItems,
     totalQuantity: itemTotalQuantity,

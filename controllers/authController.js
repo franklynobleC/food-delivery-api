@@ -147,6 +147,9 @@ const resetPassword = async (req, res) => {
   const user = await UserSchema.findOne({ email })
   if (user) {
     console.log(user)
+    /* The code is creating two Date objects: `currentDate` and `tokenExpirationDate`.
+compare Dates  to make sure  user   updates password  within a  given period  of 10minutes
+    */
     const currentDate = new Date()
     const tokenExpirationDate = new Date(user.passwordTokenExpirationDate)
 
