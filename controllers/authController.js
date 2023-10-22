@@ -8,7 +8,8 @@ const bcrypt = require('bcrypt')
 const {
   attachCookiesToResponse,
   createTokenUser,
-  sendResetPasswordEmail
+  sendResetPasswordEmail,
+  createHash
 } = require('../utils')
 const { error } = require('console')
 const { emailFunc } = require('../service/mailService')
@@ -128,7 +129,7 @@ const forgotPassword = async (req, res) => {
 
     const tenMinutes = 1000 * 60 * 10
     const passwordTokenExpiresDate = Date.now(Date.now() + tenMinutes)
-    user.passwordToken = passwordToken
+    user.passwordToken = createHash(passwordToken)
     user.passwordTokenExpirationDate = passwordTokenExpiresDate
     await user.save()
   }
@@ -154,7 +155,7 @@ compare Dates  to make sure  user   updates password  within a  given period  of
     const tokenExpirationDate = new Date(user.passwordTokenExpirationDate)
 
     if (
-      user.passwordToken === token &&
+      user.passwordToken === createHash(token) &&
       tokenExpirationDate.getTime() + tenMinutes > currentDate.getTime()
     ) {
       console.log('all matched  now  move to  pass word  update')
