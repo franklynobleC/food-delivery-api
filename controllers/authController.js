@@ -4,8 +4,12 @@ const { json } = require('stream/consumers')
 const jwt = require('jsonwebtoken')
 const crypto = require('crypto')
 const bcrypt = require('bcrypt')
-const sendMail = require('../service/mailService')
-const { attachCookiesToResponse, createTokenUser } = require('../utils')
+
+const {
+  attachCookiesToResponse,
+  createTokenUser,
+  sendResetPasswordEmail
+} = require('../utils')
 const { error } = require('console')
 const { emailFunc } = require('../service/mailService')
 require('dotenv').config()
@@ -114,6 +118,14 @@ const forgotPassword = async (req, res) => {
   if (user) {
     const passwordToken = crypto.randomBytes(70).toString('hex')
     //send  email
+    const origin = 'http://localhost:5000/api/v1/auth/resetPassword'
+    await sendResetPasswordEmail({
+      name: user.name,
+      email: user.email,
+      token: passwordToken,
+      origin
+    })
+
     const tenMinutes = 1000 * 60 * 10
     const passwordTokenExpiresDate = Date.now(Date.now() + tenMinutes)
     user.passwordToken = passwordToken
@@ -121,16 +133,33 @@ const forgotPassword = async (req, res) => {
     await user.save()
   }
   //**Note wether  or  not  the  email exists,  still send  a success message,  should  there be  any problem, with someone  trying  to hack  through  sending  mails through  user, the success  message would  give a  hard  time
-  res
-    .status(StatusCodes.OK)
-    .json({
-      message: 'Successful! please check your email for password reset link'
-    })
+  res.status(StatusCodes.OK).json({
+    message: 'Successful! please check your email for password reset link'
+  })
 }
 const resetPassword = async (req, res) => {
-  console.log('rest pass')
+  const { token, email, password } = req.body
+  if (!token || !password || !email) {
+    throw new Error(`please  provide all  values ${error}`)
+  }
+  const user = await UserSchema.findOne({ email })
+  if (user) {
+    const currentDate = new Date()
 
-  res.send('reset password')
+    if (
+      user.passwordToken === token &&
+      !user.passwordTokenExpirationDate > currentDate
+    ) {
+      console.log('all matched  now  move to  pass word  update')
+      console.log(user)
+      user.password = password
+      user.passwordToken = null
+      user.passwordTokenExpirationDate = null
+      await user.save()
+    }
+   // console.log(user)
+//throw  new Error(`error occurred${error.toString()}`)
+  }
 }
 
 module.exports = {

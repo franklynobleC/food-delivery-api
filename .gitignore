@@ -9,3 +9,5 @@ package.json
 
 .vscode
 .trunk
+models/playground-3.mongodb.js
+models/playground-learning.mongodb.js
