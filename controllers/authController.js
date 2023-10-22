@@ -148,25 +148,31 @@ const resetPassword = async (req, res) => {
   if (user) {
     console.log(user)
     const currentDate = new Date()
-    const  tokenExpirationDate = new Date(user.passwordTokenExpirationDate)
-    console.log(user.passwordTokenExpirationDate)
-    console.log(user.token)
-    console.log(currentDate)
+    const tokenExpirationDate = new Date(user.passwordTokenExpirationDate)
 
     if (
       user.passwordToken === token &&
-      tokenExpirationDate.getTime()+tenMinutes > currentDate.getTime()
+      tokenExpirationDate.getTime() + tenMinutes > currentDate.getTime()
     ) {
       console.log('all matched  now  move to  pass word  update')
-      console.log(user)
+
       user.password = password
       user.passwordToken = null
       user.passwordTokenExpirationDate = null
       await user.save()
+    } else {
+      //send Email  that Token has expired,  user  should  reset  password
+      console.log('token expired, please resend  reset  password')
+      res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: 'Failed! token Expired, please reset password' })
     }
     // console.log(user)
     //throw  new Error(`error occurred${error.toString()}`)
   }
+  res
+    .status(StatusCodes.OK)
+    .json({ message: 'Success! pass word reset successful!' })
 }
 
 module.exports = {
