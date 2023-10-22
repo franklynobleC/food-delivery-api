@@ -142,13 +142,20 @@ const resetPassword = async (req, res) => {
   if (!token || !password || !email) {
     throw new Error(`please  provide all  values ${error}`)
   }
+  const tenMinutes = 1000 * 60 * 10
+
   const user = await UserSchema.findOne({ email })
   if (user) {
+    console.log(user)
     const currentDate = new Date()
+    const  tokenExpirationDate = new Date(user.passwordTokenExpirationDate)
+    console.log(user.passwordTokenExpirationDate)
+    console.log(user.token)
+    console.log(currentDate)
 
     if (
       user.passwordToken === token &&
-      !user.passwordTokenExpirationDate > currentDate
+      tokenExpirationDate.getTime()+tenMinutes > currentDate.getTime()
     ) {
       console.log('all matched  now  move to  pass word  update')
       console.log(user)
@@ -157,8 +164,8 @@ const resetPassword = async (req, res) => {
       user.passwordTokenExpirationDate = null
       await user.save()
     }
-   // console.log(user)
-//throw  new Error(`error occurred${error.toString()}`)
+    // console.log(user)
+    //throw  new Error(`error occurred${error.toString()}`)
   }
 }
 
