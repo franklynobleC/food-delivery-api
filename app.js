@@ -21,9 +21,12 @@ const dbConnection = require('./db/connectDb')
 //authRouter
 
 const authRouter = require('./routes/authRoute')
+//otherRouter
 const userRouter = require('./routes/userRoute')
 const foodRouter = require('./routes/foodRoute')
 const orderRouter = require('./routes/orderRoute')
+//paymentRouter
+const paymentRouter = require('./routes/paymentRoute')
 
 //NOTE!
 
@@ -43,6 +46,7 @@ app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/foods', foodRouter)
 app.use('/api/v1/orders', orderRouter)
+app.use('/api/v1/payment', paymentRouter)
 
 //   Add Port
 /* This code is setting up the server to listen on a specific port. */
