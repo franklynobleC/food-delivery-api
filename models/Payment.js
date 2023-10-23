@@ -8,16 +8,12 @@ const PaymentSchema = new mongoose.Schema({
   currency: {
     type: String,
     required: true,
-    enum: ['NGN', 'USD'],
+    enum: ['NGN'],
     default: 'NGN'
   },
   email: {
-type:String
+    type: String
   },
-  orderId: {
-    type:String,
-  },
-
   paymentStatus: {
     type: String,
     required: [true, 'please  provide  payment  status'],
@@ -26,7 +22,12 @@ type:String
   paymentAmount: {
     type: Number,
     required: [true, 'amount can  not  be  empty.  please  provide  amount'],
-    default:200
+    default: 200
+  },
+  order: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Order'
+    //required: [true, 'order can not be empty. please provide order']
   }
 })
 module.exports = mongoose.model('Payment', PaymentSchema)

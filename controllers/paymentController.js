@@ -1,5 +1,5 @@
 const { StatusCodes } = require('http-status-codes')
-const paymentSchema = require('../models/Payment')
+const PaymentSchema = require('../models/Payment')
 const { makePayment } = require('../service/paymentService')
 const createPayment = async (req, res) => {
   console.log('create  Payment function')
@@ -10,7 +10,14 @@ const createPayment = async (req, res) => {
     })
   }
   const result = await makePayment(email, amount)
-  console.log(result)
+  console.log('all Data sent from  payment')
+
+  //const refId = await result.data.reference
+
+  // const { reference } = await result.data
+  //   const {  data: {status, currency, description, reference, createdAt, updatedAt
+  // } = await result.data
+
   res
     .status(StatusCodes.CREATED)
     .json({ result, message: 'payment successful' })

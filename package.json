@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@paystack-oss/dev-cli": "^1.0.0-nightly.0",
     "bcrypt": "^5.1.1",
     "cloudinary": "^1.41.0",
     "cookie-parser": "^1.4.6",
@@ -19,4 +20,5 @@
     "paystack": "^2.0.1",
     "validator": "^13.11.0"
   }
+
 }
