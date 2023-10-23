@@ -1,9 +1,9 @@
 require('dotenv').config()
 var paystack = require('paystack')(process.env.PAYSTACK_API_SECRET_KEY)
 //add payment  functionality
-const  PaymentSchema = require('../models/Payment')
+const PaymentSchema = require('../models/Payment')
 
-const makePayment = async (email, amount) => {
+const makePayment = async (email, amount, orderId ) => {
   try {
     const response = await paystack.transaction.initialize({
       email: email,
@@ -11,15 +11,16 @@ const makePayment = async (email, amount) => {
       publicKey: process.env.PAYSTACK_API_PUBLICK_KEY,
       callback_url: 'https://paystacktest.com'
     })
-    const{reference}=  await response.data
+    const { reference } = await response.data
     console.log(response)
-console.log('FROM API')
-const paymentToDb = await PaymentSchema.create({
-  transactionId: reference,
-  amount: amount,
-  status: response.data.status
-})
-console.log(paymentToDb, 'FROM DATABASE')
+    console.log('FROM API')
+    const paymentToDb = await PaymentSchema.create({
+      transactionId: reference,
+      amount: amount,
+      status: response.data.status,
+      orderId: orderId
+    })
+    console.log(paymentToDb, 'FROM DATABASE')
 
     //const createPayment = await paystack.transaction.verify(response.data.reference)
 
@@ -29,9 +30,7 @@ console.log(paymentToDb, 'FROM DATABASE')
     console.error(error)
   }
 }
-const verifyPaymentTransaction = async (ref) => {
-
-}
+const verifyPaymentTransaction = async ref => {}
 module.exports = {
-  makePayment,
+  makePayment
 }

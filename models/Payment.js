@@ -24,10 +24,10 @@ const PaymentSchema = new mongoose.Schema({
     required: [true, 'amount can  not  be  empty.  please  provide  amount'],
 
   },
-  order: {
+  orderId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Order'
-    //required: [true, 'order can not be empty. please provide order']
+    ref: 'Order',
+    required: [true, 'order can not be empty. please provide order']
   }
 })
 module.exports = mongoose.model('Payment', PaymentSchema)
