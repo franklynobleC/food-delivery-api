@@ -19,10 +19,10 @@ const PaymentSchema = new mongoose.Schema({
     required: [true, 'please  provide  payment  status'],
     default: 'pending'
   },
-  paymentAmount: {
+  amount: {
     type: Number,
     required: [true, 'amount can  not  be  empty.  please  provide  amount'],
-    default: 200
+
   },
   order: {
     type: mongoose.Schema.Types.ObjectId,
