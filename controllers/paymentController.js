@@ -10,8 +10,7 @@ const createPayment = async (req, res) => {
     })
   }
   const result = await makePayment(email, amount,orderId)
-  console.log('all Data sent from  payment')
-
+//TODO:send Email To User After Payment
   //const refId = await result.data.reference
 
   // const { reference } = await result.data
