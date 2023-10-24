@@ -3,6 +3,7 @@ var paystack = require('paystack')(process.env.PAYSTACK_API_SECRET_KEY)
 //add payment  functionality
 const PaymentSchema = require('../models/Payment')
 
+//TODO: change  the secrete to  production
 const makePayment = async (email, amount, orderId ) => {
   try {
     const response = await paystack.transaction.initialize({
@@ -18,7 +19,7 @@ const makePayment = async (email, amount, orderId ) => {
       transactionId: reference,
       amount: amount,
       status: response.data.status,
-      orderId: orderId
+      order: orderId
     })
     console.log(paymentToDb, 'FROM DATABASE')
 

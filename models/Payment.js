@@ -24,7 +24,7 @@ const PaymentSchema = new mongoose.Schema({
     required: [true, 'amount can  not  be  empty.  please  provide  amount'],
 
   },
-  orderId: {
+  order: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Order',
     required: [true, 'order can not be empty. please provide order']
