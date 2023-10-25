@@ -20,7 +20,7 @@ const PaymentSchema = new mongoose.Schema({
     enum: ['success', 'failed', 'pending'],
     default: 'pending'
   },
-  paymentMethod: {
+  paymentOption: {
     type: String,
     enum: ['card', 'cash'],
     default: 'cash'

@@ -13,7 +13,7 @@ const Order = require('../models/Order')
 const createOrder = async (req, res) => {
   // req.user = req.user.userId
   console.log(req.user.userId)
-  const { OrderItems: OrderItems, deliveryFee } = req.body
+  const { OrderItems: OrderItems,paymentoption, deliveryFee } = req.body
 
   console.log(OrderItems, deliveryFee)
 
@@ -67,20 +67,48 @@ const createOrder = async (req, res) => {
   //NOTE: total price  is  including  Delivery Fee
   const userProperty = await UserSchema.findOne({ _id: req.user.userId })
   console.log(userProperty, 'From User DB')
-
+  //TODO: add  payment  based on PaymentOption (if  payment  option is selected cash|| card)
   const createdOrderItem = await OrderSchema.create({
     OrderItems: orderItems,
     totalQuantity: itemTotalQuantity,
     totalPrice: totalPriceValue,
+    paymentOption:paymentoption,
     deliveryFee,
     user: userProperty
   })
-  //Todo: code clean  up to  handle  order  and and  payment and  send  emails
   const orderItemId = await OrderSchema.findOne({ _id: createdOrderItem._id })
-  console.log(orderItemId, 'From Order DB')
-  const paymentData = await makePayment(userProperty.email, totalPriceValue, orderItemId._id)
-  //Todo: if  payment  is successful,  send  email to  the User
+console.log(orderItemId, 'From Order DB')
+
+  const { paymentOption } = createdOrderItem
+  console.log(paymentOption)
+
+  //const checkPaymentOption = await OrderSchema.find({ paymentOption })
+  //console.log(checkPaymentOption, 'From Order DB')
+  //const { paymentOption} =  checkPaymentOption
+  console.log(paymentOption, 'From Order DB')
+  if (paymentOption === 'cash') {
+    console.log('Cash Payment Option Selected')
+    const paymentData = await makePayment(
+      userProperty.email,
+      totalPriceValue,
+      //orderItems,
+      orderItemId._id,
+      paymentOption
+
+    )
     console.log(paymentData, 'From Payment DB')
+    //TODO: send email to user
+  }
+  //Todo: code clean  up to  handle  order  and and  payment and  send  emails
+
+  const paymentData = await makePayment(
+    userProperty.email,
+    totalPriceValue,
+    orderItemId._id,
+    paymentOption
+  )
+  //Todo: if  payment  is successful,  send  email to  the User
+  console.log(paymentData, 'From Payment DB')
   res.status(StatusCodes.CREATED).json({
     order: createdOrderItem,
     message: 'Success! Order created successfully'

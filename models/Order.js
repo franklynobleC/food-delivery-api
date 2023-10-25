@@ -38,7 +38,8 @@ const OrderSchema = new mongoose.Schema(
     paymentOption: {
       type: String,
       enum: ['cash', 'card'],
-      default: 'cash'
+      // required: [true, 'please  provide  payment Option']
+      default:'cash'
     },
     orderStatus: {
       type: String,
@@ -49,7 +50,7 @@ const OrderSchema = new mongoose.Schema(
     deliveryFee: {
       type: Number,
       required: [true, 'please provide Delivery fee, make sure type is number'],
-      default:0
+      default: 0
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,

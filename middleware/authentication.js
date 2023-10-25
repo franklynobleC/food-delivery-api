@@ -15,6 +15,7 @@ const { isTokenValid } = require('../utils')
  * function to indicate that the authentication process is complete and the next middleware function
  * should be called.
  */
+//TODO:handle errors safely withought crashing The App
 const authenticateUser = async (req, res, next) => {
   const token = req.signedCookies.token
 
