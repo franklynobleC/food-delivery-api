@@ -18,11 +18,11 @@ This is a food delivery api that allows users to create an account, login, place
 - mongoose
 - dotenv
 
-
-
 ### file structure
 
 ## TODO
+
+- handling Errors Safely without Crashing The App
 
 #### For Front-end reactjs
 
@@ -35,7 +35,8 @@ This is a food delivery api that allows users to create an account, login, place
 - Food Model
 - Order Model
 
-#### user  model
+#### user model
+
 ```
 const mongoose = require('mongoose')
 
@@ -78,9 +79,12 @@ const UserSchema = new mongoose.Schema({
 
 module.exports = mongoose.model('User', UserSchema)
 ```
+
 #### food model
-**import  mongoose
-```
+
+\*\*import mongoose
+
+````
 
 
 const FoodSchema = new mongoose.Schema(
@@ -130,3 +134,4 @@ module.exports = mongoose.model('Food', FoodSchema)
 ```#### upload Images
  - install package express file  upload
  - express  to static
+````

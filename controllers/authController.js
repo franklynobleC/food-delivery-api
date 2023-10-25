@@ -80,11 +80,18 @@ const login = async (req, res) => {
   const user = await UserSchema.findOne({ email })
 
   if (!user) {
-    throw new Error('no User found!, Invalid credentials')
+    res.status(StatusCodes.BAD_REQUEST ).json({message:'no User found!, Invalid credentials'})
+  return
+   // throw new Error('no User found!, Invalid credentials')
+
   }
   const isPasswordCorrect = await user.checkPassword(password)
   if (!isPasswordCorrect) {
-    throw new Error('Invalid credentials, password does not  Match')
+    res
+  .status(StatusCodes.BAD_REQUEST)
+      .json({ message: 'Invalid credentials, password does not  Match, Invalid credentials' })
+    return
+
   }
   //if  password Matched,  add   user to Token
   const tokenUser = createTokenUser(user)
