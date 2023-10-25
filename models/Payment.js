@@ -17,12 +17,17 @@ const PaymentSchema = new mongoose.Schema({
   paymentStatus: {
     type: String,
     required: [true, 'please  provide  payment  status'],
+    enum: ['success', 'failed', 'pending'],
     default: 'pending'
+  },
+  paymentMethod: {
+    type: String,
+    enum: ['card', 'cash'],
+    default: 'cash'
   },
   amount: {
     type: Number,
-    required: [true, 'amount can  not  be  empty.  please  provide  amount'],
-
+    required: [true, 'amount can  not  be  empty.  please  provide  amount']
   },
   order: {
     type: mongoose.Schema.Types.ObjectId,

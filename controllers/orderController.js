@@ -1,10 +1,13 @@
 const OrderSchema = require('../models/Order')
 const FoodSchema = require('../models/Food')
+const UserSchema = require('../models/User')
 const { StatusCodes } = require('http-status-codes')
 const { restart } = require('nodemon')
 const { json } = require('stream/consumers')
 const { error } = require('console')
 const { STATUS_CODES } = require('http')
+const { makePayment } = require('../service/paymentService')
+const Order = require('../models/Order')
 
 //   TODO:       add check Permission,  to rout  authUser and check Permission
 const createOrder = async (req, res) => {
@@ -29,7 +32,7 @@ const createOrder = async (req, res) => {
   for (let i = 0; i < OrderItems.length; i++) {
     console.log(OrderItems[i].food)
     const foodFromDb = await FoodSchema.findOne({ _id: OrderItems[i].food })
-
+    console.log(foodFromDb, 'From Food DB')
     if (!foodFromDb || foodFromDb === null) {
       res
         .status(StatusCodes.BAD_REQUEST)
@@ -40,9 +43,9 @@ const createOrder = async (req, res) => {
     const { _id, name, image, price } = foodFromDb
     const singleOrderItem = {
       food: _id,
-      name,
-      image,
-      price,
+      name: name,
+      image: image,
+      price: price,
       quantity: OrderItems[i].quantity
     }
 
@@ -60,15 +63,24 @@ const createOrder = async (req, res) => {
   totalPriceValue = subTotal + deliveryFee
   //TODO:
   //add payment and  amount,
-//send Email for Order placement. this email should contain, food name, quantity,and price of  the  total  Food
+  //send Email for Order placement. this email should contain, food name, quantity,and price of  the  total  Food
+  //NOTE: total price  is  including  Delivery Fee
+  const userProperty = await UserSchema.findOne({ _id: req.user.userId })
+  console.log(userProperty, 'From User DB')
+
   const createdOrderItem = await OrderSchema.create({
     OrderItems: orderItems,
     totalQuantity: itemTotalQuantity,
     totalPrice: totalPriceValue,
     deliveryFee,
-    user: req.user.userId
+    user: userProperty
   })
-
+  //Todo: code clean  up to  handle  order  and and  payment and  send  emails
+  const orderItemId = await OrderSchema.findOne({ _id: createdOrderItem._id })
+  console.log(orderItemId, 'From Order DB')
+  const paymentData = await makePayment(userProperty.email, totalPriceValue, orderItemId._id)
+  //Todo: if  payment  is successful,  send  email to  the User
+    console.log(paymentData, 'From Payment DB')
   res.status(StatusCodes.CREATED).json({
     order: createdOrderItem,
     message: 'Success! Order created successfully'
@@ -149,5 +161,5 @@ module.exports = {
   getSingleOrder,
   updateOrder,
   deleteOrder,
-  getAllPendingOrders,
+  getAllPendingOrders
 }

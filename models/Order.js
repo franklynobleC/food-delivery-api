@@ -9,7 +9,7 @@ const SingleOrderItemSchema = mongoose.Schema({
     type: String
   },
   price: {
-    type: String,
+    type: Number,
 
     required: [true, 'amount can  not  be Empty please provide amount']
   },
@@ -49,7 +49,7 @@ const OrderSchema = new mongoose.Schema(
     deliveryFee: {
       type: Number,
       required: [true, 'please provide Delivery fee, make sure type is number'],
-      default: 200
+      default:0
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,

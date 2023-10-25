@@ -2,9 +2,10 @@ require('dotenv').config()
 var paystack = require('paystack')(process.env.PAYSTACK_API_SECRET_KEY)
 //add payment  functionality
 const PaymentSchema = require('../models/Payment')
+const OrderSchema = require('../models/Order')
 
 //TODO: change  the secrete to  production
-const makePayment = async (email, amount, orderId ) => {
+const makePayment = async (email, amount, orderId) => {
   try {
     const response = await paystack.transaction.initialize({
       email: email,
@@ -15,11 +16,17 @@ const makePayment = async (email, amount, orderId ) => {
     const { reference } = await response.data
     console.log(response)
     console.log('FROM API')
+
+    const orderDetails = await OrderSchema.findOne({ _id: orderId })
+    console.log(orderDetails, 'FROM ORDER')
+    if (!orderDetails) {
+      res.status(400).json({message:"Failed!  no order id found in database"})
+    }
     const paymentToDb = await PaymentSchema.create({
       transactionId: reference,
       amount: amount,
       status: response.data.status,
-      order: orderId
+      order: orderDetails
     })
     console.log(paymentToDb, 'FROM DATABASE')
 

@@ -48,6 +48,7 @@ const createFood = async (req, res) => {
       .json({ failed: 'Please fill all fields' })
   }
   const createdFood = await FoodSchema.create({ ...req.body })
+  console.log(createdFood)
   res.status(StatusCodes.CREATED).json({ createdFood })
 }
 
