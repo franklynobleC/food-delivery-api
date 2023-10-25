@@ -183,11 +183,17 @@ const deleteOrder = async (req, res) => {
     .json({ message: `Success!  order with id ${orderId},deleted.` })
 }
 
+//TODO: get Orders  based  on  the  status(failed, pending, confirmed, delivered, canceled)
+const getOrderStatus = async (req, res) => {
+
+}
+
 module.exports = {
   createOrder,
   getAllOrders,
   getSingleOrder,
   updateOrder,
   deleteOrder,
-  getAllPendingOrders
+  getAllPendingOrders,
+  getOrderStatus,
 }

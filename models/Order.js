@@ -38,12 +38,12 @@ const OrderSchema = new mongoose.Schema(
     paymentOption: {
       type: String,
       enum: ['cash', 'card'],
-      // required: [true, 'please  provide  payment Option']
-      default:'cash'
+      required: [true, 'please  provide  payment Option'],
+      default: 'cash'
     },
     orderStatus: {
       type: String,
-      enum: ['pending', 'failed', 'paid', 'delivered', 'canceled'],
+      enum: ['pending', 'failed', 'confirmed', 'delivered', 'canceled'],
       default: 'pending'
     },
 
