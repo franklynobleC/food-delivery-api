@@ -11,7 +11,8 @@ const {
   getAllOrders,
   updateOrder,
   deleteOrder,
-  getSingleOrder
+  getSingleOrder,
+ // getOrderStatus
 } = require('../controllers/orderController')
 
 router.get('/getAllOrders', getAllOrders)
@@ -21,8 +22,14 @@ router.post(
   authenticateUser,
   authorizedPermissions('admin', 'user'),
   createOrder
+  )
+  router.patch('/:id', updateOrder)
+  router.delete('/:id', deleteOrder)
+router.get(
+  '/:orderstatus',
+  authenticateUser,
+  authorizedPermissions('admin', 'user'),
+  //getOrderStatus
 )
-router.patch('/:id', updateOrder)
-router.delete('/:id', deleteOrder)
 
 module.exports = router

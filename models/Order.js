@@ -62,4 +62,9 @@ const OrderSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
+OrderSchema.pre('save', async function (status) {
+  if (!this.isModified('orderStatus')) return
+   this.orderStatus  =  await status
+})
+
 module.exports = mongoose.model('Order', OrderSchema)

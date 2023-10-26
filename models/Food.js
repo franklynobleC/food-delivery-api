@@ -1,15 +1,14 @@
 const mongoose = require('mongoose')
 
-const FoodSchema = new mongoose.Schema(
-  {
+const FoodSchema = new mongoose.Schema({
+
     name: {
-      String,
       type: String,
-      required: [true, 'Please provide food  name'],
-      maxlength: [150, 'name can not be more than 150 characters']
+      //required: [true, 'Please provide food  name'],
+     // maxlength: [150, 'name can not be more than 150 characters']
     },
     price: {
-      type: String,
+      type:Number,
       required: [true, 'Please provide price'],
       default: 0
     },
@@ -20,13 +19,21 @@ const FoodSchema = new mongoose.Schema(
     },
     //TODO :add image upload function
     image: {
-      name:String,
-      type: String
+      type: String,
+      name: String
     },
 
     category: {
       type: String,
-      enum: ['breakfast', 'dinner', 'protein'],
+      enum: [
+        'breakfast',
+        'rice',
+        'protein',
+        'drinks',
+        'fish and meat',
+        'soup',
+        'dinner'
+      ],
       default: 'dinner'
     },
     delivery: {

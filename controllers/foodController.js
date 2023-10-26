@@ -41,13 +41,15 @@ const createFood = async (req, res) => {
   req.body.user = req.user.userId
 
   console.log(req.user, '/n from create food route')
+  console.log(req.body)
 
   if (!req.body) {
     res
       .status(StatusCodes.BAD_REQUEST)
       .json({ failed: 'Please fill all fields' })
   }
-  const createdFood = await FoodSchema.create({ ...req.body })
+  //const {name,price,description,image,category,delivery,user} = req.body
+  const createdFood = await FoodSchema.create(req.body)
   console.log(createdFood)
   res.status(StatusCodes.CREATED).json({ createdFood })
 }
@@ -145,24 +147,61 @@ const uploadImage = async (req, res) => {
       .json({ error: 'Failed! please upload Image smaller than 1MB' })
   }
 
-  const result = await cloudinary.uploader.upload(
-    productImage.tempFilePath,
-    {
-      use_filename: true,
-      folder: 'file-upload'
-    }
-  )
+  const result = await cloudinary.uploader.upload(productImage.tempFilePath, {
+    use_filename: true,
+    folder: 'file-upload'
+  })
   /* `fs.unlinkSync(req.files.image.tempFilePath)` is a function call to the `unlinkSync` method from
   the `fs` module in Node.js.  this */
   fs.unlinkSync(productImage.tempFilePath)
 
   res.status(StatusCodes.OK).json({ image: { src: result.secure_url } })
 }
+
+const searchFood = async (req, res) => {
+  //take a query from   req, use  the word to search  if  it  matches  any name  in  the,  food name value,  if  match  is found,  return  match, else return  error
+  const searchWord = req.query.searchWord
+  //req.params.searchWord
+  console.log(searchWord)
+try {
+  const agg = [
+    {
+      $search: {
+        autocomplete: { query: searchWord, path: 'name' }
+      }
+    },
+
+    { $limit: 2 },
+
+    {
+      $project: {
+        _id: 1,
+        name: 1,
+        description: 1,
+        category: 1
+      }
+    }
+  ]
+
+  const result = await FoodSchema.aggregate(agg)
+  //console.log(result)
+    result.forEach(doc => console.log(JSON.stringify(doc)))
+
+    console.log(result)
+    console.log('RESULT >>>>>>>>>>>>>>>>>>>>>')
+
+  } catch (err) {
+    console.log('ERROR>>>>>>>')
+    console.log(err)
+  }
+}
+
 module.exports = {
   getAllFoods,
   getSingleFood,
   createFood,
   updateFood,
   deleteFood,
-  uploadImage
+  uploadImage,
+  searchFood
 }

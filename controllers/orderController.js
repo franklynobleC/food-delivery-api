@@ -8,12 +8,13 @@ const { error } = require('console')
 const { STATUS_CODES } = require('http')
 const { makePayment } = require('../service/paymentService')
 const Order = require('../models/Order')
+const { search } = require('../db/searchData')
 
 //   TODO:       add check Permission,  to rout  authUser and check Permission
 const createOrder = async (req, res) => {
   // req.user = req.user.userId
   console.log(req.user.userId)
-  const { OrderItems: OrderItems,paymentoption, deliveryFee } = req.body
+  const { OrderItems: OrderItems, paymentoption, deliveryFee } = req.body
 
   console.log(OrderItems, deliveryFee)
 
@@ -72,12 +73,12 @@ const createOrder = async (req, res) => {
     OrderItems: orderItems,
     totalQuantity: itemTotalQuantity,
     totalPrice: totalPriceValue,
-    paymentOption:paymentoption,
+    paymentOption: paymentoption,
     deliveryFee,
     user: userProperty
   })
   const orderItemId = await OrderSchema.findOne({ _id: createdOrderItem._id })
-console.log(orderItemId, 'From Order DB')
+  console.log(orderItemId, 'From Order DB')
 
   const { paymentOption } = createdOrderItem
   console.log(paymentOption)
@@ -94,7 +95,6 @@ console.log(orderItemId, 'From Order DB')
       //orderItems,
       orderItemId._id,
       paymentOption
-
     )
     console.log(paymentData, 'From Payment DB')
     //TODO: send email to user
@@ -150,13 +150,15 @@ const getSingleOrder = async (req, res) => {
 }
 
 //TODO  in this   function, ensure the UserId,  is  from  the request Object
+//add function,  if  cart  is Empty, Delete from Database
 const updateOrder = async (req, res) => {
   const updatedOrder = await OrderSchema.findByIdAndUpdate(
     req.params.id,
     req.body,
-    { new: true, runValidators: true }
+    { new: true, runValidators: true, validateBeforeSave: true, error: true }
   )
-
+  console.log(updatedOrder)
+  console.log(updatedOrder.orderStatus)
   if (!updatedOrder || updatedOrder === null) {
     res.status(StatusCodes.NOT_FOUND).json({
       message: 'Failed! could not update order data. please input valid data'
@@ -184,8 +186,10 @@ const deleteOrder = async (req, res) => {
 }
 
 //TODO: get Orders  based  on  the  status(failed, pending, confirmed, delivered, canceled)
-const getOrderStatus = async (req, res) => {
+const updateOrderStatus = async (req, res) => {
+  const { id: orderId } = req.params
 
+  //const  searchResult =   updateOrderStatus(searchWord,searchWord)
 }
 
 module.exports = {
@@ -195,5 +199,5 @@ module.exports = {
   updateOrder,
   deleteOrder,
   getAllPendingOrders,
-  getOrderStatus,
+  updateOrderStatus
 }

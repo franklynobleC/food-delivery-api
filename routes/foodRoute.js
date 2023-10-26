@@ -6,7 +6,8 @@ const {
   getSingleFood,
   updateFood,
   deleteFood,
-  uploadImage
+  uploadImage,
+  searchFood,
 } = require('../controllers/foodController')
 
 const {
@@ -18,6 +19,12 @@ router.get(
   authenticateUser,
   authorizedPermissions('admin', 'user'),
   getAllFoods
+)
+router.get(
+  '/:searchWord',
+  authenticateUser,
+  authorizedPermissions('admin', 'user'),
+  searchFood
 )
 router.get(
   '/:id',
