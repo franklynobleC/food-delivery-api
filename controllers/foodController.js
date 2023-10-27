@@ -160,40 +160,52 @@ const uploadImage = async (req, res) => {
 
 const searchFood = async (req, res) => {
   //take a query from   req, use  the word to search  if  it  matches  any name  in  the,  food name value,  if  match  is found,  return  match, else return  error
+await FoodSchema.createIndexes({name:"text"})
+
   const searchWord = req.query.searchWord
   //req.params.searchWord
   console.log(searchWord)
-try {
-  const agg = [
-    {
-      $search: {
-        autocomplete: { query: searchWord, path: 'name' }
-      }
-    },
+  //const convword = String(searchWord)
 
-    { $limit: 2 },
+// try {
+//   const agg = [
+//     {
+//       $search: {
+//         index: {
+//           name: searchWord
+//         },
+//         query: {
+//           name: {
+//             $regex: searchWord,
+//             $options: 'i'
+//           }
+//         }
+//       }
+//     },
 
-    {
-      $project: {
-        _id: 1,
-        name: 1,
-        description: 1,
-        category: 1
-      }
-    }
-  ]
+//     { $limit: 2 },
 
-  const result = await FoodSchema.aggregate(agg)
+//     {
+//       $project: {
+//         _id: 1,
+//         name: 1,
+//         description: 1,
+//         category: 1
+//       }
+//     }
+//   ]
+
+  const result = await FoodSchema.find({ $text: { $search: searchWord} })
   //console.log(result)
     result.forEach(doc => console.log(JSON.stringify(doc)))
 
     console.log(result)
     console.log('RESULT >>>>>>>>>>>>>>>>>>>>>')
 
-  } catch (err) {
-    console.log('ERROR>>>>>>>')
-    console.log(err)
-  }
+  // } catch (err) {
+  //   console.log('ERROR>>>>>>>')
+  //   console.log(err)
+  // }
 }
 
 module.exports = {

@@ -2,11 +2,13 @@
 // MongoDB Playground
 // Use Ctrl+Space inside a snippet or a string literal to trigger completions.
 
-const database = 'food-delivery'
-//const collection = 'tacos';
+const db = 'food-delivery'
+//const Food = 'Food'//const collection = 'tacos';
 
 // The current database to use.
-use(database)
+use(db)
+db.food.find({})
+// console.log(res)
 
 // Create a new collection.
 //db.testRecipe.createIndex({"title":-1})

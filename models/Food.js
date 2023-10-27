@@ -1,14 +1,14 @@
 const mongoose = require('mongoose')
 
-const FoodSchema = new mongoose.Schema({
-
+const FoodSchema = new mongoose.Schema(
+  {
     name: {
-      type: String,
+      type: String
       //required: [true, 'Please provide food  name'],
-     // maxlength: [150, 'name can not be more than 150 characters']
+      // maxlength: [150, 'name can not be more than 150 characters']
     },
     price: {
-      type:Number,
+      type: Number,
       required: [true, 'Please provide price'],
       default: 0
     },
