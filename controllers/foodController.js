@@ -160,52 +160,56 @@ const uploadImage = async (req, res) => {
 
 const searchFood = async (req, res) => {
   //take a query from   req, use  the word to search  if  it  matches  any name  in  the,  food name value,  if  match  is found,  return  match, else return  error
-await FoodSchema.createIndexes({name:"text"})
+  await FoodSchema.createIndexes({ name: 'text' })
 
   const searchWord = req.query.searchWord
   //req.params.searchWord
   console.log(searchWord)
   //const convword = String(searchWord)
 
-// try {
-//   const agg = [
-//     {
-//       $search: {
-//         index: {
-//           name: searchWord
-//         },
-//         query: {
-//           name: {
-//             $regex: searchWord,
-//             $options: 'i'
-//           }
-//         }
-//       }
-//     },
+  // try {
+  //   const agg = [
+  //     {
+  //       $search: {
+  //         index: {
+  //           name: searchWord
+  //         },
+  //         query: {
+  //           name: {
+  //             $regex: searchWord,
+  //             $options: 'i'
+  //           }
+  //         }
+  //       }
+  //     },
 
-//     { $limit: 2 },
+  //     { $limit: 2 },
 
-//     {
-//       $project: {
-//         _id: 1,
-//         name: 1,
-//         description: 1,
-//         category: 1
-//       }
-//     }
-//   ]
-
-  const result = await FoodSchema.find({ $text: { $search: searchWord} })
-  //console.log(result)
+  //     {
+  //       $project: {
+  //         _id: 1,
+  //         name: 1,
+  //         description: 1,
+  //         category: 1
+  //       }
+  //     }
+  //   ]
+  try {
+    const result = await FoodSchema.find({ $text: { $search: searchWord } })
+    //console.log(result)
     result.forEach(doc => console.log(JSON.stringify(doc)))
 
-    console.log(result)
     console.log('RESULT >>>>>>>>>>>>>>>>>>>>>')
+    if (result.length === 0) {
+     return res.status(StatusCodes.OK).json({ message: 'No match found' })
+    }
+    res.status(StatusCodes.OK).json(result)
+  } catch (err) {
+   return res.status(StatusCodes.BAD_REQUEST).json({ message: `Failed!${error}` })
 
-  // } catch (err) {
-  //   console.log('ERROR>>>>>>>')
-  //   console.log(err)
-  // }
+    console.log('ERROR>>>>>>>')
+    console.log(err)
+  }
 }
 
 module.exports = {
