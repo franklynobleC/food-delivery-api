@@ -1,12 +1,13 @@
+import React from 'react'
+
 const Contact = () => {
   return (
-    <Wrapper>
+    <section>
       <div>
-<p>Contact US</p>
+        <p>Contact US</p>
       </div>
-    </Wrapper>
-
-)
+    </section>
+  )
 }
 
 export default Contact

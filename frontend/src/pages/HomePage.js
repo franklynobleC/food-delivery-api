@@ -1,9 +1,20 @@
+import React from 'react'
 
-import {}  from '../components'
+import { Hero, Services } from '../components/index'
+
 const HomePage = () => {
-  return <main>
+  return (
+    <main>
+      <div>
 
-  </main>
+<h2>Home Page</h2>
+      </div>
+
+      <Hero />
+
+      <Services />
+    </main>
+  )
 }
 
-export default HomePage;
+export default HomePage

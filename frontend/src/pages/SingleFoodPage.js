@@ -1,15 +1,12 @@
-
-
 import React from 'react'
 
-const Services = () => {
+const SingleFood = () => {
   return (
     <section>
       <article>
-        <p>Services</p>
+        <p>Single Product Page</p>
       </article>
     </section>
   )
 }
-
-export default Services
+export default SingleFood

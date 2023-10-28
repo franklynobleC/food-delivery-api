@@ -1,10 +1,12 @@
+import React from 'react'
+
 const Hero = () => {
   return (
-    <Wrapper>
+    <main>
       <article>
         <p>HERO SECTION</p>
       </article>
-    </Wrapper>
+    </main>
   )
 }
 

@@ -1,11 +1,10 @@
+import React from 'react'
+
 const AboutPage = () => {
   return (
     <main>
       about page
-      <PageHero title='about' />
-      <Wrapper className='page section section-center'>
-        <img src={aboutImg} alt='nice desk' />
-
+      <section className='page section section-center'>
         <article>
           <div className='title'>
             <h2>Our Story</h2>
@@ -30,7 +29,7 @@ const AboutPage = () => {
             labore voluptas?
           </p>
         </article>
-      </Wrapper>
+      </section>
     </main>
   )
 }
