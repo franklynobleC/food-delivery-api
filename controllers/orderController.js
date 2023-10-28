@@ -6,7 +6,7 @@ const { restart } = require('nodemon')
 const { json } = require('stream/consumers')
 const { error } = require('console')
 const { STATUS_CODES } = require('http')
-const { makePayment } = require('../service/paymentService')
+const { makePayment } = require('../services/paymentService')
 const Order = require('../models/Order')
 const { search } = require('../db/searchData')
 

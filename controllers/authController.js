@@ -12,7 +12,7 @@ const {
   createHash
 } = require('../utils')
 const { error } = require('console')
-const { emailFunc } = require('../service/mailService')
+const { emailFunc } = require('../services/mailService')
 require('dotenv').config()
 
 //add Register, Login,  logOut,

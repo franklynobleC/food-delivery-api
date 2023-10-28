@@ -23,6 +23,7 @@ This is a food delivery api that allows users to create an account, login, place
 ## TODO
 
 - handling Errors Safely without Crashing The App
+- Add Error Object in nodejs
 
 #### For Front-end reactjs
 

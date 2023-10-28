@@ -1,6 +1,6 @@
 const { StatusCodes } = require('http-status-codes')
 const PaymentSchema = require('../models/Payment')
-const { makePayment } = require('../service/paymentService')
+const { makePayment } = require('../services/paymentService')
 
 const createPayment = async (req, res) => {
   console.log('create  Payment function')
