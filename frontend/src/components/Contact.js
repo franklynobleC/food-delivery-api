@@ -1,6 +1,8 @@
 import React from 'react'
 import '../styles/contact.css'
 
+import { FiSend } from 'react-icons/fi'
+
 const Contact = () => {
   return (
     <section className='contact-us'>
@@ -27,6 +29,7 @@ const Contact = () => {
             />
 
             <button type='submit' className='submit-btn'>
+              <FiSend className='sub-send-icon' />
               subscribe
             </button>
           </form>

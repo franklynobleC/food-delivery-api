@@ -2,7 +2,7 @@ import React from 'react'
 import '../styles/footer.css'
 const Footer = () => {
   return (
-    <footer>
+    <footer className='footer'>
       <div className='footer-div'>
         <h5>
           &copy; {new Date().getFullYear()}

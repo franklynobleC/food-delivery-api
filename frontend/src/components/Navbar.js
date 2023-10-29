@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { links } from '../utils/constants'
-import  '../styles/header/navbar.css'
+import { FiHome } from 'react-icons/fi'
+import '../styles/header/navbar.css'
 const Nav = () => {
   return (
     <nav className='nav-links'>
@@ -12,6 +13,7 @@ const Nav = () => {
             return (
               <li key={index}>
                 <Link to={link.url}>{link.text}</Link>
+
               </li>
             )
           })}
