@@ -9,7 +9,8 @@ import {
   GET_SINGLE_FOOD_SUCCESS,
   GET_SINGLE_FOOD_BEGIN,
   GET_SINGLE_FOOD_ERROR,
-  SEARCH_FOODS
+  SEARCH_FOODS,
+  GET_FOODS_ERROR
 } from '../actions.js'
 
 //set initial state that would be passed
