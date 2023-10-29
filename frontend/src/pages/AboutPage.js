@@ -1,8 +1,9 @@
 import React from 'react'
+import '../styles/about.css'
 
 const AboutPage = () => {
   return (
-    <main>
+    <main className='about-parent'>
       about page
       <section className='page section section-center'>
         <article>

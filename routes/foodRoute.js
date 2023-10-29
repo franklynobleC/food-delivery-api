@@ -9,15 +9,15 @@ const {
   uploadImage,
   searchFood,
 } = require('../controllers/foodController')
-
+//TODO :  THE      GET ALL  PRODUCTS ROUTE, ADD  USER  PERMISSION AND AUTHORIZATION, AUTHENTICATE  USER
 const {
   authorizedPermissions,
   authenticateUser
 } = require('../middleware/authentication')
 router.get(
   '/getAllFoods',
-  authenticateUser,
-  authorizedPermissions('admin', 'user'),
+  //authenticateUser,
+  //authorizedPermissions('admin', 'user'),
   getAllFoods
 )
 router.get(
