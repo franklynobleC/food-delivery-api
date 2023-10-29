@@ -28,8 +28,9 @@ const orderRouter = require('./routes/orderRoute')
 //paymentRouter
 const paymentRouter = require('./routes/paymentRoute')
 
+const cors = require('cors')
 //NOTE!
-
+app.use(cors())
 // from authRoute
 app.use(express.json()) // This convert's  the request  to Jason from Postman
 

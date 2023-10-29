@@ -1,15 +1,20 @@
 import React from 'react'
+import { useFoodsContext } from '../context/foods_context'
 const FoodList = () => {
-  return (
-    <section>
+  const { foods } = useFoodsContext()
+  if (foods.length > 0) {
+    return (
       <div>
-        ;
-        <article>
-          <p>FOODS lISTS</p>
-        </article>
+        {foods.map(food => (
+          <div key={food.id}>{console.log(food)}</div>
+        ))}
       </div>
-    </section>
+    )
+  }
+  return (
+    <div>
+      <p>No data found in foods</p>
+    </div>
   )
 }
-
 export default FoodList

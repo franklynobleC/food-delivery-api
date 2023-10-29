@@ -12,6 +12,7 @@ import {
   SEARCH_FOODS,
   GET_FOODS_ERROR
 } from '../actions.js'
+import foods_reducer from '../reducers/foods_reducer'
 
 //set initial state that would be passed
 const initialState = {
@@ -31,7 +32,7 @@ export const FoodsContext = React.createContext()
 export const FoodsProvider = ({ children }) => {
   //pass in  reducerFunction , and  initial state Object
   //TODO:create and  import foodsReducer, so  you can  use  in  this useReducerFunction
-  const [state, dispatch] = useReducer(foodsReducer, initialState)
+  const [state, dispatch] = useReducer(foods_reducer, initialState)
   //fetch Data from API   using axios
 
   const fetchFoods = async () => {
@@ -61,7 +62,7 @@ export const FoodsProvider = ({ children }) => {
       dispatch({ type: GET_SINGLE_FOOD_ERROR, payload: error.message })
     }
   }
-  useInsertionEffect(() => {
+  useEffect(() => {
     fetchFoods(url)
     {
       /* add openSidebar here */
