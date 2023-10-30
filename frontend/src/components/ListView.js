@@ -5,6 +5,9 @@ import '../styles/products.css'
 const ListView = ({ foods }) => {
   return (
     <section className='main'>
+      <div className='search-bar'>
+         <input type="text" className='search-input' placeholder='search menu' />
+      </div>
       {foods.map(food => {
         const { name, price, image, id, description } = food
         return (
@@ -15,16 +18,16 @@ const ListView = ({ foods }) => {
             <div className='food-name'>
               <h4>{name}</h4>
             </div>
-            <div className='food-price'>{price}</div>
+            <div className='food-price'>Price: &#8358;{price}</div>
             <div className='food-description'>
               {description.substring(0, 150)}...
             </div>
             <div className='details-link'>
-              <Link to={`/foods/${id}`} className='btn'>
+              <Link to={`/foods/${id}`} className='Details-link'>
                 Details
               </Link>
             </div>
-            <div class='food-spacer'></div>
+            <div className='food-spacer'></div>
           </div>
         )
       })}

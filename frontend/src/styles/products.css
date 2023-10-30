@@ -106,3 +106,9 @@
 .food-spacer {
   flex: 1;
 }
+.food-description {
+  padding-top: 10px;
+}
+.details-link {
+  padding-top: 10px;
+}
