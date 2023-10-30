@@ -13,7 +13,7 @@ const getAllFoods = async (req, res) => {
       .json({ food: 'No product found in database' })
   }
 
-  res.status(StatusCodes.OK).json(food )
+  res.status(StatusCodes.OK).json(food)
 }
 
 const getSingleFood = async (req, res) => {
@@ -34,7 +34,7 @@ const getSingleFood = async (req, res) => {
 
     return
   }
-  res.status(StatusCodes.OK).json({singleFood })
+  res.status(StatusCodes.OK).json(singleFood)
 }
 
 const createFood = async (req, res) => {
@@ -201,11 +201,13 @@ const searchFood = async (req, res) => {
 
     console.log('RESULT >>>>>>>>>>>>>>>>>>>>>')
     if (result.length === 0) {
-     return res.status(StatusCodes.OK).json({ message: 'No match found' })
+      return res.status(StatusCodes.OK).json({ message: 'No match found' })
     }
     res.status(StatusCodes.OK).json(result)
   } catch (err) {
-   return res.status(StatusCodes.BAD_REQUEST).json({ message: `Failed!${error}` })
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: `Failed!${error}` })
 
     console.log('ERROR>>>>>>>')
     console.log(err)

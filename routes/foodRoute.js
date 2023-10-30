@@ -7,7 +7,7 @@ const {
   updateFood,
   deleteFood,
   uploadImage,
-  searchFood,
+  searchFood
 } = require('../controllers/foodController')
 //TODO :  THE      GET ALL  PRODUCTS ROUTE, ADD  USER  PERMISSION AND AUTHORIZATION, AUTHENTICATE  USER
 const {
@@ -20,18 +20,20 @@ router.get(
   //authorizedPermissions('admin', 'user'),
   getAllFoods
 )
+
+router.get(
+  '/:id',
+  // authenticateUser,
+  // authorizedPermissions('admin', 'user'),
+  getSingleFood
+)
 router.get(
   '/:searchWord',
   authenticateUser,
   authorizedPermissions('admin', 'user'),
   searchFood
 )
-router.get(
-  '/:id',
-  authenticateUser,
-  authorizedPermissions('admin', 'user'),
-  getSingleFood
-)
+
 router.patch(
   '/:id',
   authenticateUser,
