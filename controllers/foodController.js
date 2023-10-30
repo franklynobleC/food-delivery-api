@@ -13,7 +13,7 @@ const getAllFoods = async (req, res) => {
       .json({ food: 'No product found in database' })
   }
 
-  res.status(StatusCodes.OK).json({ foods: food })
+  res.status(StatusCodes.OK).json(food )
 }
 
 const getSingleFood = async (req, res) => {
@@ -34,7 +34,7 @@ const getSingleFood = async (req, res) => {
 
     return
   }
-  res.status(StatusCodes.OK).json({ food: singleFood })
+  res.status(StatusCodes.OK).json({singleFood })
 }
 
 const createFood = async (req, res) => {

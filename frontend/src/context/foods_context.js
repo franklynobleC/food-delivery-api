@@ -38,9 +38,13 @@ export const FoodsProvider = ({ children }) => {
   const fetchFoods = async () => {
     try {
       dispatch({ type: GET_FOODS_BEGIN })
+      console.log('getting Foods')
+
       const response = await axios.get(url)
 
       const foods = response.data
+      console.log('getting Foods Successful')
+
       dispatch({ type: GET_FOODS_SUCCESS, payload: foods })
       console.log('Foods fetched', foods)
     } catch (error) {

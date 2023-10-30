@@ -1,9 +1,13 @@
 import React from 'react'
 import { FoodList } from '../components'
+
 const FoodsPage = () => {
   return (
     <section>
-      <FoodList />
+      <div>
+        {console.log('FROM FoodsPage')}
+        <FoodList />
+      </div>
       <article>
         <h1>Products Page</h1>
       </article>

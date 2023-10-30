@@ -1,7 +1,7 @@
 import './App.css'
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { Home, About, Foods, Error, SingleFood } from './pages/'
+import { Home, About, Foods, Error, SingleFood } from './pages'
 import { Footer, Navbar, Contact } from './components/'
 
 function App () {
