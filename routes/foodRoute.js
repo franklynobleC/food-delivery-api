@@ -22,13 +22,13 @@ router.get(
 )
 
 router.get(
-  '/:id',
+  '/getSingleFood/:id',
   // authenticateUser,
   // authorizedPermissions('admin', 'user'),
   getSingleFood
 )
 router.get(
-  '/:searchWord',
+  '/searchWord/:searchWord',
   authenticateUser,
   authorizedPermissions('admin', 'user'),
   searchFood

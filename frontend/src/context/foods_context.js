@@ -2,7 +2,8 @@ import axios from 'axios'
 
 import React, { useContext, useEffect, useReducer } from 'react'
 
-import { foods_url as url } from '../utils/constants'
+import { foods_url as url,single_food_url as single_url } from '../utils/constants'
+
 import {
   GET_FOODS_BEGIN,
   GET_FOODS_SUCCESS,
@@ -52,10 +53,10 @@ export const FoodsProvider = ({ children }) => {
       dispatch({ type: GET_FOODS_ERROR, payload: error.message })
     }
   }
-  const fetchSingleFood = async url => {
+  const fetchSingleFood = async single_url => {
     dispatch({ type: GET_SINGLE_FOOD_BEGIN })
     try {
-      const response = await axios.get(url)
+      const response = await axios.get(single_url)
       const singleFood = response.data
 
       dispatch({ type: GET_SINGLE_FOOD_SUCCESS, payload: singleFood })

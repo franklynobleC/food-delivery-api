@@ -34,7 +34,7 @@ const getSingleFood = async (req, res) => {
 
     return
   }
-  res.status(StatusCodes.OK).json(singleFood)
+  res.status(StatusCodes.OK).json( singleFood)
 }
 
 const createFood = async (req, res) => {
@@ -109,7 +109,7 @@ const uploadImageLocal = async (req, res) => {
   if (!productImage.mimetype.startsWith('image')) {
     throw new error('please upload Image')
   }
-  const maxSize = 1024 * 1024
+  const maxSize = (1024 * 1024)*5
 
   if (productImage.size > maxSize) {
     throw new error('please upload Image smaller than 1MB')
@@ -125,6 +125,7 @@ const uploadImageLocal = async (req, res) => {
   })
 }
 
+//TODO: change  the file size to 2mb or 1mb instead
 const uploadImage = async (req, res) => {
   if (!req.files) {
     res
@@ -139,7 +140,7 @@ const uploadImage = async (req, res) => {
       .json({ error: 'Failed! please upload filetype image' })
     return
   }
-  const maxSize = 1024 * 1024
+  const maxSize = (1024 * 1024) * 6
 
   if (productImage.size > maxSize) {
     res
