@@ -18,10 +18,11 @@ const foods_reducer = (state, action) => {
   }
 
   if (action.type === GET_FOODS_ERROR) {
+    console.log('All Foods Error>>>>>>>>>>>>>>')
     return {
       ...state,
       single_food_loading: false,
-      single_food_error: true
+    foods_error: true
     }
   }
   if (action.type === GET_SINGLE_FOOD_BEGIN) {

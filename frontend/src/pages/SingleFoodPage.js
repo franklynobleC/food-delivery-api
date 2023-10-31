@@ -5,7 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { single_food_url as single_url } from '../utils/constants'
 import {} from '../components/'
 import { useFoodsContext } from '../context/foods_context'
-
+import '../styles/singlefood.css'
 const SingleFoodPage = () => {
   //Get Params  id  from  the request  current url
   const { id } = useParams()
@@ -47,19 +47,22 @@ const SingleFoodPage = () => {
   const { name, image, description, price } = food
 
   return (
-    <section>
-      <div>
-        <img src={image} alt={name} />
-        <Link to={`/foods`} className='link'></Link>
-        back to foods
+    <section className='single-food-container'>
+      <div className='single-food-image-container'>
+        <img src={image} alt={name} className='single-food-image' />
       </div>
+      <h5>{name}</h5>
+      <p>{price}</p>
+      <p>{description}</p>;
+      <Link to={`/foods`} className='link'>
+        back to foods
+      </Link>
       <footer>
-        <h5>{name}</h5>
-        <p>{price}</p>
-        <p>{description}</p>
-        <img src={image} alt='' />
+        <p>Single Product Page</p>
       </footer>
-      <p>Single Product Page</p>
+      <button className='add-to-cart-btn'>
+add to cart
+      </button>
     </section>
   )
 }

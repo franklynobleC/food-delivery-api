@@ -1,11 +1,16 @@
 import React from 'react'
 import { FoodList } from '../components'
-
+import { useFoodsContext } from '../context/foods_context'
+import { Error } from './index'
 const FoodsPage = () => {
+  const { foods_error: error } = useFoodsContext()
+
+  if (error) {
+    return <Error />
+  }
   return (
     <section>
       <div>
-        {console.log('FROM FoodsPage')}
         <FoodList />
       </div>
       <article>

@@ -1,12 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import '../styles/products.css'
+import '../styles/foods.css'
 
 const ListView = ({ foods }) => {
   return (
     <section className='main'>
       <div className='search-bar'>
-         <input type="text" className='search-input' placeholder='search menu' />
+        <input type='text' className='search-input' placeholder='search menu' />
       </div>
       {foods.map(food => {
         const { name, price, image, id, description } = food
@@ -24,7 +24,7 @@ const ListView = ({ foods }) => {
             </div>
             <div className='details-link'>
               <Link to={`/foods/${id}`} className='Details-link'>
-                Details
+                <p>Order now</p>
               </Link>
             </div>
             <div className='food-spacer'></div>
