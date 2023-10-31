@@ -51,15 +51,15 @@ const SingleFoodPage = () => {
       <div className='single-food-image-container'>
         <img src={image} alt={name} className='single-food-image' />
       </div>
-      <h5>{name}</h5>
-      <p>{price}</p>
-      <p>{description}</p>;
+      <div className='single-food-details-container'>
+        <div className='single-item-name'>{name}</div>
+        <div className='single-item-price'>{price}</div>
+        <div className='single-item-description'>{description}</div>
+      </div>
       <Link to={`/foods`} className='link'>
         back to foods
       </Link>
-      <footer>
-        <p>Single Product Page</p>
-      </footer>
+
       <button className='add-to-cart-btn'>add to cart</button>
     </section>
   )

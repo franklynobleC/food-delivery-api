@@ -113,16 +113,25 @@
   padding-top: 10px;
 }
 .oder-now-btn{
+  font-size: 0.9rem;
+  font-weight: 600;
   margin-top: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 15px;
   padding-right: 15px;
-  background-color: rgb(16, 226, 191);
+  color: whitesmoke;
+
+  background-color:#028C6A;
   border-radius:8px;
   border-style: none;
   -webkit-border-radius:8px;
   -moz-border-radius:8px;
   -ms-border-radius:8px;
   -o-border-radius:8px;
+}
+
+.oder-now-btn:hover{
+background-color: #003E19;
+color: rgb(248, 247, 244);
 }

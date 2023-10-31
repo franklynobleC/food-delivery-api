@@ -1,5 +1,4 @@
 .single-food-container {
-  background-color: red;
   display: grid;
   margin-top: 20px;
 }
@@ -15,9 +14,11 @@
   max-height: 100%;
 }
 .add-to-cart-btn {
-  background-color: #09c979;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background-color: #003e19;
   color: #ffffff;
-  font-size: 16px;
+
   font-weight: 700;
   padding: 10px 20px;
   border: none;
@@ -28,7 +29,7 @@
   margin-left: 350px;
 }
 .add-to-cart-btn:hover {
-  background-color: #038650;
+  background-color: #7bc5ae;
   border-style: style;
   border-color: #00deaf;
   border-radius: 5px;
@@ -36,4 +37,8 @@
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
+}
+.single-food-details-container {
+  margin-left: 50px;
+  display: grid;
 }
