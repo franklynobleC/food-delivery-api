@@ -24,7 +24,7 @@ const ListView = ({ foods }) => {
             </div>
             <div className='details-link'>
               <Link to={`/foods/${id}`} className='Details-link'>
-                <p>Order now</p>
+                <button className='oder-now-btn'>Order now</button>
               </Link>
             </div>
             <div className='food-spacer'></div>

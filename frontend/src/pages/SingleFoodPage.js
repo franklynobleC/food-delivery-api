@@ -60,9 +60,7 @@ const SingleFoodPage = () => {
       <footer>
         <p>Single Product Page</p>
       </footer>
-      <button className='add-to-cart-btn'>
-add to cart
-      </button>
+      <button className='add-to-cart-btn'>add to cart</button>
     </section>
   )
 }

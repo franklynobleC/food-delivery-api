@@ -112,3 +112,17 @@
 .details-link {
   padding-top: 10px;
 }
+.oder-now-btn{
+  margin-top: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: rgb(16, 226, 191);
+  border-radius:8px;
+  border-style: none;
+  -webkit-border-radius:8px;
+  -moz-border-radius:8px;
+  -ms-border-radius:8px;
+  -o-border-radius:8px;
+}

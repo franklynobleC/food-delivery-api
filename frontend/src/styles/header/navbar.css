@@ -21,11 +21,11 @@
 }
 .nav-links a {
   border-width: 2px;
-  border-color: rgb(62, 142, 156);
+  /* border-color: rgb(62, 142, 156); */
   border-style: solid;
   text-decoration: none;
   background-color: rgb(208, 251, 245);
-   border-color: #00deaf;;
+   border-color: #00deaf;
   color: white;
   /*padding-left:10px ;
   */
