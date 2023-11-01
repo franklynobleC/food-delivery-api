@@ -7,8 +7,9 @@ const CartContent = () => {
   // pass the cart  item  here
   return (
     <div>
+      <h5>cart Content page</h5>
       {cart.map(item => {
-        return <CartItem key={item.id} item={item} />
+        return <CartItem key={item.id} {...item} />
       })}
     </div>
   )
