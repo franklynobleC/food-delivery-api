@@ -1,7 +1,13 @@
 .cart-content {
+  height: 1500px; /* set a fixed height */
+  overflow: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   background-color: rgb(208, 251, 245);
+  padding: 20px;
+  padding-bottom: 20px;
+
+  width: 80%;
 }

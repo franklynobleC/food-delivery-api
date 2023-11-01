@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import CartItem from './CartItem'
 import { useCartContext } from '../context/cart_context'
 import CartTotal from './CartTotal'
-import  '../styles/cart/cartcontent.css'
+import '../styles/cart/cartcontent.css'
 const CartContent = () => {
   const { cart, clearCart } = useCartContext()
   // pass the cart  item  here
@@ -14,6 +14,9 @@ const CartContent = () => {
         console.log(item)
         return <CartItem key={item.id} {...item} />
       })}
+      <div>
+        <Link to='/foods'>add more orders</Link>
+      </div>
       <CartTotal />
       <button onClick={clearCart}>clear cart</button>
     </div>
