@@ -5,6 +5,7 @@
 .single-food-image-container {
   padding-top: 30px;
   margin: 30px;
+  margin-left: 200px;
   height: 200px;
   width: 100%;
 }
@@ -41,4 +42,11 @@
 .single-food-details-container {
   margin-left: 50px;
   display: grid;
+}
+.single-item-name{
+margin-left: 50px;
+}
+.single-item-price{
+  margin-left: 20px;
+
 }

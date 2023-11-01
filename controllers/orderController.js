@@ -7,13 +7,14 @@ const { json } = require('stream/consumers')
 const { error } = require('console')
 const { STATUS_CODES } = require('http')
 const { makePayment } = require('../services/paymentService')
-const Order = require('../models/Order')
+
 const { search } = require('../db/searchData')
 
 //   TODO:       add check Permission,  to rout  authUser and check Permission
 const createOrder = async (req, res) => {
   // req.user = req.user.userId
-  console.log(req.user.userId)
+  // console.log(user.userId)
+  //console.log(req.user.userId)
   const { OrderItems: OrderItems, paymentoption, deliveryFee } = req.body
 
   console.log(OrderItems, deliveryFee)
@@ -109,10 +110,7 @@ const createOrder = async (req, res) => {
   )
   //Todo: if  payment  is successful,  send  email to  the User
   console.log(paymentData, 'From Payment DB')
-  res.status(StatusCodes.CREATED).json({
-    order: createdOrderItem,
-    message: 'Success! Order created successfully'
-  })
+  res.status(StatusCodes.CREATED).json(createdOrderItem)
 }
 const getAllPendingOrders = async (req, res) => {
   const pendingOrders = await OrderSchema.find({ status: 'Pending' })

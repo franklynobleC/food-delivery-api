@@ -1,7 +1,7 @@
 import './App.css'
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { Home, About, Foods, Error, SingleFood } from './pages'
+import { Home, About, Foods, Error, SingleFood, Cart } from './pages'
 import { Footer, Navbar, Contact } from './components/'
 
 function App () {
@@ -12,8 +12,9 @@ function App () {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='about' element={<About />} />
-        ;<Route path='contact' element={<Contact />} />
+        <Route path='contact' element={<Contact />} />
         <Route path='foods' element={<Foods />} />
+        <Route path='/cart' element={<Cart />} />
         <Route path='foods/:id' element={<SingleFood />} />
         <Route path='*' element={<Error />} />
       </Routes>

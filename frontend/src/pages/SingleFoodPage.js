@@ -27,7 +27,7 @@ const SingleFoodPage = () => {
     if (error) {
       setTimeout(() => {
         navigate('/')
-      }, 2000)
+      }, 3000)
     }
   }, [error])
   if (loading) {
@@ -56,11 +56,14 @@ const SingleFoodPage = () => {
         <div className='single-item-price'>{price}</div>
         <div className='single-item-description'>{description}</div>
       </div>
+      <hr />
       <Link to={`/foods`} className='link'>
         back to foods
       </Link>
-
-      <button className='add-to-cart-btn'>add to cart</button>
+      <div className='spacer'></div>
+      <Link to='/cart'>
+        <button className='add-to-cart-btn'>add to cart</button>
+      </Link>
     </section>
   )
 }

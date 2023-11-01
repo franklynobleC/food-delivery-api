@@ -11,9 +11,11 @@ const {
   getAllOrders,
   updateOrder,
   deleteOrder,
-  getSingleOrder,
- // getOrderStatus
+  getSingleOrder
+  // getOrderStatus
 } = require('../controllers/orderController')
+
+//TODO:  ADD the Authentication and  authorization for routes
 
 router.get('/getAllOrders', getAllOrders)
 router.get('/:id', getSingleOrder)
@@ -22,13 +24,13 @@ router.post(
   authenticateUser,
   authorizedPermissions('admin', 'user'),
   createOrder
-  )
-  router.patch('/:id', updateOrder)
-  router.delete('/:id', deleteOrder)
+)
+router.patch('/:id', updateOrder)
+router.delete('/:id', deleteOrder)
 router.get(
   '/:orderstatus',
   authenticateUser,
-  authorizedPermissions('admin', 'user'),
+  authorizedPermissions('admin', 'user')
   //getOrderStatus
 )
 

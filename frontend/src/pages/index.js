@@ -4,5 +4,5 @@ import Foods from './FoodsPage'
 import SingleFood from './SingleFoodPage'
 import Error from './ErrorPage'
 import Contact from '../components/Contact'
-
-export { Home, About, Foods, SingleFood, Error, Contact }
+import  Cart from './CartPage'
+export { Home, About, Foods, SingleFood, Error, Contact,Cart }
