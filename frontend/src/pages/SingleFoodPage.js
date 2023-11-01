@@ -3,7 +3,7 @@ import { FaSearch } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { useParams, useNavigate } from 'react-router-dom'
 import { single_food_url as single_url } from '../utils/constants'
-import {} from '../components/'
+import { AddToCart } from '../components'
 import { useFoodsContext } from '../context/foods_context'
 import '../styles/singlefood.css'
 const SingleFoodPage = () => {
@@ -61,9 +61,13 @@ const SingleFoodPage = () => {
         back to foods
       </Link>
       <div className='spacer'></div>
+      //{' '}
       <Link to='/cart'>
-        <button className='add-to-cart-btn'>add to cart</button>
+        // <bu className='add-to-cart-btn'>add to cart</bu>
+        //{' '}
       </Link>
+      <hr />
+      <AddToCart food={food} />
     </section>
   )
 }

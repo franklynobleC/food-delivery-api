@@ -11,8 +11,8 @@ const ListView = ({ foods }) => {
       {foods.map(food => {
         const { name, price, image, id, description } = food
         return (
-          <div className='food-container'>
-            <div key={id} className='food-image-container'>
+          <div key={id} className='food-container'>
+            <div className='food-image-container'>
               <img src={image} alt={name} className='food-image' />
             </div>
             <div className='food-name'>
