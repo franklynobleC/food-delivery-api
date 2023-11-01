@@ -28,6 +28,7 @@ const CartContainer = () => {
         </header>
       </section>
     )
+  }
 
     return (
       <section className='cart'>
@@ -40,6 +41,5 @@ const CartContainer = () => {
       </section>
     )
   }
-}
 
 export default CartContainer

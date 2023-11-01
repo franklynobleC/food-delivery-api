@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 import React, { useContext, useEffect, useReducer } from 'react'
+import cart_reducer from '../reducers/cart_reducer'
 import {
   ADD_TO_CART,
   REMOVE_CART_ITEM,
@@ -23,11 +24,11 @@ const initialState = {
 const CartContext = React.createContext()
 
 export const CartProvider = ({ children }) => {
-  const [useState, dispatch] = useReducer(reducer, initialState)
+  const [state, dispatch] = useReducer(cart_reducer, initialState)
 
   //add to  cart function
-  const addToCart = (id, food) => {
-    dispatch({ type: ADD_TO_CART, payload: { id, food } })
+  const addToCart = (id, amount, food) => {
+    dispatch({ type: ADD_TO_CART, payload: { id, amount, food } })
   }
   //remove an  item from  cart
   const removeItem = id => {
@@ -38,6 +39,7 @@ export const CartProvider = ({ children }) => {
     dispatch({ type: CLEAR_CART })
   }
 
+  // this would be implemented when  the components loads(when  the Page  loads)
   useEffect(() => {
     //dispatch this when  component mounts
     dispatch({ type: COUNT_CART_TOTALS })
@@ -55,5 +57,5 @@ export const CartProvider = ({ children }) => {
 
 //
 export const useCartContext = () => {
-  return useCartContext(CartContext)
+  return useContext(CartContext)
 }

@@ -1,15 +1,19 @@
 import React, { useState } from 'react'
 import { useCartContext } from '../context/cart_context'
+import { Link } from 'react-router-dom'
 
 const AddToCart = ({ food }) => {
+  const [amount, setAmount] = useState(1)
   const { addToCart } = useCartContext()
   const { id } = food
 
   return (
     <div>
-      <Link to='/cart'>
+      <Link
+        to='/cart'
         className='btn-add-to-cart'
-        {onClick(() => addToCart(id, food))}
+        onClick={() => addToCart(id, amount, food)}
+      >
         add to cart
       </Link>
     </div>

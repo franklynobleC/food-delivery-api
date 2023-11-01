@@ -36,9 +36,29 @@ const cart_reducer = (state, action) => {
       return { ...state, cart: [...state.cart, newItem] }
     }
   }
+  if (action.type === COUNT_CART_TOTALS) {
+    const { total_price, total_quantity } = state.cart.reduce(
+      (total, cartItem) => {
+        const { price, amount } = cartItem
+        {
+          /*calculate  the amount of  item(total quantity of  item)*/
+        }
+        total.total_quantity += amount
+        total.total_price += price * amount
+
+        return total
+      },
+      {
+        total_price: 0,
+        total_quantity: 0
+      }
+    )
+    return { ...state, total_price, total_quantity }
+  }
   throw new Error(`No matching ${action.type} -action  type`)
   //check for  another Action Dispatch
 }
+
 //remove single item  from cart
 
 export default cart_reducer

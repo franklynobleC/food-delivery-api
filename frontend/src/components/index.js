@@ -8,6 +8,7 @@ import Navbar from './Navbar'
 import Contact from './Contact'
 import ListView from './ListView'
 import AddToCart from './AddToCart'
+import CartContent from './CartContent'
 
 //TODO: import all data from  component and  give  it  a component  name
 
@@ -20,5 +21,6 @@ export {
   Navbar,
   Contact,
   ListView,
-  AddToCart
+  AddToCart,
+  CartContent
 }

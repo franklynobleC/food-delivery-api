@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App'
 import { FoodsProvider } from './context/foods_context'
-
+import { CartProvider } from './context/cart_context'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
     <FoodsProvider>
-      <App />
+      <CartProvider>
+        <App />
+      </CartProvider>
     </FoodsProvider>
   </React.StrictMode>
 )
