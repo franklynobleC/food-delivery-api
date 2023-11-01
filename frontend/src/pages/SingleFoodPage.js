@@ -68,6 +68,8 @@ const SingleFoodPage = () => {
 
       <hr />
       {/*<AddToCart food={food} /> */}
+
+{/*
       <Link
         to='/cart'
         className='add-to-cart-btn'
@@ -75,6 +77,8 @@ const SingleFoodPage = () => {
       >
         add to cart
       </Link>
+  */ }
+      <AddToCart food={food}/>
     </section>
   )
 }

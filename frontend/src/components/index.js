@@ -9,7 +9,7 @@ import Contact from './Contact'
 import ListView from './ListView'
 import AddToCart from './AddToCart'
 import CartContent from './CartContent'
-
+import CartToTal from './CartTotal'
 //TODO: import all data from  component and  give  it  a component  name
 
 export {
@@ -22,5 +22,6 @@ export {
   Contact,
   ListView,
   AddToCart,
-  CartContent
+  CartContent,
+  CartToTal
 }
