@@ -11,6 +11,7 @@ const cart_reducer = (state, action) => {
     //check  if id  is  found  in  cart  array
     const tempItem = state.cart.find(i => i.id === id)
     if (tempItem) {
+      console.log('ADD TO CART',tempCart)
       //check if  the  item  is  in  the     Cart,  iterate  over it
       const tempCart = state.cart.map(cartItem => {
         if (cartItem.id === id) {
@@ -53,6 +54,7 @@ const cart_reducer = (state, action) => {
         total_quantity: 0
       }
     )
+    console.log(total_price,total_quantity)
     return { ...state, total_price, total_quantity }
   }
   throw new Error(`No matching ${action.type} -action  type`)

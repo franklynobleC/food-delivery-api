@@ -1,4 +1,5 @@
 import React from 'react'
+import '../styles/cart/cartitem.css'
 
 const CartItem = ({ name, price, description, image }) => {
   {
@@ -6,15 +7,18 @@ const CartItem = ({ name, price, description, image }) => {
      */
   }
   return (
-    <section>
-      <div>
-        <img src={image} alt={name} />
+    <section className='cart-item-container'>
+      <div className='cart-item-image-container'>
+        <img src={image} alt={name} className='cart-image' />
       </div>
-      <div>
+      <div className='cart-item-name'>
         <h5>{name}</h5>
       </div>
-      <div>
-        <h5>{price}</h5>
+
+      <div>{description}</div>
+
+      <div className='cart-item-price'>
+        <h5>Price: &#8358;{price}</h5>
       </div>
     </section>
   )

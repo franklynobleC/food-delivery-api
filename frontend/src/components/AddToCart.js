@@ -3,12 +3,12 @@ import { useCartContext } from '../context/cart_context'
 import { Link } from 'react-router-dom'
 
 const AddToCart = ({ food }) => {
-  const [amount, setAmount] = useState(1)
-  const { addToCart } = useCartContext()
+  const [amount, setAmount] = useState(4)
+  const { addToCart,cart } = useCartContext()
   const { id } = food
 
   return (
-    <div>
+    <div className=''>
       <Link
         to='/cart'
         className='btn-add-to-cart'

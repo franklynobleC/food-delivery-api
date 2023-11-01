@@ -6,9 +6,10 @@ const CartTotal = () => {
   return (
     <div>
       <div>
-        <h4>{total_quantity}</h4>
+        <h1>CART TOTAL PAGE</h1>
+        <h4>Total Amount: &#8358;{total_quantity}</h4>
       </div>
-      <div>{shipping_fee}</div>
+      <div>Delivery Fee:&#8358;{shipping_fee}</div>
     </div>
   )
 }
