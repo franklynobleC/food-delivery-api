@@ -23,4 +23,7 @@ export const links = [
 ]
 
 export const foods_url = 'http://localhost:5000/api/v1/foods/getAllFoods'
-export const single_food_url = 'http://localhost:5000/api/v1/foods/getsingleFood/'
+export const single_food_url =
+  'http://localhost:5000/api/v1/foods/getsingleFood/'
+export const signin_url = 'http://localhost:5000/api/v1/auth/register'
+export const login_url = 'http://localhost:5000/api/v1/auth/login'
