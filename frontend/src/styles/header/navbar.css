@@ -1,8 +1,9 @@
 .nav-links {
-  /* background-color: #eee023; */
+
   height: 50px;
   /* background-color: rgb(12, 81, 63); */
   background-color: rgb(208, 251, 245);
+
   display: flex;
   /* justify-content: space-evenly; */
   /* justify-content: space-around; */
