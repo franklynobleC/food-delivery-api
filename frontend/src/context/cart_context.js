@@ -13,7 +13,7 @@ const initialState = {
   total_quantity: 0,
   total_price: 0,
   payment_option: 'cash',
-  delivery_fee: 20
+  delivery_fee: 0
 }
 
 // In   Context  is a feature that allows you to

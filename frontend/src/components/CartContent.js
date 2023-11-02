@@ -11,9 +11,8 @@ const CartContent = () => {
     <div className='cart-content'>
       <h5>cart Content page</h5>
       {cart.map(item => {
-        console.log(item)
-        return <CartItem key={item.id} {...item} className = 'cart-main-item'
- />
+
+        return <CartItem key={item.id} {...item} />
       })}
       <div>
         <Link to='/foods'>add more orders</Link>

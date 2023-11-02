@@ -11,7 +11,8 @@ const cart_reducer = (state, action) => {
     //check  if id  is  found  in  cart  array
     const tempItem = state.cart.find(i => i.id === id)
     if (tempItem) {
-      console.log('ADD TO CART',tempCart)
+      console.log('ADD TO CART>>>>>>', tempItem)
+
       //check if  the  item  is  in  the     Cart,  iterate  over it
       const tempCart = state.cart.map(cartItem => {
         if (cartItem.id === id) {
@@ -46,6 +47,7 @@ const cart_reducer = (state, action) => {
         }
         total.total_quantity += amount
         total.total_price += price * amount
+        console.log('TOTAL>>>>>>>>>', total)
 
         return total
       },
@@ -54,13 +56,24 @@ const cart_reducer = (state, action) => {
         total_quantity: 0
       }
     )
-    console.log(total_price,total_quantity)
+    console.log(total_price, total_quantity)
     return { ...state, total_price, total_quantity }
   }
+  if (action.type === CLEAR_CART) {
+    return { ...state, cart: [] }
+  }
+  //remove single item  from cart
+  if (action.type === REMOVE_CART_ITEM) {
+    const id = action.payload
+    console.log(state.cart)
+    let tempcart2 = state.cart
+    console.log('IS ID>>>', id)
+    let filteredOrder = tempcart2.filter(item => item.id !== id)
+    return { ...state, cart: filteredOrder }
+  }
+
   throw new Error(`No matching ${action.type} -action  type`)
   //check for  another Action Dispatch
 }
-
-//remove single item  from cart
 
 export default cart_reducer
