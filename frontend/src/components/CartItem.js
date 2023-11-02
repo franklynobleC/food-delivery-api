@@ -11,15 +11,11 @@ const CartItem = ({ name, price, description, image }) => {
       <div className='cart-item-image-container'>
         <img src={image} alt={name} className='cart-image' />
       </div>
-      <div className='cart-item-name'>
-        {name}
-      </div>
+      <div className='cart-item-name'>Name:{name}</div>
 
       <div>{description}</div>
 
-      <div className='cart-item-price'>
-        <h5>Price: &#8358;{price}</h5>
-      </div>
+      <div className='cart-item-price'>Price: &#8358;{price}</div>
     </section>
   )
 }
