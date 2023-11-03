@@ -18,11 +18,12 @@ require('dotenv').config()
 //add Register, Login,  logOut,
 const register = async (req, res) => {
   console.log(req)
-  const { name, email, password, deliveryAddress, role } = req.body
+  const { email, password } = req.body
 
   //console.log(req.body, 'FROM  REQUEST BODY')
+  console.log(email, password)
 
-  if (!name || !email || !password || !deliveryAddress || !role) {
+  if (!email || !password) {
     console.log('Registration Error!')
     //  throw new Error('Please fill all the fields')
     return res.status(StatusCodes.BAD_REQUEST).json({ error: res.error })
@@ -40,11 +41,8 @@ const register = async (req, res) => {
   //await emailFunc(email,name)
 
   const createdUser = await UserSchema.create({
-    name,
     email,
-    password,
-    deliveryAddress,
-    role
+    password
   })
 
   //
@@ -80,18 +78,19 @@ const login = async (req, res) => {
   const user = await UserSchema.findOne({ email })
 
   if (!user) {
-    res.status(StatusCodes.BAD_REQUEST ).json({message:'no User found!, Invalid credentials'})
-  return
-   // throw new Error('no User found!, Invalid credentials')
-
+    res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: 'no User found!, Invalid credentials' })
+    return
+    // throw new Error('no User found!, Invalid credentials')
   }
   const isPasswordCorrect = await user.checkPassword(password)
   if (!isPasswordCorrect) {
-    res
-  .status(StatusCodes.BAD_REQUEST)
-      .json({ message: 'Invalid credentials, password does not  Match, Invalid credentials' })
+    res.status(StatusCodes.BAD_REQUEST).json({
+      message:
+        'Invalid credentials, password does not  Match, Invalid credentials'
+    })
     return
-
   }
   //if  password Matched,  add   user to Token
   const tokenUser = createTokenUser(user)

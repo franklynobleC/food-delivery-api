@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { FaSearch } from 'react-icons/fa'
+import React, { useEffect } from 'react'
+import {} from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { useParams, useNavigate } from 'react-router-dom'
 import { single_food_url as single_url } from '../utils/constants'
@@ -8,7 +8,6 @@ import { useFoodsContext } from '../context/foods_context'
 import { useCartContext } from '../context/cart_context'
 import '../styles/singlefood.css'
 const SingleFoodPage = () => {
-
   // const { id } = food
 
   //Get Params  id  from  the request  current url
@@ -69,7 +68,7 @@ const SingleFoodPage = () => {
       <hr />
       {/*<AddToCart food={food} /> */}
 
-{/*
+      {/*
       <Link
         to='/cart'
         className='add-to-cart-btn'
@@ -77,8 +76,8 @@ const SingleFoodPage = () => {
       >
         add to cart
       </Link>
-  */ }
-      <AddToCart food={food}/>
+  */}
+      <AddToCart food={food} />
     </section>
   )
 }

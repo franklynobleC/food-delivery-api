@@ -1,30 +1,33 @@
 import React, { useEffect, useReducer, useContext } from 'react'
 import axios from 'axios'
 import { register_user_url } from '../utils/constants'
+import user_reducer from '../reducers/user_reducer'
 
-const initialState = {
-  user_sign_in: false,
-  user_sign_in_error: false,
-  user: {}
-}
 import {
   REGISTER_BEGIN,
   REGISTER_ERROR,
-  REGISTER_USER,
   REGISTER_SUCCESS,
   LOGIN_ERROR,
   LOGIN_SUCCESS,
   LOG_OUT,
   LOG_OUT_SUCCESS,
-  LOG_OUT_ERROR
+  LOG_OUT_ERROR,
+  REGISTER_USER
 } from '../actions'
+
+const initialState = {
+  register: false,
+  register_error: false,
+  register_loading: false,
+  email: '',
+  password: ''
+}
+
 //declare global context and  make it  Available Globally
 // also here, Set All  the Actions using Dispatch
 
 export const UserContext = React.createContext()
-
 //create  user provider
-
 export const UserProvider = ({ children }) => {
   //pass reducer function and  initial state Object
   //TODO: import and  use user sign_in_reducer
@@ -32,22 +35,44 @@ export const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(user_reducer, initialState)
 
   //Hit   API end point  for        register
-  const registerUser = async url => {
+  const registerUser = async (email, password) => {
     try {
-      dispatch({ type: REGISTER_BEGIN })
+      dispatch({ type: REGISTER_USER })
       console.log('register action Begin')
-      const response = await axios.post(url)
-      const registeredUser = response.data
-      console.log('Register  user Success',registeredUser)
+      console.log(
+        'FROM USER  CONTEXT!!!!!!',
+        'EMAIL!!',
+        email,
+        'PASSWORD',
+        password
+      )
+      console.log(email, password, 'FROM   REGISTER CONTEXT>>>>>')
+
+      const response = await axios.post(register_user_url, {
+        email: email,
+        password: password
+      })
+      const registeredUser = await response.data
+      console.log(
+        'Register  SucceSSSS AFTER  RESPONSE FROM  CONTEXT',
+        registeredUser
+      )
       dispatch({ type: REGISTER_SUCCESS, payload: registeredUser })
     } catch (error) {
-      console.log('Register  user Error')
+      console.log(
+        'FROM  REGISTER CONTEXT, ERROR, NOT!! SUCCESSFUL',
+        error.message
+      )
       dispatch({ type: REGISTER_ERROR, payload: error.message })
     }
   }
-  useEffect(() => {
-    registerUser(register_user_url)
-  }, [])
+  // useEffect(() => {
+  //   registerUser(state.userData)
+  // }, [])
+
+  // const setUserDataNameAndPassword = userData => {
+
+  // }
 
   //Todo: add  login, logout function
 
