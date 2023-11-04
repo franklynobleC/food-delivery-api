@@ -77,6 +77,7 @@ export const UserProvider = ({ children }) => {
         password: password
       })
       const userLoginData = await response.data
+      console.log('FROM LOGGING  RESPONSE DATA>>>>',userLoginData)
       dispatch({ type: LOGIN_USER_SUCCESS, payload: userLoginData })
     } catch (err) {
       console.log('LOGIN ERROR CONTEXT')

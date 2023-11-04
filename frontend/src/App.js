@@ -11,7 +11,7 @@ import {
   Checkout,
   Auth
 } from './pages'
-import { Footer, Navbar, Contact } from './components/'
+import { Footer, Navbar, Contact,Login } from './components/'
 
 function App () {
   return (
@@ -24,6 +24,7 @@ function App () {
         <Route path='contact' element={<Contact />} />
         <Route path='foods' element={<Foods />} />
         <Route path='register' element={<Auth />} />
+        <Route path='login' element={<Login />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='foods/:id' element={<SingleFood />} />
         <Route path='/checkout' element={<Checkout />} />

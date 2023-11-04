@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useUserContext } from '../context/user_context'
 import '../styles/user/register.css'
 function Auth () {
@@ -46,9 +47,9 @@ function Auth () {
         <button class='sign-up'>Sign Up</button>
       </div>
       <div class='password-reset-login'>
-        <a href='./index.html'>already have an account? Login</a>
+        <Link to='/login'>already have an account? Login</Link>
         <div></div>
-        <a href='./index.html'> forgot password? Reset password</a>
+        <Link to='reset'>forgot password? Reset password</Link>
       </div>
     </form>
   )

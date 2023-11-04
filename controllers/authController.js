@@ -79,6 +79,8 @@ const login = async (req, res) => {
       .status(StatusCodes.BAD_REQUEST)
       .json({ error: 'Please fill all the fields' })
   }
+
+  console.log(email, password)
   const user = await UserSchema.findOne({ email })
 
   if (!user) {

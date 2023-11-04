@@ -68,7 +68,7 @@ export const FoodsProvider = ({ children }) => {
     }
   }
   useEffect(() => {
-    fetchFoods(url)
+    // fetchFoods(url)
     {
       /* add openSidebar here */
     }
