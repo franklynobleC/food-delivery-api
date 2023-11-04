@@ -1,16 +1,22 @@
 import React, { useState } from 'react'
 import { useUserContext } from '../context/user_context'
 import { Foods } from '../pages'
-import { Link } from 'react-router-dom'
+import { Link, Redirect, useNavigate } from 'react-router-dom'
 const Login = () => {
   const [userPassword, setUserPassword] = useState('')
   const [userEmail, setUserEmail] = useState('')
   const { loginUser, is_registered, is_logged_in } = useUserContext()
+  let navigate = useNavigate()
   const handleSubmit = e => {
     e.preventDefault()
     console.log(userPassword, userEmail)
     loginUser(userEmail, userPassword)
   }
+  if (is_logged_in) {
+    return navigate('/foods')
+  }
+  console.log(is_logged_in)
+
   return (
     <form class='login-container' onSubmit={handleSubmit}>
       <div class='email-container'>
@@ -40,7 +46,7 @@ const Login = () => {
         <button class='sign-up'>Login</button>
       </div>
       <div class='password-reset-login'>
-        <a href='./index.html'>already have an account? Login</a>
+        <a href='/'>Home page</a>
         <div></div>
         <a href='./index.html'> forgot password? Reset password</a>
       </div>

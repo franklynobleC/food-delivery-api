@@ -2,7 +2,10 @@ import axios from 'axios'
 
 import React, { useContext, useEffect, useReducer } from 'react'
 
-import { foods_url as url,single_food_url as single_url } from '../utils/constants'
+import {
+  foods_url as url,
+  single_food_url as single_url
+} from '../utils/constants'
 
 import {
   GET_FOODS_BEGIN,
@@ -39,15 +42,12 @@ export const FoodsProvider = ({ children }) => {
   const fetchFoods = async () => {
     try {
       dispatch({ type: GET_FOODS_BEGIN })
-      console.log('getting Foods')
 
       const response = await axios.get(url)
 
       const foods = response.data
-      console.log('getting Foods Successful')
 
       dispatch({ type: GET_FOODS_SUCCESS, payload: foods })
-      console.log('Foods fetched', foods)
     } catch (error) {
       console.log('Error fetching foods', error.message)
       dispatch({ type: GET_FOODS_ERROR, payload: error.message })
@@ -68,7 +68,8 @@ export const FoodsProvider = ({ children }) => {
     }
   }
   useEffect(() => {
-    // fetchFoods(url)
+    fetchFoods(url)
+    console.log('USE EFFECT RENDER')
     {
       /* add openSidebar here */
     }

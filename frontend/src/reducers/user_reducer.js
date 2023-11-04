@@ -54,12 +54,13 @@ const user_reducer = (state, action) => {
 
   if (action.type === LOGIN_USER_SUCCESS) {
     console.log('LOGIN SUCCESS FROM  REDUCERS')
+
     return {
       ...state,
       register_loading: false,
       register_error: false,
       is_registered: true,
-      is_logged_in:true,
+      is_logged_in: true,
       user: action.payload
     }
   }

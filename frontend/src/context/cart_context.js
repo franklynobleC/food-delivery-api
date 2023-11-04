@@ -1,12 +1,17 @@
 import axios from 'axios'
 
 import React, { useContext, useEffect, useReducer } from 'react'
+import { create_orders_url } from '../utils/constants'
 import cart_reducer from '../reducers/cart_reducer'
 import {
   ADD_TO_CART,
   REMOVE_CART_ITEM,
   CLEAR_CART,
-  COUNT_CART_TOTALS
+  COUNT_CART_TOTALS,
+  CREATE_ORDER,
+  CREATE_ORDER_BEGIN,
+  CREATE_ORDER_SUCCESS,
+  CREATE_ORDER_ERROR
 } from '../actions'
 const initialState = {
   cart: [],
@@ -38,6 +43,27 @@ export const CartProvider = ({ children }) => {
   const clearCart = () => {
     dispatch({ type: CLEAR_CART })
   }
+  const createOrder = async (id, cart, payment_option, delivery_fee) => {
+    dispatch({ type: CREATE_ORDER_BEGIN })
+    try {
+      const response = await axios.post(create_orders_url, {
+        id,
+        cart,
+        payment_option,
+        delivery_fee
+      })
+      const createdOrder = response.data
+      console.log('CREATED ORDER SUCCESS')
+      dispatch({ type: CREATE_ORDER_SUCCESS, payload: createdOrder })
+    } catch (error) {
+      console.log('CREATE ORDERS ERROR')
+      console.log(error)
+      dispatch({
+        type: CREATE_ORDER_ERROR,
+        payload: error.response.data.message
+      })
+    }
+  }
 
   // this would be implemented when  the components loads(when  the Page  loads)
   useEffect(() => {
@@ -48,7 +74,7 @@ export const CartProvider = ({ children }) => {
 
   return (
     <CartContext.Provider
-      value={{ ...state, addToCart, clearCart, removeItem }}
+      value={{ ...state, addToCart, clearCart, removeItem, createOrder }}
     >
       {children}
     </CartContext.Provider>
