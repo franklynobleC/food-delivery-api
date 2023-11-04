@@ -14,12 +14,13 @@ const user_reducer = (state, action) => {
   if (action.type === REGISTER_USER) {
     console.log('FROM REGISTER USER REDUCER')
     console.log(action.payload)
-
+    state.user = action.payload
+    console.log(state.user)
     return { ...state, register_loading: false, user: action.payload }
   }
   if (action.type === REGISTER_SUCCESS) {
     console.log('FROM REGISTER USER Success REDUCER')
-    console.log(action.payload)
+    console.log(action.payload.user)
 
     return {
       ...state,
@@ -54,14 +55,15 @@ const user_reducer = (state, action) => {
 
   if (action.type === LOGIN_USER_SUCCESS) {
     console.log('LOGIN SUCCESS FROM  REDUCERS')
-
+    const { userId, name } = action.payload
+    console.log("FROM  PAYLOAD LOGIN REDUCERS  TEST",userId,name)
     return {
       ...state,
       register_loading: false,
       register_error: false,
       is_registered: true,
       is_logged_in: true,
-      user: action.payload
+      userId: userId
     }
   }
   if (action.type === LOGIN_USER_ERROR) {

@@ -21,8 +21,8 @@ router.get('/getAllOrders', getAllOrders)
 router.get('/:id', getSingleOrder)
 router.post(
   '/createOrder',
-  authenticateUser,
-  authorizedPermissions('admin', 'user'),
+  // authenticateUser,
+  // authorizedPermissions('admin', 'user'),
   createOrder
 )
 router.patch('/:id', updateOrder)

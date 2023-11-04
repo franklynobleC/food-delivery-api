@@ -22,7 +22,8 @@ const initialState = {
   register_loading: false,
   is_logged_in: false,
   email: '',
-  password: ''
+  password: '',
+  userId:'',
 }
 
 //declare global context and  make it  Available Globally
@@ -77,7 +78,7 @@ export const UserProvider = ({ children }) => {
         password: password
       })
       const userLoginData = await response.data
-      console.log('FROM LOGGING  RESPONSE DATA>>>>',userLoginData)
+      console.log('FROM LOGGING  RESPONSE DATA>>>>', userLoginData)
       dispatch({ type: LOGIN_USER_SUCCESS, payload: userLoginData })
     } catch (err) {
       console.log('LOGIN ERROR CONTEXT')

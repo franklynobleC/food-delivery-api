@@ -63,7 +63,7 @@ const register = async (req, res) => {
   // add UserToken
   const tokenUser = createTokenUser(createdUser)
   attachCookiesToResponse({ res, user: tokenUser })
-  res.status(StatusCodes.CREATED).json({ user: tokenUser })
+  res.status(StatusCodes.CREATED).json(tokenUser)
 }
 
 //TODO
@@ -102,9 +102,7 @@ const login = async (req, res) => {
   const tokenUser = createTokenUser(user)
   attachCookiesToResponse({ res, user: tokenUser })
 
-  res
-    .status(StatusCodes.OK)
-    .json({ user: tokenUser, message: 'User logged in' })
+  res.status(StatusCodes.OK).json(tokenUser)
 }
 
 //TODO

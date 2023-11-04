@@ -2,7 +2,10 @@ import {
   CLEAR_CART,
   COUNT_CART_TOTALS,
   REMOVE_CART_ITEM,
-  ADD_TO_CART
+  ADD_TO_CART,
+  CREATE_ORDER_BEGIN,
+  CREATE_ORDER_ERROR,
+  CREATE_ORDER_SUCCESS
 } from '../actions'
 
 const cart_reducer = (state, action) => {
@@ -70,6 +73,41 @@ const cart_reducer = (state, action) => {
     console.log('IS ID>>>', id)
     let filteredOrder = tempcart2.filter(item => item.id !== id)
     return { ...state, cart: filteredOrder }
+  }
+
+  if (action.type === CREATE_ORDER_BEGIN) {
+    console.log('ORDER CREATE BEGIN')
+
+    return {
+      ...state,
+      is_loading: true,
+      is_order_created_success: false,
+      is_order_error: false,
+      order: null
+    }
+  }
+
+  if (action.type === CREATE_ORDER_SUCCESS) {
+    console.log('ORDER CREATE SUCCESS')
+
+    return {
+      ...state,
+      is_loading: false,
+      is_order_created_success: true,
+      is_order_error: false,
+      order: action.payload
+    }
+  }
+  if (action.type === CREATE_ORDER_ERROR) {
+    console.log('ORDER CREATE ERROR')
+
+    return {
+      ...state,
+      is_loading: false,
+      is_order_created_success: false,
+      is_order_error: true,
+      order: null
+    }
   }
 
   throw new Error(`No matching ${action.type} -action  type`)

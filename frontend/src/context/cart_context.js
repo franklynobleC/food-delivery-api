@@ -18,7 +18,12 @@ const initialState = {
   total_quantity: 0,
   total_price: 0,
   payment_option: 'cash',
-  delivery_fee: 0
+  delivery_fee: 0,
+  is_order_created_success: false,
+  is_order_error: false,
+  is_loading: false,
+
+  order: {}
 }
 
 // In   Context  is a feature that allows you to
@@ -48,11 +53,11 @@ export const CartProvider = ({ children }) => {
     try {
       const response = await axios.post(create_orders_url, {
         id,
-        cart,
-        payment_option,
-        delivery_fee
+        OrderItems: cart,
+        paymentoption: payment_option,
+        deliveryFee: delivery_fee
       })
-      const createdOrder = response.data
+      const createdOrder = await response.data
       console.log('CREATED ORDER SUCCESS')
       dispatch({ type: CREATE_ORDER_SUCCESS, payload: createdOrder })
     } catch (error) {

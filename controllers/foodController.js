@@ -10,7 +10,7 @@ const getAllFoods = async (req, res) => {
   if (!food) {
     res
       .status(StatusCodes.BAD_REQUEST)
-      .json({ food: 'No product found in database' })
+      .json({ food: 'No b  product found in database' })
   }
 
   res.status(StatusCodes.OK).json(food)

@@ -5,17 +5,19 @@ import { Link, Redirect, useNavigate } from 'react-router-dom'
 const Login = () => {
   const [userPassword, setUserPassword] = useState('')
   const [userEmail, setUserEmail] = useState('')
-  const { loginUser, is_registered, is_logged_in } = useUserContext()
+  const { loginUser, is_registered, is_logged_in, userId } = useUserContext()
   let navigate = useNavigate()
   const handleSubmit = e => {
     e.preventDefault()
     console.log(userPassword, userEmail)
     loginUser(userEmail, userPassword)
   }
+  console.log(is_logged_in)
+  console.log('from user loggedIn Data WITH USER ID',userId)
+
   if (is_logged_in) {
     return navigate('/foods')
   }
-  console.log(is_logged_in)
 
   return (
     <form class='login-container' onSubmit={handleSubmit}>
