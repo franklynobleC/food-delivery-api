@@ -12,7 +12,7 @@
  */
 const checkPermissions = (requestUser, resourceUserId) => {
   console.log(requestUser)
-  console.loh(resourceUserId)
+  console.log(resourceUserId)
   // console.log(typeof  resourcesUserId);
   //if  request role is  equal to  admin, proceed with the function
 

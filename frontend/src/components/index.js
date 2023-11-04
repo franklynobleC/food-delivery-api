@@ -11,6 +11,7 @@ import AddToCart from './AddToCart'
 import CartContent from './CartContent'
 import CartToTal from './CartTotal'
 import Auth from './Auth'
+import Login from './Login'
 //TODO: import all data from  component and  give  it  a component  name
 
 export {
@@ -25,5 +26,6 @@ export {
   AddToCart,
   CartContent,
   CartToTal,
-  Auth
+  Auth,
+Login
 }

@@ -1,10 +1,10 @@
 .about-parent {
   margin-top: 50px;
   height: 700px;
-  /* background-color: white; */
+
   /* background-color: #37b9a8; */
   padding-left: 10px;
-  /* color: whitesmoke; */
+  background-color: #e3f6f5;
   border-color: red;
   border-style: solid;
 }
