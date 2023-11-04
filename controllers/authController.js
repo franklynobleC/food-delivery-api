@@ -30,6 +30,10 @@ const register = async (req, res) => {
   }
 
   //
+  if (email || password) {
+    console.log(email, password)
+    return
+  }
   //check  if user Already exist,
   const emailAlreadyExist = await UserSchema.findOne({ email })
   if (emailAlreadyExist) {

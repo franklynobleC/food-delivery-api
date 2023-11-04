@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      .login-container {
+.login-container {
         display: flex;
         position: fixed;
 
@@ -121,36 +114,3 @@
 
         color: #7dc0bc;
       }
-    </style>
-  </head>
-  <body>
-    <div class="login-container">
-      <div class="email-container">
-        <div class="email">email</div>
-        <input
-          type="text"
-          class="email-input-text"
-          placeholder="enter email"
-          autofocus
-        />
-      </div>
-      <div class="password-container">
-        <div class="password">password</div>
-        <input
-          type="text"
-          class="password-input-text"
-          placeholder="enter password"
-          autofocus
-        />
-      </div>
-      <div class="signup-container">
-        <button class="sign-up">Sign Up</button>
-      </div>
-      <div class="password-reset-login">
-        <a href="./index.html">already have an account? Login</a>
-        <div></div>
-        <a href="./index.html"> forgot password? Reset password</a>
-      </div>
-    </div>
-  </body>
-</html>
