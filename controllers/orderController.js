@@ -13,9 +13,10 @@ const { search } = require('../db/searchData')
 //   TODO:       add check Permission,  to rout  authUser and check Permission
 const createOrder = async (req, res) => {
   // req.user = req.user.userId
-  // console.log(user.userId)
+  // console.log(req.user)
   //console.log(req.user.userId)
-  const { OrderItems: OrderItems, paymentoption, deliveryFee } = req.body
+  const { OrderItems: OrderItems, _id: userid, deliveryFee } = req.body
+  console.log(typeof OrderItems)
 
   console.log(OrderItems, deliveryFee)
 
@@ -67,14 +68,16 @@ const createOrder = async (req, res) => {
   //add payment and  amount,
   //send Email for Order placement. this email should contain, food name, quantity,and price of  the  total  Food
   //NOTE: total price  is  including  Delivery Fee
-  const userProperty = await UserSchema.findOne({ _id: req.user.userId })
+  //TODO: pass  this back  to        userSchema to find  the user  that created  this order payment (req.user.userId NOTE you will  get this from  the request Body)
+
+  const userProperty = await UserSchema.findOne({ _id: userid })
   console.log(userProperty, 'From User DB')
   //TODO: add  payment  based on PaymentOption (if  payment  option is selected cash|| card)
   const createdOrderItem = await OrderSchema.create({
     OrderItems: orderItems,
     totalQuantity: itemTotalQuantity,
     totalPrice: totalPriceValue,
-    paymentOption: paymentoption,
+
     deliveryFee,
     user: userProperty
   })

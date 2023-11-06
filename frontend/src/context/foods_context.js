@@ -68,6 +68,9 @@ export const FoodsProvider = ({ children }) => {
     }
   }
   useEffect(() => {
+fetchFoods()
+  },[])
+  useEffect(() => {
     fetchFoods(url)
     console.log('USE EFFECT RENDER')
     {

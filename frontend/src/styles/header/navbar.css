@@ -1,4 +1,5 @@
 .nav-links {
+  flex-wrap: nowrap;
 
   height: 50px;
   /* background-color: rgb(12, 81, 63); */
@@ -26,7 +27,7 @@
   border-style: solid;
   text-decoration: none;
   background-color: rgb(208, 251, 245);
-   border-color: #00deaf;
+  border-color: #00deaf;
   color: white;
   /*padding-left:10px ;
   */

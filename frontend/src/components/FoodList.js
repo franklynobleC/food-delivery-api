@@ -5,9 +5,12 @@ import ListView from './ListView'
 const FoodList = () => {
   const { foods } = useFoodsContext()
   if (foods.length < 1) {
-    <div>
+    return (
+      <div>
       <h4>foods Data not found</h4>
-    </div>
+      </div>
+      )
+
   }
   return <ListView foods={foods}>food list </ListView>
 }

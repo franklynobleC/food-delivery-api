@@ -1,47 +1,57 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useCartContext } from '../context/cart_context'
+import { useUserContext } from '../context/user_context'
 import { Link } from 'react-router-dom'
 import '../styles/cart/carttotal.css'
-import { useUserContext } from '../context/user_context'
+//import { useAuthContext } from '../context/auth_context'
 const CartTotal = () => {
   const {
     total_quantity,
-    shipping_fee,
+    delivery_fee,
+
     total_price,
     cart,
     createOrder,
     payment_option
   } = useCartContext()
-  const { userId } = useUserContext()
+  const { user, myUser } = useUserContext()
 
   const [shippingFee, setShippingFee] = useState(0)
-  const handleSubmit = e => {
+  const [myCart, setMyCart] = useState({})
+  const [userI, setUser] = useState({})
+  const HandleSubmit = e => {
     e.preventDefault()
-    console.log(cart, shipping_fee, payment_option, userId)
-    createOrder(cart, shipping_fee, payment_option, userId)
+    console.log('myUser', myUser, 'USER', user, 'FROM SUBMIT  PAY')
+
+    console.log('myCart>>>>>MYCARTT!!! SUBMIT', myCart)
+    console.log('shippingFee', delivery_fee)
+    console.log('user ID from DB', user.userId)
+
+    createOrder( myCart,user.userId, delivery_fee)
   }
+  useEffect(() => {
+    setShippingFee(delivery_fee)
+    setMyCart(cart)
+    setUser(user)
+  }, [cart, delivery_fee])
+
   return (
     <div className='cart-total-container'>
       <div className='total-items'>
         <div>
           <h1>CART TOTAL PAGE</h1>
-          {console.log(
-            'FROM CHECK OUT  PAGE USER ID',
-            userId,
-            'payment option is',
-            payment_option
-          )}
+
           <h4>Total Quantity:{total_quantity}</h4>
         </div>
         <div>
           <h4>Total Price: &#8358;{total_price}</h4>
         </div>
-        <div>Delivery Fee:&#8358;{shipping_fee}</div>
+        <div>Delivery Fee:&#8358;{delivery_fee}</div>
         {console.log('CART CONTENT  IS>>>', typeof cart)}
 
         <div>
           <Link to='/checkout'>checkout</Link>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={HandleSubmit}>
             <button className='submit'>pay now</button>
           </form>
         </div>

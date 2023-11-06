@@ -21,9 +21,7 @@ const initialState = {
   delivery_fee: 0,
   is_order_created_success: false,
   is_order_error: false,
-  is_loading: false,
-
-  order: {}
+  is_loading: false
 }
 
 // In   Context  is a feature that allows you to
@@ -48,13 +46,21 @@ export const CartProvider = ({ children }) => {
   const clearCart = () => {
     dispatch({ type: CLEAR_CART })
   }
-  const createOrder = async (id, cart, payment_option, delivery_fee) => {
+  const createOrder = async (cart, id, delivery_fee) => {
     dispatch({ type: CREATE_ORDER_BEGIN })
+    console.log(
+      'THIS IS FROM CREAT ORDER  POST REQUEEST  TO BACKEND',
+      cart,
+      id,
+      delivery_fee
+    )
+    console.log('ABOVE DETAILS FOR  CREATED ORDER BEGIN!!')
+
     try {
       const response = await axios.post(create_orders_url, {
-        id,
+        _id: id,
         OrderItems: cart,
-        paymentoption: payment_option,
+
         deliveryFee: delivery_fee
       })
       const createdOrder = await response.data
@@ -69,13 +75,15 @@ export const CartProvider = ({ children }) => {
       })
     }
   }
-
+  // useEffect(() => {
+  //   createOrder()
+  // }, [])
   // this would be implemented when  the components loads(when  the Page  loads)
   useEffect(() => {
     //dispatch this when  component mounts
     dispatch({ type: COUNT_CART_TOTALS })
     //also, adding  to  the Dependency array, so it would remount when  item  in  the component  is changed
-  }, [state.cart])
+  }, [state.cart, state.order])
 
   return (
     <CartContext.Provider

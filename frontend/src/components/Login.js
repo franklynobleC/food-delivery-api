@@ -1,23 +1,31 @@
 import React, { useState } from 'react'
-import { useUserContext } from '../context/user_context'
+import { useAuthContext } from '../context/auth_context'
 import { Foods } from '../pages'
 import { Link, Redirect, useNavigate } from 'react-router-dom'
 const Login = () => {
   const [userPassword, setUserPassword] = useState('')
   const [userEmail, setUserEmail] = useState('')
-  const { loginUser, is_registered, is_logged_in, userId } = useUserContext()
+  const { loginUser, is_registered, is_logged_in, userId, isAuthenticated } =
+    useAuthContext()
+
+  // const history = useHistory()
   let navigate = useNavigate()
+
   const handleSubmit = e => {
     e.preventDefault()
     console.log(userPassword, userEmail)
     loginUser(userEmail, userPassword)
+    // history.push('/foods')
+
+    navigate('/foods')
   }
   console.log(is_logged_in)
-  console.log('from user loggedIn Data WITH USER ID',userId)
+  console.log('from user loggedIn Data WITH USER ID', userId)
 
-  if (is_logged_in) {
-    return navigate('/foods')
-  }
+  // if (is_logged_in) {
+  //   console.log('FROM IS AUTHENTICATED!!>>>>', isAuthenticated)
+  //   return navigate('/foods')
+  // }
 
   return (
     <form class='login-container' onSubmit={handleSubmit}>
@@ -45,7 +53,9 @@ const Login = () => {
         />
       </div>
       <div class='signup-container'>
-        <button class='sign-up'>Login</button>
+        <button class='sign-up' type='submit'>
+          Login
+        </button>
       </div>
       <div class='password-reset-login'>
         <a href='/'>Home page</a>

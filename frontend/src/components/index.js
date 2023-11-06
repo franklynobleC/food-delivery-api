@@ -12,7 +12,9 @@ import CartContent from './CartContent'
 import CartToTal from './CartTotal'
 import Auth from './Auth'
 import Login from './Login'
+import AuthWrapper from '../pages/AuthWrapper'
 //TODO: import all data from  component and  give  it  a component  name
+import  PrivateRoute  from '../pages/PrivateRoute'
 
 export {
   Hero,
@@ -27,5 +29,7 @@ export {
   CartContent,
   CartToTal,
   Auth,
-Login
+  Login,
+  PrivateRoute,
+  AuthWrapper
 }

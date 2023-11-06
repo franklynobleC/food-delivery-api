@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useUserContext } from '../context/user_context'
+import { useAuthContext } from '../context/auth_context'
 import '../styles/user/register.css'
 function Auth () {
-  const { registerUser, state, email, password } = useUserContext()
+  const { registerUser, state, email, password } = useAuthContext()
 
   const [email1, setUserEmail] = useState('')
   const [password1, setUserPassword] = useState('')

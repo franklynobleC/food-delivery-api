@@ -9,29 +9,61 @@ import {
   SingleFood,
   Cart,
   Checkout,
-  Auth
+  Auth,
+  PrivateRoute,
+  AuthWrapper
 } from './pages'
-import { Footer, Navbar, Contact,Login } from './components/'
+
+import { Footer, Navbar, Contact, Login } from './components/'
 
 function App () {
   return (
-    <Router>
-      {/*// add Navbar and Side Bar here  and side bar */}
-      <Navbar />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='about' element={<About />} />
-        <Route path='contact' element={<Contact />} />
-        <Route path='foods' element={<Foods />} />
-        <Route path='register' element={<Auth />} />
-        <Route path='login' element={<Login />} />
-        <Route path='/cart' element={<Cart />} />
-        <Route path='foods/:id' element={<SingleFood />} />
-        <Route path='/checkout' element={<Checkout />} />
-        <Route path='*' element={<Error />} />
-      </Routes>
-      <Footer />
-    </Router>
+    <AuthWrapper>
+      <Router>
+        {/*// add Navbar and Side Bar here  and side bar */}
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='about' element={<About />} />
+          <Route path='contact' element={<Contact />} />
+          <Route path='foods' element={<Foods />} />
+          <Route path='cart' element={<Cart />} />
+          <Route path='/register' element={<Auth />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/foods/:id' element={<SingleFood />} />
+          {/*
+          // <Route
+          //   path='/foods'
+          //   element={
+          //     <PrivateRoute>
+          //       <Foods />
+          //     </PrivateRoute>
+          //   }
+          // />
+          // <Route
+          //   path='/foods/:id'
+          //   element={
+          //     <PrivateRoute>
+          //       <SingleFood />
+          //     </PrivateRoute>
+          //   }
+            // />
+
+  */}
+          <Route
+            path='/checkout'
+            element={
+              <PrivateRoute>
+                <Checkout />
+              </PrivateRoute>
+            }
+          />
+
+          <Route path='*' element={<Error />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </AuthWrapper>
   )
 }
 

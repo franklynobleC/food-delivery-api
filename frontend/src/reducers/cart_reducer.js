@@ -28,7 +28,7 @@ const cart_reducer = (state, action) => {
           return cartItem
         }
       })
-      return { ...state, cart: tempCart }
+      return { ...state, cart: tempCart, delivery_fee: 100 }
     } else {
       //if  item  is  not  found  in  cart  array  add  it
       const newItem = {
@@ -38,7 +38,7 @@ const cart_reducer = (state, action) => {
         image: food.image,
         price: food.price
       }
-      return { ...state, cart: [...state.cart, newItem] }
+      return { ...state, cart: [...state.cart, newItem], delivery_fee: 100 }
     }
   }
   if (action.type === COUNT_CART_TOTALS) {
@@ -60,7 +60,7 @@ const cart_reducer = (state, action) => {
       }
     )
     console.log(total_price, total_quantity)
-    return { ...state, total_price, total_quantity }
+    return { ...state, total_price, total_quantity, delivery_fee: 100 }
   }
   if (action.type === CLEAR_CART) {
     return { ...state, cart: [] }
@@ -83,6 +83,8 @@ const cart_reducer = (state, action) => {
       is_loading: true,
       is_order_created_success: false,
       is_order_error: false,
+      delivery_fee: 0,
+
       order: null
     }
   }
@@ -95,6 +97,8 @@ const cart_reducer = (state, action) => {
       is_loading: false,
       is_order_created_success: true,
       is_order_error: false,
+      delivery_fee: 100,
+
       order: action.payload
     }
   }
@@ -106,6 +110,7 @@ const cart_reducer = (state, action) => {
       is_loading: false,
       is_order_created_success: false,
       is_order_error: true,
+      delivery_fee: 0,
       order: null
     }
   }
