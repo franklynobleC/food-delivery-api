@@ -15,12 +15,22 @@ const createOrder = async (req, res) => {
   // req.user = req.user.userId
   // console.log(req.user)
   //console.log(req.user.userId)
-  const { OrderItems: OrderItems, _id: userid, deliveryFee } = req.body
-  console.log(typeof OrderItems)
+  const { OrderItems: cart, _id: id, deliveryFee } = req.body
+  console.log(typeof cart)
+  console.log('CHECKING CART ID>>>>', cart.id)
+  console.log(cart, deliveryFee)
+  console.log("THIS IS  THE USER  ID",id)
+  if (!id) {
+    throw new Error({ message: 'OrderIdUser is required' })
+    return
+  }
 
-  console.log(OrderItems, deliveryFee)
+  const cartToItems = cart.map(item => {
+    const { id, name, image, price, quantity } = item
+    return { id, name, image, price, quantity }
+  })
 
-  if (!OrderItems) {
+  if (!cartToItems) {
     throw new Error({ message: 'OrderItems is required' })
   }
   if (!deliveryFee || deliveryFee === null) {
@@ -32,9 +42,8 @@ const createOrder = async (req, res) => {
   let subTotal = 0
   let totalPriceValue = 0
   let itemTotalQuantity = 0
-  for (let i = 0; i < OrderItems.length; i++) {
-    console.log(OrderItems[i].food)
-    const foodFromDb = await FoodSchema.findOne({ _id: OrderItems[i].food })
+  for (let i = 0; i < cartToItems.length; i++) {
+    const foodFromDb = await FoodSchema.findOne({ _id: cartToItems[i].id })
     console.log(foodFromDb, 'From Food DB')
     if (!foodFromDb || foodFromDb === null) {
       res
@@ -49,10 +58,10 @@ const createOrder = async (req, res) => {
       name: name,
       image: image,
       price: price,
-      quantity: OrderItems[i].quantity
+      quantity: cartToItems[i].quantity
     }
 
-    itemTotalQuantity += OrderItems[i].quantity
+    itemTotalQuantity += cartToItems[i].quantity
     //orderItems.push[singleOrderItem]
 
     //orderItems += OrderItems[i]
@@ -70,7 +79,7 @@ const createOrder = async (req, res) => {
   //NOTE: total price  is  including  Delivery Fee
   //TODO: pass  this back  to        userSchema to find  the user  that created  this order payment (req.user.userId NOTE you will  get this from  the request Body)
 
-  const userProperty = await UserSchema.findOne({ _id: userid })
+  const userProperty = await UserSchema.findOne({ _id: id })
   console.log(userProperty, 'From User DB')
   //TODO: add  payment  based on PaymentOption (if  payment  option is selected cash|| card)
   const createdOrderItem = await OrderSchema.create({

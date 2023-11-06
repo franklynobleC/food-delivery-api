@@ -58,8 +58,8 @@ export const CartProvider = ({ children }) => {
 
     try {
       const response = await axios.post(create_orders_url, {
-        _id: id,
         OrderItems: cart,
+        _id: id,
 
         deliveryFee: delivery_fee
       })

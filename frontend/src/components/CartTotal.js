@@ -17,23 +17,22 @@ const CartTotal = () => {
   const { user, myUser } = useUserContext()
 
   const [shippingFee, setShippingFee] = useState(0)
-  const [myCart, setMyCart] = useState({})
+  const [myCart, setMyCart] = useState([])
   const [userI, setUser] = useState({})
   const HandleSubmit = e => {
     e.preventDefault()
-    console.log('myUser', myUser, 'USER', user, 'FROM SUBMIT  PAY')
 
     console.log('myCart>>>>>MYCARTT!!! SUBMIT', myCart)
     console.log('shippingFee', delivery_fee)
     console.log('user ID from DB', user.userId)
 
-    createOrder( myCart,user.userId, delivery_fee)
+    createOrder(myCart, user.userId, delivery_fee)
   }
   useEffect(() => {
     setShippingFee(delivery_fee)
-    setMyCart(cart)
+    setMyCart([...cart, ])
     setUser(user)
-  }, [cart, delivery_fee])
+  }, [myCart, delivery_fee, user.userId])
 
   return (
     <div className='cart-total-container'>
