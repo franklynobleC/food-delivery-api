@@ -53,6 +53,13 @@
   text-align: left;
 }
 /* {  Effects} */
+.nav-links a {
+  transition: all 0.6s ease 0s;
+  -webkit-transition: all 0.6s ease 0s;
+  -moz-transition: all 0.6s ease 0s;
+  -ms-transition: all 0.6s ease 0s;
+  -o-transition: all 0.6s ease 0s;
+}
 .nav-links a:hover,
 .nav-links a:focus {
   /* //color: #00675a;   */

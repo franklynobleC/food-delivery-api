@@ -76,7 +76,6 @@
   color: #e3f6f5;
   background-color: #272643;
   cursor: pointer;
-
   border-top: none;
 }
 .password-input-text {
@@ -95,15 +94,26 @@
 }
 .password-input-text:focus-visible {
   border-color: #7dc0bc;
-  background-color: #ececec;
+  background-color: #e6e6e6;
 }
 .email-input-text:focus {
   border-color: #7dc0bc;
 }
+
 .sign-up:hover {
   background-color: #2c698d;
   border: none;
   color: #ffffff;
+  border-radius: 15px;
+  transition: all 0.5s ease 0.1s;
+  -webkit-transition: all 0.5s ease 0.1s;
+  -moz-transition: all 0.5s ease 0.1s;
+  -ms-transition: all 0.5s ease 0.1s;
+  -o-transition: all 0.5s ease 0.1s;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
 }
 .password-reset-login {
   display: flex;
