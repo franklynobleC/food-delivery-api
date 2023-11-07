@@ -8,8 +8,8 @@ const PrivateRoute = ({ children }) => {
   let navigate = useNavigate()
   console.log('FROM  PRIVATE ROUTE')
   if (!is_logged_in) {
-    navigate('/')
+   return navigate('/login')
   }
-  return <>children</>
+  return children
 }
 export default PrivateRoute

@@ -29,6 +29,7 @@ const auth_reducer = (state, action) => {
       loading: false,
 
       is_registered: true,
+      is_logged_in: false,
       isAuthenticated: true,
       user: action.payload
     }
@@ -42,6 +43,7 @@ const auth_reducer = (state, action) => {
       is_registered: false,
       register_error: true,
       error: true,
+      is_logged_in: false,
       user: null
     }
   }
@@ -56,6 +58,7 @@ const auth_reducer = (state, action) => {
       loading: true,
       register_error: false,
       is_registered: false,
+      is_logged_in: false,
       user: null
     }
   }
@@ -84,6 +87,7 @@ const auth_reducer = (state, action) => {
       register_loading: false,
       register_error: true,
       error: true,
+      is_logged_in: false,
       user: null
     }
   }

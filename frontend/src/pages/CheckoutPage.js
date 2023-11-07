@@ -1,7 +1,9 @@
 import React, { Link } from 'react'
 import { useCartContext } from '../context/cart_context'
+import { useAuthContext } from '../context/auth_context'
 const CheckoutPage = () => {
   const { cart } = useCartContext()
+  const { is_logged_in } = useAuthContext()
 
   if (cart.length < 1) {
     return (
@@ -9,6 +11,23 @@ const CheckoutPage = () => {
         <Link to='foods'>
           <h1>Your Cart is Empty, Fill it</h1>
         </Link>
+      </div>
+    )
+  }
+  if (is_logged_in && cart.length > 0) {
+    return (
+      <div>
+        <Link to='/checkout'>
+          <h1>Checkout</h1>
+        </Link>
+      </div>
+    )
+  }
+  if (!is_logged_in) {
+    return (
+      <div>
+        <h2>Please Log In</h2>
+        <Link to='/login'>Login</Link>
       </div>
     )
   }

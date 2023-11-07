@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useCartContext } from '../context/cart_context'
 import { useUserContext } from '../context/user_context'
+import { useAuthContext } from '../context/auth_context'
 import { Link } from 'react-router-dom'
+import { Route, useNavigate } from 'react-router-dom'
+
 import '../styles/cart/carttotal.css'
 //import { useAuthContext } from '../context/auth_context'
 const CartTotal = () => {
@@ -14,21 +17,40 @@ const CartTotal = () => {
     createOrder,
     payment_option
   } = useCartContext()
+  const { is_logged_in } = useAuthContext()
   const { user, myUser } = useUserContext()
 
   const [shippingFee, setShippingFee] = useState(0)
   const [myCart, setMyCart] = useState([])
   const [paymentOption, setPaymentOption] = useState('')
   const [userI, setUser] = useState({})
+  let navigate = useNavigate()
+
   const HandleSubmit = e => {
     e.preventDefault()
 
-    console.log('myCart>>>>>MYCARTT!!! SUBMIT', myCart)
-    console.log('shippingFee', delivery_fee)
-    console.log('user ID from DB', user.userId)
-    console.log('payment option is>>', paymentOption)
+    if (cart.length < 1) {
+      return (
+        <div>
+          <Link to='foods'>
+            <h1>Your Cart is Empty, Fill it</h1>
+          </Link>
+        </div>
+      )
+    }
+    if (!is_logged_in) {
+      console.log('not logged in!!!')
+      return navigate('/login')
+    }
 
-    createOrder(myCart, user.userId, paymentOption, delivery_fee)
+    if (is_logged_in && cart.length > 0) {
+      console.log('myCart>>>>>MYCARTT!!! SUBMIT', myCart)
+      console.log('shippingFee', delivery_fee)
+      console.log('user ID from DB', user.userId)
+      console.log('payment option is>>', paymentOption)
+
+      createOrder(myCart, user.userId, paymentOption, delivery_fee)
+    }
   }
   useEffect(() => {
     setShippingFee(delivery_fee)

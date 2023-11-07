@@ -9,7 +9,7 @@ const ListView = ({ foods }) => {
         <input type='text' className='search-input' placeholder='search menu' />
       </div>
       {foods.map(food => {
-        const { name, price, image, id,quantity, description } = food
+        const { name, price, image, id, quantity } = food
         return (
           <div key={id} className='food-container'>
             <div className='food-image-container'>
@@ -20,9 +20,7 @@ const ListView = ({ foods }) => {
               <h4>{quantity}</h4>
             </div>
             <div className='food-price'>Price: &#8358;{price}</div>
-            <div className='food-description'>
-              {description.substring(0, 150)}...
-            </div>
+            <div className='food-description'></div>
             <div className='details-link'>
               <Link to={`/foods/${id}`} className='Details-link'>
                 <button className='oder-now-btn'>Order now</button>

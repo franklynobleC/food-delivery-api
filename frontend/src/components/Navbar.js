@@ -12,8 +12,9 @@ const Nav = () => {
           {links.map((link, index) => {
             return (
               <li key={index}>
-                <Link to={link.url}>{link.text}</Link>
-
+                <Link to={link.url} className='url-link'>
+                  {link.text}
+                </Link>
               </li>
             )
           })}

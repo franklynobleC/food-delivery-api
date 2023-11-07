@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useAuthContext } from '../context/auth_context'
-import { Foods } from '../pages'
+import { Cart, Foods } from '../pages'
 import { Link, Redirect, useNavigate } from 'react-router-dom'
 const Login = () => {
   const [userPassword, setUserPassword] = useState('')
@@ -16,8 +16,10 @@ const Login = () => {
     console.log(userPassword, userEmail)
     loginUser(userEmail, userPassword)
     // history.push('/foods')
-
-    navigate('/foods')
+    if (Cart.length > 0 && is_logged_in) {
+      return navigate('/checkout')
+    }
+    return navigate('/foods')
   }
   console.log(is_logged_in)
   console.log('from user loggedIn Data WITH USER ID', userId)
