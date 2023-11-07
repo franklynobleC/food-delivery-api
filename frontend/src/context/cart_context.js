@@ -8,7 +8,7 @@ import {
   REMOVE_CART_ITEM,
   CLEAR_CART,
   COUNT_CART_TOTALS,
-  CREATE_ORDER,
+
   CREATE_ORDER_BEGIN,
   CREATE_ORDER_SUCCESS,
   CREATE_ORDER_ERROR
@@ -17,7 +17,7 @@ const initialState = {
   cart: [],
   total_quantity: 0,
   total_price: 0,
-  payment_option: 'cash',
+  payment_option: '',
   delivery_fee: 0,
   is_order_created_success: false,
   is_order_error: false,
@@ -46,12 +46,13 @@ export const CartProvider = ({ children }) => {
   const clearCart = () => {
     dispatch({ type: CLEAR_CART })
   }
-  const createOrder = async (cart, id, delivery_fee) => {
+  const createOrder = async (cart, id, paymentoption, delivery_fee) => {
     dispatch({ type: CREATE_ORDER_BEGIN })
     console.log(
       'THIS IS FROM CREAT ORDER  POST REQUEEST  TO BACKEND',
       cart,
       id,
+
       delivery_fee
     )
     console.log('ABOVE DETAILS FOR  CREATED ORDER BEGIN!!')
@@ -60,6 +61,7 @@ export const CartProvider = ({ children }) => {
       const response = await axios.post(create_orders_url, {
         OrderItems: cart,
         _id: id,
+        paymentOption: paymentoption,
 
         deliveryFee: delivery_fee
       })

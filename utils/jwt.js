@@ -15,6 +15,7 @@ const createJWT = ({ payload }) => {
   const token = jwt.sign(payload, process.env.JWT_SECRET, {
     expiresIn: '1h'
   })
+
   return token
 }
 
@@ -32,10 +33,10 @@ console.log(process.env.JWT_SECRET)
  */
 const attachCookiesToResponse = ({ res, user }) => {
   const token = createJWT({ payload: user })
-
+  console.log('token is', token)
   const oneDay = 100 * 60 * 60 * 24
-
-  res.cookie('token', token, {
+  // console.log(token)
+  return res.cookie('token', token, {
     httpOnly: true,
     signed: true,
     expire: new Date(Date.now() + oneDay)

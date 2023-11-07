@@ -18,6 +18,7 @@ const CartTotal = () => {
 
   const [shippingFee, setShippingFee] = useState(0)
   const [myCart, setMyCart] = useState([])
+  const [paymentOption, setPaymentOption] = useState('')
   const [userI, setUser] = useState({})
   const HandleSubmit = e => {
     e.preventDefault()
@@ -25,13 +26,16 @@ const CartTotal = () => {
     console.log('myCart>>>>>MYCARTT!!! SUBMIT', myCart)
     console.log('shippingFee', delivery_fee)
     console.log('user ID from DB', user.userId)
+    console.log('payment option is>>', paymentOption)
 
-    createOrder(myCart, user.userId, delivery_fee)
+    createOrder(myCart, user.userId, paymentOption, delivery_fee)
   }
   useEffect(() => {
     setShippingFee(delivery_fee)
     setMyCart([...cart])
+
     setUser(user)
+    setPaymentOption('card')
   }, [])
 
   return (

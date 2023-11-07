@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useCartContext } from '../context/cart_context'
 import { Link } from 'react-router-dom'
 
 const AddToCart = ({ food }) => {
-  const [quantity, setQuantity] = useState(1)
+  // const [quantity, setQuantity] = useState(1)
   const { addToCart, cart } = useCartContext()
-  const { id } = food
+  const { id,quantity } = food
 
   return (
     <div className=''>

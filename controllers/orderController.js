@@ -15,11 +15,16 @@ const createOrder = async (req, res) => {
   // req.user = req.user.userId
   // console.log(req.user)
   //console.log(req.user.userId)
-  const { OrderItems: cart, _id: id, deliveryFee } = req.body
+  const {
+    OrderItems: cart,
+    _id: id,
+    paymentOption: paymentoption,
+    deliveryFee
+  } = req.body
   console.log(typeof cart)
   console.log('CHECKING CART ID>>>>', cart.id)
-  console.log(cart, deliveryFee)
-  console.log("THIS IS  THE USER  ID",id)
+  console.log(cart, paymentoption, deliveryFee)
+  console.log('THIS IS  THE USER  ID', id)
   if (!id) {
     throw new Error({ message: 'OrderIdUser is required' })
     return
@@ -86,7 +91,7 @@ const createOrder = async (req, res) => {
     OrderItems: orderItems,
     totalQuantity: itemTotalQuantity,
     totalPrice: totalPriceValue,
-
+    paymentOption: paymentoption,
     deliveryFee,
     user: userProperty
   })
@@ -172,7 +177,6 @@ const updateOrder = async (req, res) => {
   if (!updatedOrder || updatedOrder === null) {
     res.status(StatusCodes.NOT_FOUND).json({
       message: 'Failed! could not update order data. please input valid data'
-
     })
   }
 

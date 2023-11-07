@@ -4,15 +4,11 @@ import { register_user_url, login_user_url } from '../utils/constants'
 import auth_reducer from '../reducers/auth_reducer'
 
 import {
-  REGISTER_BEGIN,
   REGISTER_ERROR,
   REGISTER_SUCCESS,
   LOGIN_USER_BEGIN,
   LOGIN_USER_ERROR,
   LOGIN_USER_SUCCESS,
-  LOG_OUT,
-  LOG_OUT_SUCCESS,
-  LOG_OUT_ERROR,
   REGISTER_USER
 } from '../actions'
 
@@ -39,6 +35,7 @@ export const AuthProvider = ({ children }) => {
   //TODO: import and  use user sign_in_reducer
 
   const [state, dispatch] = useReducer(auth_reducer, initialState)
+  // const [token, setToken] = useState(null)
 
   //Hit   API end point  for        register
   const registerUser = async (email, password) => {
@@ -81,28 +78,28 @@ export const AuthProvider = ({ children }) => {
         password: password
       })
       const userLoginData = await response.data
-      console.log('FROM LOGGING  RESPONSE DATA>>>>', userLoginData)
+            console.log('FROM LOGGING  RESPONSE DATA>>>>', userLoginData)
       dispatch({ type: LOGIN_USER_SUCCESS, payload: userLoginData })
     } catch (err) {
       console.log('LOGIN ERROR CONTEXT')
 
       dispatch({ type: LOGIN_USER_ERROR, payload: err.message })
     }
-  }
+    }
   useEffect(() => {}, [state.email, state.password])
 
-  // const setUserDataNameAndPassword = userData => {
+    // const setUserDataNameAndPassword = userData => {
 
-  // }
+    // }
 
-  //Todo: add  login, logout function
+    //Todo: add  login, logout function
 
-  return (
-    <AuthContext.Provider value={{ ...state, registerUser, loginUser }}>
-      {children}
-    </AuthContext.Provider>
-  )
-}
+    return (
+      <AuthContext.Provider value={{ ...state, registerUser, loginUser }}>
+        {children}
+      </AuthContext.Provider>
+    )
+  }
 
 export const useAuthContext = () => {
   return useContext(AuthContext)
