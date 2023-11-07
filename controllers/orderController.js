@@ -172,6 +172,7 @@ const updateOrder = async (req, res) => {
   if (!updatedOrder || updatedOrder === null) {
     res.status(StatusCodes.NOT_FOUND).json({
       message: 'Failed! could not update order data. please input valid data'
+
     })
   }
 

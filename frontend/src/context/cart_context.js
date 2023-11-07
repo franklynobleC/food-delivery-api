@@ -35,8 +35,8 @@ export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cart_reducer, initialState)
 
   //add to  cart function
-  const addToCart = (id, amount, food) => {
-    dispatch({ type: ADD_TO_CART, payload: { id, amount, food } })
+  const addToCart = (id, quantity, food) => {
+    dispatch({ type: ADD_TO_CART, payload: { id, quantity, food } })
   }
   //remove an  item from  cart
   const removeItem = id => {

@@ -10,7 +10,7 @@ import {
 
 const cart_reducer = (state, action) => {
   if (action.type === ADD_TO_CART) {
-    const { id, amount, food } = action.payload
+    const { id, quantity, food } = action.payload
     //check  if id  is  found  in  cart  array
     const tempItem = state.cart.find(i => i.id === id)
     if (tempItem) {
@@ -19,9 +19,9 @@ const cart_reducer = (state, action) => {
       //check if  the  item  is  in  the     Cart,  iterate  over it
       const tempCart = state.cart.map(cartItem => {
         if (cartItem.id === id) {
-          let newAmount = cartItem.amount + amount
+          let newQuantity = cartItem.quantity + quantity
 
-          return { ...cartItem, amount: newAmount }
+          return { ...cartItem, quantity: newQuantity }
 
           //if  item  is  found  in  cart  array  update  amount
         } else {
@@ -34,7 +34,7 @@ const cart_reducer = (state, action) => {
       const newItem = {
         id: id,
         name: food.name,
-        amount,
+        quantity: food.quantity,
         image: food.image,
         price: food.price
       }
@@ -44,12 +44,12 @@ const cart_reducer = (state, action) => {
   if (action.type === COUNT_CART_TOTALS) {
     const { total_price, total_quantity } = state.cart.reduce(
       (total, cartItem) => {
-        const { price, amount } = cartItem
+        const { price, quantity } = cartItem
         {
           /*calculate  the amount of  item(total quantity of  item)*/
         }
-        total.total_quantity += amount
-        total.total_price += price * amount
+        total.total_quantity += quantity
+        total.total_price += price * quantity
         console.log('TOTAL>>>>>>>>>', total)
 
         return total

@@ -30,9 +30,9 @@ const CartTotal = () => {
   }
   useEffect(() => {
     setShippingFee(delivery_fee)
-    setMyCart([...cart, ])
+    setMyCart([...cart])
     setUser(user)
-  }, [myCart, delivery_fee, user.userId])
+  }, [])
 
   return (
     <div className='cart-total-container'>
