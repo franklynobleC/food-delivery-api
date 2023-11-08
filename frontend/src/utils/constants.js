@@ -19,16 +19,6 @@ export const links = [
     id: 4,
     text: 'contact us',
     url: '/contact'
-  },
-  {
-    id: 5,
-    text: 'register',
-    url: '/register'
-  },
-  {
-    id: 6,
-    text: 'login',
-    url: '/login'
   }
 ]
 

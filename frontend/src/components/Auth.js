@@ -22,7 +22,8 @@ function Auth () {
   return (
     <form class='login-container' onSubmit={handleSubmit}>
       <div class='email-container'>
-        <div class='email'>email</div>
+        <h2>Sign Into Your Account</h2>
+        <div class='email'></div>
         <input
           type='email'
           class='email-input-text'
@@ -33,7 +34,7 @@ function Auth () {
         />
       </div>
       <div class='password-container'>
-        <div class='password'>password</div>
+        <div class='password'></div>
         <input
           type='text'
           class='password-input-text'

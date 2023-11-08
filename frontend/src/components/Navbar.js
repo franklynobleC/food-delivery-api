@@ -6,18 +6,29 @@ import '../styles/header/navbar.css'
 const Nav = () => {
   return (
     <nav className='nav-links'>
+
+      <div className='nav-link-user'>
+        <ul className='user-ul-container'>
+          <li>
+            <Link to='login'>login</Link>
+          </li>
+          <li>
+            <Link to='register'>register</Link>
+          </li>
+        </ul>
+      </div>
       <div className='nav-center'>
-        <div className='nav-header'></div>
-        <ul className='nav-links'>
+        <ul className='nav-links-other-url'>
           {links.map((link, index) => {
             return (
               <li key={index}>
-                <Link to={link.url} className='url-link'>
+                <Link to={link.url}>
                   {link.text}
                 </Link>
               </li>
             )
           })}
+
           {/* add my user,  if  user? show check out  page   */}
         </ul>
       </div>

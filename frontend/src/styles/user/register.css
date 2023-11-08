@@ -91,6 +91,7 @@
 .password-input-text::placeholder,
 .email-input-text::placeholder {
   padding-left: 90px;
+font-size: larger;
 }
 .password-input-text:focus-visible {
   border-color: #7dc0bc;
