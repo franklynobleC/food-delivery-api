@@ -1,7 +1,8 @@
 import axios from 'axios'
+// import base64 from 'base64'
 
-import React, { useContext, useEffect, useReducer } from 'react'
-
+import React, { useContext, useEffect, useReducer, useState } from 'react'
+import { useAuthContext } from '../context/auth_context'
 import {
   foods_url as url,
   single_food_url as single_url
@@ -14,7 +15,8 @@ import {
   GET_SINGLE_FOOD_BEGIN,
   GET_SINGLE_FOOD_ERROR,
   SEARCH_FOODS,
-  GET_FOODS_ERROR
+  GET_FOODS_ERROR,
+  UPDATE_SORT
 } from '../actions.js'
 import foods_reducer from '../reducers/foods_reducer'
 
@@ -37,6 +39,8 @@ export const FoodsProvider = ({ children }) => {
   //pass in  reducerFunction , and  initial state Object
   //TODO:create and  import foodsReducer, so  you can  use  in  this useReducerFunction
   const [state, dispatch] = useReducer(foods_reducer, initialState)
+  const { token } = useAuthContext()
+  const [UserToken, setUserToken] = useState('')
   //fetch Data from API   using axios
 
   const fetchFoods = async () => {
@@ -67,18 +71,30 @@ export const FoodsProvider = ({ children }) => {
       dispatch({ type: GET_SINGLE_FOOD_ERROR, payload: error.message })
     }
   }
+  const updateSort = e => {
+    const value = e.target.value
+    console.log('Value from  sort  is', value)
+    dispatch({ type: UPDATE_SORT, payload: { value } })
+  }
+
+  if (token) {
+    setUserToken(token)
+  }
   useEffect(() => {
-fetchFoods()
-  },[])
-  useEffect(() => {
-    fetchFoods(url)
-    console.log('USE EFFECT RENDER')
-    {
-      /* add openSidebar here */
-    }
-  }, [])
+    // if (token) {
+    fetchFoods()
+    // }
+  }, [UserToken])
+  console.log('Token after Mount from  foodContext', UserToken)
+  // useEffect(() => {
+  //   fetchFoods(url)
+  //   console.log('USE EFFECT RENDER')
+  //   {
+  //     /* add openSidebar here */
+  //   }
+  // }, [])
   return (
-    <FoodsContext.Provider value={{ ...state, fetchSingleFood }}>
+    <FoodsContext.Provider value={{ ...state, fetchSingleFood, updateSort }}>
       {children}
     </FoodsContext.Provider>
   )

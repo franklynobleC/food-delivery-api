@@ -1,3 +1,4 @@
+import React, { useState } from 'react'
 import {
   GET_FOODS_BEGIN,
   GET_SINGLE_FOOD_BEGIN,
@@ -9,6 +10,7 @@ import {
 
 //state is  the  initial state Before the Update
 const foods_reducer = (state, action) => {
+
   if (action.type === GET_FOODS_BEGIN) {
     return { ...state, food_loading: true }
   }
@@ -22,7 +24,7 @@ const foods_reducer = (state, action) => {
     return {
       ...state,
       single_food_loading: false,
-    foods_error: true
+      foods_error: true
     }
   }
   if (action.type === GET_SINGLE_FOOD_BEGIN) {

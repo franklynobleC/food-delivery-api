@@ -6,6 +6,7 @@ const cloudinary = require('cloudinary').v2
 //TODO:
 //add Search index to check  if food entered is protein, breakfast, and  dinner
 const getAllFoods = async (req, res) => {
+  console.log("All Foods API>>>>")
   const food = await FoodSchema.find({})
   if (!food) {
     res

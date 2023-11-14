@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useAuthContext } from '../context/auth_context'
+import { useAuthContext, token } from '../context/auth_context'
 import { Cart, Foods } from '../pages'
 import { Link, Redirect, useNavigate } from 'react-router-dom'
 const Login = () => {
@@ -15,14 +15,15 @@ const Login = () => {
     e.preventDefault()
     console.log(userPassword, userEmail)
     loginUser(userEmail, userPassword)
+
     // history.push('/foods')
     if (Cart.length > 0 && is_logged_in) {
       return navigate('/checkout')
     }
-    return navigate('/foods')
+        return navigate('/foods')
   }
   console.log(is_logged_in)
-  console.log('from user loggedIn Data WITH USER ID', userId)
+console.log('from user loggedIn Data WITH USER ID', userId)
 
   // if (is_logged_in) {
   //   console.log('FROM IS AUTHENTICATED!!>>>>', isAuthenticated)
@@ -32,7 +33,7 @@ const Login = () => {
   return (
     <form class='login-container' onSubmit={handleSubmit}>
       <div class='email-container'>
-        <h2>Login Into your Account</h2>
+        <h2> Login </h2>
         <div class='email'></div>
         <input
           type='email'

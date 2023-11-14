@@ -10,12 +10,12 @@ require('dotenv').config()
  * @returns The function `createJWT` returns a JSON Web Token (JWT) that is generated using the
  * `jwt.sign` method.
  */
+
 const createJWT = ({ payload }) => {
   console.log('createJWT func')
   const token = jwt.sign(payload, process.env.JWT_SECRET, {
     expiresIn: '1h'
   })
-
   return token
 }
 
@@ -36,11 +36,12 @@ const attachCookiesToResponse = ({ res, user }) => {
 
   const oneDay = 100 * 60 * 60 * 24
 
-  return res.cookie('token', token, {
+  res.cookie('token', token, {
     httpOnly: true,
     signed: true,
     expire: new Date(Date.now() + oneDay)
   })
+  return { token }
 }
 
 module.exports = {

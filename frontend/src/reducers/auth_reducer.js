@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   REGISTER_SUCCESS,
   REGISTER_BEGIN,
@@ -14,7 +15,8 @@ const auth_reducer = (state, action) => {
   if (action.type === REGISTER_USER) {
     console.log('FROM REGISTER USER REDUCER')
     console.log(action.payload)
-    state.user = action.payload
+    const { token, tokenUser } = action.payload
+    console.log(token, tokenUser)
     console.log(state.user)
     return { ...state, register_loading: false, user: action.payload }
   }
@@ -44,14 +46,15 @@ const auth_reducer = (state, action) => {
       register_error: true,
       error: true,
       is_logged_in: false,
-      user: null
+      user: null,
+      token: ''
     }
   }
 
   if (action.type === LOGIN_USER_BEGIN) {
     console.log('LOGIN  BEGIN')
 
-    console.log('fromLOGINSUCCESS PAYLOAD', action.payload)
+    console.log('from LOGIN BEGIN', action.payload)
     return {
       ...state,
       register_loading: true,
@@ -59,13 +62,18 @@ const auth_reducer = (state, action) => {
       register_error: false,
       is_registered: false,
       is_logged_in: false,
-      user: null
+      user: null,
+      token: ''
     }
   }
 
   if (action.type === LOGIN_USER_SUCCESS) {
     console.log('LOGIN SUCCESS FROM  REDUCERS')
-    const { userId, name } = action.payload
+    // const { userId, name } = action.payload
+    const { token, tokenUser } = action.payload
+
+    const { name, userId, role } = tokenUser
+
     console.log('FROM  PAYLOAD LOGIN REDUCERS  TEST', userId, name)
     return {
       ...state,
@@ -76,7 +84,8 @@ const auth_reducer = (state, action) => {
       loading: false,
 
       isAuthenticated: true,
-      user: action.payload
+      user: tokenUser,
+      token: token
     }
   }
   if (action.type === LOGIN_USER_ERROR) {
@@ -88,7 +97,8 @@ const auth_reducer = (state, action) => {
       register_error: true,
       error: true,
       is_logged_in: false,
-      user: null
+      user: null,
+      token: ''
     }
   }
   throw new Error(`No matching ${action.type}-action  type`)

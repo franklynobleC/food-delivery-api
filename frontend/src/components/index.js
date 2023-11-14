@@ -1,5 +1,3 @@
-import Hero from './Hero'
-
 import Services from './Services'
 import CartItem from './CartItem'
 import FoodList from './FoodList'
@@ -14,10 +12,9 @@ import Auth from './Auth'
 import Login from './Login'
 import AuthWrapper from '../pages/AuthWrapper'
 //TODO: import all data from  component and  give  it  a component  name
-import  PrivateRoute  from '../pages/PrivateRoute'
+import PrivateRoute from '../pages/PrivateRoute'
 
 export {
-  Hero,
   FoodList,
   Services,
   CartItem,

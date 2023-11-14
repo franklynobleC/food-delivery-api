@@ -22,7 +22,7 @@ function Auth () {
   return (
     <form class='login-container' onSubmit={handleSubmit}>
       <div class='email-container'>
-        <h2>Sign Into Your Account</h2>
+        <h2> Sign in </h2>
         <div class='email'></div>
         <input
           type='email'

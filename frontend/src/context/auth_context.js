@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useContext } from 'react'
+import React, { useEffect, useReducer, useContext, useState } from 'react'
 import axios from 'axios'
 import { register_user_url, login_user_url } from '../utils/constants'
 import auth_reducer from '../reducers/auth_reducer'
@@ -22,12 +22,13 @@ const initialState = {
   loading: false,
   email: '',
   password: '',
-  user: {}
+  user: {},
+  token: ''
 }
 
 //declare global context and  make it  Available Globally
 // also here, Set All  the Actions using Dispatch
-
+export const token = JSON.parse(localStorage.getItem('token'))
 export const AuthContext = React.createContext()
 //create  user provider
 export const AuthProvider = ({ children }) => {
@@ -35,7 +36,6 @@ export const AuthProvider = ({ children }) => {
   //TODO: import and  use user sign_in_reducer
 
   const [state, dispatch] = useReducer(auth_reducer, initialState)
-  // const [token, setToken] = useState(null)
 
   //Hit   API end point  for        register
   const registerUser = async (email, password) => {
@@ -56,10 +56,8 @@ export const AuthProvider = ({ children }) => {
         password: password
       })
       const registeredUser = await response.data
-      console.log(
-        'Register  SucceSSSS AFTER  RESPONSE FROM  CONTEXT',
-        registeredUser
-      )
+
+      console.log('Register  SucceSSSS AFTER  RESPONSE FROM  CONTEXT')
       dispatch({ type: REGISTER_SUCCESS, payload: registeredUser })
     } catch (error) {
       console.log(
@@ -77,29 +75,33 @@ export const AuthProvider = ({ children }) => {
         email: email,
         password: password
       })
+
       const userLoginData = await response.data
-            console.log('FROM LOGGING  RESPONSE DATA>>>>', userLoginData)
+      console.log(userLoginData, 'RAW DATA FROM RESPONSE')
+      // localStorage.setItem('token', JSON.stringify(userLoginData.token))
+      // const { token } = await userLoginData
+
       dispatch({ type: LOGIN_USER_SUCCESS, payload: userLoginData })
     } catch (err) {
       console.log('LOGIN ERROR CONTEXT')
 
       dispatch({ type: LOGIN_USER_ERROR, payload: err.message })
     }
-    }
-  useEffect(() => {}, [state.email, state.password])
-
-    // const setUserDataNameAndPassword = userData => {
-
-    // }
-
-    //Todo: add  login, logout function
-
-    return (
-      <AuthContext.Provider value={{ ...state, registerUser, loginUser }}>
-        {children}
-      </AuthContext.Provider>
-    )
   }
+  useEffect(() => {}, [state.email, state.password])
+  useEffect(() => {})
+  // const setUserDataNameAndPassword = userData => {
+
+  // }
+
+  //Todo: add  login, logout function
+
+  return (
+    <AuthContext.Provider value={{ ...state, registerUser, loginUser }}>
+      {children}
+    </AuthContext.Provider>
+  )
+}
 
 export const useAuthContext = () => {
   return useContext(AuthContext)

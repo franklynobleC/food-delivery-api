@@ -1,6 +1,7 @@
 const UserSchema = require('../models/User')
 const { StatusCodes } = require('http-status-codes')
 const { json } = require('stream/consumers')
+const { createJWT } = require('../utils/jwt')
 const jwt = require('jsonwebtoken')
 const crypto = require('crypto')
 const bcrypt = require('bcrypt')
@@ -13,6 +14,7 @@ const {
 } = require('../utils')
 const { error } = require('console')
 const { emailFunc } = require('../services/mailService')
+const { token } = require('morgan')
 require('dotenv').config()
 
 //add Register, Login,  logOut,
@@ -62,7 +64,9 @@ const register = async (req, res) => {
 
   // add UserToken
   const tokenUser = createTokenUser(createdUser)
+
   attachCookiesToResponse({ res, user: tokenUser })
+
   res.status(StatusCodes.CREATED).json(tokenUser)
 }
 
@@ -100,10 +104,14 @@ const login = async (req, res) => {
   }
   //if  password Matched,  add   user to Token
   const tokenUser = createTokenUser(user)
+  // attachCookiesToResponse({ res, user: tokenUser })
+  const { token } = attachCookiesToResponse({
+    res,
+    user: tokenUser
+  })
+  console.log('TOKEN FROM RESPONSE', token)
 
-  attachCookiesToResponse({ res, user: tokenUser })
-
-  res.status(StatusCodes.OK).json(tokenUser)
+  res.status(StatusCodes.OK).json({ token, tokenUser })
 }
 
 //TODO

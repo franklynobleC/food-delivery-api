@@ -26,20 +26,12 @@ function App () {
           <Route path='/' element={<Home />} />
           <Route path='about' element={<About />} />
           <Route path='contact' element={<Contact />} />
-          <Route path='foods' element={<Foods />} />
-          <Route path='cart' element={<Cart />} />
+                    <Route path='foods' element={<Foods />} />
           <Route path='/register' element={<Auth />} />
           <Route path='/login' element={<Login />} />
           <Route path='/foods/:id' element={<SingleFood />} />
           {/*
-          // <Route
-          //   path='/foods'
-          //   element={
-          //     <PrivateRoute>
-          //       <Foods />
-          //     </PrivateRoute>
-          //   }
-          // />
+
           // <Route
           //   path='/foods/:id'
           //   element={
