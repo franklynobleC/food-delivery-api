@@ -30,7 +30,6 @@ const ListView = ({ foods }) => {
             <section className=''>
               <div key={id} className='food-container-search'>
                 <div className='food-image-container'>
-                  <Link to='/foods'>back to foods</Link>
                   <img src={image} alt={name} className='food-image-search' />
                 </div>
                 <div className='food-name-search'>
@@ -55,18 +54,21 @@ const ListView = ({ foods }) => {
 
   return (
     <section className='main'>
-      <form onSubmit={handSearchSubmit} className='search-form'>
-        <div className='search-bar'>
+      <div className='form-container'>
+        <form onSubmit={handSearchSubmit}  className='search-bar'>
           <input
             type='text'
+            required
             className='search-input-search'
             value={searchFood}
-            placeholder='search your favorite meal'
+            placeholder='Search your favorite meal'
             onChange={e => setSearchFood(e.target.value)}
           />
-        </div>
-        <button type='submit'>search</button>
-      </form>
+          <button type='submit'>search</button>
+        </form>
+        //{' '}
+      </div>
+
       {foods.map(food => {
         const { name, price, image, id, quantity } = food
         return (

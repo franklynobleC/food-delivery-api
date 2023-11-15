@@ -4,6 +4,7 @@
   */
   justify-content: center;
   align-items: center;
+
   border-style: solid;
   border-radius: 2px;
   box-shadow: inset;
@@ -20,6 +21,16 @@
   -ms-border-radius: 2px;
   -o-border-radius: 2px;
 }
+
+.search-bar {
+
+  flex: 1;
+
+  max-width: 850px;
+  margin-top: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+  display: flex;}
 
 .food-container-search {
   padding-top: 40px;
