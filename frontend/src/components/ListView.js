@@ -1,7 +1,13 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { FiSearch } from 'react-icons/fi'
+
 import '../styles/foods.css'
 import '../styles/filteredFood.css'
+import '../icons/search-icon.png'
+
+import '../images/icons/search-icon.png'
+
 import { useFoodsContext } from '../context/foods_context'
 
 const ListView = ({ foods }) => {
@@ -55,18 +61,19 @@ const ListView = ({ foods }) => {
   return (
     <section className='main'>
       <div className='form-container'>
-        <form onSubmit={handSearchSubmit}  className='search-bar'>
+        <form onSubmit={handSearchSubmit} className='search-bar'>
           <input
             type='text'
             required
             className='search-input-search'
             value={searchFood}
-            placeholder='Search your favorite meal'
+            placeholder='Search meal'
             onChange={e => setSearchFood(e.target.value)}
           />
-          <button type='submit'>search</button>
+          <button type='submit' className='search-btn'>
+            <FiSearch className='search-icon' />
+          </button>
         </form>
-        //{' '}
       </div>
 
       {foods.map(food => {
@@ -77,8 +84,7 @@ const ListView = ({ foods }) => {
               <img src={image} alt={name} className='food-image' />
             </div>
             <div className='food-name'>
-              <h4>{name}</h4>
-              <h4>{quantity}</h4>
+              <h4 className='food-h4'>{name}</h4>
             </div>
             <div className='food-price'>Price: &#8358;{price}</div>
             <div className='food-description'></div>

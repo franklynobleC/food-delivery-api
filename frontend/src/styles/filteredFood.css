@@ -1,37 +1,11 @@
 .main-search {
   margin-top: 60px;
-  /*margin-left: 200px;
-  */
-  justify-content: center;
-  align-items: center;
+  margin-left: 200px;
 
-  border-style: solid;
-  border-radius: 2px;
-  box-shadow: inset;
-  border-width: 1px;
-  object-fit: contain;
-  height: auto;
   margin-top: 60px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  /*//grid-template-columns: repeat(4, 1fr);
-  */
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
 }
-
-.search-bar {
-
-  flex: 1;
-
-  max-width: 850px;
-  margin-top: 50px;
-  margin-left: 10px;
-  margin-right: 10px;
-  display: flex;}
-
 .food-container-search {
   padding-top: 40px;
   padding-top: 40px;
