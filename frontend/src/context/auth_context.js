@@ -32,6 +32,8 @@ export const token = JSON.parse(localStorage.getItem('token'))
 export const AuthContext = React.createContext()
 //create  user provider
 export const AuthProvider = ({ children }) => {
+  const [token, setToken] = useState('')
+
   //pass reducer function and  initial state Object
   //TODO: import and  use user sign_in_reducer
 
@@ -77,7 +79,13 @@ export const AuthProvider = ({ children }) => {
       })
 
       const userLoginData = await response.data
+
       console.log(userLoginData, 'RAW DATA FROM RESPONSE')
+      const { token } = await userLoginData
+
+      setToken(token)
+
+      console.log('AFTER LOGIN success GET  TOKEN', token)
       // localStorage.setItem('token', JSON.stringify(userLoginData.token))
       // const { token } = await userLoginData
 
@@ -89,7 +97,7 @@ export const AuthProvider = ({ children }) => {
     }
   }
   useEffect(() => {}, [state.email, state.password])
-  useEffect(() => {})
+
   // const setUserDataNameAndPassword = userData => {
 
   // }
@@ -97,7 +105,7 @@ export const AuthProvider = ({ children }) => {
   //Todo: add  login, logout function
 
   return (
-    <AuthContext.Provider value={{ ...state, registerUser, loginUser }}>
+    <AuthContext.Provider value={{ ...state, registerUser, loginUser, token}}>
       {children}
     </AuthContext.Provider>
   )

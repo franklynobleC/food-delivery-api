@@ -10,8 +10,8 @@ const FoodsPage = () => {
 
   return (
     <section>
-
       <article>
+        {console.log("EMPTY PRODUCTS PAGE",user)}
         <FoodList />
         <h1>Products Page</h1>
       </article>

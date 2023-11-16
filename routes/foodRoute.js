@@ -16,8 +16,8 @@ const {
 } = require('../middleware/authentication')
 router.get(
   '/getAllFoods',
-  // authenticateUser,
-  // authorizedPermissions('admin', 'user'),
+  authenticateUser,
+  authorizedPermissions('admin', 'user'),
   getAllFoods
 )
 

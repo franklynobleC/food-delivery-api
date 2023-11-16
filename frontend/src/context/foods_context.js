@@ -27,7 +27,8 @@ const initialState = {
   foods: [],
   single_food_error: false,
   single_food_loading: false,
-  single_food: {}
+  single_food: {},
+
 }
 
 //declare global context and  make it  Available Globally
@@ -47,7 +48,10 @@ export const FoodsProvider = ({ children }) => {
     try {
       dispatch({ type: GET_FOODS_BEGIN })
 
-      const response = await axios.get(url)
+      const response = await axios.get(url, {
+
+      headers:{Authorization:token}},
+      )
 
       const foods = response.data
 
@@ -81,20 +85,14 @@ export const FoodsProvider = ({ children }) => {
     setUserToken(token)
   }
   useEffect(() => {
-    // if (token) {
+    if (token) {
     fetchFoods()
-    // }
+    }
   }, [UserToken])
-  console.log('Token after Mount from  foodContext', UserToken)
-  // useEffect(() => {
-  //   fetchFoods(url)
-  //   console.log('USE EFFECT RENDER')
-  //   {
-  //     /* add openSidebar here */
-  //   }
-  // }, [])
+  console.log('Token after Mount from  foodContext', token,)
+
   return (
-    <FoodsContext.Provider value={{ ...state, fetchSingleFood, updateSort }}>
+    <FoodsContext.Provider value={{ ...state, fetchSingleFood, updateSort,}}>
       {children}
     </FoodsContext.Provider>
   )

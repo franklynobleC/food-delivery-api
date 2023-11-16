@@ -63,7 +63,7 @@ const auth_reducer = (state, action) => {
       is_registered: false,
       is_logged_in: false,
       user: null,
-      token: ''
+
     }
   }
 
@@ -85,7 +85,7 @@ const auth_reducer = (state, action) => {
 
       isAuthenticated: true,
       user: tokenUser,
-      token: token
+
     }
   }
   if (action.type === LOGIN_USER_ERROR) {
@@ -98,7 +98,7 @@ const auth_reducer = (state, action) => {
       error: true,
       is_logged_in: false,
       user: null,
-      token: ''
+
     }
   }
   throw new Error(`No matching ${action.type}-action  type`)

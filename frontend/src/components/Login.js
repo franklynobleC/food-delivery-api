@@ -16,14 +16,10 @@ const Login = () => {
     console.log(userPassword, userEmail)
     loginUser(userEmail, userPassword)
 
-    // history.push('/foods')
-    if (Cart.length > 0 && is_logged_in) {
-      return navigate('/checkout')
-    }
-        return navigate('/foods')
+    navigate('/foods')
   }
   console.log(is_logged_in)
-console.log('from user loggedIn Data WITH USER ID', userId)
+  console.log('from user loggedIn Data WITH USER ID', userId)
 
   // if (is_logged_in) {
   //   console.log('FROM IS AUTHENTICATED!!>>>>', isAuthenticated)
