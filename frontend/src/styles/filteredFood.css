@@ -48,8 +48,13 @@
   /* Images will overflow their container by default. To
     prevent this, we set max-width and max-height to 100%
     so they stay inside their container. */
-  width: 150px;
-  height: auto;
+  /* width: 150px;
+  height: auto; */
+   max-width: 100%;
+
+  object-fit: contain;
+
+  height: 200px;
 }
 .food-name-search {
   height: 40px;

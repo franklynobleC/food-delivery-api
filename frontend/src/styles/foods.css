@@ -222,11 +222,14 @@ input:focus {
   object-fit: contain;
   width: 50%;
   text-wrap: wrap;
+  height: 40px;
+ max-width: 100%;
+
+  object-fit: contain;
   align-items: center;
   /* margin-left: 20px; */
   margin-top: 12px;
   margin-bottom: 5px;
-  height: 40px;
   background-color: #b4ffd1;
   color: rgb(53, 53, 53);
   border-radius: 5px;
