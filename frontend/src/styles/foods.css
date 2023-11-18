@@ -1,4 +1,5 @@
 .main {
+  /* background-color: red; */
   margin-top: 60px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -33,6 +34,7 @@
    */
 @media screen and(max-with: 1600px) {
   .main {
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
   }
 }
@@ -82,7 +84,6 @@
 }
 
 .search-bar {
-
   background-color: rgb(255, 253, 253);
   position: absolute;
   width: 70%;
@@ -194,7 +195,6 @@ input:focus {
   justify-content: center;
   align-items: center;
 
-  height: 120px;
   margin-bottom: 20px;
 }
 
@@ -202,7 +202,10 @@ input:focus {
   /* Images will overflow their container by default. To
     prevent this, we set max-width and max-height to 100%
     so they stay inside their container. */
-  width: 300px;
+  max-width: 100%;
+
+  object-fit: contain;
+
   height: 200px;
 }
 .food-name > h4 {
