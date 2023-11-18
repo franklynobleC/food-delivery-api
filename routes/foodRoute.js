@@ -16,8 +16,8 @@ const {
 } = require('../middleware/authentication')
 router.get(
   '/getAllFoods',
-  authenticateUser,
-  authorizedPermissions('admin', 'user'),
+  // authenticateUser,
+  // authorizedPermissions('admin', 'user'),
   getAllFoods
 )
 
@@ -57,8 +57,8 @@ router.post(
 
 router.post(
   '/uploadImage',
-  authenticateUser,
-  authorizedPermissions('admin', 'user'),
+  // authenticateUser,
+  // authorizedPermissions('admin', 'user'),
   uploadImage
 )
 

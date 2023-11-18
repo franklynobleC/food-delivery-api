@@ -1,7 +1,7 @@
 .main {
   margin-top: 60px;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 
   /* // grid-template-columns: repeat(4, 1fr); */
 }
@@ -24,7 +24,7 @@
 /* grid-template-columns: repeat(4, 1fr); */
 @media screen and (max-with: 2000px) {
   .main {
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -33,18 +33,18 @@
    */
 @media screen and(max-with: 1600px) {
   .main {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 @media screen and(max-with: 1300px) {
   .main {
-    grid-template-columns: repeat(5, 1 fr);
+    grid-template-columns: repeat(3, 1 fr);
   }
 }
 
 @media screen and (max-width: 1000px) {
   .main {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -202,8 +202,8 @@ input:focus {
   /* Images will overflow their container by default. To
     prevent this, we set max-width and max-height to 100%
     so they stay inside their container. */
-  width: 150px;
-  height: auto;
+  width: 300px;
+  height: 200px;
 }
 .food-name > h4 {
   display: flex;

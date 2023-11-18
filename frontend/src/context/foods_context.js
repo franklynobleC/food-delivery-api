@@ -1,5 +1,5 @@
 import axios from 'axios'
-// import base64 from 'base64'
+// import cookieParser from 'cookie-parser'
 
 import React, { useContext, useEffect, useReducer, useState } from 'react'
 import { useAuthContext } from '../context/auth_context'
@@ -27,8 +27,7 @@ const initialState = {
   foods: [],
   single_food_error: false,
   single_food_loading: false,
-  single_food: {},
-
+  single_food: {}
 }
 
 //declare global context and  make it  Available Globally
@@ -42,22 +41,31 @@ export const FoodsProvider = ({ children }) => {
   const [state, dispatch] = useReducer(foods_reducer, initialState)
   const { token } = useAuthContext()
   const [UserToken, setUserToken] = useState('')
+  const [token1, setToken] = useState('')
   //fetch Data from API   using axios
 
   const fetchFoods = async () => {
+    const retrievedToken = localStorage.getItem('token')
+    console.log('RETRIEVED TOKEN', retrievedToken)
+
     try {
       dispatch({ type: GET_FOODS_BEGIN })
+      console.log('TOKEN CALL TO API FROM   FOODS Before GET Method', token)
 
-      const response = await axios.get(url, {
-
-      headers:{Authorization:token}},
+      const response = await axios.get(url
+      //   headers: {
+      //     authorization: `Bearer ${retrievedToken}`
+      //   }
+      // }
       )
 
-      const foods = response.data
-
+      const foods = await response.data
+      console.log('FETCH FOODS  ', foods)
       dispatch({ type: GET_FOODS_SUCCESS, payload: foods })
     } catch (error) {
-      console.log('Error fetching foods', error.message)
+      console.log('TOKEN CALL TO API FROM   FOODS', token)
+
+      console.log('Error fetching foods', token, error.message)
       dispatch({ type: GET_FOODS_ERROR, payload: error.message })
     }
   }
@@ -81,18 +89,19 @@ export const FoodsProvider = ({ children }) => {
     dispatch({ type: UPDATE_SORT, payload: { value } })
   }
 
-  if (token) {
-    setUserToken(token)
-  }
+  // if (token) {
+  //     setUserToken(token)
+  //   }
   useEffect(() => {
-    if (token) {
+
     fetchFoods()
-    }
-  }, [UserToken])
-  console.log('Token after Mount from  foodContext', token,)
+  }, [])
+  console.log('Token after Mount from  foodContext', token)
 
   return (
-    <FoodsContext.Provider value={{ ...state, fetchSingleFood, updateSort,}}>
+    <FoodsContext.Provider
+      value={{ ...state, fetchSingleFood, updateSort, fetchFoods }}
+    >
       {children}
     </FoodsContext.Provider>
   )

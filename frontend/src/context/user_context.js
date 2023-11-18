@@ -4,14 +4,16 @@ import { useAuthContext } from './auth_context.js'
 const UserContext = React.createContext()
 
 export const UserProvider = ({ children }) => {
+  const [myUser, setMyUser] = useState({})
   const { register, login, user } = useAuthContext()
-  const [myUser, setMyUser] = useState(null)
 
   useEffect(() => {
+    console.log("User from  userContext",user)
     setMyUser(user)
   }, [user])
-  console.log('myUser', myUser)
-  console.log('User', user)
+
+  console.log('User1 this works', user)
+  console.log('User2 this does not work', myUser)
 
   return (
     <UserContext.Provider value={{ myUser, register, login,user }}>

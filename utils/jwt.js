@@ -14,7 +14,7 @@ require('dotenv').config()
 const createJWT = ({ payload }) => {
   console.log('createJWT func')
   const token = jwt.sign(payload, process.env.JWT_SECRET, {
-    expiresIn: '1h'
+    expiresIn: '24h'
   })
   return token
 }
@@ -36,12 +36,13 @@ const attachCookiesToResponse = ({ res, user }) => {
 
   const oneDay = 100 * 60 * 60 * 24
 
-  res.cookie('token', token, {
+  return res.cookie('token', token, {
     httpOnly: true,
     signed: true,
     expire: new Date(Date.now() + oneDay)
   })
-  return { token }
+  // return { resToken}
+  // return { token}
 }
 
 module.exports = {

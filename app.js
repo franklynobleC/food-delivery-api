@@ -42,12 +42,6 @@ app.use(cookieParser(process.env.JWT_SECRET))
 app.use(express.static('./public'))
 app.use(fileUpload({ useTempFiles: true }))
 app.use('/api/v1/auth', authRouter)
-app.use((req, res, next) => {
-  const  token = req.headers['authorization']
-  req.token = token
-  console.log("token  is",token)
-  next()
-})
 
 //ROUTE FOR USERS
 app.use('/api/v1/users', userRouter)

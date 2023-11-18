@@ -4,11 +4,11 @@ import { Route, useNavigate } from 'react-router-dom'
 import { useAuthContext } from '../context/auth_context'
 
 const PrivateRoute = ({ children }) => {
-  const { is_logged_in } = useAuthContext()
+  const { token } = useAuthContext()
   let navigate = useNavigate()
   console.log('FROM  PRIVATE ROUTE')
-  if (!is_logged_in) {
-   return navigate('/login')
+  if (!token) {
+    return navigate('/login')
   }
   return children
 }

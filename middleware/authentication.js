@@ -18,8 +18,10 @@ const { isTokenValid } = require('../utils')
 //TODO:handle errors safely with out crashing The App
 const authenticateUser = async (req, res, next) => {
   const token = req.signedCookies.token
+  console.log(" this is from Authenticate User",token)
 
   if (!token) {
+    console.log("Authenticate Error",token)
     throw new error('Authentication  Invalid')
   }
   //check  if  the token is valid

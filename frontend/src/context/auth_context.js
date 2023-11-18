@@ -2,6 +2,7 @@ import React, { useEffect, useReducer, useContext, useState } from 'react'
 import axios from 'axios'
 import { register_user_url, login_user_url } from '../utils/constants'
 import auth_reducer from '../reducers/auth_reducer'
+import cookie from 'cookie'
 
 import {
   REGISTER_ERROR,
@@ -22,17 +23,18 @@ const initialState = {
   loading: false,
   email: '',
   password: '',
-  user: {},
-  token: ''
+  user: {}
 }
 
 //declare global context and  make it  Available Globally
 // also here, Set All  the Actions using Dispatch
-export const token = JSON.parse(localStorage.getItem('token'))
+
 export const AuthContext = React.createContext()
+
 //create  user provider
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState('')
+  const [token, setToken] = useState(null)
+  const [user, setUser] = useState({})
 
   //pass reducer function and  initial state Object
   //TODO: import and  use user sign_in_reducer
@@ -57,9 +59,10 @@ export const AuthProvider = ({ children }) => {
         email: email,
         password: password
       })
+
       const registeredUser = await response.data
 
-      console.log('Register  SucceSSSS AFTER  RESPONSE FROM  CONTEXT')
+      console.log('Register  SucceSS AFTER  RESPONSE FROM  CONTEXT')
       dispatch({ type: REGISTER_SUCCESS, payload: registeredUser })
     } catch (error) {
       console.log(
@@ -78,25 +81,32 @@ export const AuthProvider = ({ children }) => {
         password: password
       })
 
-      const userLoginData = await response.data
+        const userLoginData = response.data
 
-      console.log(userLoginData, 'RAW DATA FROM RESPONSE')
-      const { token } = await userLoginData
+        console.log(userLoginData, 'RAW DATA FROM RESPONSE')
+        const { token, tokenUser } = await userLoginData
+        // let retrievedToken = localStorage.setItem('token', JSON.stringify(token))
+        // setToken(retrievedToken)
 
-      setToken(token)
+        setToken(token)
+        setUser(tokenUser)
 
-      console.log('AFTER LOGIN success GET  TOKEN', token)
-      // localStorage.setItem('token', JSON.stringify(userLoginData.token))
-      // const { token } = await userLoginData
+        console.log('LOGIN SUCCESS FROM  USER 1', tokenUser, 'tokenUser', token)
+        console.log('LOGIN SUCCESS FROM  USER 2', token, user)
 
-      dispatch({ type: LOGIN_USER_SUCCESS, payload: userLoginData })
+        // localStorage.setItem('token', JSON.stringify(userLoginData.token))
+        // const { token } = await userLoginData
+        console.log('call foods Context Here')
+
+        dispatch({ type: LOGIN_USER_SUCCESS, payload: userLoginData })
+
     } catch (err) {
       console.log('LOGIN ERROR CONTEXT')
 
       dispatch({ type: LOGIN_USER_ERROR, payload: err.message })
     }
   }
-  useEffect(() => {}, [state.email, state.password])
+  useEffect(() => {}, [state.email, state.password, token, user])
 
   // const setUserDataNameAndPassword = userData => {
 
@@ -105,7 +115,9 @@ export const AuthProvider = ({ children }) => {
   //Todo: add  login, logout function
 
   return (
-    <AuthContext.Provider value={{ ...state, registerUser, loginUser, token}}>
+    <AuthContext.Provider
+      value={{ ...state, registerUser, loginUser, token, user }}
+    >
       {children}
     </AuthContext.Provider>
   )

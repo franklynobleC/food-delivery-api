@@ -11,10 +11,9 @@ import '../images/icons/search-icon.png'
 import { useFoodsContext } from '../context/foods_context'
 
 const ListView = ({ foods }) => {
-  // const { foods } = useFoodsContext()
-
   const [searchFood, setSearchFood] = useState('')
   const [searchFoodsResult, setFoodsResult] = useState([])
+
   const handSearchSubmit = e => {
     e.preventDefault()
     // console.log(foods)
@@ -68,6 +67,7 @@ const ListView = ({ foods }) => {
             className='search-input-search'
             value={searchFood}
             placeholder='Search meal'
+            onfocus="this.style.border = 'none' this.border='none'"
             onChange={e => setSearchFood(e.target.value)}
           />
           <button type='submit' className='search-btn'>

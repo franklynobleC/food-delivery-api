@@ -105,13 +105,13 @@ const login = async (req, res) => {
   //if  password Matched,  add   user to Token
   const tokenUser = createTokenUser(user)
   // attachCookiesToResponse({ res, user: tokenUser })
-  const { token } = attachCookiesToResponse({
+  attachCookiesToResponse({
     res,
     user: tokenUser
   })
   console.log('TOKEN FROM RESPONSE', token)
 
-  res.status(StatusCodes.OK).json({ token, tokenUser })
+  res.status(StatusCodes.OK).json({ tokenUser })
 }
 
 //TODO

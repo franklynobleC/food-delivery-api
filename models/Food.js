@@ -32,7 +32,9 @@ const FoodSchema = new mongoose.Schema(
         'drinks',
         'fish and meat',
         'soup',
-        'dinner'
+        'dinner',
+        'noodles',
+'vegetable'
       ],
       default: 'dinner'
     },

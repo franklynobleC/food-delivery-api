@@ -1,30 +1,46 @@
 import React, { useState } from 'react'
 import { useAuthContext, token } from '../context/auth_context'
+import { useFoodsContext } from '../context/foods_context'
 import { Cart, Foods } from '../pages'
 import { Link, Redirect, useNavigate } from 'react-router-dom'
+
 const Login = () => {
   const [userPassword, setUserPassword] = useState('')
   const [userEmail, setUserEmail] = useState('')
-  const { loginUser, is_registered, is_logged_in, userId, isAuthenticated } =
-    useAuthContext()
+  // const tokenCookie = useCookies('token')
+  // console.log(tokenCookie, 'TOKEN COOKIE')
+
+  // const [tokenSet, setToken] = useState(null)
+  const {
+    loginUser,
+    is_registered,
+    is_logged_in,
+    userId,
+    isAuthenticated,
+    token,
+
+    user
+  } = useAuthContext()
+  const { fetchFoods } = useFoodsContext()
 
   // const history = useHistory()
   let navigate = useNavigate()
+  console.log('Before  LOGIN', token, 'USER DATA  IS')
 
   const handleSubmit = e => {
     e.preventDefault()
     console.log(userPassword, userEmail)
+
     loginUser(userEmail, userPassword)
 
+    // setTimeout(() => {
+      // fetchFoods()
+    // }, 3000)
+    // console.log('AFTER  LOGIN', token)
     navigate('/foods')
   }
   console.log(is_logged_in)
   console.log('from user loggedIn Data WITH USER ID', userId)
-
-  // if (is_logged_in) {
-  //   console.log('FROM IS AUTHENTICATED!!>>>>', isAuthenticated)
-  //   return navigate('/foods')
-  // }
 
   return (
     <form class='login-container' onSubmit={handleSubmit}>
