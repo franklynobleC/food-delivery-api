@@ -39,36 +39,64 @@ export const FoodsProvider = ({ children }) => {
   //pass in  reducerFunction , and  initial state Object
   //TODO:create and  import foodsReducer, so  you can  use  in  this useReducerFunction
   const [state, dispatch] = useReducer(foods_reducer, initialState)
-  const { token } = useAuthContext()
-  const [UserToken, setUserToken] = useState('')
-  const [token1, setToken] = useState('')
+  // const { token } = useAuthContext()
+  const [userToken, setUserToken] = useState(null)
+
   //fetch Data from API   using axios
 
   const fetchFoods = async () => {
-    const retrievedToken = localStorage.getItem('token')
-    console.log('RETRIEVED TOKEN', retrievedToken)
+    // const fetchFoods = async () => {
+
+    let retrievedToken = localStorage.getItem('token')
+    console.log('RETRIEVED TOKEN', retrievedToken, userToken)
 
     try {
       dispatch({ type: GET_FOODS_BEGIN })
-      console.log('TOKEN CALL TO API FROM   FOODS Before GET Method', token)
+      console.log('TOKEN CALL TO API FROM   FOODS Before GET Method')
 
-      const response = await axios.get(url
-      //   headers: {
-      //     authorization: `Bearer ${retrievedToken}`
-      //   }
-      // }
+      console.log(retrievedToken)
+      setUserToken(retrievedToken)
+
+      // const headers = {'Content-Type': 'application/json', authorization:`Bearer${userToken}` }
+      console.log(
+        'Data being sent to foods API',
+
+        'USERtOKEN  IS',
+        userToken
       )
+      const configuration = {
+        method: 'GET',
+        url: url,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
 
-      const foods = await response.data
+        }
+      }
+      console.log(userToken)
+      console.log(configuration)
+      const response = await axios(configuration)
+      // console.log(configuration)
+
+      // console.log('TOKEN  IN TO  FOODS coNTEXTS', token)
+
+      const foods = response.data
       console.log('FETCH FOODS  ', foods)
       dispatch({ type: GET_FOODS_SUCCESS, payload: foods })
     } catch (error) {
-      console.log('TOKEN CALL TO API FROM   FOODS', token)
+      console.log('TOKEN CALL TO API FROM   FOODS')
 
-      console.log('Error fetching foods', token, error.message)
+      console.log('Error fetching foods', error.message)
       dispatch({ type: GET_FOODS_ERROR, payload: error.message })
     }
   }
+  useEffect(() => {
+    if (userToken) {
+      setUserToken(userToken)
+
+      fetchFoods()
+    }
+  }, [userToken])
+  //end here
   const fetchSingleFood = async single_url => {
     dispatch({ type: GET_SINGLE_FOOD_BEGIN })
     try {
@@ -92,15 +120,23 @@ export const FoodsProvider = ({ children }) => {
   // if (token) {
   //     setUserToken(token)
   //   }
-  useEffect(() => {
+  // useEffect(() => {
+  //   // if (userToken) {
+  //   //   setUserToken(userToken)
+  //   //   fetchFoods()
+  //   // }
+  //   // fetchFoods()
+  // }, [userToken])
+  console.log(
+    'Token after Mount from  foodContext ',
 
-    fetchFoods()
-  }, [])
-  console.log('Token after Mount from  foodContext', token)
+    'USERtOKEN IS',
+    userToken
+  )
 
   return (
     <FoodsContext.Provider
-      value={{ ...state, fetchSingleFood, updateSort, fetchFoods }}
+      value={{ ...state, fetchSingleFood, fetchFoods, updateSort }}
     >
       {children}
     </FoodsContext.Provider>

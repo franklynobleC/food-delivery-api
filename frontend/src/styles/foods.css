@@ -163,7 +163,7 @@ input:focus {
   padding-bottom: 25px;
   padding-left: 25px;
   padding-right: 25px;
-  margin-top: 80px;
+  margin-top: 90px;
   margin-left: 10px;
   border-radius: 10%;
   border-right: 1px solid rgb(231, 231, 231);
@@ -172,6 +172,8 @@ input:focus {
   display: flex;
   /* display: block; */
   flex-direction: column;
+  justify-content: space-between;
+align-items: center;
   -webkit-border-radius: 10%;
   -moz-border-radius: 10%;
   -ms-border-radius: 10%;
@@ -211,21 +213,22 @@ input:focus {
 .food-name > h4 {
   display: flex;
   text-align: center;
+   justify-self: center;
 
-  font-weight: 200%;
   font-size: larger;
   justify-content: center;
-  align-content: center;
+  align-content: stretch;
 }
 .food-name {
   display: flex;
+
   object-fit: contain;
   width: 50%;
   text-wrap: wrap;
   height: 40px;
  max-width: 100%;
+ text-align: center;
 
-  object-fit: contain;
   align-items: center;
   /* margin-left: 20px; */
   margin-top: 12px;
@@ -254,15 +257,15 @@ input:focus {
   margin-top: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 25px;
+  padding-right: 25px;
   color: whitesmoke;
+  background-color: #028c6a;
   transition: all 0.4s ease 0s;
   -webkit-transition: all 0.4s ease 0s;
   -moz-transition: all 0.4s ease 0s;
   -ms-transition: all 0.4s ease 0s;
   -o-transition: all 0.4s ease 0s;
-  background-color: #028c6a;
   border-radius: 8px;
   border-style: none;
   -webkit-border-radius: 8px;

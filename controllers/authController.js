@@ -14,7 +14,7 @@ const {
 } = require('../utils')
 const { error } = require('console')
 const { emailFunc } = require('../services/mailService')
-const { token } = require('morgan')
+
 require('dotenv').config()
 
 //add Register, Login,  logOut,
@@ -104,14 +104,14 @@ const login = async (req, res) => {
   }
   //if  password Matched,  add   user to Token
   const tokenUser = createTokenUser(user)
-  // attachCookiesToResponse({ res, user: tokenUser })
-  attachCookiesToResponse({
+
+  const { token } = attachCookiesToResponse({
     res,
     user: tokenUser
   })
-  console.log('TOKEN FROM RESPONSE', token)
 
-  res.status(StatusCodes.OK).json({ tokenUser })
+  console.log('Token after Login', token)
+  res.status(StatusCodes.OK).json({ token, tokenUser })
 }
 
 //TODO

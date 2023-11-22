@@ -7,6 +7,7 @@ import '../styles/cart/cartcontent.css'
 const CartContent = () => {
   const { cart, clearCart } = useCartContext()
   // pass the cart  item  here
+localStorage.setItem('cart', JSON.stringify(cart))
   return (
     <div className='cart-content'>
       <h5>cart Content page</h5>

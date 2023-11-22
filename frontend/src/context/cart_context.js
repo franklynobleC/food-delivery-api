@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import React, { useContext, useEffect, useReducer } from 'react'
+import React, { useContext, useEffect, useReducer, useState } from 'react'
 import { create_orders_url } from '../utils/constants'
 import cart_reducer from '../reducers/cart_reducer'
 import {
@@ -8,7 +8,6 @@ import {
   REMOVE_CART_ITEM,
   CLEAR_CART,
   COUNT_CART_TOTALS,
-
   CREATE_ORDER_BEGIN,
   CREATE_ORDER_SUCCESS,
   CREATE_ORDER_ERROR
@@ -19,6 +18,7 @@ const initialState = {
   total_price: 0,
   payment_option: '',
   delivery_fee: 0,
+  quantity: 2,
   is_order_created_success: false,
   is_order_error: false,
   is_loading: false
@@ -84,8 +84,10 @@ export const CartProvider = ({ children }) => {
   useEffect(() => {
     //dispatch this when  component mounts
     dispatch({ type: COUNT_CART_TOTALS })
+
+    localStorage.setItem('cart', JSON.stringify(state.cart))
     //also, adding  to  the Dependency array, so it would remount when  item  in  the component  is changed
-  }, [state.cart, state.order])
+  }, [state.cart])
 
   return (
     <CartContext.Provider

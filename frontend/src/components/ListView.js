@@ -7,12 +7,14 @@ import '../styles/filteredFood.css'
 import '../icons/search-icon.png'
 
 import '../images/icons/search-icon.png'
+import { useCartContext } from '../context/cart_context'
 
 import { useFoodsContext } from '../context/foods_context'
 
 const ListView = ({ foods }) => {
   const [searchFood, setSearchFood] = useState('')
   const [searchFoodsResult, setFoodsResult] = useState([])
+  const { addToCart } = useCartContext()
 
   const handSearchSubmit = e => {
     e.preventDefault()
@@ -22,7 +24,10 @@ const ListView = ({ foods }) => {
     )
 
     setFoodsResult(results)
-    console.log(results)
+    if (results) {
+      setSearchFood('')
+      return
+    }
   }
 
   if (searchFoodsResult.length > 0) {
@@ -44,6 +49,11 @@ const ListView = ({ foods }) => {
                 <div className='food-price-search'>Price: &#8358;{price}</div>
                 <div className='food-description-search'></div>
                 <div className='details-link-search'>
+                  {/*
+                  // <button type='click' onClick={() => addToCart(id, quantity, food)}>
+                  //   {' '}
+                  //   Add to Cart
+          // </button>        */}
                   <Link to={`/foods/${id}`} className='Details-link-search'>
                     <button className='oder-now-btn-search'>Order now</button>
                   </Link>

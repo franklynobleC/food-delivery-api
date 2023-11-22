@@ -14,7 +14,7 @@ const CheckoutPage = () => {
       </div>
     )
   }
-  if (is_logged_in && cart.length > 0) {
+  if (cart.length > 0) {
     return (
       <div>
         <Link to='/checkout'>
@@ -23,14 +23,14 @@ const CheckoutPage = () => {
       </div>
     )
   }
-  if (!is_logged_in) {
-    return (
-      <div>
-        <h2>Please Log In</h2>
-        <Link to='/login'>Login</Link>
-      </div>
-    )
-  }
+  // if () {
+  //   return (
+  //     <div>
+  //       <h2>Please Log In</h2>
+  //       <Link to='/login'>Login</Link>
+  //     </div>
+  //   )
+  // }
   return (
     <div>
       <h2>CheckOut page!</h2>

@@ -2,17 +2,19 @@ const FoodSchema = require('../models/Food')
 const { StatusCodes } = require('http-status-codes')
 const path = require('path')
 const fs = require('fs')
+const { checkPermissions, attachCookiesToResponse } = require('../utils')
 const cloudinary = require('cloudinary').v2
 //TODO:
 //add Search index to check  if food entered is protein, breakfast, and  dinner
 const getAllFoods = async (req, res) => {
-  console.log("All Foods API>>>>>>>")
+  console.log('All Foods API>>>>>>>')
   const food = await FoodSchema.find({})
   if (!food) {
     res
       .status(StatusCodes.BAD_REQUEST)
       .json({ food: 'No b  product found in database' })
   }
+  checkPermissions(req.user, food.user)
 
   res.status(StatusCodes.OK).json(food)
 }
@@ -35,7 +37,7 @@ const getSingleFood = async (req, res) => {
 
     return
   }
-  res.status(StatusCodes.OK).json( singleFood)
+  res.status(StatusCodes.OK).json(singleFood)
 }
 
 const createFood = async (req, res) => {
@@ -110,7 +112,7 @@ const uploadImageLocal = async (req, res) => {
   if (!productImage.mimetype.startsWith('image')) {
     throw new error('please upload Image')
   }
-  const maxSize = (1024 * 1024)*5
+  const maxSize = 1024 * 1024 * 5
 
   if (productImage.size > maxSize) {
     throw new error('please upload Image smaller than 1MB')
@@ -141,7 +143,7 @@ const uploadImage = async (req, res) => {
       .json({ error: 'Failed! please upload filetype image' })
     return
   }
-  const maxSize = (1024 * 1024) * 6
+  const maxSize = 1024 * 1024 * 6
 
   if (productImage.size > maxSize) {
     res

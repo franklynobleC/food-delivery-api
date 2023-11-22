@@ -16,21 +16,21 @@ const {
 } = require('../middleware/authentication')
 router.get(
   '/getAllFoods',
-  // authenticateUser,
-  // authorizedPermissions('admin', 'user'),
+   authenticateUser,
+ authorizedPermissions('admin', 'user'),
   getAllFoods
 )
 
 router.get(
   '/getSingleFood/:id',
-  // authenticateUser,
-  // authorizedPermissions('admin', 'user'),
+//  authenticateUser,
+  //authorizedPermissions('admin', 'user'),
   getSingleFood
 )
 router.get(
   '/searchWord/:searchWord',
   authenticateUser,
-  authorizedPermissions('admin', 'user'),
+  // authorizedPermissions('admin', 'user'),
   searchFood
 )
 

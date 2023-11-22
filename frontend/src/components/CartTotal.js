@@ -11,7 +11,6 @@ const CartTotal = () => {
   const {
     total_quantity,
     delivery_fee,
-
     total_price,
     cart,
     createOrder,
@@ -20,11 +19,15 @@ const CartTotal = () => {
   const { is_logged_in } = useAuthContext()
   const { user, myUser } = useUserContext()
 
-  const [shippingFee, setShippingFee] = useState(0)
-  const [myCart, setMyCart] = useState([])
+  const [myCart, setMyCart] = useState(cart)
   const [paymentOption, setPaymentOption] = useState('')
   const [userI, setUser] = useState({})
   let navigate = useNavigate()
+  console.log('MYCART', myCart)
+
+  //get  item from  local Storage
+  let itemFromLocalStorage = localStorage.getItem('cart')
+  let itemFromLocalStorageObj = JSON.parse(itemFromLocalStorage)
 
   const HandleSubmit = e => {
     e.preventDefault()
@@ -38,14 +41,10 @@ const CartTotal = () => {
         </div>
       )
     }
-    if (!is_logged_in) {
-      console.log('not logged in!!!')
-      return navigate('/login')
-    }
 
-    if (is_logged_in && cart.length > 0) {
-      console.log('myCart>>>>>MYCARTT!!! SUBMIT', myCart)
-      console.log('shippingFee', delivery_fee)
+    if (cart.length) {
+      console.log('myCart>>>>>MYCARTT!!! SUBMIT', myCart, cart)
+      console.log('shippingFee', delivery_fee, 'Shipping fee 2',)
       console.log('user ID from DB', user.userId)
       console.log('payment option is>>', paymentOption)
 
@@ -53,18 +52,21 @@ const CartTotal = () => {
     }
   }
   useEffect(() => {
-    setShippingFee(delivery_fee)
-    setMyCart([...cart])
-
-    setUser(user)
-    setPaymentOption('card')
-  }, [])
+    // setShippingFee(delivery_fee)
+    // setMyCart([...cart,itemFromLocalStorageObj])
+    // setUser(user)
+    // setPaymentOption('card')
+  }, [cart])
 
   return (
     <div className='cart-total-container'>
       <div className='total-items'>
         <div>
           <h1>CART TOTAL PAGE</h1>
+          {console.log(
+            'THIS  IS FROM  TOTAL CART COMPONENT',
+            itemFromLocalStorageObj
+          )}
 
           <h4>Total Quantity:{total_quantity}</h4>
         </div>
@@ -72,7 +74,6 @@ const CartTotal = () => {
           <h4>Total Price: &#8358;{total_price}</h4>
         </div>
         <div>Delivery Fee:&#8358;{delivery_fee}</div>
-        {console.log('CART CONTENT  IS>>>', typeof cart)}
 
         <div>
           <Link to='/checkout'>checkout</Link>

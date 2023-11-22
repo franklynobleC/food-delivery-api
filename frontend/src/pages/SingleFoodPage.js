@@ -66,17 +66,13 @@ const SingleFoodPage = () => {
       <div className='spacer'></div>
 
       <hr />
-      {/*<AddToCart food={food} /> */}
+      <AddToCart food={food} />
 
-      {/*
-      <Link
-        to='/cart'
-        className='add-to-cart-btn'
-
-      >
-        add to cart
-      </Link>
-  */}
+      {
+        <Link to='/cart' className='add-to-cart-btn'>
+          add to cart
+        </Link>
+      }
       <AddToCart food={food} />
     </section>
   )

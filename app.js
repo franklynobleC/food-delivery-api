@@ -1,9 +1,15 @@
 const express = require('express')
+const bodyParser = require('body-parser')
+// parse application/json
+
 require('dotenv').config()
 // const {sendEmail} = require('./service/mailService')
 
-const app = express()
+require('express-async-errors')
+
+// Do something with the headers
 const cookieParser = require('cookie-parser')
+const app = express()
 
 //for  file Upload
 
@@ -30,17 +36,39 @@ const paymentRouter = require('./routes/paymentRoute')
 
 const cors = require('cors')
 //NOTE!
-app.use(cors())
+// app.use(cors())
 // from authRoute
-app.use(express.json()) // This convert's  the request  to Jason from Postman
 
-//ROUTES FOR  AUTH USERS
+// This convert's  the request  to Jason from Postman
+
+///ROUTES FOR  AUTH USERS
 //cookieParser("secret") required for signed cookies'
-app.use(cookieParser(process.env.JWT_SECRET))
+// Curb Cores Error by adding a header here
+
 //make  the public folder  available
 //FILE  UPLOAD
+app.use(bodyParser.json())
+
 app.use(express.static('./public'))
 app.use(fileUpload({ useTempFiles: true }))
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'
+  )
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET, POST, PUT, DELETE, PATCH, OPTIONS'
+  )
+  next()
+})
+app.use(express.json())
+
+app.use(cors())
+
+app.use(cookieParser(process.env.JWT_SECRET))
+
 app.use('/api/v1/auth', authRouter)
 
 //ROUTE FOR USERS
@@ -52,6 +80,7 @@ app.use('/api/v1/payment', paymentRouter)
 //   Add Port
 /* This code is setting up the server to listen on a specific port. */
 const port = process.env.PORT || 3000 // if  the Port  is  undefined, use port 3000
+
 const start = async () => {
   try {
     const db = await dbConnection(process.env.MONGO_URI)

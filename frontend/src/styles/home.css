@@ -1,7 +1,10 @@
 .home-page {
   margin-top: 65px;
-  margin-left: 90px;
-}
+  margin-left: 10px;
+
+   background-color: yellowgreen;
+
+  }
 /* CONTENT */
 .content {
   display: grid;

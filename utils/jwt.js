@@ -1,7 +1,5 @@
 let jwt = require('jsonwebtoken')
 
-require('dotenv').config()
-
 //create jsonwebtoken
 
 /**
@@ -24,7 +22,9 @@ const createJWT = ({ payload }) => {
  * The function `isTokenValid` checks if a given token is valid by verifying it using a JWT secret
  * stored in the environment variable `JWT_SECRET`.
  */
+
 const isTokenValid = ({ token }) => jwt.verify(token, process.env.JWT_SECRET)
+
 console.log(process.env.JWT_SECRET)
 
 // this takes response and  user  object
@@ -35,14 +35,16 @@ const attachCookiesToResponse = ({ res, user }) => {
   const token = createJWT({ payload: user })
 
   const oneDay = 100 * 60 * 60 * 24
-
-  return res.cookie('token', token, {
-    httpOnly: true,
+  console.log('TOKEN FROM UTILS ATTACHE RESPONSE', token)
+  res.cookie('token', token, {
+    httpOnly: true, //access  only  by web Server
     signed: true,
+    secure: false, //request site be https change  it back to  true  on Production
+    sameSite: 'none', //   cross-site cookie
     expire: new Date(Date.now() + oneDay)
   })
-  // return { resToken}
-  // return { token}
+  //Send accessToken containing username and   roles
+  return { token }
 }
 
 module.exports = {

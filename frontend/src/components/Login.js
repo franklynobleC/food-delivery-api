@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAuthContext, token } from '../context/auth_context'
 import { useFoodsContext } from '../context/foods_context'
 import { Cart, Foods } from '../pages'
@@ -27,17 +27,18 @@ const Login = () => {
   let navigate = useNavigate()
   console.log('Before  LOGIN', token, 'USER DATA  IS')
 
+  useEffect(() => {}, [userEmail, userPassword])
+
   const handleSubmit = e => {
     e.preventDefault()
     console.log(userPassword, userEmail)
-
     loginUser(userEmail, userPassword)
+    setTimeout(() => {
+    fetchFoods()
 
-    // setTimeout(() => {
-      // fetchFoods()
-    // }, 3000)
-    // console.log('AFTER  LOGIN', token)
     navigate('/foods')
+  }, 3000)
+
   }
   console.log(is_logged_in)
   console.log('from user loggedIn Data WITH USER ID', userId)

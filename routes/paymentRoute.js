@@ -8,26 +8,26 @@ const {
 
 router.post(
   '/createPayment',
-  authenticateUser,
-  authorizedPermissions('admin', 'user'),
+  // authenticateUser,
+  // authorizedPermissions('admin', 'user'),
   createPayment
 )
 router.get(
   '/getAllPayments',
-  authenticateUser,
-  authorizedPermissions('admin', 'user'),
+  // authenticateUser,
+  // authorizedPermissions('admin', 'user'),
   getAllPayments
 )
 router.get(
   '/:id',
-  authenticateUser,
-  authorizedPermissions('admin', 'user'),
+  // authenticateUser,
+  // authorizedPermissions('admin', 'user'),
 getSInglePayment
 )
 router.delete(
   '/:id',
-  authenticateUser,
-  authorizedPermissions('admin', 'user'),
+  // authenticateUser,
+  // authorizedPermissions('admin', 'user'),
 deletePayment
 )
 

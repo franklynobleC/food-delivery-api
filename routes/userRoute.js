@@ -26,8 +26,8 @@ router.get(
 
 router.patch(
   '/updateUserPassword',
-  authenticateUser,
-  authorizedPermissions('admin', 'user'),
+  // authenticateUser,
+  // authorizedPermissions('admin', 'user'),
   updateUserPassword
 )
 

@@ -2,8 +2,7 @@ import React, { useEffect, useReducer, useContext, useState } from 'react'
 import axios from 'axios'
 import { register_user_url, login_user_url } from '../utils/constants'
 import auth_reducer from '../reducers/auth_reducer'
-import cookie from 'cookie'
-
+// import { useFoodsContext } from '../context/foods_context'
 import {
   REGISTER_ERROR,
   REGISTER_SUCCESS,
@@ -12,6 +11,7 @@ import {
   LOGIN_USER_SUCCESS,
   REGISTER_USER
 } from '../actions'
+import { signedCookie } from 'cookie-parser'
 
 const initialState = {
   is_registered: false,
@@ -35,6 +35,7 @@ export const AuthContext = React.createContext()
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null)
   const [user, setUser] = useState({})
+  // const { fetchFoods } = useFoodsContext()
 
   //pass reducer function and  initial state Object
   //TODO: import and  use user sign_in_reducer
@@ -76,30 +77,46 @@ export const AuthProvider = ({ children }) => {
   const loginUser = async (email, password) => {
     dispatch({ type: LOGIN_USER_BEGIN })
     try {
-      const response = await axios.post(login_user_url, {
-        email: email,
-        password: password
-      })
+      const response = await axios.post(
+        login_user_url,
 
-        const userLoginData = response.data
+        { email: email, password: password },
+        {
+          headers: { 'Content-Type': 'application/json' },
 
-        console.log(userLoginData, 'RAW DATA FROM RESPONSE')
-        const { token, tokenUser } = await userLoginData
-        // let retrievedToken = localStorage.setItem('token', JSON.stringify(token))
-        // setToken(retrievedToken)
+        }
+        // headers: { 'Content-Type': 'application/json' },
+        // withCredentials: true
+      )
 
-        setToken(token)
-        setUser(tokenUser)
+      console.log(
+          'FROM RESPONSE OBJECT',
+        // response.Headers
+        response.headers
+      )
 
-        console.log('LOGIN SUCCESS FROM  USER 1', tokenUser, 'tokenUser', token)
-        console.log('LOGIN SUCCESS FROM  USER 2', token, user)
+      const userLoginData = response.data
 
-        // localStorage.setItem('token', JSON.stringify(userLoginData.token))
-        // const { token } = await userLoginData
-        console.log('call foods Context Here')
+      console.log(userLoginData, 'RAW DATA FROM RESPONSE')
+      const { token, tokenUser } = await userLoginData
+    let retrievedToken = localStorage.setItem(
+        'token',
+        JSON.stringify(token)
+      )
+      setToken(retrievedToken)
 
-        dispatch({ type: LOGIN_USER_SUCCESS, payload: userLoginData })
+      // setToken(token)
+      setUser(tokenUser)
 
+      console.log('LOGIN SUCCESS FROM  USER 1', tokenUser, 'tokenUser', token)
+      console.log('LOGIN SUCCESS FROM  USER 2', token, user)
+      console.log('LOGIN SUCCESS FROM  USER 3', token)
+
+      // localStorage.setItem('token', JSON.stringify(userLoginData.token))
+      // const { token } = await userLoginData
+      console.log('call foods Context Here')
+
+      dispatch({ type: LOGIN_USER_SUCCESS, payload: userLoginData })
     } catch (err) {
       console.log('LOGIN ERROR CONTEXT')
 

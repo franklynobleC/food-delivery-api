@@ -30,21 +30,23 @@ function App () {
           <Route path='/register' element={<Auth />} />
           <Route path='/login' element={<Login />} />
           <Route path='/foods/:id' element={<SingleFood />} />
+          <Route path='/cart' element={<Cart />} />
+          <Route path='/checkout' element={<Checkout />} />
           <Route
-            path='foods'
+            path='/foods'
             element={
               <PrivateRoute>
                 <Foods />
               </PrivateRoute>
             }
           />
-          <Route
-            path='/checkout'
-            element={
-              <PrivateRoute>
-                <Checkout />
-              </PrivateRoute>
-            }
+          // <Route
+          //   path='/checkout'
+          //   element={
+          //     <PrivateRoute>
+          //       <Checkout />
+          //     </PrivateRoute>
+          //   }
           />
           <Route path='*' element={<Error />} />
         </Routes>

@@ -29,9 +29,9 @@ router.patch('/:id', updateOrder)
 router.delete('/:id', deleteOrder)
 router.get(
   '/:orderstatus',
-  authenticateUser,
-  authorizedPermissions('admin', 'user')
-  //getOrderStatus
+  // authenticateUser,
+  // authorizedPermissions('admin', 'user')
+  // getOrderStatus
 )
 
 module.exports = router

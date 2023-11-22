@@ -13,7 +13,7 @@ import Login from './Login'
 import AuthWrapper from '../pages/AuthWrapper'
 //TODO: import all data from  component and  give  it  a component  name
 import PrivateRoute from '../pages/PrivateRoute'
-
+import SvgComponent from './SvgComponent'
 export {
   FoodList,
   Services,
@@ -28,5 +28,6 @@ export {
   Auth,
   Login,
   PrivateRoute,
-  AuthWrapper
+  AuthWrapper,
+  SvgComponent,
 }
