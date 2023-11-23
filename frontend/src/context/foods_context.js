@@ -47,7 +47,8 @@ export const FoodsProvider = ({ children }) => {
   const fetchFoods = async () => {
     // const fetchFoods = async () => {
 
-    let retrievedToken = localStorage.getItem('token')
+    let retrievedToken = JSON.parse(localStorage.getItem('token'))
+    let userToken = retrievedToken.token
     console.log('RETRIEVED TOKEN', retrievedToken, userToken)
 
     try {
@@ -55,12 +56,12 @@ export const FoodsProvider = ({ children }) => {
       console.log('TOKEN CALL TO API FROM   FOODS Before GET Method')
 
       console.log(retrievedToken)
-      setUserToken(retrievedToken)
+      setUserToken(userToken)
 
       // const headers = {'Content-Type': 'application/json', authorization:`Bearer${userToken}` }
       console.log(
         'Data being sent to foods API',
-
+retrievedToken,
         'USERtOKEN  IS',
         userToken
       )
@@ -68,7 +69,7 @@ export const FoodsProvider = ({ children }) => {
         method: 'GET',
         url: url,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${retrievedToken}`,
 
         }
       }

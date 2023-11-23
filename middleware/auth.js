@@ -1,27 +1,33 @@
-const jwt = require('jsonwebtoken')
-require('dotenv').config()
+const { isTokenValid } = require('../utils')
 
-//set Authentication Middleware
-const authenticationMiddleware = async (req, res, next) => {
-  //check  header
-  console.log('from Auth middleWare')
-  console(req.headers)
-  const authHeader = await req.headers.authorization || req.headers.Authorization
-  console('Auth Header', authHeader)
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    throw new error('Authentication Invalid')
+const authenticateUser = async (req, res, next) => {
+  const token = req.signedCookies.token
+
+  if (!token) {
+    // throw new CustomError.UnauthenticatedError('Authentication Invalid')
   }
 
-  const token = authHeader.split(' ')[1]
-
   try {
-    const payload =  await jwt.verify(token, process.env.JWT_SECRET)
-    //attach user to  route
-    req.user = await { userId: payload.userId, name: payload.name }
+    const { name, userId, role } = isTokenValid({ token })
+    req.user = { name, userId, role }
     next()
-  } catch (err) {
-    throw new error('Authentication Invalid')
+  } catch (error) {
+    /// throw new CustomError.UnauthenticatedError('Authentication Invalid')
   }
 }
 
-module.exports = authenticationMiddleware
+const authorizePermissions = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      // throw new CustomError.UnauthorizedError(
+      //   'Unauthorized to access this route'
+      // )
+    }
+    next()
+  }
+}
+
+module.exports = {
+  authenticateUser,
+  authorizePermissions
+}

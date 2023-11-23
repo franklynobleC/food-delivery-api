@@ -1,6 +1,5 @@
-let jwt = require('jsonwebtoken')
-
-//create jsonwebtoken
+const jwt = require('jsonwebtoken')
+require('dotenv').config()
 
 /**
  * The function `createJWT` generates a JSON Web Token (JWT) with a given payload and returns the
@@ -11,9 +10,7 @@ let jwt = require('jsonwebtoken')
 
 const createJWT = ({ payload }) => {
   console.log('createJWT func')
-  const token = jwt.sign(payload, process.env.JWT_SECRET, {
-    expiresIn: '24h'
-  })
+  const token = jwt.sign(payload, process.env.JWT_SECRET)
   return token
 }
 
@@ -23,7 +20,7 @@ const createJWT = ({ payload }) => {
  * stored in the environment variable `JWT_SECRET`.
  */
 
-const isTokenValid = ({ token }) => jwt.verify(token, process.env.JWT_SECRET)
+const isTokenValid = token => jwt.verify(token, process.env.JWT_SECRET)
 
 console.log(process.env.JWT_SECRET)
 
@@ -41,7 +38,7 @@ const attachCookiesToResponse = ({ res, user }) => {
     signed: true,
     secure: false, //request site be https change  it back to  true  on Production
     sameSite: 'none', //   cross-site cookie
-    expire: new Date(Date.now() + oneDay)
+    expires: new Date(Date.now() + oneDay)
   })
   //Send accessToken containing username and   roles
   return { token }

@@ -49,6 +49,11 @@ const cors = require('cors')
 //FILE  UPLOAD
 app.use(bodyParser.json())
 
+app.use(express.json())
+
+app.use(cors())
+
+app.use(cookieParser(process.env.JWT_SECRET))
 app.use(express.static('./public'))
 app.use(fileUpload({ useTempFiles: true }))
 app.use((req, res, next) => {
@@ -63,11 +68,6 @@ app.use((req, res, next) => {
   )
   next()
 })
-app.use(express.json())
-
-app.use(cors())
-
-app.use(cookieParser(process.env.JWT_SECRET))
 
 app.use('/api/v1/auth', authRouter)
 

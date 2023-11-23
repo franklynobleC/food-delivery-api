@@ -2,7 +2,7 @@ const FoodSchema = require('../models/Food')
 const { StatusCodes } = require('http-status-codes')
 const path = require('path')
 const fs = require('fs')
-const { checkPermissions, attachCookiesToResponse } = require('../utils')
+const { checkPermissions } = require('../utils')
 const cloudinary = require('cloudinary').v2
 //TODO:
 //add Search index to check  if food entered is protein, breakfast, and  dinner

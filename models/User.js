@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const validator = require('validator')
-const Bcrypt = require('bcrypt')
+const Bcrypt = require('bcryptjs')
 /* The code is defining a Mongoose schema for a user. It specifies the structure and validation rules
 for the user object. */
 

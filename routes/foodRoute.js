@@ -10,21 +10,22 @@ const {
   searchFood
 } = require('../controllers/foodController')
 //TODO :  THE      GET ALL  PRODUCTS ROUTE, ADD  USER  PERMISSION AND AUTHORIZATION, AUTHENTICATE  USER
-const {
-  authorizedPermissions,
-  authenticateUser
-} = require('../middleware/authentication')
+const { authenticateUser } = require('../middleware/authentication')
+const { authorizePermissions } = require('../middleware/auth')
+const authMiddleware = require('../middleware/authMid')
 router.get(
   '/getAllFoods',
-   authenticateUser,
- authorizedPermissions('admin', 'user'),
+  //  authenticateUser,
+  authMiddleware,
+   authorizePermissions('admin', 'user'),
+
   getAllFoods
 )
 
 router.get(
   '/getSingleFood/:id',
-//  authenticateUser,
-  //authorizedPermissions('admin', 'user'),
+  // authenticateUser,
+  // authorizePermissions('admin', 'user'),
   getSingleFood
 )
 router.get(
@@ -37,21 +38,21 @@ router.get(
 router.patch(
   '/:id',
   authenticateUser,
-  authorizedPermissions('admin', 'user'),
+  // authorizedPermissions('admin', 'user'),
   updateFood
 )
 
 router.delete(
   '/:id',
   authenticateUser,
-  authorizedPermissions('admin', 'user'),
+  // authorizedPermissions('admin', 'user'),
   deleteFood
 )
 
 router.post(
   '/createFood',
   authenticateUser,
-  authorizedPermissions('admin', 'user'),
+  // authorizedPermissions('admin', 'user'),
   createFood
 )
 

@@ -20,7 +20,7 @@ const {
 router.get(
   '/showCurrentUser',
   authenticateUser,
-  authorizedPermissions('admin', 'user'),
+  // authorizedPermissions('admin', 'user'),
   showCurrentUser
 )
 
@@ -35,13 +35,13 @@ router.patch(
 router.patch(
   '/:id',
   authenticateUser,
-  authorizedPermissions('admin', 'user'),
+  // authorizedPermissions('admin', 'user'),
   updateUser
 )
 router.delete(
   '/:id',
   authenticateUser,
-  authorizedPermissions('admin', 'user'),
+  // authorizedPermissions('admin', 'user'),
   deleteUser
 )
 
@@ -49,13 +49,13 @@ router.delete(
 router.get(
   '/getAllUsers',
   authenticateUser,
-  authorizedPermissions('admin', 'user'),
+  // authorizedPermissions('admin', 'user'),
   getAllUsers
 ),
   router.get(
     '/:id',
     authenticateUser,
-    authorizedPermissions('admin', 'user'),
+    // authorizedPermissions('admin', 'user'),
     getSingleUser
   )
 
