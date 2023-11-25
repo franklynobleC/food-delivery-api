@@ -27,5 +27,6 @@ export const single_food_url =
   'http://localhost:5000/api/v1/foods/getsingleFood/'
 export const register_user_url = 'http://localhost:5000/api/v1/auth/register'
 export const login_user_url = 'http://localhost:5000/api/v1/auth/login'
+export const logout_user_url = 'http://localhost:5000/api/v1/auth/logout'
 export const create_orders_url =
   'http://localhost:5000/api/v1/orders/createOrder'

@@ -1,10 +1,12 @@
 const express = require('express')
 const router = express.Router()
+const { authorizePermissions } = require('../middleware/auth')
 
 const {
   authenticateUser,
   authorizedPermissions
 } = require('../middleware/authentication')
+const authMiddleware = require('../middleware/authMid')
 
 const {
   createOrder,
@@ -21,14 +23,14 @@ router.get('/getAllOrders', getAllOrders)
 router.get('/:id', getSingleOrder)
 router.post(
   '/createOrder',
-  // authenticateUser,
-  // authorizedPermissions('admin', 'user'),
+  authMiddleware,
+  // authorizePermissions('admin', 'user'),
   createOrder
 )
 router.patch('/:id', updateOrder)
 router.delete('/:id', deleteOrder)
 router.get(
-  '/:orderstatus',
+  '/:orderstatus'
   // authenticateUser,
   // authorizedPermissions('admin', 'user')
   // getOrderStatus

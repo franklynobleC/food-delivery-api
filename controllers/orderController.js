@@ -9,25 +9,28 @@ const { STATUS_CODES } = require('http')
 const { makePayment } = require('../services/paymentService')
 
 const { search } = require('../db/searchData')
+const { checkPermissions } = require('../utils')
 
 //   TODO:       add check Permission,  to rout  authUser and check Permission
 const createOrder = async (req, res) => {
   // req.user = req.user.userId
   // console.log(req.user)
   //console.log(req.user.userId)
+console.log(req.body)
+console.log("Data  is from Data",req.data)
   const {
     OrderItems: cart,
     _id: id,
     paymentOption: paymentoption,
     deliveryFee
   } = req.body
-  console.log(typeof cart)
+  console.log(typeof cart, "AND CART IS", cart)
   console.log('CHECKING CART ID>>>>', cart.id)
   console.log(cart, paymentoption, deliveryFee)
   console.log('THIS IS  THE USER  ID', id)
   if (!id) {
     throw new Error({ message: 'OrderIdUser is required' })
-    return
+
   }
 
   const cartToItems = cart.map(item => {
@@ -136,6 +139,7 @@ const getAllPendingOrders = async (req, res) => {
       message: `No orders found Or  orders table empty ${Error.message}`
     })
   }
+  // checkPermissions()
 
   res.status(StatusCodes.OK).json({ orders: pendingOrders })
 }

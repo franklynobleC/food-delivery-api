@@ -34,13 +34,18 @@ const FoodSchema = new mongoose.Schema(
         'soup',
         'dinner',
         'noodles',
-'vegetable'
+        'vegetable'
       ],
       default: 'dinner'
     },
     delivery: {
       type: Boolean,
       default: false
+    },
+    quantity: {
+      type: Number,
+      default: 1,
+      required: false
     },
 
     user: {

@@ -10,6 +10,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: false
   },
+
   email: {
     type: String,
     required: true,
@@ -20,15 +21,21 @@ const UserSchema = new mongoose.Schema({
       message: 'please  provide email'
     }
   },
-
-  password: {
-    type: String,
-    require: [true, 'please provide password'],
-    minlength: 3
+  phone: {
+    type: Number,
+    required: false,
+    minlength: 11,
+    maxHeight: 11
   },
+
   deliveryAddress: {
     type: String,
     required: false,
+    minlength: 3
+  },
+  password: {
+    type: String,
+    require: [true, 'please provide password'],
     minlength: 3
   },
   createdAt: {

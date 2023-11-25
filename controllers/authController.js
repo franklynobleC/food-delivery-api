@@ -32,10 +32,7 @@ const register = async (req, res) => {
   }
 
   //
-  if (email || password) {
-    console.log(email, password)
-    return
-  }
+
   //check  if user Already exist,
   const emailAlreadyExist = await UserSchema.findOne({ email })
   if (emailAlreadyExist) {
@@ -61,13 +58,13 @@ const register = async (req, res) => {
   )
 
   */
-
+//Todo:  if  user successfully registered,  send  user a  welcome mail
   // add UserToken
   const tokenUser = createTokenUser(createdUser)
 
   attachCookiesToResponse({ res, user: tokenUser })
 
-  res.status(StatusCodes.CREATED).json(tokenUser)
+  res.status(StatusCodes.CREATED).json({ tokenUser })
 }
 
 //TODO

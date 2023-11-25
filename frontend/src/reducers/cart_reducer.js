@@ -28,6 +28,9 @@ const cart_reducer = (state, action) => {
           return cartItem
         }
       })
+      //save  cart  in  localStorage
+      //TODO: COMMENT TO  TRY  OUT IF  THIS  WORKS
+      // localStorage.setItem('cart', JSON.stringify(tempCart))
       return { ...state, cart: tempCart, delivery_fee: 100 }
     } else {
       //if  item  is  not  found  in  cart  array  add  it

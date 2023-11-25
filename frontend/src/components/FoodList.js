@@ -1,3 +1,4 @@
+// This file is part of Foods. Copyright ( C ) 2008 John Resig Inc
 'use client'
 import React, { useState } from 'react'
 

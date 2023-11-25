@@ -1,3 +1,8 @@
 {
-  "docwriter.style": "JSDoc"
+  "docwriter.style": "JSDoc",
+  "docify.translateService.docstringFormat": "JsDoc",
+  "docify.commentService.docstringFormat": "JsDoc",
+  "docify.commentService.programmingLanguage": "javascript",
+  "cSpell.words": ["ivwcvtyfshhw"],
+  "editor.inlineSuggest.showToolbar": "onHover"
 }

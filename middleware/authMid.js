@@ -1,3 +1,4 @@
+/* trunk-ignore-all(prettier) */
 // Import required modules
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
@@ -7,7 +8,7 @@ const authMiddleware = async (req, res, next) => {
   try {
     // Get the authorization header from the request
     const authHeader = req.headers.authorization
-    let check = authHeader.startsWith('Bearer ') ? true : false
+    let check = authHeader.startsWith('Bearer ')
     console.log(check)
     console.log(authHeader)
     // Check if the authorization header exists
@@ -22,8 +23,8 @@ const authMiddleware = async (req, res, next) => {
 
     // Verify the token
 
-       let decodedToken = jwt.verify(token, process.env.JWT_SECRET)
-       console.log(decodedToken, 'From Decode  Token')
+    let decodedToken = jwt.verify(token, process.env.JWT_SECRET)
+    console.log(decodedToken, 'From Decode  Token')
     // Check if user is authenticated
     if (!decodedToken) {
       console.log(decodedToken, 'from Decode  Token')

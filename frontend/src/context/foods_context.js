@@ -1,8 +1,9 @@
+/* trunk-ignore-all(prettier) */
 import axios from 'axios'
 // import cookieParser from 'cookie-parser'
 
 import React, { useContext, useEffect, useReducer, useState } from 'react'
-import { useAuthContext } from '../context/auth_context'
+
 import {
   foods_url as url,
   single_food_url as single_url
@@ -37,51 +38,50 @@ export const FoodsContext = React.createContext()
 //creating FoodsProvider
 export const FoodsProvider = ({ children }) => {
   //pass in  reducerFunction , and  initial state Object
-  //TODO:create and  import foodsReducer, so  you can  use  in  this useReducerFunction
+  //NOTE:create and  import foodsReducer, so  you can  use  in  this useReducerFunction
   const [state, dispatch] = useReducer(foods_reducer, initialState)
   // const { token } = useAuthContext()
-  const [userToken, setUserToken] = useState(null)
+  const [userTokenData, setUserToken] = useState(null)
+  const [foodsData, setFoodsData] = useState([])
 
   //fetch Data from API   using axios
 
   const fetchFoods = async () => {
-    // const fetchFoods = async () => {
+    console.log('TYPE 1 FOR TOKEN', typeof localStorage.getItem('token'))
+    //NOTE: convert  to  valid  json String Object: this would   would enable  possible read from  the Backend;
+    // if   allocated directly without  using  JSON.parse, it would  read "null"from  the  backend
 
     let retrievedToken = JSON.parse(localStorage.getItem('token'))
-    let userToken = retrievedToken.token
-    console.log('RETRIEVED TOKEN', retrievedToken, userToken)
 
     try {
       dispatch({ type: GET_FOODS_BEGIN })
-      console.log('TOKEN CALL TO API FROM   FOODS Before GET Method')
 
       console.log(retrievedToken)
-      setUserToken(userToken)
+      setUserToken(retrievedToken)
 
-      // const headers = {'Content-Type': 'application/json', authorization:`Bearer${userToken}` }
       console.log(
         'Data being sent to foods API',
-retrievedToken,
+        retrievedToken,
         'USERtOKEN  IS',
-        userToken
+        userTokenData
       )
-      const configuration = {
-        method: 'GET',
-        url: url,
-        headers: {
-          Authorization: `Bearer ${retrievedToken}`,
-
-        }
-      }
-      console.log(userToken)
-      console.log(configuration)
-      const response = await axios(configuration)
+      // const configuration = {
+      //   method: 'GET',
+      //   url: url,
+      //   headers: {
+      //     Authorization: `Bearer ${userTokenData}`
+      //   }
+      // }
+      console.log(userTokenData)
+      // console.log(configuration)
+      const response = await axios.get(url)
       // console.log(configuration)
 
       // console.log('TOKEN  IN TO  FOODS coNTEXTS', token)
 
       const foods = response.data
       console.log('FETCH FOODS  ', foods)
+      setFoodsData(foods)
       dispatch({ type: GET_FOODS_SUCCESS, payload: foods })
     } catch (error) {
       console.log('TOKEN CALL TO API FROM   FOODS')
@@ -91,12 +91,8 @@ retrievedToken,
     }
   }
   useEffect(() => {
-    if (userToken) {
-      setUserToken(userToken)
-
-      fetchFoods()
-    }
-  }, [userToken])
+    fetchFoods()
+  }, [userTokenData])
   //end here
   const fetchSingleFood = async single_url => {
     dispatch({ type: GET_SINGLE_FOOD_BEGIN })
@@ -118,26 +114,16 @@ retrievedToken,
     dispatch({ type: UPDATE_SORT, payload: { value } })
   }
 
-  // if (token) {
-  //     setUserToken(token)
-  //   }
-  // useEffect(() => {
-  //   // if (userToken) {
-  //   //   setUserToken(userToken)
-  //   //   fetchFoods()
-  //   // }
-  //   // fetchFoods()
-  // }, [userToken])
   console.log(
     'Token after Mount from  foodContext ',
 
     'USERtOKEN IS',
-    userToken
+    userTokenData
   )
 
   return (
     <FoodsContext.Provider
-      value={{ ...state, fetchSingleFood, fetchFoods, updateSort }}
+      value={{ ...state, fetchSingleFood, fetchFoods, updateSort, foodsData }}
     >
       {children}
     </FoodsContext.Provider>

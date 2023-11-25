@@ -14,21 +14,22 @@ const CartTotal = () => {
     total_price,
     cart,
     createOrder,
-    payment_option
+    payment_option,
+    clearFromLocalStorage
   } = useCartContext()
   const { is_logged_in } = useAuthContext()
   const { user, myUser } = useUserContext()
 
-  const [myCart, setMyCart] = useState(cart)
+  const [myCart, setMyCart] = useState([])
   const [paymentOption, setPaymentOption] = useState('')
   const [userI, setUser] = useState({})
   let navigate = useNavigate()
   console.log('MYCART', myCart)
 
   //get  item from  local Storage
-  let itemFromLocalStorage = localStorage.getItem('cart')
-  let itemFromLocalStorageObj = JSON.parse(itemFromLocalStorage)
-
+  const CartItems = JSON.parse(localStorage.getItem('cart'))
+  // let itemFromLocalStorageObj = JSON.parse(itemFromLocalStorage)
+  // setMyCart(CartItems)
   const HandleSubmit = e => {
     e.preventDefault()
 
@@ -44,29 +45,20 @@ const CartTotal = () => {
 
     if (cart.length) {
       console.log('myCart>>>>>MYCARTT!!! SUBMIT', myCart, cart)
-      console.log('shippingFee', delivery_fee, 'Shipping fee 2',)
+      console.log('shippingFee', delivery_fee, 'Shipping fee 2')
       console.log('user ID from DB', user.userId)
-      console.log('payment option is>>', paymentOption)
+      console.log('payment option is>>', payment_option)
 
-      createOrder(myCart, user.userId, paymentOption, delivery_fee)
+      createOrder(CartItems, user.userId, payment_option, delivery_fee)
     }
   }
-  useEffect(() => {
-    // setShippingFee(delivery_fee)
-    // setMyCart([...cart,itemFromLocalStorageObj])
-    // setUser(user)
-    // setPaymentOption('card')
-  }, [cart])
 
   return (
     <div className='cart-total-container'>
       <div className='total-items'>
         <div>
           <h1>CART TOTAL PAGE</h1>
-          {console.log(
-            'THIS  IS FROM  TOTAL CART COMPONENT',
-            itemFromLocalStorageObj
-          )}
+          {console.log('THIS  IS FROM  TOTAL CART COMPONENT', CartItems)}
 
           <h4>Total Quantity:{total_quantity}</h4>
         </div>
@@ -80,6 +72,16 @@ const CartTotal = () => {
           <form onSubmit={HandleSubmit}>
             <button className='submit'>pay now</button>
           </form>
+          {console.log(
+            'Cart is',
+            cart,
+            'CartItems  After Submission is',
+            CartItems
+          )}
+          {setTimeout(() => {
+            // clearFromLocalStorage()
+            console.log("check  if  cart  is present,  then  remove")
+          }, 2000)}
         </div>
       </div>
     </div>

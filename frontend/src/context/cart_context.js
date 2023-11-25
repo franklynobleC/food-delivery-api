@@ -12,11 +12,13 @@ import {
   CREATE_ORDER_SUCCESS,
   CREATE_ORDER_ERROR
 } from '../actions'
+import { totalmem } from 'os'
+
 const initialState = {
   cart: [],
   total_quantity: 0,
   total_price: 0,
-  payment_option: '',
+  payment_option: 'card',
   delivery_fee: 0,
   quantity: 2,
   is_order_created_success: false,
@@ -34,6 +36,9 @@ const CartContext = React.createContext()
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cart_reducer, initialState)
 
+  const [userTokenData, setUserToken] = useState({})
+  const [cart1, setCart] = useState([])
+
   //add to  cart function
   const addToCart = (id, quantity, food) => {
     dispatch({ type: ADD_TO_CART, payload: { id, quantity, food } })
@@ -48,6 +53,13 @@ export const CartProvider = ({ children }) => {
   }
   const createOrder = async (cart, id, paymentoption, delivery_fee) => {
     dispatch({ type: CREATE_ORDER_BEGIN })
+    let retrievedToken = JSON.parse(localStorage.getItem('token'))
+    const CartItems = JSON.parse(localStorage.getItem('cart'))
+    setCart(CartItems)
+    console.log('GETING CART', cart1, 'cart items', CartItems)
+
+    setUserToken(retrievedToken)
+
     console.log(
       'THIS IS FROM CREAT ORDER  POST REQUEEST  TO BACKEND',
       cart,
@@ -56,42 +68,68 @@ export const CartProvider = ({ children }) => {
       delivery_fee
     )
     console.log('ABOVE DETAILS FOR  CREATED ORDER BEGIN!!')
-
-    try {
-      const response = await axios.post(create_orders_url, {
+    const configuration = {
+      method: 'post',
+      url: create_orders_url,
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('token'))}`
+      },
+      data: {
         OrderItems: cart,
         _id: id,
         paymentOption: paymentoption,
 
         deliveryFee: delivery_fee
-      })
-      const createdOrder = await response.data
+      }
+    }
+
+    try {
+      const response = await axios(configuration)
+
+      const createdOrder = (await response.data) && response.statuscode === 201
+
       console.log('CREATED ORDER SUCCESS')
+
       dispatch({ type: CREATE_ORDER_SUCCESS, payload: createdOrder })
     } catch (error) {
       console.log('CREATE ORDERS ERROR')
       console.log(error)
       dispatch({
         type: CREATE_ORDER_ERROR,
-        payload: error.response.data.message
+        payload: error.response.message
       })
     }
   }
-  // useEffect(() => {
-  //   createOrder()
-  // }, [])
-  // this would be implemented when  the components loads(when  the Page  loads)
+  const clearFromLocalStorage = () => {
+    localStorage.removeItem('cart')
+    state.total_quantity = 0
+    state.totalPrice = 0
+    localStorage.clear()
+  }
   useEffect(() => {
     //dispatch this when  component mounts
     dispatch({ type: COUNT_CART_TOTALS })
-
     localStorage.setItem('cart', JSON.stringify(state.cart))
     //also, adding  to  the Dependency array, so it would remount when  item  in  the component  is changed
-  }, [state.cart])
+  }, [
+    state.cart,
+    JSON.parse(
+      localStorage.getItem('token'),
+      state.totalPrice,
+      state.total_quantity
+    )
+  ])
 
   return (
     <CartContext.Provider
-      value={{ ...state, addToCart, clearCart, removeItem, createOrder }}
+      value={{
+        ...state,
+        addToCart,
+        clearCart,
+        removeItem,
+        createOrder,
+        clearFromLocalStorage
+      }}
     >
       {children}
     </CartContext.Provider>

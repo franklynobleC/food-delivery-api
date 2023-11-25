@@ -14,7 +14,7 @@ const getAllFoods = async (req, res) => {
       .status(StatusCodes.BAD_REQUEST)
       .json({ food: 'No b  product found in database' })
   }
-  checkPermissions(req.user, food.user)
+  // checkPermissions(req.user, food.user)
 
   res.status(StatusCodes.OK).json(food)
 }

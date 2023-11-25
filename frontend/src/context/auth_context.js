@@ -1,6 +1,10 @@
 import React, { useEffect, useReducer, useContext, useState } from 'react'
 import axios from 'axios'
-import { register_user_url, login_user_url } from '../utils/constants'
+import {
+  register_user_url,
+  login_user_url,
+  logout_user_url
+} from '../utils/constants'
 import auth_reducer from '../reducers/auth_reducer'
 // import { useFoodsContext } from '../context/foods_context'
 import {
@@ -9,16 +13,17 @@ import {
   LOGIN_USER_BEGIN,
   LOGIN_USER_ERROR,
   LOGIN_USER_SUCCESS,
-  REGISTER_USER
+  LOGOUT_USER_SUCCESS,
+  REGISTER_USER,
+  LOGOUT_USER_ERROR
 } from '../actions'
-import { signedCookie } from 'cookie-parser'
 
 const initialState = {
   is_registered: false,
   register_error: false,
   register_loading: false,
   is_logged_in: false,
-  isAuthenticated: false,
+  is_authenticated: false,
   error: false,
   loading: false,
   email: '',
@@ -82,27 +87,15 @@ export const AuthProvider = ({ children }) => {
 
         { email: email, password: password },
         {
-          headers: { 'Content-Type': 'application/json' },
-
+          headers: { 'Content-Type': 'application/json' }
         }
-        // headers: { 'Content-Type': 'application/json' },
-        // withCredentials: true
-      )
-
-      console.log(
-          'FROM RESPONSE OBJECT',
-        // response.Headers
-        response.headers
       )
 
       const userLoginData = response.data
 
       console.log(userLoginData, 'RAW DATA FROM RESPONSE')
       const { token, tokenUser } = await userLoginData
-    let retrievedToken = localStorage.setItem(
-        'token',
-        JSON.stringify(token)
-      )
+      let retrievedToken = localStorage.setItem('token', JSON.stringify(token))
       setToken(retrievedToken)
 
       // setToken(token)
@@ -110,10 +103,7 @@ export const AuthProvider = ({ children }) => {
 
       console.log('LOGIN SUCCESS FROM  USER 1', tokenUser, 'tokenUser', token)
       console.log('LOGIN SUCCESS FROM  USER 2', token, user)
-      console.log('LOGIN SUCCESS FROM  USER 3', token)
 
-      // localStorage.setItem('token', JSON.stringify(userLoginData.token))
-      // const { token } = await userLoginData
       console.log('call foods Context Here')
 
       dispatch({ type: LOGIN_USER_SUCCESS, payload: userLoginData })
@@ -123,17 +113,38 @@ export const AuthProvider = ({ children }) => {
       dispatch({ type: LOGIN_USER_ERROR, payload: err.message })
     }
   }
-  useEffect(() => {}, [state.email, state.password, token, user])
 
-  // const setUserDataNameAndPassword = userData => {
+  //CALL  THIS  METHOD  IN  THE  COMPONENT  TO  LOGOUT
+  const logoutUser = async () => {
+    try {
+      const response = await axios.get(logout_user_url)
 
-  // }
+      const payloadData = await response.data
+  console.log(payloadData)
+      console.log('LOG OUT SUCCESS')
+      localStorage.removeItem('token')
+      setToken(null)
+      setUser(null)
+      dispatch({ type: LOGOUT_USER_SUCCESS, payload: payloadData })
+    } catch (error) {
+      console.log('LOG OUT eRROR')
 
-  //Todo: add  login, logout function
+      dispatch({ type: LOGOUT_USER_ERROR, payload: error.message })
+    }
+  }
+  useEffect(() => {}, [
+    state.email,
+    state.password,
+    token,
+    user,
+
+  ])
+
+  //TODO: add  login, logout function
 
   return (
     <AuthContext.Provider
-      value={{ ...state, registerUser, loginUser, token, user }}
+      value={{ ...state, registerUser, loginUser, logoutUser, token, user }}
     >
       {children}
     </AuthContext.Provider>

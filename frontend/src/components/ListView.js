@@ -5,6 +5,7 @@ import { FiSearch } from 'react-icons/fi'
 import '../styles/foods.css'
 import '../styles/filteredFood.css'
 import '../icons/search-icon.png'
+import { AddToCart } from '../components'
 
 import '../images/icons/search-icon.png'
 import { useCartContext } from '../context/cart_context'
@@ -14,7 +15,7 @@ import { useFoodsContext } from '../context/foods_context'
 const ListView = ({ foods }) => {
   const [searchFood, setSearchFood] = useState('')
   const [searchFoodsResult, setFoodsResult] = useState([])
-  const { addToCart } = useCartContext()
+  // const { addToCart } = useCartContext()
 
   const handSearchSubmit = e => {
     e.preventDefault()
@@ -58,6 +59,7 @@ const ListView = ({ foods }) => {
                     <button className='oder-now-btn-search'>Order now</button>
                   </Link>
                 </div>
+
                 <div className='food-spacer-search'></div>
               </div>
             </section>
@@ -103,6 +105,8 @@ const ListView = ({ foods }) => {
                 <button className='oder-now-btn'>Order now</button>
               </Link>
             </div>
+            <AddToCart food={food} />
+
             <div className='food-spacer'></div>
           </div>
         )

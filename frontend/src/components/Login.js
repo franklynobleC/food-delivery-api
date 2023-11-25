@@ -33,6 +33,7 @@ const Login = () => {
     e.preventDefault()
     console.log(userPassword, userEmail)
     loginUser(userEmail, userPassword)
+    console.log("User Logged In",user)
     setTimeout(() => {
     fetchFoods()
 

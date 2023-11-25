@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {
   REGISTER_SUCCESS,
   REGISTER_BEGIN,
@@ -7,8 +6,8 @@ import {
   LOGIN_USER_BEGIN,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_ERROR,
-  LOGOUT_USER,
-  LOGOUT_USER_SUCCESS
+  LOGOUT_USER_SUCCESS,
+  LOGOUT_USER_ERROR
 } from '../actions'
 
 const auth_reducer = (state, action) => {
@@ -32,7 +31,7 @@ const auth_reducer = (state, action) => {
 
       is_registered: true,
       is_logged_in: false,
-      isAuthenticated: true,
+      is_authenticated: true,
       user: action.payload
     }
   }
@@ -62,8 +61,7 @@ const auth_reducer = (state, action) => {
       register_error: false,
       is_registered: false,
       is_logged_in: false,
-      user: null,
-
+      user: null
     }
   }
 
@@ -83,9 +81,8 @@ const auth_reducer = (state, action) => {
       is_logged_in: true,
       loading: false,
 
-      isAuthenticated: true,
-      user: tokenUser,
-
+      is_authenticated: true,
+      user: tokenUser
     }
   }
   if (action.type === LOGIN_USER_ERROR) {
@@ -97,8 +94,34 @@ const auth_reducer = (state, action) => {
       register_error: true,
       error: true,
       is_logged_in: false,
-      user: null,
+      user: null
+    }
+  }
 
+  if (action.type === LOGOUT_USER_SUCCESS) {
+    console.log('USER LOG OUT SUCCESS   FROM  REDUCERS!')
+    // const { data } = action.payload
+    // console.log(data)
+    return {
+      ...state,
+      register_loading: false,
+      register_error: false,
+      is_registered: false,
+      is_logged_in: false,
+      loading: false,
+
+      is_authenticated: false,
+      error: false,
+      data: action.payload,
+      user: null,
+    }
+  }
+  if (action.type === LOGOUT_USER_ERROR) {
+    console.log('USER LOG OUT SUCCESS   FROM  REDUCERS!')
+    return {
+      ...state,
+      is_logged_in: false,
+      user: null
     }
   }
   throw new Error(`No matching ${action.type}-action  type`)

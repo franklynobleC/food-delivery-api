@@ -16,8 +16,6 @@ const authMiddleware = require('../middleware/authMid')
 router.get(
   '/getAllFoods',
   //  authenticateUser,
-  authMiddleware,
-   authorizePermissions('admin', 'user'),
 
   getAllFoods
 )
@@ -37,21 +35,21 @@ router.get(
 
 router.patch(
   '/:id',
-  authenticateUser,
+  // authenticateUser,
   // authorizedPermissions('admin', 'user'),
   updateFood
 )
 
 router.delete(
   '/:id',
-  authenticateUser,
+  // authenticateUser,
   // authorizedPermissions('admin', 'user'),
   deleteFood
 )
 
 router.post(
   '/createFood',
-  authenticateUser,
+  // authenticateUser,
   // authorizedPermissions('admin', 'user'),
   createFood
 )
