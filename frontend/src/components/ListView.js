@@ -33,6 +33,8 @@ const ListView = ({ foods }) => {
 
   if (searchFoodsResult.length > 0) {
     return (
+      <div className='main-search-background'>
+
       <div className='main-search'>
         {searchFoodsResult.map(food => {
           const { name, price, image, id, quantity } = food
@@ -65,7 +67,8 @@ const ListView = ({ foods }) => {
             </section>
           )
         })}
-      </div>
+        </div>
+          </div>
     )
   }
 

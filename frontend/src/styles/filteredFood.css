@@ -1,4 +1,12 @@
+
+.main-search-background{
+background-color: whitesmoke;
+height: 700px;
+}
 .main-search {
+  width: 100%;
+  height: 100%;
+   background-color:  whitesmoke;
   margin-top: 60px;
   margin-left: 200px;
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useCartContext } from '../context/cart_context'
 import { useUserContext } from '../context/user_context'
+import { Login } from '../components'
 import { useAuthContext } from '../context/auth_context'
 import { Link } from 'react-router-dom'
 import { Route, useNavigate } from 'react-router-dom'
@@ -33,17 +34,7 @@ const CartTotal = () => {
   const HandleSubmit = e => {
     e.preventDefault()
 
-    if (cart.length < 1) {
-      return (
-        <div>
-          <Link to='foods'>
-            <h1>Your Cart is Empty, Fill it</h1>
-          </Link>
-        </div>
-      )
-    }
-
-    if (cart.length) {
+    if (cart.length > 0 || CartItems.length > 0) {
       console.log('myCart>>>>>MYCARTT!!! SUBMIT', myCart, cart)
       console.log('shippingFee', delivery_fee, 'Shipping fee 2')
       console.log('user ID from DB', user.userId)
@@ -52,6 +43,11 @@ const CartTotal = () => {
       createOrder(CartItems, user.userId, payment_option, delivery_fee)
     }
   }
+  <div>
+    <Link to='foods'>
+      <h1>Your Cart is Empty, Fill it</h1>
+    </Link>
+  </div>
 
   return (
     <div className='cart-total-container'>
@@ -65,25 +61,23 @@ const CartTotal = () => {
         <div>
           <h4>Total Price: &#8358;{total_price}</h4>
         </div>
-        <div>Delivery Fee:&#8358;{delivery_fee}</div>
+        <div>Delivery Fee: &#8358;{delivery_fee}</div>
 
         <div>
           <Link to='/checkout'>checkout</Link>
           <form onSubmit={HandleSubmit}>
             <button className='submit'>pay now</button>
           </form>
-          {console.log(
-            'Cart is',
-            cart,
-            'CartItems  After Submission is',
-            CartItems
-          )}
-          {setTimeout(() => {
-            // clearFromLocalStorage()
-            console.log("check  if  cart  is present,  then  remove")
-          }, 2000)}
         </div>
+        {is_logged_in ? (
+          ''
+        ) : (
+          <Link to='/signin' className='cart-total-btn'>
+            sin in
+          </Link>
+        )}
       </div>
+      <Link>btn Click</Link>
     </div>
   )
 }
