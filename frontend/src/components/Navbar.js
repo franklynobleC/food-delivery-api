@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { links } from '../utils/constants'
+import { links, icons } from '../utils/constants'
 import { useAuthContext } from '../context/auth_context'
 import { FiHome } from 'react-icons/fi'
+import { FaRegUser } from 'react-icons/fa'
+import { IoCartOutline } from 'react-icons/io5'
+
 import '../styles/header/navbar.css'
 const Nav = () => {
   const [checkLogin, setCheckLogin] = useState(Boolean)
@@ -24,9 +27,11 @@ const Nav = () => {
     <nav className='nav-links'>
       <div className='nav-link-user'>
         <ul className='user-ul-container'>
-
-          <li>
-            <Link to='signin'>Sign In</Link>
+          <li   className='signin-link-parent'>
+            <Link to='signin' className='signin-link'>
+              <FaRegUser   className=''/>
+               Sign in
+            </Link>
           </li>
         </ul>
       </div>
@@ -36,12 +41,15 @@ const Nav = () => {
             return (
               <li key={index}>
                 <Link to={link.url} className='link-text'>
+                  {link.icon}
+
                   {link.text}
                 </Link>
+                <IoCartOutline/>
               </li>
             )
           })}
-          {console.log('from Navbar', user)}
+
           {/* add my user,  if  user? show check out  page   */}
         </ul>
       </div>
@@ -50,7 +58,7 @@ const Nav = () => {
         {is_logged_in ? <button onClick={handleLogout}>logOut</button> : null}
         {console.log(
           'Checking Loging And Checking LogOut',
-          is_authenticated,
+          is_authenticated
           // setCheckLogin(is_logged_in)
         )}
       </div>

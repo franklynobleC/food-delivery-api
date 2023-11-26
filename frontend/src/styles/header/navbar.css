@@ -2,12 +2,14 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  height: 50px;
+
   background-color: rgb(208, 251, 245);
+  min-width: fit-content;
+  height: 50px;
 
   padding: 0;
   margin: 0;
-  /* align-items: center; */
+  align-items: center;
   list-style-type: none;
   margin-bottom: 20px;
   position: fixed;
@@ -21,17 +23,18 @@
   margin-left: 10px;
 }
 .nav-links-other-url {
+  margin-top: 100px;
   display: flex;
   list-style-type: none;
   flex-direction: row;
   align-items: end;
 
   justify-content: flex-end;
-  margin-left: 20px;
+  margin-left: 250px;
 }
 
 .nav-links a {
-   font-family: "Courier New", Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   font-size: xx-large;
   font-weight: 900;
 
@@ -60,10 +63,8 @@
 }
 
 .nav-link-user {
+  background-color: pink;
   display: flex;
-
-  align-items: center;
-  justify-content: center;
 
   align-items: start;
 
@@ -72,8 +73,6 @@
 }
 .user-ul-container {
   display: flex;
-  margin-right: 0px;
-  margin-left: 0px;
   list-style-type: none;
 }
 .user-ul-container > li {
@@ -114,4 +113,35 @@
   -moz-border-radius: 8px;
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
+}
+
+.signin-link-parent {
+  /* margin-bottom: 50px; */
+  display: flex;
+  width: 100%;
+  margin-right: 40px;
+/* margin-bottom: 100px; */
+  justify-content: flex-start;
+  background-color: red;
+  /* align-self: auto; */
+
+}
+
+.link-text {
+  display: flex;
+  color: rgb(19, 19, 16);
+  flex-direction: row;
+  align-items: flex-start;
+  margin-bottom: 100px;
+}
+
+.signin-link {
+  text-wrap: nowrap;
+  display: flex;
+  align-items: flex-start;
+
+  justify-content: start;
+  background-color: yellow;
+
+  font-size: medium;
 }

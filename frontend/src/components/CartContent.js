@@ -7,20 +7,32 @@ import '../styles/cart/cartcontent.css'
 const CartContent = () => {
   const { cart, clearCart } = useCartContext()
   // pass the cart  item  here
-localStorage.setItem('cart', JSON.stringify(cart))
-  return (
-    <div className='cart-content'>
-      <h5>cart Content page</h5>
-      {cart.map(item => {
+  localStorage.setItem('cart', JSON.stringify(cart))
 
-        return <CartItem key={item.id} {...item} />
-      })}
-      <div>
-        <Link to='/foods'>add more orders</Link>
+  {
+    if (cart.length < 1) {
+      return (
+        <>
+          <Link to='/foods'>
+            <h1> Cart is Empty Fill it</h1>
+          </Link>
+        </>
+      )
+    }
+
+    return (
+      <div className='cart-content'>
+        <h5>cart Content page</h5>
+        {cart.map(item => {
+          return <CartItem key={item.id} {...item} />
+        })}
+        <div>
+          <Link to='/foods'>add more orders</Link>
+        </div>
+        <CartTotal />
+        <button onClick={clearCart}>clear cart</button>
       </div>
-      <CartTotal />
-      <button onClick={clearCart}>clear cart</button>
-    </div>
-  )
+    )
+  }
 }
 export default CartContent

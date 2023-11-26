@@ -4,5 +4,5 @@
   "docify.commentService.docstringFormat": "JsDoc",
   "docify.commentService.programmingLanguage": "javascript",
   "cSpell.words": ["ivwcvtyfshhw"],
-  "editor.inlineSuggest.showToolbar": "onHover"
+  "editor.inlineSuggest.showToolbar": "always"
 }

@@ -1,7 +1,12 @@
 import React from 'react'
+import { FiHome } from 'react-icons/fi'
+import { IoFastFoodSharp } from 'react-icons/io5'
+
 export const links = [
   {
     id: 1,
+    icon: <FiHome />,
+
     text: 'home',
     url: '/'
   },
@@ -13,6 +18,8 @@ export const links = [
   {
     id: 3,
     text: 'foods',
+    icon: <IoFastFoodSharp />,
+
     url: '/foods'
   },
   {
@@ -21,6 +28,16 @@ export const links = [
     url: '/contact'
   }
 ]
+// export const icons = [
+//   {
+//     id: 6,
+//     home: <FiHome />
+//   },
+//   {
+//     id: 7,
+//     products: <IoFastFoodSharp />
+//   }
+// ]
 
 export const foods_url = 'http://localhost:5000/api/v1/foods/getAllFoods'
 export const single_food_url =

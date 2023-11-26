@@ -73,11 +73,10 @@ const CartTotal = () => {
           ''
         ) : (
           <Link to='/signin' className='cart-total-btn'>
-            sin in
+            Sing In
           </Link>
         )}
       </div>
-      <Link>btn Click</Link>
     </div>
   )
 }
