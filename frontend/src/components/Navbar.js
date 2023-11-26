@@ -31,7 +31,7 @@ const Nav = () => {
         <ul className='user-ul-container'>
           <li className='signin-link-parent'>
             <Link to='signin' className='signin-link'>
-              <FaRegUser className='' />
+              <FaRegUser className='sign-in-icon' />
               Sign in
             </Link>
           </li>
@@ -54,11 +54,20 @@ const Nav = () => {
           {/* add my user,  if  user? show check out  page   */}
         </ul>
       </div>
-      <div className='cart-items-here'>
+      <div className='cart-items-here-dont-style'>
         <Link to='/cart'>
-        cart
-          <span>{total_quantity ? <>{ total_quantity}</>:<></>}</span>
-          <IoCartOutline />
+          {total_quantity ? (
+            <>
+
+              <div className='cart-total-quantity-count'>
+                {total_quantity}
+              </div>
+            </>
+          ) : (
+            <></>
+          )}
+          cart
+          <IoCartOutline className='item-cart-content-icon'/>
 
         </Link>
         {console.log('cartTotal is ', total_quantity)}
@@ -75,4 +84,5 @@ const Nav = () => {
     </nav>
   )
 }
+
 export default Nav

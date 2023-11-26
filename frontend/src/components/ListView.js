@@ -82,11 +82,11 @@ const ListView = ({ foods }) => {
             className='search-input-search'
             value={searchFood}
             placeholder='Search meal'
-            onfocus="this.style.border = 'none' this.border='none'"
+
             onChange={e => setSearchFood(e.target.value)}
           />
           <button type='submit' className='search-btn'>
-            <FiSearch className='search-icon' />
+            <FiSearch className='search-bar-icon' />
           </button>
         </form>
       </div>
