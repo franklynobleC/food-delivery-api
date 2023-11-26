@@ -63,7 +63,7 @@
 }
 
 .nav-link-user {
-  background-color: pink;
+  /* background-color: pink; */
   display: flex;
 
   align-items: start;
@@ -120,11 +120,10 @@
   display: flex;
   width: 100%;
   margin-right: 40px;
-/* margin-bottom: 100px; */
+  /* margin-bottom: 100px; */
   justify-content: flex-start;
-  background-color: red;
+  /* background-color: red; */
   /* align-self: auto; */
-
 }
 
 .link-text {
@@ -141,7 +140,12 @@
   align-items: flex-start;
 
   justify-content: start;
-  background-color: yellow;
+  /* background-color: yellow; */
 
   font-size: medium;
+}
+.cart-quantity-number {
+  background-color: rgb(248, 248, 248);
+  color: red;
+
 }

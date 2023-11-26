@@ -5,10 +5,12 @@ import { useAuthContext } from '../context/auth_context'
 import { FiHome } from 'react-icons/fi'
 import { FaRegUser } from 'react-icons/fa'
 import { IoCartOutline } from 'react-icons/io5'
+import { useCartContext } from '../context/cart_context'
 
 import '../styles/header/navbar.css'
 const Nav = () => {
   const [checkLogin, setCheckLogin] = useState(Boolean)
+  const { total_quantity } = useCartContext()
   const { logoutUser, is_logged_in, user, is_authenticated } = useAuthContext()
   let navigate = useNavigate()
   // setCheckLogin(is_logged_in)
@@ -27,10 +29,10 @@ const Nav = () => {
     <nav className='nav-links'>
       <div className='nav-link-user'>
         <ul className='user-ul-container'>
-          <li   className='signin-link-parent'>
+          <li className='signin-link-parent'>
             <Link to='signin' className='signin-link'>
-              <FaRegUser   className=''/>
-               Sign in
+              <FaRegUser className='' />
+              Sign in
             </Link>
           </li>
         </ul>
@@ -45,13 +47,21 @@ const Nav = () => {
 
                   {link.text}
                 </Link>
-                <IoCartOutline/>
               </li>
             )
           })}
 
           {/* add my user,  if  user? show check out  page   */}
         </ul>
+      </div>
+      <div className='cart-items-here'>
+        <Link to='/cart'>
+        cart
+          <span>{total_quantity ? <>{ total_quantity}</>:<></>}</span>
+          <IoCartOutline />
+
+        </Link>
+        {console.log('cartTotal is ', total_quantity)}
       </div>
 
       <div>
