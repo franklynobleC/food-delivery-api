@@ -12,19 +12,23 @@ import {
 const foods_reducer = (state, action) => {
 
   if (action.type === GET_FOODS_BEGIN) {
-    return { ...state, food_loading: true }
+    console.log("is Loading Began")
+    return { ...state, foods_loading: true }
   }
 
   if (action.type === GET_FOODS_SUCCESS) {
-    return { ...state, food_loading: false, foods: action.payload }
+    console.log('is Loading Finished')
+    return { ...state, foods_loading: false, foods: action.payload }
   }
 
   if (action.type === GET_FOODS_ERROR) {
     console.log('All Foods Error>>>>>>>>>>>>>>')
     return {
       ...state,
+      foods_loading: false,
       single_food_loading: false,
       foods_error: true
+
     }
   }
   if (action.type === GET_SINGLE_FOOD_BEGIN) {

@@ -1,8 +1,5 @@
 .cart-total-container {
-
-}
-.cart-total-container {
-   position: fixed;
+  position: fixed;
 
   /* left: 60%; */
   right: 10%;
@@ -15,7 +12,7 @@
   width: 30%;
   height: 50%;
 
-    /* //remember to remove some    styling */
+  /* //remember to remove some    styling */
   display: flex;
   position: fixed;
   top: 15%;

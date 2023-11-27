@@ -295,3 +295,21 @@ input:focus {
   color: rgb(248, 247, 244);
   cursor: pointer;
 }
+
+.class-spinner-container {
+  margin-top: 100px;
+  margin-left: 80px;
+  background-color:  red;
+
+}
+.main-loader{
+  margin-top:   50%;
+   margin-left:  50%;
+
+}
+  .spinner-component{
+    position: relative;
+  }
+.spinner-message{
+  position: relative;
+}

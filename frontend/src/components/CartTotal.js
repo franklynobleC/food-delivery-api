@@ -29,8 +29,7 @@ const CartTotal = () => {
 
   //get  item from  local Storage
   const CartItems = JSON.parse(localStorage.getItem('cart'))
-  // let itemFromLocalStorageObj = JSON.parse(itemFromLocalStorage)
-  // setMyCart(CartItems)
+
   const HandleSubmit = e => {
     e.preventDefault()
 

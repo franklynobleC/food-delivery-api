@@ -3,10 +3,13 @@ import { useAuthContext, token } from '../context/auth_context'
 import { useFoodsContext } from '../context/foods_context'
 import { Cart, Foods } from '../pages'
 import { Link, Redirect, useNavigate } from 'react-router-dom'
+import { DotLoader } from 'react-spinners'
+import { Audio } from 'react-loader-spinner'
 
 const Login = () => {
   const [userPassword, setUserPassword] = useState('')
   const [userEmail, setUserEmail] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   // const tokenCookie = useCookies('token')
   // console.log(tokenCookie, 'TOKEN COOKIE')
 
@@ -21,7 +24,7 @@ const Login = () => {
 
     user
   } = useAuthContext()
-  const { fetchFoods } = useFoodsContext()
+  const { fetchFoods, foods_loading } = useFoodsContext()
 
   // const history = useHistory()
   let navigate = useNavigate()
@@ -33,15 +36,18 @@ const Login = () => {
     e.preventDefault()
     console.log(userPassword, userEmail)
     loginUser(userEmail, userPassword)
-    console.log("User Logged In",user)
-    setTimeout(() => {
-    fetchFoods()
+    console.log('User Logged In', user)
+    console.log('IS LOADING ', isLoading)
+    let timer = setTimeout(() => {
+      fetchFoods()
 
-    navigate('/foods')
-  }, 3000)
-
+      navigate('/foods')
+    }, 1000)
+    return () => clearTimeout(timer)
   }
-  console.log(is_logged_in)
+  // console.log(is_logged_in)
+  console.log('IS LOADING  2 ', isLoading)
+
   console.log('from user loggedIn Data WITH USER ID', userId)
 
   return (
@@ -78,6 +84,7 @@ const Login = () => {
         <a href='/'>Home page</a>
         <div></div>
         <a href='./index.html'> forgot password? Reset password</a>
+        {console.log('IS LOADING 3 ', isLoading)}
       </div>
     </form>
   )
