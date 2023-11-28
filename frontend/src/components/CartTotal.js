@@ -49,7 +49,7 @@ const CartTotal = () => {
       createOrder(CartItems, user.userId, paymentOption, delivery_fee)
     }
   }
-  ;<div>
+  <div>
     <Link to='foods'>
       <h1>Your Cart is Empty, Fill it</h1>
     </Link>
