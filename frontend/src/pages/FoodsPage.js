@@ -22,7 +22,7 @@ const FoodsPage = () => {
   useEffect(() => {
     let timeout = setTimeout(() => {
       setIsLoading(false)
-    }, 3000)
+    }, 2000)
 
     return () => clearTimeout(timeout)
   }, [])

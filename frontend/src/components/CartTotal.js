@@ -30,26 +30,27 @@ const CartTotal = () => {
   //get  item from  local Storage
   const CartItems = JSON.parse(localStorage.getItem('cart'))
 
+  //h
   const handlePaymentChangeOption = e => {
-    e.preventDefault()
     setPaymentOption(e.target.value)
-
-    // setPaymentOption(payWith)
   }
   const HandleSubmit = e => {
     e.preventDefault()
 
+    if (paymentOption === '' || paymentOption === null) {
+}
+
     if (cart.length > 0 || CartItems.length > 0) {
-      console.log('myCart>>>>>MYCARTT!!! SUBMIT', myCart, cart)
-      console.log('shippingFee', delivery_fee, 'Shipping fee 2')
-      console.log('user ID from DB', user.userId)
-      console.log('payment option is>>', payment_option)
-      console.log('Payment Option in  handleSubmit', paymentOption)
+      // console.log('myCart>>>>>MYCARTT!!! SUBMIT', myCart, cart)
+      // console.log('shippingFee', delivery_fee, 'Shipping fee 2')
+      // console.log('user ID from DB', user.userId)
+      // console.log('payment option is>>', payment_option)
+      // console.log('Payment Option in  handleSubmit', paymentOption)
 
       createOrder(CartItems, user.userId, paymentOption, delivery_fee)
     }
   }
-  <div>
+  ;<div>
     <Link to='foods'>
       <h1>Your Cart is Empty, Fill it</h1>
     </Link>
@@ -59,7 +60,7 @@ const CartTotal = () => {
     <div className='cart-total-container'>
       <div className='total-items'>
         <div>
-          <h1>CART TOTAL PAGE</h1>
+          <h3>YOUR CART TOTAL PAGE</h3>
           {console.log('THIS  IS FROM  TOTAL CART COMPONENT', CartItems)}
 
           <h4>Total Quantity:{total_quantity}</h4>
@@ -70,26 +71,28 @@ const CartTotal = () => {
         <div>Delivery Fee: &#8358;{delivery_fee}</div>
         <div>Payment Opt: {paymentOption}</div>
 
-        <fieldset>
-          <legend>Select paymentOption </legend>
-          <input
-            type='radio'
-            name={paymentOption}
-            value='card'
-            checked={paymentOption === 'card'}
-            onChange={handlePaymentChangeOption}
-          />
-          <label htmlFor='card'>Pay with card</label>
+        <div>
+          <fieldset>
+            <legend>Select paymentOption </legend>
+            <input
+              type='radio'
+              value='card'
+              name='paymentOption'
+              checked={paymentOption === 'card'}
+              onChange={handlePaymentChangeOption}
+            />
+            <label htmlFor='card'>Pay with card</label>
 
-          <input
-            type='radio'
-            name={paymentOption}
-            value='cash'
-            checked={paymentOption === 'cash'}
-            onChange={handlePaymentChangeOption}
-          />
-          <label htmlFor='cash'> Pay on delivery </label>
-        </fieldset>
+            <input
+              type='radio'
+              name='paymentOption'
+              value='cash'
+              checked={paymentOption === 'cash'}
+              onChange={handlePaymentChangeOption}
+            />
+            <label htmlFor='cash'> Pay on delivery </label>
+          </fieldset>
+        </div>
 
         <div>
           {/*   <Link to='/checkout'>checkout</Link>   */}
