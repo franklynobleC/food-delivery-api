@@ -32,13 +32,9 @@ const CartTotal = () => {
 
   const handlePaymentChangeOption = e => {
     e.preventDefault()
-    setPaymentOption(e.target.name)
-    console.log(e.target.value)
-    let payWith = e.target.name
-    console.log(payWith)
+    setPaymentOption(e.target.value)
 
-    setPaymentOption(payWith)
-
+    // setPaymentOption(payWith)
   }
   const HandleSubmit = e => {
     e.preventDefault()
@@ -48,9 +44,9 @@ const CartTotal = () => {
       console.log('shippingFee', delivery_fee, 'Shipping fee 2')
       console.log('user ID from DB', user.userId)
       console.log('payment option is>>', payment_option)
-      console.log('Payment Option', paymentOption)
+      console.log('Payment Option in  handleSubmit', paymentOption)
 
-      createOrder(CartItems, user.userId, payment_option, delivery_fee)
+      createOrder(CartItems, user.userId, paymentOption, delivery_fee)
     }
   }
   ;<div>
@@ -78,9 +74,8 @@ const CartTotal = () => {
           <legend>Select paymentOption </legend>
           <input
             type='radio'
-            id='card'
-            name='card'
-            value={paymentOption}
+            name={paymentOption}
+            value='card'
             checked={paymentOption === 'card'}
             onChange={handlePaymentChangeOption}
           />
@@ -88,9 +83,8 @@ const CartTotal = () => {
 
           <input
             type='radio'
-            id='cash'
-            name='cash'
-            value={paymentOption}
+            name={paymentOption}
+            value='cash'
             checked={paymentOption === 'cash'}
             onChange={handlePaymentChangeOption}
           />
