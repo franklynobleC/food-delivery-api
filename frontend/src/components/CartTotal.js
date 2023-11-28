@@ -30,6 +30,16 @@ const CartTotal = () => {
   //get  item from  local Storage
   const CartItems = JSON.parse(localStorage.getItem('cart'))
 
+  const handlePaymentChangeOption = e => {
+    e.preventDefault()
+    setPaymentOption(e.target.name)
+    console.log(e.target.value)
+    let payWith = e.target.name
+    console.log(payWith)
+
+    setPaymentOption(payWith)
+
+  }
   const HandleSubmit = e => {
     e.preventDefault()
 
@@ -38,11 +48,12 @@ const CartTotal = () => {
       console.log('shippingFee', delivery_fee, 'Shipping fee 2')
       console.log('user ID from DB', user.userId)
       console.log('payment option is>>', payment_option)
+      console.log('Payment Option', paymentOption)
 
       createOrder(CartItems, user.userId, payment_option, delivery_fee)
     }
   }
-  <div>
+  ;<div>
     <Link to='foods'>
       <h1>Your Cart is Empty, Fill it</h1>
     </Link>
@@ -61,9 +72,33 @@ const CartTotal = () => {
           <h4>Total Price: &#8358;{total_price}</h4>
         </div>
         <div>Delivery Fee: &#8358;{delivery_fee}</div>
+        <div>Payment Opt: {paymentOption}</div>
+
+        <fieldset>
+          <legend>Select paymentOption </legend>
+          <input
+            type='radio'
+            id='card'
+            name='card'
+            value={paymentOption}
+            checked={paymentOption === 'card'}
+            onChange={handlePaymentChangeOption}
+          />
+          <label htmlFor='card'>Pay with card</label>
+
+          <input
+            type='radio'
+            id='cash'
+            name='cash'
+            value={paymentOption}
+            checked={paymentOption === 'cash'}
+            onChange={handlePaymentChangeOption}
+          />
+          <label htmlFor='cash'> Pay on delivery </label>
+        </fieldset>
 
         <div>
-          <Link to='/checkout'>checkout</Link>
+          {/*   <Link to='/checkout'>checkout</Link>   */}
           <form onSubmit={HandleSubmit}>
             <button className='submit'>pay now</button>
           </form>

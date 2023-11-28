@@ -18,7 +18,7 @@ const initialState = {
   cart: [],
   total_quantity: 0,
   total_price: 0,
-  payment_option: 'card',
+  payment_option:'',
   delivery_fee: 0,
   quantity: 2,
   is_order_created_success: false,
