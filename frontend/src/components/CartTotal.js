@@ -38,7 +38,9 @@ const CartTotal = () => {
     e.preventDefault()
 
     if (paymentOption === '' || paymentOption === null) {
-}
+      console.log('payment option  is empty returned!!')
+      return
+    }
 
     if (cart.length > 0 || CartItems.length > 0) {
       // console.log('myCart>>>>>MYCARTT!!! SUBMIT', myCart, cart)
@@ -46,6 +48,10 @@ const CartTotal = () => {
       // console.log('user ID from DB', user.userId)
       // console.log('payment option is>>', payment_option)
       // console.log('Payment Option in  handleSubmit', paymentOption)
+      if (!user.userId) {
+        console.log('user id is null')
+        return
+      }
 
       createOrder(CartItems, user.userId, paymentOption, delivery_fee)
     }
@@ -71,7 +77,19 @@ const CartTotal = () => {
         <div>Delivery Fee: &#8358;{delivery_fee}</div>
         <div>Payment Opt: {paymentOption}</div>
 
-        <div>
+        <div
+          className={`payment ${
+            paymentOption === 'card' || paymentOption === 'cash'
+              ? ''
+              : 'invalid'
+          }`}
+        >
+          {paymentOption !== 'card' && paymentOption !== 'cash' && (
+            <div>
+              <p>Please select a payment option</p>
+            </div>
+          )}
+
           <fieldset>
             <legend>Select paymentOption </legend>
             <input
@@ -107,6 +125,14 @@ const CartTotal = () => {
             Sing In
           </Link>
         )}
+        <div
+          div
+          className={`sing-in-before-checkout ${
+            is_logged_in ? '' : 'user-invalid'
+          }`}
+        >
+          {is_logged_in === false && <div> please login</div>}
+        </div>
       </div>
     </div>
   )

@@ -70,3 +70,11 @@
   background-color: #7eca9c;
   color: rgb(248, 247, 244);
 }
+
+.invalid {
+  color: red;
+}
+.user-invalid {
+  color: red;
+z-index: 2;
+}
