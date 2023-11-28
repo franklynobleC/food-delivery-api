@@ -43,9 +43,10 @@ const ListView = ({ foods }) => {
                   </div>
                   <div className='food-name-search'>
                     <h4>{name}</h4>
-                    <h4>{quantity}</h4>
                   </div>
-                  <div className='food-price-search'>Price: &#8358 {price}</div>
+                  <div className='food-price-search'>
+                    Price: &#8358; {price}
+                  </div>
                   <div className='food-description-search'></div>
                   <div className='details-link-search'>
                     {/*
