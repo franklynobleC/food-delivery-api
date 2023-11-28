@@ -1,4 +1,5 @@
 import React, { useEffect, useState, CSSProperties } from 'react'
+
 import { DotLoader, BeatLoader, ClipLoader } from 'react-spinners'
 import { FoodList } from '../components'
 import { useFoodsContext } from '../context/foods_context'
@@ -13,9 +14,7 @@ const FoodsPage = () => {
   const [UserToken, setUserToken] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
   const override = {
-    // display: 'block',
     margin: '25%',
-    // marginRight: '50px',
 
     Color: 'green'
   }
@@ -27,20 +26,26 @@ const FoodsPage = () => {
 
     return () => clearTimeout(timeout)
   }, [])
-
+  console.log('FOODS PAGE', foods)
   return (
     <section>
       <article>
         {console.log('EMPTY PRODUCTS PAGE', user)}
         {isLoading ? (
           <div className='class-spinner-container'>
-                   <div className='spinner-message'>loading please wait ..</div>
-            <BeatLoader cssOverride={override} size={30} color='#36d7b7' className='spinner-component' />
+            <div className='spinner-message'>Loading please wait ...</div>
+            <BeatLoader
+              cssOverride={override}
+              size={80}
+              color='#36d7b7'
+              className='spinner-component'
+            />
           </div>
-        ) : (
+        ) : foods.length > 0 ? (
           <FoodList />
+        ) : (
+          <Error />
         )}
-        <h1>Products Page</h1>
       </article>
     </section>
   )

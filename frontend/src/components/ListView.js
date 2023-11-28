@@ -10,12 +10,9 @@ import { AddToCart } from '../components'
 import '../images/icons/search-icon.png'
 import { useCartContext } from '../context/cart_context'
 
-import { useFoodsContext } from '../context/foods_context'
-
 const ListView = ({ foods }) => {
   const [searchFood, setSearchFood] = useState('')
   const [searchFoodsResult, setFoodsResult] = useState([])
-  // const { addToCart } = useCartContext()
 
   const handSearchSubmit = e => {
     e.preventDefault()
@@ -34,41 +31,40 @@ const ListView = ({ foods }) => {
   if (searchFoodsResult.length > 0) {
     return (
       <div className='main-search-background'>
+        <div className='main-search'>
+          {searchFoodsResult.map(food => {
+            const { name, price, image, id, quantity } = food
 
-      <div className='main-search'>
-        {searchFoodsResult.map(food => {
-          const { name, price, image, id, quantity } = food
-
-          return (
-            <section className=''>
-              <div key={id} className='food-container-search'>
-                <div className='food-image-container'>
-                  <img src={image} alt={name} className='food-image-search' />
-                </div>
-                <div className='food-name-search'>
-                  <h4>{name}</h4>
-                  <h4>{quantity}</h4>
-                </div>
-                <div className='food-price-search'>Price: &#8358;{price}</div>
-                <div className='food-description-search'></div>
-                <div className='details-link-search'>
-                  {/*
+            return (
+              <section className=''>
+                <div key={id} className='food-container-search'>
+                  <div className='food-image-container'>
+                    <img src={image} alt={name} className='food-image-search' />
+                  </div>
+                  <div className='food-name-search'>
+                    <h4>{name}</h4>
+                    <h4>{quantity}</h4>
+                  </div>
+                  <div className='food-price-search'>Price: &#8358 {price}</div>
+                  <div className='food-description-search'></div>
+                  <div className='details-link-search'>
+                    {/*
                   // <button type='click' onClick={() => addToCart(id, quantity, food)}>
                   //   {' '}
                   //   Add to Cart
           // </button>        */}
-                  <Link to={`/foods/${id}`} className='Details-link-search'>
-                    <button className='oder-now-btn-search'>Order now</button>
-                  </Link>
-                </div>
+                    <Link to={`/foods/${id}`} className='Details-link-search'>
+                      <button className='oder-now-btn-search'>Order now</button>
+                    </Link>
+                  </div>
 
-                <div className='food-spacer-search'></div>
-              </div>
-            </section>
-          )
-        })}
+                  <div className='food-spacer-search'></div>
+                </div>
+              </section>
+            )
+          })}
         </div>
-          </div>
+      </div>
     )
   }
 
@@ -82,7 +78,6 @@ const ListView = ({ foods }) => {
             className='search-input-search'
             value={searchFood}
             placeholder='Search meal'
-
             onChange={e => setSearchFood(e.target.value)}
           />
           <button type='submit' className='search-btn'>

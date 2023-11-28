@@ -297,19 +297,20 @@ input:focus {
 }
 
 .class-spinner-container {
-  margin-top: 100px;
+  display: flex;
+
+  margin-top: 80px;
   margin-left: 80px;
-  background-color:  red;
-
 }
-.main-loader{
-  margin-top:   50%;
-   margin-left:  50%;
-
+.main-loader {
+  margin-left: 50%;
 }
-  .spinner-component{
-    position: relative;
-  }
-.spinner-message{
-  position: relative;
+.spinner-component {
+  position: fixed;
+}
+.spinner-message {
+  position: fixed;
+  margin-top: 20%;
+
+  margin-left: 30%;
 }

@@ -1,3 +1,23 @@
 .error-page {
   margin-top: 60px;
 }
+
+.error-page {
+  display: flex;
+  position: absolute;
+  margin-top: 30%;
+  margin-left: 30%;
+  margin-bottom: 30%;
+  background-color: rgb(170, 170, 170);
+  height: 100px;
+  width: 300px;
+}
+.back-to-home-link {
+  background-color: "#36d7b7";
+  color: whitesmoke;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}

@@ -13,7 +13,7 @@ const FoodList = () => {
   const [searchFood, setSearchFood] = useState('')
   const [searchFoodsResult, setFoodsResult] = useState([])
   console.log("Token from FoodList Component",token)
-  if (foods.length === 0) {
+  if (foods.length === 0     || foods === null) {
     return (
       <div>
         {console.log('TOKEN FROM  FOODlIST>>> No Data Found', token)}
