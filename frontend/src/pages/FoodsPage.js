@@ -1,4 +1,4 @@
-import React, { useEffect, useState, CSSProperties } from 'react'
+import React, { useEffect, useState} from 'react'
 
 import { DotLoader, BeatLoader, ClipLoader } from 'react-spinners'
 import { FoodList } from '../components'
@@ -22,7 +22,7 @@ const FoodsPage = () => {
   useEffect(() => {
     let timeout = setTimeout(() => {
       setIsLoading(false)
-    }, 2000)
+    }, 1000)
 
     return () => clearTimeout(timeout)
   }, [])

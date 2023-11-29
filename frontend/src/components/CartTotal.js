@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import { useCartContext } from '../context/cart_context'
 import { useUserContext } from '../context/user_context'
 import { Login } from '../components'
@@ -43,11 +43,7 @@ const CartTotal = () => {
     }
 
     if (cart.length > 0 || CartItems.length > 0) {
-      // console.log('myCart>>>>>MYCARTT!!! SUBMIT', myCart, cart)
-      // console.log('shippingFee', delivery_fee, 'Shipping fee 2')
-      // console.log('user ID from DB', user.userId)
-      // console.log('payment option is>>', payment_option)
-      // console.log('Payment Option in  handleSubmit', paymentOption)
+
       if (!user.userId) {
         console.log('user id is null')
         return
@@ -56,7 +52,7 @@ const CartTotal = () => {
       createOrder(CartItems, user.userId, paymentOption, delivery_fee)
     }
   }
-  ;<div>
+  <div>
     <Link to='foods'>
       <h1>Your Cart is Empty, Fill it</h1>
     </Link>
@@ -66,7 +62,7 @@ const CartTotal = () => {
     <div className='cart-total-container'>
       <div className='total-items'>
         <div>
-          <h3>YOUR CART TOTAL PAGE</h3>
+          <h3>YOUR CART TOTAL  IS:</h3>
           {console.log('THIS  IS FROM  TOTAL CART COMPONENT', CartItems)}
 
           <h4>Total Quantity:{total_quantity}</h4>

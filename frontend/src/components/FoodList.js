@@ -16,7 +16,7 @@ const FoodList = () => {
   if (foods.length === 0     || foods === null) {
     return (
       <div>
-        {console.log('TOKEN FROM  FOODlIST>>> No Data Found', token)}
+
         <h4>foods Data not found</h4>
       </div>
     )
@@ -26,8 +26,7 @@ const FoodList = () => {
       <div>
         <h2>Food List</h2>
       </div>
-      {console.log('TOKEN FROM  FOODlIST>>>', token)};
-      {console.log('USER FROM  FOODlIST>>>', user)};
+
     </ListView>
   )
 }

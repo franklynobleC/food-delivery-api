@@ -40,13 +40,16 @@ const auth_reducer = (state, action) => {
     console.log('from reducers register Error')
     return {
       ...state,
-      register_loading: false,
       is_registered: false,
-      register_error: true,
-      error: true,
+      register_error: false,
+      register_loading: false,
       is_logged_in: false,
-      user: null,
-      token: ''
+      is_authenticated: false,
+      error: true,
+      loading: false,
+      email: '',
+      password: '',
+      user: {}
     }
   }
 
@@ -59,6 +62,7 @@ const auth_reducer = (state, action) => {
       register_loading: true,
       loading: true,
       register_error: false,
+      is_error: false,
       is_registered: false,
       is_logged_in: false,
       user: null
@@ -80,6 +84,7 @@ const auth_reducer = (state, action) => {
       is_registered: true,
       is_logged_in: true,
       loading: false,
+      is_error: false,
 
       is_authenticated: true,
       user: tokenUser
@@ -87,14 +92,21 @@ const auth_reducer = (state, action) => {
   }
   if (action.type === LOGIN_USER_ERROR) {
     console.log('USER LOGIN ERROR FROM  REDUCER')
+
+    console.log('error    variable', state.is_error)
     return {
       ...state,
+
       is_registered: false,
+      register_error: false,
       register_loading: false,
-      register_error: true,
-      error: true,
       is_logged_in: false,
-      user: null
+      is_authenticated: false,
+         is_error: true,
+      loading: false,
+      email: '',
+      password: '',
+      user: {}
     }
   }
 
@@ -111,9 +123,9 @@ const auth_reducer = (state, action) => {
       loading: false,
 
       is_authenticated: false,
-      error: false,
+      is_error: false,
       data: action.payload,
-      user: null,
+      user: null
     }
   }
   if (action.type === LOGOUT_USER_ERROR) {

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import {} from 'react-icons/fa'
+
 import { Link } from 'react-router-dom'
 import { useParams, useNavigate } from 'react-router-dom'
 import { single_food_url as single_url } from '../utils/constants'

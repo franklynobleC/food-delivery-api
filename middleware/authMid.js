@@ -1,5 +1,4 @@
-/* trunk-ignore-all(prettier) */
-// Import required modules
+
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
@@ -14,7 +13,7 @@ const authMiddleware = async (req, res, next) => {
     // Check if the authorization header exists
     if (!authHeader && !check) {
       console.log(authHeader, 'From Header')
-      return res.status(401).json({ message: 'Unauthorized' })
+      return res.status(401).json({ message: 'Unauthorized invalid  header' })
     }
 
     // Extract the token from the authorization header
@@ -28,7 +27,7 @@ const authMiddleware = async (req, res, next) => {
     // Check if user is authenticated
     if (!decodedToken) {
       console.log(decodedToken, 'from Decode  Token')
-      return res.status(401).json({ message: 'Unauthorized' })
+      return res.status(401).json({ message: 'Unauthorized token maybe changed' })
     }
     console.log(decodedToken, 'from Decode  Token Success')
 
@@ -41,7 +40,8 @@ const authMiddleware = async (req, res, next) => {
     req.user = decodedToken
     next()
   } catch (error) {
-    return res.status(401).json({ message: 'Unauthorized' })
+    console.log(error)
+return res.status(401).json({ message: 'Unauthorized not found  maybe' })
   }
 }
 

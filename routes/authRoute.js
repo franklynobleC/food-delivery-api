@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 //TODO
-// Add  user, logOut,Login
+
 const {
   register,
   login,

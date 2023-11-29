@@ -24,7 +24,7 @@ const initialState = {
   register_loading: false,
   is_logged_in: false,
   is_authenticated: false,
-  error: false,
+  is_error: false,
   loading: false,
   email: '',
   password: '',
@@ -85,10 +85,7 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.post(
         login_user_url,
 
-        { email: email, password: password },
-        {
-          headers: { 'Content-Type': 'application/json' }
-        }
+        { email: email, password: password }
       )
 
       const userLoginData = response.data
@@ -120,7 +117,7 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.get(logout_user_url)
 
       const payloadData = await response.data
-  console.log(payloadData)
+      console.log(payloadData)
       console.log('LOG OUT SUCCESS')
       localStorage.removeItem('token')
       setToken(null)
@@ -132,13 +129,7 @@ export const AuthProvider = ({ children }) => {
       dispatch({ type: LOGOUT_USER_ERROR, payload: error.message })
     }
   }
-  useEffect(() => {}, [
-    state.email,
-    state.password,
-    token,
-    user,
-
-  ])
+  useEffect(() => {}, [state.email, state.password, token, user])
 
   //TODO: add  login, logout function
 

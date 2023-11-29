@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FiSearch } from 'react-icons/fi'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import '../styles/foods.css'
 import '../styles/filteredFood.css'
@@ -104,7 +106,10 @@ const ListView = ({ foods }) => {
                 <button className='oder-now-btn'>Order now</button>
               </Link>
             </div>
-            <AddToCart food={food} />
+            <div>
+              <AddToCart food={food} />
+              <ToastContainer />
+            </div>
 
             <div className='food-spacer'></div>
           </div>
