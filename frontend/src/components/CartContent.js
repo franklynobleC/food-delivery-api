@@ -35,7 +35,6 @@ const CartContent = () => {
         <button className='clear-btn' onClick={clearCart}>
           clear cart
         </button>
-        ;{console.log('Chekcing Logging  from  cart Summary', is_logged_in)}
         {is_logged_in ? (
           <Link to='/checkout'>proceed to Checkout</Link>
         ) : (

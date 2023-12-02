@@ -1,13 +1,10 @@
 .cart-content {
-  display: grid;
+  /* display: grid; */
   background-color: rgb(245, 245, 245);
 
   grid-template-columns: 1fr;
   row-gap: 50px;
   width: 80%;
-}
-
-.cart-main-item {
 }
 
 .cart-item-container {
