@@ -2,10 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import CartItem from './CartItem'
 import { useCartContext } from '../context/cart_context'
+import { useAuthContext } from '../context/auth_context'
 import CartTotal from './CartTotal'
 import '../styles/cart/cartcontent.css'
 const CartContent = () => {
   const { cart, clearCart } = useCartContext()
+  const { is_logged_in } = useAuthContext()
   // pass the cart  item  here
   localStorage.setItem('cart', JSON.stringify(cart))
 
@@ -30,7 +32,13 @@ const CartContent = () => {
           <Link to='/foods'>add more orders</Link>
         </div>
         <CartTotal />
-        <button onClick={clearCart}>clear cart</button>
+        <button onClick={clearCart}>clear cart</button>;
+        {console.log('Chekcing Logging  from  cart Summary', is_logged_in)}
+        {is_logged_in ? (
+          <Link to='/checkout'>proceed to Checkout</Link>
+        ) : (
+          <Link to='/signin'>login to checkout</Link>
+        )}
       </div>
     )
   }

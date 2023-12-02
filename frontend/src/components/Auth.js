@@ -26,6 +26,7 @@ function Auth () {
         <div class='email'></div>
         <input
           type='email'
+          required
           class='email-input-text'
           placeholder='enter email'
           autofocus
@@ -36,6 +37,7 @@ function Auth () {
       <div class='password-container'>
         <div class='password'></div>
         <input
+          required
           type='text'
           class='password-input-text'
           placeholder='enter password'

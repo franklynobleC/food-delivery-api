@@ -19,6 +19,7 @@ const ListView = ({ foods }) => {
   const handSearchSubmit = e => {
     e.preventDefault()
     // console.log(foods)
+
     const results = foods.filter(food =>
       food.name.toLowerCase().includes(searchFood.toLowerCase())
     )
@@ -55,7 +56,8 @@ const ListView = ({ foods }) => {
                   // <button type='click' onClick={() => addToCart(id, quantity, food)}>
                   //   {' '}
                   //   Add to Cart
-          // </button>        */}
+          // </button>
+            */}
                     <Link to={`/foods/${id}`} className='Details-link-search'>
                       <button className='oder-now-btn-search'>Order now</button>
                     </Link>
@@ -77,6 +79,7 @@ const ListView = ({ foods }) => {
         <form onSubmit={handSearchSubmit} className='search-bar'>
           <input
             type='text'
+
             required
             className='search-input-search'
             value={searchFood}

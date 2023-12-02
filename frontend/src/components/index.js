@@ -7,6 +7,7 @@ import Contact from './Contact'
 import ListView from './ListView'
 import AddToCart from './AddToCart'
 import CartContent from './CartContent'
+import CartSummary from './CartSummary'
 import CartToTal from './CartTotal'
 import Auth from './Auth'
 import Login from './Login'
@@ -30,4 +31,5 @@ export {
   PrivateRoute,
   AuthWrapper,
   SvgComponent,
+  CartSummary
 }

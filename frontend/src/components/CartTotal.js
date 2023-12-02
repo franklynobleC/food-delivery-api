@@ -1,8 +1,9 @@
-import React, {  useState } from 'react'
+import React, { useState } from 'react'
 import { useCartContext } from '../context/cart_context'
 import { useUserContext } from '../context/user_context'
 import { Login } from '../components'
 import { useAuthContext } from '../context/auth_context'
+
 import { Link } from 'react-router-dom'
 import { Route, useNavigate } from 'react-router-dom'
 
@@ -25,12 +26,12 @@ const CartTotal = () => {
   const [paymentOption, setPaymentOption] = useState('')
   const [userI, setUser] = useState({})
   let navigate = useNavigate()
-  console.log('MYCART', myCart)
+
+  // console.log('MYCART', myCart)
 
   //get  item from  local Storage
   const CartItems = JSON.parse(localStorage.getItem('cart'))
 
-  //h
   const handlePaymentChangeOption = e => {
     setPaymentOption(e.target.value)
   }
@@ -43,7 +44,6 @@ const CartTotal = () => {
     }
 
     if (cart.length > 0 || CartItems.length > 0) {
-
       if (!user.userId) {
         console.log('user id is null')
         return
@@ -52,7 +52,7 @@ const CartTotal = () => {
       createOrder(CartItems, user.userId, paymentOption, delivery_fee)
     }
   }
-  <div>
+  ;<div>
     <Link to='foods'>
       <h1>Your Cart is Empty, Fill it</h1>
     </Link>
@@ -62,7 +62,7 @@ const CartTotal = () => {
     <div className='cart-total-container'>
       <div className='total-items'>
         <div>
-          <h3>YOUR CART TOTAL  IS:</h3>
+          <h3>YOUR CART TOTAL IS:</h3>
           {console.log('THIS  IS FROM  TOTAL CART COMPONENT', CartItems)}
 
           <h4>Total Quantity:{total_quantity}</h4>
@@ -110,9 +110,12 @@ const CartTotal = () => {
 
         <div>
           {/*   <Link to='/checkout'>checkout</Link>   */}
+
+          {/*
           <form onSubmit={HandleSubmit}>
-            <button className='submit'>pay now</button>
+          <button className='submit'>pay now</button>
           </form>
+        */}
         </div>
         {is_logged_in ? (
           ''
