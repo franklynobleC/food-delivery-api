@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate , useLocation} from 'react-router-dom'
 import { useCartContext } from '../context/cart_context'
 import { useAuthContext } from '../context/auth_context'
 
@@ -29,7 +29,7 @@ const CartSummary = () => {
         </div>
       )
   }
-  return navigate('/signin')
+  return navigate('/login')
 }
 
 export default CartSummary

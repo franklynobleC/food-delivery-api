@@ -1,5 +1,6 @@
 .cart-item-container {
-  width: 400px;
+  min-width: 20%;
+  max-width: 40%;
   padding-top: 40px;
   padding-top: 40px;
   padding-bottom: 25px;
@@ -7,25 +8,19 @@
   padding-right: 25px;
   margin-top: 10px;
   margin-left: 10px;
-  border-radius: 10%;
   border-right: 1px solid rgb(231, 231, 231);
   border-bottom: 1px solid rgb(231, 231, 231);
   background-color: white;
-
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  flex-direction: row;
-
   align-items: space-around;
-  -webkit-border-radius: 10%;
-  -moz-border-radius: 10%;
-  -ms-border-radius: 10%;
-  -o-border-radius: 10%;
+  border-radius: 5px;
+
+  -webkit-border-radius: 5px;
 }
 .cart-item-image-container {
-  display:-moz-grid-group;
-  justify-content: flex-start;
 
+  justify-content: flex-start;
+/* background-color: red; */
+padding-top: 10px;
   height: 170px;
   width: 200px;
 }
@@ -34,21 +29,61 @@
   max-height: 100%;
 }
 .cart-item-price {
-font-weight: bolder;
+  font-weight: bolder;
+}
+.item-details{
+margin-left: 10px;
 }
 .cart-item-name {
-  margin-left: 30px;
+  /* margin-left: 30px; */
 }
 .cart-item-quantity {
   font-size: 18px;
   font-weight: bold;
 }
-.remove-btn-container{
-display:flex;
-flex-direction: column;
+.remove-btn-container {
+  display: flex;
+  /* flex-direction: column; */
 }
 .cart-item-total-price {
   font-size: 18px;
   font-weight: bold;
   margin-left: 30px;
+}
+.cart-item-quantity{
+     padding-top: 10px;
+
+}
+.cart-item-name{
+   padding-top: 10px;
+   font-weight: bold;
+
+}
+.cart-item-price{
+   padding-top: 10px;
+
+}
+.remove-btn{
+   font-family: sans-serif;
+  font-size: 100%;
+  margin: 0px;
+
+  vertical-align: baseline;
+  line-height: normal;
+  appearance: button;
+  cursor: pointer;
+  display: inline-block;
+  background: rgb(34, 102, 0);
+  color: rgb(255, 255, 255);
+  border: 2px solid rgb(34, 102, 0);
+  height: auto;
+  width: 100%;
+  padding: 9px 1.4em;
+  font-weight: 400;
+  text-align: center;
+  border-radius: 3px;
+  transition: opacity 0.2s ease 0s, background-color 0.15s ease 0s,
+    border-color 0.15s ease 0s, filter 0.2s ease 0s, -webkit-filter 0.2s ease 0s;
+  position: relative;
+  outline: rgb(66, 153, 225) solid 1px !important;
 }

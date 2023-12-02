@@ -50,7 +50,7 @@ function Auth () {
         <button class='sign-up'>Sign Up</button>
       </div>
       <div class='password-reset-login'>
-        <Link to='/login'>already have an account? Login</Link>
+        <Link to={{ pathname:'/login', state: {from:location.pathname}}}>already have an account? Login</Link>
         <div></div>
         <Link to='reset'>forgot password? Reset password</Link>
       </div>

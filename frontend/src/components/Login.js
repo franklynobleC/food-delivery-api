@@ -4,7 +4,7 @@ import { useAuthContext, token } from '../context/auth_context'
 
 import { useFoodsContext } from '../context/foods_context'
 import { Cart, Foods } from '../pages'
-import { Link, Redirect, useNavigate } from 'react-router-dom'
+import { Link, Redirect, useNavigate, useLocation } from 'react-router-dom'
 import { ScaleLoader } from 'react-spinners'
 
 const Login = () => {
@@ -12,6 +12,9 @@ const Login = () => {
   const [userEmail, setUserEmail] = useState('')
   const [isLoginLoading, setIsLoginLoading] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  let navigate = useNavigate()
+  const location = useLocation()
+
   // const [previousPage, setPreviousPage] = useState(window.location.href)
   // let navigate = useNavigate()
 
@@ -28,24 +31,20 @@ const Login = () => {
   } = useAuthContext()
   const { fetchFoods, foods_loading } = useFoodsContext()
 
-  let navigate = useNavigate()
-
   const handleSubmit = e => {
     e.preventDefault()
     console.log(userPassword, userEmail)
     loginUser(userEmail, userPassword)
   }
   useEffect(() => {
-    // setIsLoggedIn(is_logged_in)
-if(is_logged_in)    {
-
-     let  timeCheck = setTimeout(() => {
-        navigate('/foods')
+    if (is_logged_in) {
+      let timeCheck = setTimeout(() => {
+        fetchFoods()
+        navigate(location.state?.from)
       }, 2000)
-    return () =>  clearTimeout(timeCheck)
-}
-  },
- [userEmail, userPassword, is_error,is_logged_in])
+      return () => clearTimeout(timeCheck)
+    }
+  }, [userEmail, userPassword, is_error, is_logged_in])
   if (is_logged_in) {
     return (
       <div>
