@@ -35,11 +35,17 @@ const CartContent = () => {
         <button className='clear-btn' onClick={clearCart}>
           clear cart
         </button>
-        {is_logged_in ? (
-          <Link to='/checkout'>proceed to Checkout</Link>
-        ) : (
-          <Link to='/signin'>login to checkout</Link>
-        )}
+
+          {is_logged_in ? (
+            <div className='checkout'>
+              ;<Link to='/checkout'>proceed to Checkout</Link>
+            </div>
+          ) : (
+            <div className='signin'>
+              <Link to='/signin'>login to checkout</Link>
+            </div>
+          )}
+
       </div>
     )
   }
