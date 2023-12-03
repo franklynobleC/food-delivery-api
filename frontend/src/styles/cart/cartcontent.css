@@ -1,5 +1,5 @@
 .cart-content {
-  /* display: grid; */
+  display: grid;
   background-color: rgb(245, 245, 245);
 
   grid-template-columns: 1fr;
@@ -54,4 +54,29 @@
     border-color 0.15s ease 0s, filter 0.2s ease 0s, -webkit-filter 0.2s ease 0s;
   position: relative;
   outline: rgb(66, 153, 225) solid 1px !important;
+}
+
+.checkout-link {
+  display: grid;
+  margin-bottom: 20px;
+  background-color: black;
+  height: 200px;
+  width: 400px;
+}
+
+.checkout {
+  position: relative;
+  display: grid;
+  margin-bottom: 20px;
+  background-color: black;
+  height: 200px;
+  width: 400px;
+}
+.signin {
+  position: relative;
+  display: grid;
+  margin-bottom: 20px;
+  background-color: black;
+  height: 200px;
+  width: 400px;
 }
