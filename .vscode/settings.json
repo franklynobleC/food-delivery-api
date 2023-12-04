@@ -4,5 +4,7 @@
   "docify.commentService.docstringFormat": "JsDoc",
   "docify.commentService.programmingLanguage": "javascript",
   "cSpell.words": ["ivwcvtyfshhw"],
-  "editor.inlineSuggest.showToolbar": "always"
+  "editor.inlineSuggest.showToolbar": "always",
+  "liveServer.settings.port": 5501,
+  "livePreview.defaultPreviewPath": "/cartsumma.html/cartsum.html"
 }

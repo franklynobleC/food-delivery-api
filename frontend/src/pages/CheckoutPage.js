@@ -21,7 +21,7 @@ const CheckoutPage = () => {
       <div className='cart-summary'>
         <CartSummary />
         <div>
-          <CartToTal/>
+
         </div>
         </div>
     )

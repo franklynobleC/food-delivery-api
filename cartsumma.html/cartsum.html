@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .cart-summary {
+        grid-row: 1;
+        width: 45%;
+        margin-bottom: 12px;
+        border: 1px solid rgb(222, 222, 222);
+        border-radius: 4px;
+        padding: 18px;
+        padding-bottom: 5px;
+      }
+
+      .quantity-total {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+      .cart-total {
+        display: grid;
+        grid-template-columns: 1fr auto;
+
+         font-weight: 800;
+        margin-bottom: 9px;
+        color: rgb(177, 39, 4);
+
+        border-top: 1px solid rgb(222, 222, 222);
+        padding-right: 20px;
+        padding-top: 18px;
+      }
+
+      .confirm-btn {
+        font-family: sans-serif;
+        font-size: 100%;
+        font-weight: 700;
+        padding: 10px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        border: none;
+
+        line-height: normal;
+        appearance: button;
+        cursor: pointer;
+        display: inline-block;
+        background: rgb(34, 102, 0);
+        color: rgb(255, 255, 255);
+        border: 2px solid rgb(34, 102, 0);
+        height: auto;
+      }
+      .confirm-btn-container {
+        display: grid;
+        justify-content: center;
+        grid-template-columns: 1fr auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cart-summary">
+      <div><h3>ORDER SUMMARY</h3></div>
+
+      <div>Confirm Order</div>
+      <div class="quantity-total"><span>Total Quantity: 3</span></div>
+
+      <div class="cart-total">
+        <div>Sub Total:</div>
+        <div>500</div>
+      </div>
+
+      <div class="confirm-btn-container">
+        <button class="confirm-btn">Confirm Order</button>
+      </div>
+    </div>
+  </body>
+</html>

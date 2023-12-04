@@ -10,6 +10,7 @@ import CartContent from './CartContent'
 import CartSummary from './CartSummary'
 import CartToTal from './CartTotal'
 import Auth from './Auth'
+import OrderSummary from './OrderSummary'
 import Login from './Login'
 import AuthWrapper from '../pages/AuthWrapper'
 //TODO: import all data from  component and  give  it  a component  name
@@ -31,5 +32,6 @@ export {
   PrivateRoute,
   AuthWrapper,
   SvgComponent,
-  CartSummary
+  CartSummary,
+  OrderSummary
 }

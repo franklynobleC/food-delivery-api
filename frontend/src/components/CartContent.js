@@ -5,6 +5,7 @@ import { useCartContext } from '../context/cart_context'
 import { useAuthContext } from '../context/auth_context'
 import CartTotal from './CartTotal'
 import '../styles/cart/cartcontent.css'
+import OrderSummary from './OrderSummary'
 const CartContent = () => {
   const { cart, clearCart } = useCartContext()
   const { is_logged_in } = useAuthContext()
@@ -24,28 +25,32 @@ const CartContent = () => {
 
     return (
       <div className='cart-content'>
-        <h5>cart Content page</h5>
+        cart Content page
+      <div className='order-summary-div'>
+  <OrderSummary />
+</div>
+
         {cart.map(item => {
           return <CartItem key={item.id} {...item} />
         })}
         <div>
           <Link to='/foods'>add more orders</Link>
         </div>
-        <CartTotal />
         <button className='clear-btn' onClick={clearCart}>
           clear cart
         </button>
 
+        <div className='signin-or-checkout'>
           {is_logged_in ? (
-            <div className='checkout'>
-              ;<Link to='/checkout'>proceed to Checkout</Link>
+            <div className='checkout-link'>
+              <Link to='/checkout'>proceed to Checkout</Link>
             </div>
           ) : (
-            <div className='signin'>
+            <div className='signin-link'>
               <Link to='/signin'>login to checkout</Link>
             </div>
           )}
-
+        </div>
       </div>
     )
   }
