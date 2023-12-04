@@ -1,52 +1,55 @@
- .cart-summary {
-        grid-row: 1;
-        width: 45%;
-        margin-bottom: 12px;
-        border: 1px solid rgb(222, 222, 222);
-        border-radius: 4px;
-        padding: 18px;
-        padding-bottom: 5px;
-      }
+.cart-summary {
+  grid-row: 1;
+  width: 45%;
+  margin-bottom: 12px;
+  border: 1px solid rgb(222, 222, 222);
+  border-radius: 4px;
+  padding: 18px;
+  padding-bottom: 5px;
+}
 
-      .quantity-total {
-        margin-top: 10px;
-        margin-bottom: 10px;
-        font-weight: 700;
-      }
-      .cart-total {
-        display: grid;
-        grid-template-columns: 1fr auto;
+.quantity-total {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+.cart-total {
+  display: grid;
+  grid-template-columns: 1fr auto;
 
-         font-weight: 800;
-        margin-bottom: 9px;
-        color: rgb(177, 39, 4);
+  font-weight: 800;
+  margin-bottom: 9px;
+  color: rgb(177, 39, 4);
 
-        border-top: 1px solid rgb(222, 222, 222);
-        padding-right: 20px;
-        padding-top: 18px;
-      }
+  border-top: 1px solid rgb(222, 222, 222);
+  padding-right: 20px;
+  padding-top: 18px;
+}
 
-      .confirm-btn {
-        font-family: sans-serif;
-        font-size: 100%;
-        font-weight: 700;
-        padding: 10px;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        border-radius: 5px;
-        border: none;
+.confirm-btn {
+  font-family: sans-serif;
+  font-size: 100%;
+  font-weight: 700;
+  padding: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: none;
 
-        line-height: normal;
-        appearance: button;
-        cursor: pointer;
-        display: inline-block;
-        background: rgb(34, 102, 0);
-        color: rgb(255, 255, 255);
-        border: 2px solid rgb(34, 102, 0);
-        height: auto;
-      }
-      .confirm-btn-container {
-        display: grid;
-        justify-content: center;
-        grid-template-columns: 1fr auto;
-      }
+  line-height: normal;
+  appearance: button;
+  cursor: pointer;
+  display: inline-block;
+  background: #018a01;
+  border: none;
+  color: rgb(255, 255, 255);
+  /* border: 2px solid rgb(34, 102, 0); */
+  height: auto;
+}
+.confirm-btn-container {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 1fr auto;
+}
