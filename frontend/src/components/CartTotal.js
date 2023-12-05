@@ -111,11 +111,10 @@ const CartTotal = () => {
         <div>
           {/*   <Link to='/checkout'>checkout</Link>   */}
 
-          {/*
           <form onSubmit={HandleSubmit}>
           <button className='submit'>pay now</button>
           </form>
-        */}
+
         </div>
         {is_logged_in ? (
           ''
