@@ -7,8 +7,12 @@ import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_ERROR,
   LOGOUT_USER_SUCCESS,
-  LOGOUT_USER_ERROR
+  LOGOUT_USER_ERROR,
+  GET_SINGLE_USER_BEGIN,
+  SINGLE_USER_ERROR,
+  SINGLE_USER_SUCCESS
 } from '../actions'
+import { SingleFood } from '../pages'
 
 const auth_reducer = (state, action) => {
   if (action.type === REGISTER_USER) {
@@ -102,7 +106,7 @@ const auth_reducer = (state, action) => {
       register_loading: false,
       is_logged_in: false,
       is_authenticated: false,
-         is_error: true,
+      is_error: true,
       loading: false,
       email: '',
       password: '',
@@ -134,6 +138,35 @@ const auth_reducer = (state, action) => {
       ...state,
       is_logged_in: false,
       user: null
+    }
+  }
+  if (action.type === GET_SINGLE_USER_BEGIN) {
+    return {
+      ...state,
+      single_userInfoError: false,
+      single_userInfoLoading: true,
+      single_userInfo: null
+    }
+  }
+  if (action.type === SINGLE_USER_SUCCESS) {
+    console.log('from actions  payload', action.payload)
+    const { deliveryAddress, name } = action.payload
+    console.log('The Address Details', deliveryAddress, name)
+    return {
+      ...state,
+      single_userInfoError: false,
+      single_userInfoLoading: false,
+      single_userInfo: deliveryAddress,
+      userInfo_name: name
+    }
+  }
+  if (action.type === SINGLE_USER_ERROR) {
+    console.log('from actions  payload Error!', action.payload)
+    return {
+      ...state,
+      single_userInfoError: true,
+      single_userInfoLoading: false,
+      single_userInfo: null
     }
   }
   throw new Error(`No matching ${action.type}-action  type`)

@@ -3,8 +3,10 @@ const express = require('express')
 const router = express.Router()
 const {
   authenticateUser,
-  authorizedPermissions
+  authorizeRoles
 } = require('../middleware/authentication')
+const authMiddleware = require('../middleware/authMid')
+
 //import  all  from  the controller
 
 const {
@@ -19,7 +21,7 @@ const {
 //TOD//update user password, (pass in  the new and  old  password)
 router.get(
   '/showCurrentUser',
-  authenticateUser,
+  authMiddleware,
   // authorizedPermissions('admin', 'user'),
   showCurrentUser
 )
@@ -34,13 +36,13 @@ router.patch(
 //update user name and Email
 router.patch(
   '/:id',
-  authenticateUser,
+  authMiddleware,
   // authorizedPermissions('admin', 'user'),
   updateUser
 )
 router.delete(
   '/:id',
-  authenticateUser,
+  // authenticateUser,
   // authorizedPermissions('admin', 'user'),
   deleteUser
 )
@@ -48,14 +50,15 @@ router.delete(
 // GET ALL USERS
 router.get(
   '/getAllUsers',
-  authenticateUser,
-  // authorizedPermissions('admin', 'user'),
+  // authMiddleware,
+  // authorizeRoles('admin', 'user'),
   getAllUsers
 ),
   router.get(
     '/:id',
-    authenticateUser,
-    // authorizedPermissions('admin', 'user'),
+    // authenticateUser,
+    // authMiddleware,
+    // authorizeRoles('admin', 'user'),
     getSingleUser
   )
 

@@ -47,3 +47,4 @@ export const login_user_url = 'http://localhost:5000/api/v1/auth/login'
 export const logout_user_url = 'http://localhost:5000/api/v1/auth/logout'
 export const create_orders_url =
   'http://localhost:5000/api/v1/orders/createOrder'
+export const single_user_url = 'http://localhost:5000/api/v1/users/'

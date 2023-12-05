@@ -26,17 +26,18 @@ Get a Single User from  the Database Schema,(pass the id  from  postMan)
   */
 const getSingleUser = async (req, res) => {
   const { id } = req.params
+  console.log('Getting Single Data', id)
 
   console.log(req.user)
-  const singleUser = await UserSchema.findById(id)
+  const user = await UserSchema.findById(id)
 
-  if (!singleUser || singleUser.length === 0) {
+  if (!user || user.length === 0) {
     res
       .status(StatusCodes.NOT_FOUND)
       .json({ message: 'No Data Found In Database' })
   }
 
-  res.status(StatusCodes.OK).json({ user: { singleUser } })
+  res.status(StatusCodes.OK).json(user)
 }
 
 //TODO
@@ -101,7 +102,7 @@ const updateUserPassword = async (req, res) => {
 }
 
 const showCurrentUser = async (req, res) => {
- // console.log('SHOW CURRENT USER', req.user)
+  // console.log('SHOW CURRENT USER', req.user)
   console.log('SHOW CURRENT USER')
   res.status(StatusCodes.OK).json({ user: req.user })
 }

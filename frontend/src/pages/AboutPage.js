@@ -1,7 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../styles/about.css'
 
 const AboutPage = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const handleOpen = () => {
+    setIsOpen(!isOpen)
+  }
+
+  const handleDataEdit = e => {
+    e.preventDefault()
+
+    console.log('User Data Edited')
+  }
   return (
     <main className='about-parent'>
       about page
@@ -10,8 +20,23 @@ const AboutPage = () => {
           <div className='title'>
             <h2>Our Story</h2>
             <div className='underline'></div>
-          </div>
 
+            <button type='submit' onClick={handleOpen}>
+              change Address
+            </button>
+          </div>
+          {isOpen && (
+            <form onSubmit={handleDataEdit}>
+              <div> </div>
+              name:
+              <input type='text' name='' id='' />
+              address:
+              <input type='text' />
+              phone:
+              <input type='text' />
+              <button type='submit'>Submit</button>
+            </form>
+          )}
           <p>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi
             quasi neque optio possimus exercitationem. Aliquid quaerat harum

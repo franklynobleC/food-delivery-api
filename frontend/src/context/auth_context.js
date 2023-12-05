@@ -3,7 +3,8 @@ import axios from 'axios'
 import {
   register_user_url,
   login_user_url,
-  logout_user_url
+  logout_user_url,
+  single_user_url
 } from '../utils/constants'
 import auth_reducer from '../reducers/auth_reducer'
 // import { useFoodsContext } from '../context/foods_context'
@@ -15,7 +16,10 @@ import {
   LOGIN_USER_SUCCESS,
   LOGOUT_USER_SUCCESS,
   REGISTER_USER,
-  LOGOUT_USER_ERROR
+  LOGOUT_USER_ERROR,
+  GET_SINGLE_USER_BEGIN,
+  SINGLE_USER_ERROR,
+  SINGLE_USER_SUCCESS
 } from '../actions'
 
 const initialState = {
@@ -28,7 +32,11 @@ const initialState = {
   loading: false,
   email: '',
   password: '',
-  user: {}
+  user: {},
+  single_userInfoError: false,
+  single_userInfoLoading: false,
+  single_userInfo: '',
+  userInfo_name: ''
 }
 
 //declare global context and  make it  Available Globally
@@ -40,6 +48,7 @@ export const AuthContext = React.createContext()
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null)
   const [user, setUser] = useState({})
+  const [userInfo, setUserInfo] = useState({})
   // const { fetchFoods } = useFoodsContext()
 
   //pass reducer function and  initial state Object
@@ -111,6 +120,22 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
+  const getSingleUser = async userId => {
+    dispatch({ type: GET_SINGLE_USER_BEGIN })
+    try {
+      const response = await axios.get(single_user_url + userId)
+      const userData = await response.data
+      setUserInfo(userData)
+      console.log('USER  INFO  IS', userInfo)
+
+      dispatch({ type: SINGLE_USER_SUCCESS, payload: userData })
+      console.log(userData, 'RAW DATA FROM RESPONSE')
+    } catch (error) {
+      console.log(error)
+      dispatch({ type: SINGLE_USER_ERROR, payload: error })
+    }
+  }
+
   //CALL  THIS  METHOD  IN  THE  COMPONENT  TO  LOGOUT
   const logoutUser = async () => {
     try {
@@ -135,7 +160,15 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ ...state, registerUser, loginUser, logoutUser, token, user }}
+      value={{
+        ...state,
+        registerUser,
+        loginUser,
+        logoutUser,
+        token,
+        user,
+        getSingleUser
+      }}
     >
       {children}
     </AuthContext.Provider>

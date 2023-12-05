@@ -15,7 +15,7 @@ const OrderSummary = () => {
     payment_option,
     clearFromLocalStorage
   } = useCartContext()
-  const { is_logged_in } = useAuthContext()
+  const { is_logged_in,} = useAuthContext()
   const [paymentOption, setPaymentOption] = useState('')
   let navigate = useNavigate()
   const handConfirm = () => {
@@ -28,7 +28,7 @@ const OrderSummary = () => {
       let waitTime = setTimeout(() => {
         console.log('waiting for 1 sec')
         navigate('/login')
-      }, 3000)
+      }, 2000)
       return () => clearTimeout(waitTime)
     }
   }
