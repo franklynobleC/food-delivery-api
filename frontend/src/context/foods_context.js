@@ -51,17 +51,17 @@ export const FoodsProvider = ({ children }) => {
     //NOTE: convert  to  valid  json String Object: this would   would enable  possible read from  the Backend;
     // if   allocated directly without  using  JSON.parse, it would  read "null"from  the  backend
 
-    let retrievedToken = JSON.parse(localStorage.getItem('token'))
+    // let retrievedToken = JSON.parse(localStorage.getItem('token'))
 
     try {
       dispatch({ type: GET_FOODS_BEGIN })
 
-      console.log(retrievedToken)
-      setUserToken(retrievedToken)
+      // console.log(retrievedToken)
+      // setUserToken(retrievedToken)
 
       console.log(
         'Data being sent to foods API',
-        retrievedToken,
+        // retrievedToken,
         'USERtOKEN  IS',
         userTokenData
       )

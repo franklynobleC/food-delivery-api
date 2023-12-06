@@ -30,8 +30,8 @@ const UserSchema = new mongoose.Schema({
 
   deliveryAddress: {
     type: String,
-    required: false,
-    minlength: 3
+    required: [true, 'please provide  Delivery Address'],
+    minlength: 5
   },
   password: {
     type: String,

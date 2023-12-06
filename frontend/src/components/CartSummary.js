@@ -8,25 +8,56 @@ import { useUserContext } from '../context/user_context'
 import '../styles/cart/cartSummary.css'
 
 const CartSummary = () => {
-  const { is_logged_in, getSingleUser, single_userInfo, userInfo_name } =
-    useAuthContext()
+  const {
+    is_logged_in,
+    single_userInfo,
+    userInfo_name,
+    user_email,
+    updateUser
+  } = useAuthContext()
   const { user, myUser } = useUserContext()
 
   const { total_quantity, delivery_fee, total_price, cart } = useCartContext()
-  const [newCustomerAddress, setNewCustomerAddress] = useState('')
+  // const [newCustomerAddress, setNewCustomerAddress] = useState('')
+  const [newCustomerName, setNewCustomerName] = useState(userInfo_name)
+  const [newCustomerAddress, setNewCustomerAddress] = useState(single_userInfo)
+  const [newCustomerEmail, setNewCustomerEmail] = useState(user_email)
+  const [isOpen, setIsOpen] = useState(false)
   let navigate = useNavigate()
-  // const { deliveryAddress } = single_userInfo
+  const token = localStorage.getItem('token')
 
-  useEffect(() => {
-    setTimeout(() => {
-      getSingleUser(user.userId)
-      console.log('waiting  2 sec to get Single Data from      CartSummary')
-    }, 2000)
-    // console.log('Get Single User Called', deliveryAddress)
-  }, [user.userId])
+  const handleEditData = () => {
+    setIsOpen(!isOpen)
+  }
+  const handleChange1 = e => {
+    // [e.target.name] = e.target.value
+    setNewCustomerName(e.target.value)
+    console.log('Name  is', newCustomerName)
+  }
+  const handleChange2 = e => {
+    // [e.target.name] = e.target.value
+    setNewCustomerEmail(e.target.value)
+    console.log('Email  is', newCustomerEmail)
+  }
+  const handleChange3 = e => {
+    // [e.target.name] = e.target.value
+    setNewCustomerAddress(e.target.value)
+    console.log('Address  is', newCustomerAddress)
+  }
+  const handleUpdate = () => {
+    console.log('update Data handler Called')
+    updateUser(
+      user.userId,
+      newCustomerAddress,
+      newCustomerEmail,
+      newCustomerName
+    )
+
+    setIsOpen(false)
+  }
 
   {
-    if (is_logged_in)
+    if (token)
       return (
         <div className='cart-summary'>
           <div>ORDER SUMMARY</div>
@@ -38,7 +69,36 @@ const CartSummary = () => {
           <div></div>
           <section>
             <div>Customer Delivery Address:{single_userInfo}</div>
+            <button type='submit' onClick={handleEditData}>
+              change address
+            </button>
           </section>
+          {isOpen && (
+            <form onSubmit={handleUpdate}>
+              name:
+              <input
+                type='text'
+                name='name'
+                value={newCustomerName}
+                onChange={handleChange1}
+              />
+              Email:
+              <input
+                type='email'
+                name='email'
+                value={newCustomerEmail}
+                onChange={handleChange2}
+              />
+              Customer Address:
+              <input
+                type='text'
+                name='address'
+                value={newCustomerAddress}
+                onChange={handleChange3}
+              />
+              <button type='handleSubmit'>Submit</button>
+            </form>
+          )}
           <CartToTal />
           <Link>
             <button> Confirm Order</button>

@@ -20,10 +20,8 @@ const CheckoutPage = () => {
     return (
       <div className='cart-summary'>
         <CartSummary />
-        <div>
-
-        </div>
-        </div>
+        <div></div>
+      </div>
     )
   }
   // if () {

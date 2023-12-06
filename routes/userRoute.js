@@ -33,10 +33,10 @@ router.patch(
   updateUserPassword
 )
 
-//update user name and Email
+//update user name and Email, deliveryAddress
 router.patch(
   '/:id',
-  authMiddleware,
+  // authMiddleware,
   // authorizedPermissions('admin', 'user'),
   updateUser
 )
@@ -50,6 +50,7 @@ router.delete(
 // GET ALL USERS
 router.get(
   '/getAllUsers',
+
   // authMiddleware,
   // authorizeRoles('admin', 'user'),
   getAllUsers
@@ -57,6 +58,7 @@ router.get(
   router.get(
     '/:id',
     // authenticateUser,
+
     // authMiddleware,
     // authorizeRoles('admin', 'user'),
     getSingleUser

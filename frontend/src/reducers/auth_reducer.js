@@ -21,6 +21,7 @@ const auth_reducer = (state, action) => {
     const { token, tokenUser } = action.payload
     console.log(token, tokenUser)
     console.log(state.user)
+
     return { ...state, register_loading: false, user: action.payload }
   }
   if (action.type === REGISTER_SUCCESS) {
@@ -79,6 +80,7 @@ const auth_reducer = (state, action) => {
     const { token, tokenUser } = action.payload
 
     const { name, userId, role } = tokenUser
+    localStorage.setItem('userId', tokenUser.userId)
 
     console.log('FROM  PAYLOAD LOGIN REDUCERS  TEST', userId, name)
     return {
@@ -150,14 +152,15 @@ const auth_reducer = (state, action) => {
   }
   if (action.type === SINGLE_USER_SUCCESS) {
     console.log('from actions  payload', action.payload)
-    const { deliveryAddress, name } = action.payload
+    const { deliveryAddress, name, email } = action.payload
     console.log('The Address Details', deliveryAddress, name)
     return {
       ...state,
       single_userInfoError: false,
       single_userInfoLoading: false,
       single_userInfo: deliveryAddress,
-      userInfo_name: name
+      userInfo_name: name,
+      user_email: email
     }
   }
   if (action.type === SINGLE_USER_ERROR) {

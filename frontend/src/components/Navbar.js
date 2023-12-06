@@ -14,8 +14,12 @@ const Nav = () => {
   const { logoutUser, is_logged_in, user, is_authenticated } = useAuthContext()
   let navigate = useNavigate()
   // setCheckLogin(is_logged_in)
+  const token = localStorage.getItem('token')
 
   const handleLogout = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('userId')
+
     logoutUser()
 
     console.log(
@@ -58,23 +62,19 @@ const Nav = () => {
         <Link to='/cart'>
           {total_quantity ? (
             <>
-
-              <div className='cart-total-quantity-count'>
-                {total_quantity}
-              </div>
+              <div className='cart-total-quantity-count'>{total_quantity}</div>
             </>
           ) : (
             <></>
           )}
           cart
-          <IoCartOutline className='item-cart-content-icon'/>
-
+          <IoCartOutline className='item-cart-content-icon' />
         </Link>
         {console.log('cartTotal is ', total_quantity)}
       </div>
 
       <div>
-        {is_logged_in ? <button onClick={handleLogout}>logOut</button> : null}
+        {token ? <button onClick={handleLogout}>logOut</button> : null}
         {console.log(
           'Checking Loging And Checking LogOut',
           is_authenticated

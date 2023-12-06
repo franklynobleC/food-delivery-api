@@ -4,7 +4,8 @@ import {
   register_user_url,
   login_user_url,
   logout_user_url,
-  single_user_url
+  single_user_url,
+  update_user_url
 } from '../utils/constants'
 import auth_reducer from '../reducers/auth_reducer'
 // import { useFoodsContext } from '../context/foods_context'
@@ -36,7 +37,8 @@ const initialState = {
   single_userInfoError: false,
   single_userInfoLoading: false,
   single_userInfo: '',
-  userInfo_name: ''
+  userInfo_name: '',
+  user_email: ''
 }
 
 //declare global context and  make it  Available Globally
@@ -101,7 +103,7 @@ export const AuthProvider = ({ children }) => {
 
       console.log(userLoginData, 'RAW DATA FROM RESPONSE')
       const { token, tokenUser } = await userLoginData
-      let retrievedToken = localStorage.setItem('token', JSON.stringify(token))
+      let retrievedToken = localStorage.setItem('token', JSON.stringify( token))
       setToken(retrievedToken)
 
       // setToken(token)
@@ -119,7 +121,20 @@ export const AuthProvider = ({ children }) => {
       dispatch({ type: LOGIN_USER_ERROR, payload: err.message })
     }
   }
+  const updateUser = async (userId, name, email, address) => {
+    try {
+      const response = await axios.patch(update_user_url + userId, {
+        name: name,
+        email: email,
+        deliveryAddress: address
+      })
 
+      const userUpdatedData = await response.data
+      console.log('Raw Data from Updated  request', userUpdatedData)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   const getSingleUser = async userId => {
     dispatch({ type: GET_SINGLE_USER_BEGIN })
     try {
@@ -154,7 +169,13 @@ export const AuthProvider = ({ children }) => {
       dispatch({ type: LOGOUT_USER_ERROR, payload: error.message })
     }
   }
-  useEffect(() => {}, [state.email, state.password, token, user])
+  useEffect(() => {}, [
+    state.email,
+    state.password,
+    token,
+    user,
+    JSON.stringify(localStorage.getItem('token'))
+  ])
 
   //TODO: add  login, logout function
 
@@ -167,7 +188,8 @@ export const AuthProvider = ({ children }) => {
         logoutUser,
         token,
         user,
-        getSingleUser
+        getSingleUser,
+        updateUser
       }}
     >
       {children}

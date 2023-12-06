@@ -12,13 +12,12 @@ import {
   CREATE_ORDER_SUCCESS,
   CREATE_ORDER_ERROR
 } from '../actions'
-import { totalmem } from 'os'
 
 const initialState = {
   cart: [],
   total_quantity: 0,
   total_price: 0,
-  payment_option:'',
+  payment_option: '',
   delivery_fee: 0,
   quantity: 2,
   is_order_created_success: false,
@@ -114,9 +113,10 @@ export const CartProvider = ({ children }) => {
   }, [
     state.cart,
     JSON.parse(
-      localStorage.getItem('token'),
+      JSON.stringify(localStorage.getItem('token')),
       state.totalPrice,
-      state.total_quantity
+      state.total_quantity,
+      localStorage.getItem('userId')
     )
   ])
 

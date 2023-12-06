@@ -48,3 +48,22 @@ export const logout_user_url = 'http://localhost:5000/api/v1/auth/logout'
 export const create_orders_url =
   'http://localhost:5000/api/v1/orders/createOrder'
 export const single_user_url = 'http://localhost:5000/api/v1/users/'
+export const update_user_url = 'http://localhost:5000/api/v1/users/'
+
+// export const getToken = () => {
+//   let checkToken = localStorage.getItem('token')
+//   if (checkToken) {
+//     return true
+//   }
+
+//   return false
+// }
+
+export const checkToken = () => {
+  const token = localStorage.getItem('token')
+  if (token) {
+    // setIsTokenPresent(true)
+    return true
+  }
+  return false
+}

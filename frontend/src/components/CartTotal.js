@@ -26,11 +26,13 @@ const CartTotal = () => {
   const [paymentOption, setPaymentOption] = useState('')
   const [userI, setUser] = useState({})
   let navigate = useNavigate()
+  const token = localStorage.getItem('token')
 
   // console.log('MYCART', myCart)
 
   //get  item from  local Storage
   const CartItems = JSON.parse(localStorage.getItem('cart'))
+  const userId = localStorage.getItem('userId')
 
   const handlePaymentChangeOption = e => {
     setPaymentOption(e.target.value)
@@ -44,12 +46,12 @@ const CartTotal = () => {
     }
 
     if (cart.length > 0 || CartItems.length > 0) {
-      if (!user.userId) {
+      if (!userId) {
         console.log('user id is null')
         return
       }
 
-      createOrder(CartItems, user.userId, paymentOption, delivery_fee)
+      createOrder(CartItems, userId, paymentOption, delivery_fee)
     }
   }
   ;<div>
@@ -112,11 +114,10 @@ const CartTotal = () => {
           {/*   <Link to='/checkout'>checkout</Link>   */}
 
           <form onSubmit={HandleSubmit}>
-          <button className='submit'>pay now</button>
+            <button className='submit'>pay now</button>
           </form>
-
         </div>
-        {is_logged_in ? (
+        {token ? (
           ''
         ) : (
           <Link to='/signin' className='cart-total-btn'>
@@ -125,11 +126,9 @@ const CartTotal = () => {
         )}
         <div
           div
-          className={`sing-in-before-checkout ${
-            is_logged_in ? '' : 'user-invalid'
-          }`}
+          className={`sing-in-before-checkout ${token ? '' : 'user-invalid'}`}
         >
-          {is_logged_in === false && <div> please login</div>}
+          {token === false && <div> please login</div>}
         </div>
       </div>
     </div>

@@ -15,15 +15,22 @@ const OrderSummary = () => {
     payment_option,
     clearFromLocalStorage
   } = useCartContext()
-  const { is_logged_in,} = useAuthContext()
+  const { is_logged_in, user, getSingleUser } = useAuthContext()
   const [paymentOption, setPaymentOption] = useState('')
+  const [isTokenPresent, setIsTokenPresent] = useState(false)
+
   let navigate = useNavigate()
+
   const handConfirm = () => {
-    // e.preventDefault()
     console.log('handle Submit Clicked')
     if (is_logged_in && cart) {
-      console.log('Logged in')
-      return navigate('/checkout')
+      console.log('Logged in  && userID is', user.userId)
+
+      let timeCheck = setTimeout(() => {
+        getSingleUser(user.userId)
+      }, 1000)
+      navigate('/checkout')
+      return () => clearTimeout(timeCheck)
     } else {
       let waitTime = setTimeout(() => {
         console.log('waiting for 1 sec')

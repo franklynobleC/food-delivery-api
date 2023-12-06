@@ -43,10 +43,11 @@ const getSingleUser = async (req, res) => {
 //TODO
 //addUpdate a SingleUser's  name and  email Functionality
 const updateUser = async (req, res) => {
-  const { name, email } = req.body
-  console.log(name, email)
-
-  if (!name || !email) {
+  const { name, email, deliveryAddress } = req.body
+  const { id } = req.params
+  console.log(name, email, deliveryAddress, id)
+console.log(``)
+  if (!name || !email || !deliveryAddress) {
     res
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: 'Please Provide All Required Fields' })
@@ -55,10 +56,12 @@ const updateUser = async (req, res) => {
   console.log('update Single User')
   /* The code `const updateSingleUser = await UserSchema.findByIdAndUpdate(id, req.body, { new: true })`
 is updating a single user in the database. */
-
-  const userFromDb = await UserSchema.findOne({ _id: req.user.userId })
+  //NOTE: UNCOMMENT  THIS AND  PASS  THE  ID  THROUGH THE REQUEST   BODY TO  THE DB
+  // const userFromDb = await UserSchema.findOne({ _id: req.user.userId })
+  const userFromDb = await UserSchema.findOne({ _id: id })
   userFromDb.email = email
   userFromDb.name = name
+  userFromDb.deliveryAddress = deliveryAddress
 
   await userFromDb.save()
 
