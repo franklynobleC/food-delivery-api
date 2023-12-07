@@ -1,5 +1,4 @@
 .main {
-
   margin-top: 10%;
   display: grid;
   background-color: rgb(247, 247, 248);
@@ -351,10 +350,10 @@ input:focus {
 
 .add-to-cart {
   background-color: rgb(255, 255, 255);
-  color: green;
+  /* color: green; */
   border: none;
 
-  box-shadow: 1px solid rgb(146, 3, 3);
+  box-shadow: 6px solid rgb(146, 3, 3);
   /* display: flex; */
   /* display: inline-flex; */
   margin-top: 10px;
@@ -367,4 +366,12 @@ input:focus {
   /* padding: 9px 1.4em; */
   font-weight: 400;
   text-align: center;
+}
+
+button:focus {
+  outline: none;
+}
+
+button:active {
+  outline: none;
 }

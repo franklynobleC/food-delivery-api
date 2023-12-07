@@ -36,7 +36,7 @@ router.patch(
 //update user name and Email, deliveryAddress
 router.patch(
   '/:id',
-  // authMiddleware,
+  authMiddleware,
   // authorizedPermissions('admin', 'user'),
   updateUser
 )

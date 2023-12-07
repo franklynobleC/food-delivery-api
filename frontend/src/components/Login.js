@@ -37,13 +37,13 @@ const Login = () => {
     loginUser(userEmail, userPassword)
   }
   useEffect(() => {
-    if (is_logged_in) {
+
       let timeCheck = setTimeout(() => {
         fetchFoods()
         navigate(location.state?.from)
       }, 2000)
       return () => clearTimeout(timeCheck)
-    }
+
   }, [userEmail, userPassword, is_error, is_logged_in])
   if (is_logged_in) {
     return (

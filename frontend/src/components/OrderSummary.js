@@ -20,14 +20,16 @@ const OrderSummary = () => {
   const [isTokenPresent, setIsTokenPresent] = useState(false)
 
   let navigate = useNavigate()
+  const token = localStorage.getItem('token')
+  const userId = localStorage.getItem('userId')
 
   const handConfirm = () => {
     console.log('handle Submit Clicked')
-    if (is_logged_in && cart) {
-      console.log('Logged in  && userID is', user.userId)
+    if (token && cart && userId) {
+      console.log('Logged in  && userID is', user.userId, 'USER ID', userId)
 
       let timeCheck = setTimeout(() => {
-        getSingleUser(user.userId)
+        getSingleUser(userId)
       }, 1000)
       navigate('/checkout')
       return () => clearTimeout(timeCheck)
@@ -39,6 +41,10 @@ const OrderSummary = () => {
       return () => clearTimeout(waitTime)
     }
   }
+
+  useEffect(() => {
+    getSingleUser(userId)
+  }, [userId])
   return (
     <div style={{ marginTop: '200px' }}>
       <div className='cart-summary'>

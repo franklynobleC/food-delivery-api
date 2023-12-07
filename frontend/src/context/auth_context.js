@@ -103,7 +103,7 @@ export const AuthProvider = ({ children }) => {
 
       console.log(userLoginData, 'RAW DATA FROM RESPONSE')
       const { token, tokenUser } = await userLoginData
-      let retrievedToken = localStorage.setItem('token', JSON.stringify( token))
+      let retrievedToken = localStorage.setItem('token', JSON.stringify(token))
       setToken(retrievedToken)
 
       // setToken(token)
@@ -123,11 +123,20 @@ export const AuthProvider = ({ children }) => {
   }
   const updateUser = async (userId, name, email, address) => {
     try {
-      const response = await axios.patch(update_user_url + userId, {
-        name: name,
-        email: email,
-        deliveryAddress: address
-      })
+      const configuration = {
+        method: 'patch',
+        url: update_user_url + userId,
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('token'))}`
+        },
+        data: {
+          name: name,
+          email: email,
+          deliveryAddress: address
+        }
+      }
+
+  const response = await axios(configuration)
 
       const userUpdatedData = await response.data
       console.log('Raw Data from Updated  request', userUpdatedData)

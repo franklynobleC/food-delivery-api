@@ -45,7 +45,7 @@ const getSingleUser = async (req, res) => {
 const updateUser = async (req, res) => {
   const { name, email, deliveryAddress } = req.body
   const { id } = req.params
-  console.log(name, email, deliveryAddress, id)
+  console.log("ID IS",id ,"Name  is",name, "Email is",email, "Delivery Address",deliveryAddress )
 console.log(``)
   if (!name || !email || !deliveryAddress) {
     res

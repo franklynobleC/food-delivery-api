@@ -25,91 +25,92 @@ const CartSummary = () => {
   const [isOpen, setIsOpen] = useState(false)
   let navigate = useNavigate()
   const token = localStorage.getItem('token')
+  const userId = localStorage.getItem('userId')
 
   const handleEditData = () => {
     setIsOpen(!isOpen)
   }
-  const handleChange1 = e => {
+  const handleChangeName = e => {
     // [e.target.name] = e.target.value
     setNewCustomerName(e.target.value)
     console.log('Name  is', newCustomerName)
   }
-  const handleChange2 = e => {
-    // [e.target.name] = e.target.value
+  const handleChangeEmail = e => {
     setNewCustomerEmail(e.target.value)
-    console.log('Email  is', newCustomerEmail)
   }
-  const handleChange3 = e => {
-    // [e.target.name] = e.target.value
+  const handleChangeAddress = e => {
     setNewCustomerAddress(e.target.value)
-    console.log('Address  is', newCustomerAddress)
   }
   const handleUpdate = () => {
     console.log('update Data handler Called')
-    updateUser(
-      user.userId,
-      newCustomerAddress,
-      newCustomerEmail,
-      newCustomerName
-    )
+    updateUser(userId, newCustomerName, newCustomerEmail, newCustomerAddress)
 
     setIsOpen(false)
   }
+  const handleBackBtn = () => {
+    setIsOpen(false)
+  }
+  useEffect(() => {
+    console.log(newCustomerAddress, newCustomerEmail, newCustomerName)
+  }, [newCustomerAddress, newCustomerEmail, newCustomerName])
 
-  {
-    if (token)
-      return (
-        <div className='cart-summary'>
-          <div>ORDER SUMMARY</div>
-          <div>Confirm Order</div>
-          <div>Total Quantity:{total_quantity}</div>
-          <div>Total Price:{total_price}</div>
-          {/*<div> Delivery Fee:{delivery_fee}</div> */}
-          {console.log('this  is from  Cart Summary ', is_logged_in)}
-          <div></div>
-          <section>
-            <div>Customer Delivery Address:{single_userInfo}</div>
-            <button type='submit' onClick={handleEditData}>
-              change address
-            </button>
-          </section>
-          {isOpen && (
+  if (token) {
+    return (
+      <div className='cart-summary'>
+        <div>ORDER SUMMARY</div>
+        <div>Confirm Order</div>
+        <div>Total Quantity:{total_quantity}</div>
+        <div>Total Price:{total_price}</div>
+
+        <div></div>
+        <section>
+          <div>Customer Delivery Address:{single_userInfo}</div>
+
+          <button type='submit' onClick={handleEditData}>
+            change address
+          </button>
+        </section>
+        {isOpen && (
+          <div>
             <form onSubmit={handleUpdate}>
               name:
               <input
+                required
                 type='text'
                 name='name'
                 value={newCustomerName}
-                onChange={handleChange1}
+                onChange={handleChangeName}
               />
               Email:
               <input
+                required
                 type='email'
                 name='email'
                 value={newCustomerEmail}
-                onChange={handleChange2}
+                onChange={handleChangeEmail}
               />
               Customer Address:
               <input
+                required
                 type='text'
                 name='address'
                 value={newCustomerAddress}
-                onChange={handleChange3}
+                onChange={handleChangeAddress}
               />
-              <button type='handleSubmit'>Submit</button>
+              <button type='handleSubmit'>update</button>
             </form>
-          )}
-          <CartToTal />
-          <Link>
-            <button> Confirm Order</button>
-          </Link>
-          {console.log(
-            'checking Single user Data',
-            single_userInfo,
-            userInfo_name
-          )}
-        </div>
-      )
+            <button  type='click' onClick={handleBackBtn}>back</button>
+          </div>
+        )}
+        <CartToTal />
+
+        {console.log(
+          'checking Single user Data',
+          single_userInfo,
+          userInfo_name
+        )}
+      </div>
+    )
   }
   return navigate('/login')
 }
