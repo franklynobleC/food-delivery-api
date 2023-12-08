@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .customer-address {
+        background-color: rgb(219, 219, 219);
+        display: grid;
+
+        justify-content: space-between;
+        align-items: center;
+        grid-template-rows: 1fr, 2fr, 3fr;
+
+        margin-top: 10px;
+        max-width: 50%;
+      }
+      .customer-address div {
+        gap: 30px;
+        margin-top: 10px;
+      }
+      .summary-total {
+        background-color: rgb(219, 219, 219);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        column-gap: 20%;
+        margin-top: 10px;
+        max-width: 40%;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>Order Summary</h1>
+      <h3>Confirm Your Order</h3>
+      <div>
+        <div class="summary-total">
+          <div>Total Quantity:2</div>
+          <div>Total Price:5000</div>
+        </div>
+        <div></div>
+        <div class="customer-address">
+          <div>customer Deliver Address</div>
+          <div>No 112 Awolowo Way</div>
+          <div><button>change address</button></div>
+        </div>
+      </div>
+
+      <a href="#">Modify cart</a>
+    </div>
+  </body>
+</html>

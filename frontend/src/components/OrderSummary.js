@@ -15,7 +15,14 @@ const OrderSummary = () => {
     payment_option,
     clearFromLocalStorage
   } = useCartContext()
-  const { is_logged_in, user, getSingleUser } = useAuthContext()
+  const {
+    is_logged_in,
+    user,
+    getSingleUser,
+    single_userInfo,
+    userInfo_name,
+    user_email
+  } = useAuthContext()
   const [paymentOption, setPaymentOption] = useState('')
   const [isTokenPresent, setIsTokenPresent] = useState(false)
 
@@ -47,6 +54,7 @@ const OrderSummary = () => {
   }, [userId])
   return (
     <div style={{ marginTop: '200px' }}>
+
       <div className='cart-summary'>
         <div>
           <h3>ORDER SUMMARY</h3>

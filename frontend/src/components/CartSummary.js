@@ -4,6 +4,7 @@ import { useCartContext } from '../context/cart_context'
 import { useAuthContext } from '../context/auth_context'
 import { CartToTal } from '../components'
 import { useUserContext } from '../context/user_context'
+import { FiChevronRight } from 'react-icons/fi'
 
 import '../styles/cart/cartSummary.css'
 
@@ -56,22 +57,51 @@ const CartSummary = () => {
 
   if (token) {
     return (
-      <div className='cart-summary'>
-        <div>ORDER SUMMARY</div>
-        <div>Confirm Order</div>
-        <div>Total Quantity:{total_quantity}</div>
-        <div>Total Price:{total_price}</div>
+      <div className='cart-summary-final'>
+        <div>
+          {' '}
+          <h3>ORDER SUMMARY place Order Now:</h3>
+        </div>
 
-        <div></div>
-        <section>
-          <div>Customer Delivery Address:{single_userInfo}</div>
+        <div className='total-quantity-summary'>
+          <div>Total Quantity:</div>
+          <div className='actual-total-quantity'>{total_quantity}</div>
+        </div>
+        <div className='total-quantity-summary'>
+          <div>Total Price:</div>
+          <div className='actual-total-price'>{total_price}</div>
+        </div>
+        <section className='customer-address'>
+          <div className='delivery-details'>
+            <h4>Customer Delivery Details:</h4>
+          </div>
+          <div className='address-grid'>
+            <div className='user-address'>{single_userInfo}</div>
 
-          <button type='submit' onClick={handleEditData}>
-            change address
-          </button>
+            <div className='change-address'>
+              <button
+                className='change-address-btn'
+                type='submit'
+                onClick={handleEditData}
+              >
+                change address
+                <FiChevronRight className='icon-size' />
+              </button>
+            </div>
+          </div>
+
+          <div className='cart-details-summary'>
+            <div>cart here</div>
+          </div>
+          <div className='modify-cart-div'>
+            <Link to='/cart' className='modify-summary-cart-link'>
+              modify cart
+            </Link>
+          </div>
         </section>
         {isOpen && (
-          <div>
+          <div className='update-data-form-div'>
+            <h4>Update User Data</h4>
             <form onSubmit={handleUpdate}>
               name:
               <input
@@ -97,13 +127,16 @@ const CartSummary = () => {
                 value={newCustomerAddress}
                 onChange={handleChangeAddress}
               />
-              <button type='handleSubmit'>update</button>
+              <button className='btn-update' type='handleSubmit'>
+                update
+              </button>
             </form>
-            <button  type='click' onClick={handleBackBtn}>back</button>
+            <button className='btn-back' type='click' onClick={handleBackBtn}>
+              back
+            </button>
           </div>
         )}
         <CartToTal />
-
         {console.log(
           'checking Single user Data',
           single_userInfo,
