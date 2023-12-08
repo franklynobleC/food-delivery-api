@@ -12,9 +12,14 @@ import {
   CREATE_ORDER_SUCCESS,
   CREATE_ORDER_ERROR
 } from '../actions'
+function getLocalStorageData () {
+  const localData = localStorage.getItem('cart')
+
+  return JSON.parse(localData)
+}
 
 const initialState = {
-  cart: [],
+  cart: getLocalStorageData(),
   total_quantity: 0,
   total_price: 0,
   payment_option: '',
@@ -30,6 +35,7 @@ const initialState = {
 //  through intermediate components explicitly.It
 //  provides a way to pass data down the component
 //  tree without the need for prop drilling.
+
 const CartContext = React.createContext()
 
 export const CartProvider = ({ children }) => {
