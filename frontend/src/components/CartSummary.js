@@ -4,7 +4,7 @@ import { useCartContext } from '../context/cart_context'
 import { useAuthContext } from '../context/auth_context'
 import { CartToTal } from '../components'
 import { useUserContext } from '../context/user_context'
-import { FiChevronRight,FiArrowLeft } from 'react-icons/fi'
+import { FiChevronRight, FiArrowLeft } from 'react-icons/fi'
 
 import '../styles/cart/cartSummary.css'
 
@@ -59,7 +59,6 @@ const CartSummary = () => {
     return (
       <div className='cart-summary-final'>
         <div>
-
           <h3>ORDER SUMMARY place Order Now:</h3>
         </div>
 
@@ -135,20 +134,17 @@ const CartSummary = () => {
                   />
                 </div>
 
-                <div
-                  className='form-input-address'
-                >
+                <div className='form-input-address'>
                   <button className='btn-update' type='handleSubmit'>
                     update
                   </button>
                 </div>
                 <div className='update-btn-container'></div>
               </div>
-
             </form>
             <button className='btn-back' type='click' onClick={handleBackBtn}>
-            <FiArrowLeft className='back-icon' />
-            back
+              <FiArrowLeft className='back-icon' />
+              back
             </button>
           </div>
         )}
