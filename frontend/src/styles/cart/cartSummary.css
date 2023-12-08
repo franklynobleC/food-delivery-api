@@ -15,6 +15,7 @@
 }
 .customer-address {
   margin-top: 20px;
+  color: rgb(58, 78, 102);
   /* background-color: black; */
 }
 
@@ -28,6 +29,7 @@
 .total-price-summary,
 .address-is,
 .address-grid {
+  color: rgb(58, 78, 102);
   display: grid;
   margin-top: 15px;
   border-radius: 2px;
@@ -89,6 +91,9 @@
   position: absolute;
   color: green;
 }
+.back-icon {
+  margin-right: 10px;
+}
 .modify-cart-div {
   display: grid;
   justify-content: center;
@@ -139,11 +144,18 @@
 .actual-total-quantity {
   padding-left: 10px;
   font-weight: 600;
+  color: rgb(58, 78, 102);
 }
 .btn-back,
 .btn-update {
-  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
   padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  max-width: 40%;
+  min-width: 10%;
   border: none;
   border-radius: 3px;
   background-color: rgb(2, 71, 2);
@@ -155,9 +167,43 @@
 }
 .update-data-form-div {
   background-color: white;
+  justify-content: center;
+  border-width: 1px;
+  box-shadow: 0px 1;
+  border: 1px solid rgb(222, 222, 222);
 }
 .update-data-form-div > h4 {
   display: flex;
   justify-content: center;
   color: rgb(136, 136, 136);
 }
+.update-data-form-div{
+color: rgb(58, 78, 102);
+}
+.inside-form-container {
+  display: flex;
+  justify-content: center;
+  padding-left: 5px;
+  flex-direction: column;
+  /* background-color: blue; */
+}
+.form-input-address,
+.form-input-email,
+.form-input-name {
+
+  margin: 5px;
+  padding-left: 10px;
+  display: flex;
+  justify-content: center;
+  border: none;
+}
+.total-quantity-summary{
+  color: rgb(58, 78, 102);
+}
+.btn-back{
+  margin-bottom: 5px;
+}
+/* .update-btn-container > button{
+  display: flex;
+  justify-content: center;
+} */

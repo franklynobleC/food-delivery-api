@@ -1,8 +1,8 @@
 .main {
   margin-top: 10%;
   display: grid;
-  background-color: rgb(247, 247, 248);
-
+  /* background-color: rgb(247, 247, 248); */
+background-color:#f2f2f2;
   grid-template-columns: repeat(4, 1fr);
 
   /* // grid-template-columns: repeat(4, 1fr); */
@@ -261,6 +261,14 @@ input:focus {
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
+}
+.food-name > h4{
+  color: rgb(18, 44, 71);
+
+}
+.food-price{
+
+ color: rgb(58,78,102);
 }
 .food-spacer {
   flex: 1;

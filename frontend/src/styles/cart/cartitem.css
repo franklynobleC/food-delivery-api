@@ -96,3 +96,6 @@
     border-color 0.15s ease 0s, filter 0.2s ease 0s, -webkit-filter 0.2s ease 0s;
   position: relative;
 }
+.cart-item-price, .cart-item-quantity, .cart-item-name {
+   color: rgb(58,78,102);
+}

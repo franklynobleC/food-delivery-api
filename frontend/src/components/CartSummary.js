@@ -4,7 +4,7 @@ import { useCartContext } from '../context/cart_context'
 import { useAuthContext } from '../context/auth_context'
 import { CartToTal } from '../components'
 import { useUserContext } from '../context/user_context'
-import { FiChevronRight } from 'react-icons/fi'
+import { FiChevronRight,FiArrowLeft } from 'react-icons/fi'
 
 import '../styles/cart/cartSummary.css'
 
@@ -59,7 +59,7 @@ const CartSummary = () => {
     return (
       <div className='cart-summary-final'>
         <div>
-          {' '}
+
           <h3>ORDER SUMMARY place Order Now:</h3>
         </div>
 
@@ -103,36 +103,52 @@ const CartSummary = () => {
           <div className='update-data-form-div'>
             <h4>Update User Data</h4>
             <form onSubmit={handleUpdate}>
-              name:
-              <input
-                required
-                type='text'
-                name='name'
-                value={newCustomerName}
-                onChange={handleChangeName}
-              />
-              Email:
-              <input
-                required
-                type='email'
-                name='email'
-                value={newCustomerEmail}
-                onChange={handleChangeEmail}
-              />
-              Customer Address:
-              <input
-                required
-                type='text'
-                name='address'
-                value={newCustomerAddress}
-                onChange={handleChangeAddress}
-              />
-              <button className='btn-update' type='handleSubmit'>
-                update
-              </button>
+              <div className='inside-form-container'>
+                <div className='form-input-name'>
+                  Name:
+                  <input
+                    required
+                    type='text'
+                    name='name'
+                    value={newCustomerName}
+                    onChange={handleChangeName}
+                  />
+                </div>
+                <div className='form-input-email'>
+                  Email:
+                  <input
+                    required
+                    type='email'
+                    name='email'
+                    value={newCustomerEmail}
+                    onChange={handleChangeEmail}
+                  />
+                </div>
+                <div className='form-input-address'>
+                  Address:
+                  <input
+                    required
+                    type='text'
+                    name='address'
+                    value={newCustomerAddress}
+                    onChange={handleChangeAddress}
+                  />
+                </div>
+
+                <div
+                  className='form-input-address'
+                >
+                  <button className='btn-update' type='handleSubmit'>
+                    update
+                  </button>
+                </div>
+                <div className='update-btn-container'></div>
+              </div>
+
             </form>
             <button className='btn-back' type='click' onClick={handleBackBtn}>
-              back
+            <FiArrowLeft className='back-icon' />
+            back
             </button>
           </div>
         )}

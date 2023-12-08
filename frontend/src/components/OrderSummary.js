@@ -54,13 +54,14 @@ const OrderSummary = () => {
   }, [userId])
   return (
     <div style={{ marginTop: '200px' }}>
-
       <div className='cart-summary'>
         <div>
           <h3>ORDER SUMMARY</h3>
         </div>
 
-        <div>Confirm Order</div>
+        <div>
+          <h5>Confirm Order</h5>
+        </div>
         <div className='quantity-total'>
           <span>Total Quantity: {total_quantity}</span>
         </div>
