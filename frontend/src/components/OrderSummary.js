@@ -68,7 +68,7 @@ const OrderSummary = () => {
 
         <div className='cart-total'>
           <div>Sub Total:</div>
-          <div> &#8358;{total_price - delivery_fee}</div>
+          <div> &#8358;{total_price}</div>
         </div>
 
         <div className='confirm-btn-container'>

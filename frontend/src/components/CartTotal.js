@@ -54,7 +54,7 @@ const CartTotal = () => {
       createOrder(CartItems, userId, paymentOption, delivery_fee)
     }
   }
-  <div>
+  ;<div>
     <Link to='foods'>
       <h1>Your Cart is Empty, Fill it</h1>
     </Link>
@@ -69,12 +69,11 @@ const CartTotal = () => {
 
           <h4>Total Quantity:{total_quantity}</h4>
         </div>
-        <div>
-          <h4>Total Price: &#8358;{total_price}</h4>
-        </div>
         <div>Delivery Fee: &#8358;{delivery_fee}</div>
+        <div>
+          <h4>Total Price: &#8358;{total_price +delivery_fee}</h4>
+        </div>
         <div>Payment Opt: {paymentOption}</div>
-
         <div
           className={`payment ${
             paymentOption === 'card' || paymentOption === 'cash'
@@ -109,7 +108,6 @@ const CartTotal = () => {
             <label htmlFor='cash'> Pay on delivery </label>
           </fieldset>
         </div>
-
         <div>
           {/*   <Link to='/checkout'>checkout</Link>   */}
 

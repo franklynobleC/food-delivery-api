@@ -67,7 +67,7 @@ const CartSummary = () => {
           <div className='actual-total-quantity'>{total_quantity}</div>
         </div>
         <div className='total-quantity-summary'>
-          <div>Total Price:</div>
+          <div>Sub-Total:</div>
           <div className='actual-total-price'>{total_price}</div>
         </div>
         <section className='customer-address'>
