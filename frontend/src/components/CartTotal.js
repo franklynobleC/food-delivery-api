@@ -52,9 +52,10 @@ const CartTotal = () => {
       }
 
       createOrder(CartItems, userId, paymentOption, delivery_fee)
+      //  TODO: ORDER CREATION,UPDATE, REDIRECT TO  PAYMENT  GATEWAY.
     }
   }
-  ;<div>
+  <div>
     <Link to='foods'>
       <h1>Your Cart is Empty, Fill it</h1>
     </Link>
@@ -71,7 +72,7 @@ const CartTotal = () => {
         </div>
         <div>Delivery Fee: &#8358;{delivery_fee}</div>
         <div>
-          <h4>Total Price: &#8358;{total_price +delivery_fee}</h4>
+          <h4>Total Price: &#8358;{total_price + delivery_fee}</h4>
         </div>
         <div>Payment Opt: {paymentOption}</div>
         <div

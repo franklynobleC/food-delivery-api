@@ -20,18 +20,16 @@ require('dotenv').config()
 //add Register, Login,  logOut,
 const register = async (req, res) => {
   console.log(req)
-  const { email, password } = req.body
+  const { name, email, phone, deliveryAddress, password } = req.body
 
   //console.log(req.body, 'FROM  REQUEST BODY')
-  console.log(email, password)
+  console.log(name, email, phone, deliveryAddress, password)
 
-  if (!email || !password) {
+  if ((!email || !password, !name || !deliveryAddress, !phone)) {
     console.log('Registration Error!')
     //  throw new Error('Please fill all the fields')
     return res.status(StatusCodes.BAD_REQUEST).json({ error: res.error })
   }
-
-  //
 
   //check  if user Already exist,
   const emailAlreadyExist = await UserSchema.findOne({ email })
@@ -44,7 +42,10 @@ const register = async (req, res) => {
   //await emailFunc(email,name)
 
   const createdUser = await UserSchema.create({
+    name,
     email,
+    phone,
+    deliveryAddress,
     password
   })
 
@@ -58,7 +59,7 @@ const register = async (req, res) => {
   )
 
   */
-//Todo:  if  user successfully registered,  send  user a  welcome mail
+  //Todo:  if  user successfully registered,  send  user a  welcome mail
   // add UserToken
   const tokenUser = createTokenUser(createdUser)
 

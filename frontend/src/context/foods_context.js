@@ -56,28 +56,9 @@ export const FoodsProvider = ({ children }) => {
     try {
       dispatch({ type: GET_FOODS_BEGIN })
 
-      // console.log(retrievedToken)
-      // setUserToken(retrievedToken)
-
-      console.log(
-        'Data being sent to foods API',
-        // retrievedToken,
-        'USERtOKEN  IS',
-        userTokenData
-      )
-      // const configuration = {
-      //   method: 'GET',
-      //   url: url,
-      //   headers: {
-      //     Authorization: `Bearer ${userTokenData}`
-      //   }
-      // }
       console.log(userTokenData)
       // console.log(configuration)
       const response = await axios.get(url)
-      // console.log(configuration)
-
-      // console.log('TOKEN  IN TO  FOODS coNTEXTS', token)
 
       const foods = response.data
       console.log('FETCH FOODS  ', foods)

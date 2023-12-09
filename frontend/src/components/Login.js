@@ -37,13 +37,11 @@ const Login = () => {
     loginUser(userEmail, userPassword)
   }
   useEffect(() => {
-
-      let timeCheck = setTimeout(() => {
-        fetchFoods()
-        navigate(location.state?.from)
-      }, 2000)
-      return () => clearTimeout(timeCheck)
-
+    let timeCheck = setTimeout(() => {
+      fetchFoods()
+      navigate(location.state?.from)
+    }, 2000)
+    return () => clearTimeout(timeCheck)
   }, [userEmail, userPassword, is_error, is_logged_in])
   if (is_logged_in) {
     return (
@@ -65,6 +63,7 @@ const Login = () => {
               placeholder='enter email'
               autofocus
               value={userEmail}
+              name='userEmail'
               onChange={e => setUserEmail(e.target.value)}
             />
           </div>
@@ -77,6 +76,7 @@ const Login = () => {
               placeholder='enter password'
               autofocus
               value={userPassword}
+              name='userPassword'
               onChange={e => setUserPassword(e.target.value)}
             />
           </div>

@@ -10,19 +10,20 @@ import {
   LOGOUT_USER_ERROR,
   GET_SINGLE_USER_BEGIN,
   SINGLE_USER_ERROR,
-  SINGLE_USER_SUCCESS
+  SINGLE_USER_SUCCESS,
+  REGISTER_USER_BEGIN,
 } from '../actions'
 import { SingleFood } from '../pages'
 
 const auth_reducer = (state, action) => {
-  if (action.type === REGISTER_USER) {
+  if (action.type === REGISTER_USER_BEGIN) {
     console.log('FROM REGISTER USER REDUCER')
     console.log(action.payload)
-    const { token, tokenUser } = action.payload
-    console.log(token, tokenUser)
+    // const { token, tokenUser } = action.payload
+    // console.log(token, tokenUser)
     console.log(state.user)
 
-    return { ...state, register_loading: false, user: action.payload }
+    return { ...state, is_registered:false, register_loading: true,is_authenticated: false, loading:true, user: null }
   }
   if (action.type === REGISTER_SUCCESS) {
     console.log('FROM REGISTER USER Success REDUCER')
@@ -54,7 +55,7 @@ const auth_reducer = (state, action) => {
       loading: false,
       email: '',
       password: '',
-      user: {}
+      user: null
     }
   }
 

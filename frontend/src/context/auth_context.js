@@ -16,11 +16,11 @@ import {
   LOGIN_USER_ERROR,
   LOGIN_USER_SUCCESS,
   LOGOUT_USER_SUCCESS,
-  REGISTER_USER,
   LOGOUT_USER_ERROR,
   GET_SINGLE_USER_BEGIN,
   SINGLE_USER_ERROR,
-  SINGLE_USER_SUCCESS
+  SINGLE_USER_SUCCESS,
+  REGISTER_USER_BEGIN
 } from '../actions'
 
 const initialState = {
@@ -59,9 +59,15 @@ export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(auth_reducer, initialState)
 
   //Hit   API end point  for        register
-  const registerUser = async (email, password) => {
+  const registerUser = async (
+    name,
+    email,
+    phone,
+    deliveryAddress,
+    password
+  ) => {
     try {
-      dispatch({ type: REGISTER_USER })
+      dispatch({ type: REGISTER_USER_BEGIN })
       console.log('register action Begin')
       console.log(
         'FROM USER  CONTEXT!!!!!!',
@@ -73,8 +79,11 @@ export const AuthProvider = ({ children }) => {
       console.log(email, password, 'FROM   REGISTER CONTEXT>>>>>')
 
       const response = await axios.post(register_user_url, {
+        name: name,
         email: email,
-        password: password
+        password: password,
+        phone: phone,
+        deliveryAddress: deliveryAddress
       })
 
       const registeredUser = await response.data
@@ -99,7 +108,7 @@ export const AuthProvider = ({ children }) => {
         { email: email, password: password }
       )
 
-      const userLoginData = response.data
+      const userLoginData = await response.data
 
       console.log(userLoginData, 'RAW DATA FROM RESPONSE')
       const { token, tokenUser } = await userLoginData
@@ -136,7 +145,7 @@ export const AuthProvider = ({ children }) => {
         }
       }
 
-  const response = await axios(configuration)
+      const response = await axios(configuration)
 
       const userUpdatedData = await response.data
       console.log('Raw Data from Updated  request', userUpdatedData)
