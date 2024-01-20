@@ -6,8 +6,8 @@ const db = 'food-delivery'
 //const Food = 'Food'//const collection = 'tacos';
 
 // The current database to use.
-use(db)
-db.food.find({})
+// use(db)
+db.getCollection('payments').find({})
 // console.log(res)
 
 // Create a new collection.

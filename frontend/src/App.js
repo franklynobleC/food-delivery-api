@@ -1,4 +1,4 @@
-import './App.css'
+// import '/App.css'
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import {
@@ -40,7 +40,8 @@ function App () {
               </PrivateRoute>
             }
           />
-          // <Route
+          //{' '}
+          <Route
           //   path='/checkout'
           //   element={
           //     <PrivateRoute>

@@ -11,3 +11,4 @@ package.json
 .trunk
 models/playground-3.mongodb.js
 models/playground-learning.mongodb.js
+frontend/src/.env

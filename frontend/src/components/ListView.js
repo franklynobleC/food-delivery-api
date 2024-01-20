@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FiSearch } from 'react-icons/fi'
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import { Alert } from '@mui/material'
+
+// import { ToastContainer, toast } from 'react-toastify'
+// import 'react-toastify/dist/ReactToastify.css'
 
 import '../styles/foods.css'
 import '../styles/filteredFood.css'
@@ -79,7 +81,6 @@ const ListView = ({ foods }) => {
         <form onSubmit={handSearchSubmit} className='search-bar'>
           <input
             type='text'
-
             required
             className='search-input-search'
             value={searchFood}
@@ -111,7 +112,8 @@ const ListView = ({ foods }) => {
             </div>
             <div>
               <AddToCart food={food} />
-              <ToastContainer />
+              /**add to cat */ ;
+
             </div>
 
             <div className='food-spacer'></div>

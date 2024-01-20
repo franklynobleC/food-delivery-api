@@ -3,12 +3,12 @@
 // Use Ctrl+Space inside a snippet or a string literal to trigger completions.
 
 // The current database to use.
-use('food-delivery');
+use('food-delivery')
 
 // Search for documents in the current collection.
 
-
-db.getCollection('foods').updateMany({}, { $set: { quantity: 1 } })
+// db.getCollection('foods').updateMany({}, { $set: { quantity: 1 } })
+db.getCollection('payments').countDocuments({})
 
 // db.getCollection('foods')
 //   .find(
@@ -32,4 +32,3 @@ db.getCollection('foods').updateMany({}, { $set: { quantity: 1 } })
 //     * fieldB: -1 // descending
 //     */
 //   });
-  

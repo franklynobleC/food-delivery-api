@@ -114,7 +114,7 @@ function Auth () {
         />
       </div>
       <div class='signup-container'>
-        <button class='sign-up'>Sign Up</button>
+        <button class='sign-up'>Sign up</button>
       </div>
       <div class='password-reset-login'>
         <Link to={{ pathname: '/login', state: { from: location.pathname } }}>
@@ -128,5 +128,4 @@ function Auth () {
     </form>
   )
 }
-
 export default Auth
