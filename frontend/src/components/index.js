@@ -16,6 +16,7 @@ import AuthWrapper from '../pages/AuthWrapper'
 //TODO: import all data from  component and  give  it  a component  name
 import PrivateRoute from '../pages/PrivateRoute'
 import SvgComponent from './SvgComponent'
+import ActualPay from './ActualPay'
 export {
   FoodList,
   Services,
@@ -33,5 +34,6 @@ export {
   AuthWrapper,
   SvgComponent,
   CartSummary,
-  OrderSummary
+  OrderSummary,
+  ActualPay
 }

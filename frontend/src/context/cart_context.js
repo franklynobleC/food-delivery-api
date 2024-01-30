@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 import React, { useContext, useEffect, useReducer, useState } from 'react'
-import { create_orders_url } from '../utils/constants'
+import { create_orders_url, checkout_url } from '../utils/constants'
 import cart_reducer from '../reducers/cart_reducer'
 import {
   ADD_TO_CART,
@@ -12,6 +12,8 @@ import {
   CREATE_ORDER_SUCCESS,
   CREATE_ORDER_ERROR
 } from '../actions'
+
+//TODO: pass  this  to     cart state  in  initial State
 function getLocalStorageData () {
   const localData = localStorage.getItem('cart')
 
@@ -19,7 +21,7 @@ function getLocalStorageData () {
 }
 
 const initialState = {
-  cart: getLocalStorageData(),
+  cart: [],
   total_quantity: 0,
   total_price: 0,
   payment_option: '',
@@ -56,6 +58,7 @@ export const CartProvider = ({ children }) => {
   const clearCart = () => {
     dispatch({ type: CLEAR_CART })
   }
+
   const createOrder = async (cart, id, paymentoption, delivery_fee) => {
     dispatch({ type: CREATE_ORDER_BEGIN })
     let retrievedToken = JSON.parse(localStorage.getItem('token'))
@@ -94,6 +97,7 @@ export const CartProvider = ({ children }) => {
       const createdOrder = (await response.data) && response.statuscode === 201
 
       console.log('CREATED ORDER SUCCESS')
+      console.log('ORDER SUCCESS MESSAGE', await createOrder.data)
 
       dispatch({ type: CREATE_ORDER_SUCCESS, payload: createdOrder })
     } catch (error) {
@@ -105,6 +109,20 @@ export const CartProvider = ({ children }) => {
       })
     }
   }
+  const checkOut = async () => {
+    try {
+      const response = await axios.get(checkout_url)
+
+      const data = await response.data
+
+      console.log('response Payment url Link', data)
+      data ? (window.location.href = data) : ''
+    } catch (err) {
+      console.log('error', err)
+    }
+  }
+
+  //clear  from  local storage
   const clearFromLocalStorage = () => {
     localStorage.removeItem('cart')
     state.total_quantity = 0
@@ -113,8 +131,15 @@ export const CartProvider = ({ children }) => {
   }
   useEffect(() => {
     //dispatch this when  component mounts
-    dispatch({ type: COUNT_CART_TOTALS })
-    localStorage.setItem('cart', JSON.stringify(state.cart))
+    // dispatch({ type: COUNT_CART_TOTALS })
+    console.log('check cart STATE', state.cart)
+
+    if (state.cart !== null) {
+      dispatch({ type: COUNT_CART_TOTALS })
+      localStorage.setItem('cart', JSON.stringify(state.cart))
+      console.log(console.log(localStorage.getItem('cart')))
+    }
+
     //also, adding  to  the Dependency array, so it would remount when  item  in  the component  is changed
   }, [
     state.cart,
@@ -134,6 +159,7 @@ export const CartProvider = ({ children }) => {
         clearCart,
         removeItem,
         createOrder,
+        checkOut,
         clearFromLocalStorage
       }}
     >

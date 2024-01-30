@@ -13,11 +13,14 @@ const {
   getAllOrders,
   updateOrder,
   deleteOrder,
-  getSingleOrder
+  getSingleOrder,
+  checkOut
   // getOrderStatus
 } = require('../controllers/orderController')
 
 //TODO:  ADD the Authentication and  authorization for routes
+
+router.get('/checkout', checkOut)
 
 router.get('/getAllOrders', getAllOrders)
 router.get('/:id', getSingleOrder)

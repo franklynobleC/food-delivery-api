@@ -117,9 +117,9 @@ function Auth () {
         <button class='sign-up'>Sign up</button>
       </div>
       <div class='password-reset-login'>
-        <Link to={{ pathname: '/login', state: { from: location.pathname } }}>
+
           already have an account? Login
-        </Link>
+
         <div></div>
         {is_registered ? navigate('/login') : ''}
         <Link to='reset'>forgot password? Reset password</Link>

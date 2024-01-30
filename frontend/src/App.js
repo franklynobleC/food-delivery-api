@@ -11,7 +11,8 @@ import {
   Checkout,
   Auth,
   PrivateRoute,
-  AuthWrapper
+  AuthWrapper,
+  ActualCheckOut
 } from './pages'
 
 import { Footer, Navbar, Contact, Login } from './components/'
@@ -32,6 +33,7 @@ function App () {
           <Route path='/foods/:id' element={<SingleFood />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/checkout' element={<Checkout />} />
+          <Route path='/actualcheckOut' element={<ActualCheckOut />} />
           <Route
             path='/foods'
             element={

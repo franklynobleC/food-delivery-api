@@ -45,7 +45,6 @@ const cart_reducer = (state, action) => {
     }
   }
   if (action.type === COUNT_CART_TOTALS) {
-
     //TODO:  change  the Delivery   fee  to  use    Dynamically
     const { total_price, total_quantity } = state.cart.reduce(
       (total, cartItem) => {
@@ -96,6 +95,8 @@ const cart_reducer = (state, action) => {
 
   if (action.type === CREATE_ORDER_SUCCESS) {
     console.log('ORDER CREATE SUCCESS')
+
+    console.log('from Action PayLoad', action.payload)
 
     return {
       ...state,

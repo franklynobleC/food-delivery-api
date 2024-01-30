@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import { Route, useNavigate } from 'react-router-dom'
 
 import '../styles/cart/carttotal.css'
+
 //import { useAuthContext } from '../context/auth_context'
 const CartTotal = () => {
   const {
@@ -16,6 +17,8 @@ const CartTotal = () => {
     total_price,
     cart,
     createOrder,
+    is_order_created_success,
+    checkOut,
     payment_option,
     clearFromLocalStorage
   } = useCartContext()
@@ -53,9 +56,15 @@ const CartTotal = () => {
 
       createOrder(CartItems, userId, paymentOption, delivery_fee)
       //  TODO: ORDER CREATION,UPDATE, REDIRECT TO  PAYMENT  GATEWAY.
+
+      console.log('Console Success', is_order_created_success)
+      // const timeCheck = setTimeout(() => {
+
+      // }, 4000)
+      // clearTimeout(timeCheck)
     }
   }
-  <div>
+  ;<div>
     <Link to='foods'>
       <h1>Your Cart is Empty, Fill it</h1>
     </Link>
@@ -110,8 +119,17 @@ const CartTotal = () => {
           </fieldset>
         </div>
         <div>
+          {console.log('success Message', is_order_created_success)}
           {/*   <Link to='/checkout'>checkout</Link>   */}
+          {is_order_created_success ? (checkOut()) : ''}
 
+            {/* { */}
+              /* (window.location.href =
+              'https://nodejs.org/en/guides/anatomy-of-an-http-transaction/') */
+            {/* }
+          ) : (
+            <></>
+          )} */}
           <form onSubmit={HandleSubmit}>
             <button className='submit'>pay now</button>
           </form>

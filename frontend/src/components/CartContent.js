@@ -9,9 +9,9 @@ import OrderSummary from './OrderSummary'
 import { checkToken } from '../utils/constants'
 
 const CartContent = () => {
-  const { cart, clearCart } = useCartContext()
+  const { cart, clearCart, } = useCartContext()
   const { is_logged_in } = useAuthContext()
-  const [isTokenPresent, setIsTokenPresent] = useState(false)
+
   // pass the cart  item  here
   localStorage.setItem('cart', JSON.stringify(cart))
   const token = localStorage.getItem('token')

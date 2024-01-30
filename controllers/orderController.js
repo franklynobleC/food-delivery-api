@@ -6,7 +6,10 @@ const { restart } = require('nodemon')
 const { json } = require('stream/consumers')
 const { error } = require('console')
 const { STATUS_CODES } = require('http')
-const { makePayment } = require('../services/paymentService')
+const {
+  makePayment,
+  generateCheckoutUrl
+} = require('../services/paymentService')
 
 const { search } = require('../db/searchData')
 const { checkPermissions } = require('../utils')
@@ -16,21 +19,20 @@ const createOrder = async (req, res) => {
   // req.user = req.user.userId
   // console.log(req.user)
   //console.log(req.user.userId)
-console.log(req.body)
-console.log("Data  is from Data",req.data)
+  console.log(req.body)
+  console.log('Data  is from Data', req.data)
   const {
     OrderItems: cart,
     _id: id,
     paymentOption: paymentoption,
     deliveryFee
   } = req.body
-  console.log(typeof cart, "AND CART IS", cart)
+  console.log(typeof cart, 'AND CART IS', cart)
   console.log('CHECKING CART ID>>>>', cart.id)
   console.log(cart, paymentoption, deliveryFee)
   console.log('THIS IS  THE USER  ID', id)
   if (!id) {
     throw new Error({ message: 'OrderIdUser is required' })
-
   }
 
   const cartToItems = cart.map(item => {
@@ -99,7 +101,7 @@ console.log("Data  is from Data",req.data)
     user: userProperty
   })
   const orderItemId = await OrderSchema.findOne({ _id: createdOrderItem._id })
-  console.log(orderItemId, 'From Order DB')
+  console.log(orderItemId, 'From Ordera DB')
 
   const { paymentOption } = createdOrderItem
   console.log(paymentOption)
@@ -107,7 +109,16 @@ console.log("Data  is from Data",req.data)
   //const checkPaymentOption = await OrderSchema.find({ paymentOption })
   //console.log(checkPaymentOption, 'From Order DB')
   //const { paymentOption} =  checkPaymentOption
-  console.log(paymentOption, 'From Order DB')
+  // paymentOption.map((data)=> {
+  //   console.log(data)
+  // });
+  console.log(paymentOption, 'From Orderb DB')
+
+  const { data } = await paymentOption
+  console.log('check data')
+  console.log(paymentOption, 'From Orderb DB', data)
+  console.log('check data')
+
   if (paymentOption === 'cash') {
     console.log('Cash Payment Option Selected')
     const paymentData = await makePayment(
@@ -117,7 +128,7 @@ console.log("Data  is from Data",req.data)
       orderItemId._id,
       paymentOption
     )
-    console.log(paymentData, 'From Payment DB')
+    // console.log(paymentData, 'From Payment DB')
     //TODO: send email to user
   }
   //Todo: code clean  up to  handle  order  and and  payment and  send  emails
@@ -128,9 +139,15 @@ console.log("Data  is from Data",req.data)
     orderItemId._id,
     paymentOption
   )
-  //Todo: if  payment  is successful,  send  email to  the User
-  console.log(paymentData, 'From Payment DB')
-  res.status(StatusCodes.CREATED).json(createdOrderItem)
+  //Todo: if  payment  is successful,  send  email to  the User, Also send  theURL TO      FRONTEND TOMAKE  THE  PAYMENT
+  // console.log(paymentData 'From Payment DB')
+
+  // const datas = await paymentData.data
+  console.log('from Payment CheckOut', generateCheckoutUrl())
+  console.log('PAYMENT dATA', paymentData)
+
+  // console.log(data, 'DATA PAYMENT  URL')
+  res.status(StatusCodes.CREATED).json({ createdOrderItem, paymentData })
 }
 const getAllPendingOrders = async (req, res) => {
   const pendingOrders = await OrderSchema.find({ status: 'Pending' })
@@ -157,6 +174,8 @@ const getAllOrders = async (req, res) => {
 
 const getSingleOrder = async (req, res) => {
   const { id: singleOderId } = req.params
+
+  console.log('SINGLE ID  TO CHECK ERROR', singleOderId)
   const singleOrder = await OrderSchema.findOne({ _id: singleOderId })
 
   if (singleOrder === null || !singleOrder) {
@@ -211,10 +230,23 @@ const updateOrderStatus = async (req, res) => {
   //const  searchResult =   updateOrderStatus(searchWord,searchWord)
 }
 
+const checkOut = async (req, res) => {
+  try {
+    const checkoutUrl = await generateCheckoutUrl()
+    console.log('FROM check  out  get method', checkoutUrl)
+
+    res.json( checkoutUrl )
+  } catch (err) {
+    console.log(err.message)
+    res.status(500).json({ error: 'Failed to generate checkOut  url' })
+  }
+}
+
 module.exports = {
   createOrder,
-  getAllOrders,
   getSingleOrder,
+  checkOut,
+  getAllOrders,
   updateOrder,
   deleteOrder,
   getAllPendingOrders,
