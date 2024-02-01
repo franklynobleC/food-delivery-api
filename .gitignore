@@ -12,3 +12,5 @@ package.json
 models/playground-3.mongodb.js
 models/playground-learning.mongodb.js
 frontend/src/.env
+config/serviceAccountKey.json
+frontend/src/config/firebase-config.js
