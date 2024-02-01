@@ -5,6 +5,7 @@ const Bcrypt = require('bcryptjs')
 /* The code is defining a Mongoose schema for a user. It specifies the structure and validation rules
 for the user object. */
 
+//NOTE: This  schema  is  to store user Data, Note, The Password and  email is  managed  by  3rd Party Auth  fireBase,  the Schema  is  just  to Store All user Details
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -30,7 +31,7 @@ const UserSchema = new mongoose.Schema({
 
   deliveryAddress: {
     type: String,
-    required: [true, 'please provide  Delivery Address'],
+    required: [false, 'please provide  Delivery Address'],
     minlength: 5
   },
   password: {

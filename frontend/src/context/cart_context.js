@@ -116,7 +116,15 @@ export const CartProvider = ({ children }) => {
       const data = await response.data
 
       console.log('response Payment url Link', data)
-      data ? (window.location.href = data) : ''
+      // setTimeout(() => {
+      //  const  paymentUrl =
+      if (data) {
+        (window.location.href = data);
+      } else {
+        '';
+      }
+
+      // }, 2000)
     } catch (err) {
       console.log('error', err)
     }

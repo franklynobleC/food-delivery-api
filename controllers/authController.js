@@ -20,12 +20,12 @@ require('dotenv').config()
 //add Register, Login,  logOut,
 const register = async (req, res) => {
   console.log(req)
-  const { name, email, phone, deliveryAddress, password } = req.body
+  const { email,password,role } = req.body
 
   //console.log(req.body, 'FROM  REQUEST BODY')
-  console.log(name, email, phone, deliveryAddress, password)
+  console.log( email, password)
 
-  if ((!email || !password, !name || !deliveryAddress, !phone)) {
+  if ((!email || !password)) {
     console.log('Registration Error!')
     //  throw new Error('Please fill all the fields')
     return res.status(StatusCodes.BAD_REQUEST).json({ error: res.error })
@@ -42,10 +42,10 @@ const register = async (req, res) => {
   //await emailFunc(email,name)
 
   const createdUser = await UserSchema.create({
-    name,
+
     email,
-    phone,
-    deliveryAddress,
+    role,
+
     password
   })
 
@@ -61,6 +61,7 @@ const register = async (req, res) => {
   */
   //Todo:  if  user successfully registered,  send  user a  welcome mail
   // add UserToken
+  //TODO: ADD  FIREbASE  TOKEN TO RESPONSE
   const tokenUser = createTokenUser(createdUser)
 
   attachCookiesToResponse({ res, user: tokenUser })

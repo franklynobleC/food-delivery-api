@@ -1,11 +1,20 @@
 import React, { useEffect, useReducer, useContext, useState } from 'react'
 import axios from 'axios'
+import '../config/firebase-config'
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signOut
+} from 'firebase/auth'
 import {
   register_user_url,
   login_user_url,
   logout_user_url,
   single_user_url,
-  update_user_url
+  update_user_url,
+  forgot_password_url
 } from '../utils/constants'
 import auth_reducer from '../reducers/auth_reducer'
 // import { useFoodsContext } from '../context/foods_context'
@@ -40,10 +49,8 @@ const initialState = {
   userInfo_name: '',
   user_email: ''
 }
-
 //declare global context and  make it  Available Globally
 // also here, Set All  the Actions using Dispatch
-
 export const AuthContext = React.createContext()
 
 //create  user provider
@@ -51,7 +58,7 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null)
   const [user, setUser] = useState({})
   const [userInfo, setUserInfo] = useState({})
-  // const { fetchFoods } = useFoodsContext()
+  const auth = getAuth()
 
   //pass reducer function and  initial state Object
   //TODO: import and  use user sign_in_reducer
@@ -59,13 +66,7 @@ export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(auth_reducer, initialState)
 
   //Hit   API end point  for        register
-  const registerUser = async (
-    name,
-    email,
-    phone,
-    deliveryAddress,
-    password
-  ) => {
+  const registerUser = async (email, password) => {
     try {
       dispatch({ type: REGISTER_USER_BEGIN })
       console.log('register action Begin')
@@ -77,18 +78,30 @@ export const AuthProvider = ({ children }) => {
         password
       )
       console.log(email, password, 'FROM   REGISTER CONTEXT>>>>>')
+      const firebaseRegisterUserResponse = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      )
 
+      console.log(
+        'from  created fireBase Auth',
+        firebaseRegisterUserResponse.user
+      )
       const response = await axios.post(register_user_url, {
-        name: name,
+        // name: name,
         email: email,
-        password: password,
-        phone: phone,
-        deliveryAddress: deliveryAddress
+        password: password
+        // phone: phone,
+        // deliveryAddress: deliveryAddress
       })
 
       const registeredUser = await response.data
 
-      console.log('Register  SucceSS AFTER  RESPONSE FROM  CONTEXT')
+      console.log(
+        'Register  SucceSS AFTER  RESPONSE FROM  CONTEXT from  my DB',
+        registerUser
+      )
       dispatch({ type: REGISTER_SUCCESS, payload: registeredUser })
     } catch (error) {
       console.log(
@@ -102,6 +115,16 @@ export const AuthProvider = ({ children }) => {
   const loginUser = async (email, password) => {
     dispatch({ type: LOGIN_USER_BEGIN })
     try {
+      const firebaseLoginResponse = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      )
+      const tokenData = await (
+        await firebaseLoginResponse.user.getIdTokenResult()
+      ).token
+      localStorage.setItem('access_token', tokenData)
+      console.log('login from fireBase Token', tokenData)
       const response = await axios.post(
         login_user_url,
 
@@ -130,6 +153,44 @@ export const AuthProvider = ({ children }) => {
       dispatch({ type: LOGIN_USER_ERROR, payload: err.message })
     }
   }
+
+  const resetPassword = async email => {
+    // /  dispatch({ type: FORGOT_PASSWORD_BEGIN })
+
+    try {
+      const firbaseForgotPasswordLink = await sendPasswordResetEmail(
+        auth,
+        email
+      )
+
+      console.log(firbaseForgotPasswordLink)
+
+      // const forgotPassword = await firebaseLoginResponse.user.getIdTokenResult()
+
+      const response = await axios.post(forgot_password_url, {
+        email: email
+      })
+
+      const emailResponse = await response.data
+
+      console.log('Mail Was Sent to You SuccessFully', emailResponse)
+    } catch (err) {
+      console.log('error', err)
+    }
+  }
+  /**
+   * The updateUser function sends a PATCH request to update a user's name, email, and address using
+   * the provided userId and authorization token.
+   * @param userId - The `userId` parameter is the unique identifier of the user whose information
+   * needs to be updated. It is used to specify which user's data should be updated in the API request.
+   * @param name - The name parameter is the updated name of the user. It is a string value that
+   * represents the new name for the user.
+   * @param email - The `email` parameter is the new email address that you want to update for the
+   * user.
+   * @param address - The `address` parameter is the delivery address of the user. It is used to update
+   * the user's delivery address in the database.
+   */
+
   const updateUser = async (userId, name, email, address) => {
     try {
       const configuration = {
@@ -172,6 +233,7 @@ export const AuthProvider = ({ children }) => {
   //CALL  THIS  METHOD  IN  THE  COMPONENT  TO  LOGOUT
   const logoutUser = async () => {
     try {
+      await signOut(auth)
       const response = await axios.get(logout_user_url)
 
       const payloadData = await response.data
@@ -207,7 +269,8 @@ export const AuthProvider = ({ children }) => {
         token,
         user,
         getSingleUser,
-        updateUser
+        updateUser,
+        resetPassword
       }}
     >
       {children}

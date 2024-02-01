@@ -8,7 +8,7 @@ use('food-delivery')
 // Search for documents in the current collection.
 
 // db.getCollection('foods').updateMany({}, { $set: { quantity: 1 } })
-db.getCollection('payments').countDocuments({})
+db.getCollection('payments').deleteMany({})
 
 // db.getCollection('foods')
 //   .find(

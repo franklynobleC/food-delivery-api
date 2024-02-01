@@ -17,6 +17,7 @@ import AuthWrapper from '../pages/AuthWrapper'
 import PrivateRoute from '../pages/PrivateRoute'
 import SvgComponent from './SvgComponent'
 import ActualPay from './ActualPay'
+import PasswordReset from './PasswordReset'
 export {
   FoodList,
   Services,
@@ -35,5 +36,6 @@ export {
   SvgComponent,
   CartSummary,
   OrderSummary,
-  ActualPay
+  ActualPay,
+  PasswordReset
 }

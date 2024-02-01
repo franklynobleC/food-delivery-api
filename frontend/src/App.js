@@ -15,7 +15,7 @@ import {
   ActualCheckOut
 } from './pages'
 
-import { Footer, Navbar, Contact, Login } from './components/'
+import { Footer, Navbar, Contact, Login, PasswordReset } from './components/'
 
 function App () {
   return (
@@ -33,6 +33,7 @@ function App () {
           <Route path='/foods/:id' element={<SingleFood />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/checkout' element={<Checkout />} />
+          <Route path='/passwordReset' element={<PasswordReset />} />
           <Route path='/actualcheckOut' element={<ActualCheckOut />} />
           <Route
             path='/foods'

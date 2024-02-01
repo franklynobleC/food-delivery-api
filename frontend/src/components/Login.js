@@ -89,7 +89,7 @@ const Login = () => {
           <div class='password-reset-login'>
             <a href='/'>Home page</a>
 
-            <a href='./index.html'> forgot password? Reset password</a>
+            <Link to='/passwordReset'>forgot password? Reset password</Link>
           </div>
         </form>
       </div>
