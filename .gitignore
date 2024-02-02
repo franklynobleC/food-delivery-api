@@ -1,11 +1,9 @@
 ./package-lock.json
-./package.json
-.package.json
-/package.json
+
 /node_modules
 .env
 ./node_modules
-package.json
+
 
 .vscode
 .trunk
