@@ -43,7 +43,7 @@ function App () {
               </PrivateRoute>
             }
           />
-          //{' '}
+
           <Route
           //   path='/checkout'
           //   element={

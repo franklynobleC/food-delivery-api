@@ -121,7 +121,7 @@ export const CartProvider = ({ children }) => {
       if (data) {
         (window.location.href = data);
       } else {
-        '';
+        null;
       }
 
       // }, 2000)

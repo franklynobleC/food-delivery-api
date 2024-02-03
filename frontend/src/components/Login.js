@@ -35,11 +35,14 @@ const Login = () => {
     e.preventDefault()
     console.log(userPassword, userEmail)
     loginUser(userEmail, userPassword)
+    navigate(-1)
+
   }
   useEffect(() => {
     let timeCheck = setTimeout(() => {
-      fetchFoods()
-      navigate(location.state?.from)
+      // fetchFoods()
+  // navigate(-1)
+
     }, 2000)
     return () => clearTimeout(timeCheck)
   }, [userEmail, userPassword, is_error, is_logged_in])

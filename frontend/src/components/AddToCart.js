@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useCartContext } from '../context/cart_context'
-import AlertMessage from '../config/AlertMessage'
-import { Link } from 'react-router-dom'
 
+import { Link } from 'react-router-dom'
+// import { toast}
 import toast, { toastConfig } from 'react-simple-toasts'
-// import 'react-simple-toasts/dist/theme/success.css'
+import 'react-simple-toasts/dist/theme/success.css'
+// import 'react-simple-toasts/dist/theme/info.css'
 
 // toastConfig({ theme: 'success', position: 'top-right' })
-
+import { toastConfigAlert, ShowToast } from '../toastConfigAlert'
 const AddToCart = ({ food }) => {
   const { addToCart, cart, _id } = useCartContext()
 
@@ -20,8 +21,8 @@ const AddToCart = ({ food }) => {
     // console.log('THIS IS  FROM FOOD   ADD TO CART', food)
     addToCart(_id, quantity, food)
     setIsAdded(true)
-
-    toast('Item successfully added to cart')
+    toastConfigAlert.theme = 'success'
+    ShowToast('Item successfully added to cart',)
   }
 
   return (
@@ -29,9 +30,6 @@ const AddToCart = ({ food }) => {
       <button className='add-to-cart' onClick={() => handleAddToCart()}>
         add to cart 2
       </button>
-      {isAdded && (
-        <AlertMessage toastTheme={'info item add'} message={'item added'} />
-      )}
     </div>
   )
 }

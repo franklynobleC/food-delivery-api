@@ -9,7 +9,7 @@ function Auth () {
   const [formValues, setFormValues] = useState({
     email: '',
     password: ''
-  })
+  });
   let navigate = useNavigate()
   const handleChange = event => {
     event.preventDefault()
@@ -45,7 +45,8 @@ function Auth () {
     <form class='login-container' onSubmit={handleSubmit}>
       <div class='name-container'>
         <h2> Sign in Form</h2>
-        {/* <div class='name'></div>
+        {
+          /* <div class='name'></div>
         <input
           type='name'
           required
@@ -80,7 +81,8 @@ function Auth () {
           value={formValues.deliveryAddress}
           onChange={handleChange}
         />
-      </div> */}
+      </div> */
+        }
         <div class='email-container'>
           <input
             type='email'
@@ -112,7 +114,7 @@ function Auth () {
         <div class='password-reset-login'>
           {is_registered ? navigate('/login') : ''}
           <div>
-            <Link to='/login'>already have an account? Login</Link>
+            <Link to='/login'>Already have an account? Login</Link>
           </div>
         </div>
       </div>

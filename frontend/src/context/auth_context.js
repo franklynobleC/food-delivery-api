@@ -17,6 +17,8 @@ import {
   forgot_password_url
 } from '../utils/constants'
 import auth_reducer from '../reducers/auth_reducer'
+
+import{useHistory, withRouter} from 'react-router-dom'
 // import { useFoodsContext } from '../context/foods_context'
 import {
   REGISTER_ERROR,
