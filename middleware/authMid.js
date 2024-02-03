@@ -2,7 +2,8 @@
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
-// Middleware function to authenticate and authorize users
+// Middleware function to authenticate and authorize users, this works  using jwt.
+  //if  not using  fire base Auth change  to  this
 const authMiddleware = async (req, res, next) => {
   try {
     // Get the authorization header from the request

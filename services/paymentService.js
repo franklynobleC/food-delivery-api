@@ -57,6 +57,7 @@ const makePayment = async (email, amount, orderId, paymentOption) => {
         order: orderDetails,
         paymentOption: paymentOption
       })
+
       console.log(paymentToDb.data, 'FROM DATABASE')
       console.log(paymentToDb, 'FROM DATABASE')
       //TODO:send  email to users about item  placed and the Payment Option  they have selected
@@ -87,6 +88,7 @@ const makePayment = async (email, amount, orderId, paymentOption) => {
         paymentOption: paymentOption
       })
       console.log('PAYMENT WITH cash>>>>')
+      DataUrlLink.paymentUrl = 'Payment with  cash is initialized'
 
       console.log(paymentToDb, 'FROM DATABASE')
       //TODO: send  email to users about item  placed and the Payment Option  they have selected

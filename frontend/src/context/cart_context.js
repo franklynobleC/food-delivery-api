@@ -75,12 +75,13 @@ export const CartProvider = ({ children }) => {
 
       delivery_fee
     )
+    console.log(localStorage.getItem('access_token'))
     console.log('ABOVE DETAILS FOR  CREATED ORDER BEGIN!!')
     const configuration = {
       method: 'post',
       url: create_orders_url,
       headers: {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('token'))}`
+        Authorization: `Bearer ${localStorage.getItem('access_token')}`
       },
       data: {
         OrderItems: cart,
@@ -119,9 +120,9 @@ export const CartProvider = ({ children }) => {
       // setTimeout(() => {
       //  const  paymentUrl =
       if (data) {
-        (window.location.href = data);
+        window.location.href = data
       } else {
-        null;
+        null
       }
 
       // }, 2000)

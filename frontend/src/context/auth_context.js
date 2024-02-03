@@ -6,7 +6,9 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
-  signOut
+  signOut,
+  verifyBeforeUpdateEmail,
+sendEmailVerification
 } from 'firebase/auth'
 import {
   register_user_url,
@@ -18,7 +20,7 @@ import {
 } from '../utils/constants'
 import auth_reducer from '../reducers/auth_reducer'
 
-import{useHistory, withRouter} from 'react-router-dom'
+import { useHistory, withRouter } from 'react-router-dom'
 // import { useFoodsContext } from '../context/foods_context'
 import {
   REGISTER_ERROR,
@@ -86,9 +88,15 @@ export const AuthProvider = ({ children }) => {
         password
       )
 
+      const userd = firebaseRegisterUserResponse.user
+      // await user.sendEmailVerification()
+      sendEmailVerification(userd)
+
+      // verifyBeforeUpdateEmail(email)
+
       console.log(
-        'from  created fireBase Auth',
-        firebaseRegisterUserResponse.user
+        'from  created fireBase Auth'
+        // firebaseRegisterUserResponse.user.uid
       )
       const response = await axios.post(register_user_url, {
         // name: name,

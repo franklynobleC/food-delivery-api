@@ -7,7 +7,7 @@ const db = 'food-delivery'
 
 // The current database to use.
 // use(db)
-db.getCollection('payments').find({})
+db.getCollection('orders').deleteMany({})
 // console.log(res)
 
 // Create a new collection.

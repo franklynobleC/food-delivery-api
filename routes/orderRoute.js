@@ -6,6 +6,7 @@ const {
   authenticateUser,
   authorizedPermissions
 } = require('../middleware/authentication')
+const Middleware = require('../middleware/index')
 const authMiddleware = require('../middleware/authMid')
 
 const {
@@ -26,7 +27,8 @@ router.get('/getAllOrders', getAllOrders)
 router.get('/:id', getSingleOrder)
 router.post(
   '/createOrder',
-  authMiddleware,
+  // authMiddleware,
+  Middleware.decode,
   // authorizePermissions('admin', 'user'),
   createOrder
 )

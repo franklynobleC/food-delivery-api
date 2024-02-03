@@ -28,7 +28,7 @@ const AddToCart = ({ food }) => {
   return (
     <div className=''>
       <button className='add-to-cart' onClick={() => handleAddToCart()}>
-        add to cart 2
+        add to cart
       </button>
     </div>
   )
