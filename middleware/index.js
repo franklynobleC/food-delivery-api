@@ -4,33 +4,46 @@ class Middleware {
   async decode (req, res, next) {
     console.log(req.headers.authorization)
     const token = req.headers.authorization.split(' ')[1]
+    let checkClaims1
     console.log('FROM FIRE  BASE AUTH  TEST  TOKEN  CHECK')
     try {
       const decodeValue = await admin.auth().verifyIdToken(token)
       // decodeValue.email_verified = true
-      let checkClaims1;
       console.log('UUID:', decodeValue.uid)
       if (decodeValue.email === 'essienfrankudom@gmail.com') {
-        const decode2 = await admin
-          .auth()
-          .setCustomUserClaims(decodeValue.uid, {
-            admin: true
-          })
+        checkClaims1 = await admin.auth().setCustomUserClaims(decodeValue.sub, {
+          role: {
+            admin: true,
+            user: false
+          }
+        })
+      } else {
+        checkClaims1 = admin.auth().setCustomUserClaims(decodeValue.sub, {
+          role: {
+            user: true
+          }
+        })
       }
 
       // console.log('checking what  Claims  is', claims)
 
-      console.log('Token Value from Server:', decodeValue)
-
-      const checkClaims = (await admin.auth().getUser()).customClaims
-      console.log('check claims', checkClaims)
+      console.log('Token Value from Server:', decodeValue, 'user is', req.user)
+      // (await admin.auth().getUser()).customClaims
+      // console.log('check claims', checkClaims)
       if (decodeValue) {
-        console.log('DECODE VALUE SEARCHING ROLES', decodeValue.roles)
-        req.user = decodeValue
+        console.log('DECODE VALUE SEARCHING ROLES', decodeValue.role)
+        req.user = {
+          role: decodeValue.role,
+          email: decodeValue.email
+        }
+        // req.user = decodeValue.role,
 
-        console.log('USER  IS', req.user)
+        // console.log(checkClaims1)
+        // req.user = checkClaims1
 
-        console.log('from  firebase Auth')
+        console.log('USER  IS', req.user.role)
+
+        // console.log('from  firebase Auth claims', checkClaims1)
 
         return next()
       }
@@ -46,10 +59,24 @@ class Middleware {
         console.log(token)
         return res.json({ message: 'user Not Logged In' })
       }
-      console.log('Error Occurred In ')
+      console.log('Error Occurred In ', e)
 
       return res.json({ message: 'Internal server Error' })
     }
+  }
+
+  async authorizePermissions (req, res, next) {
+    // return (req, res, next) => {
+    if (!req.user.role.admin) {
+      // throw new CustomError.UnauthorizedError(
+      //   'Unauthorized to access this route'
+      // )
+      console.log('Unauthorize to access This Route!!')
+      return 'Unauthorized to access this route'
+    }
+    console.log('Auth method works authorization Permission', req.user.role)
+    next()
+    // }
   }
 }
 
