@@ -43,7 +43,8 @@ export const foods_url = 'http://localhost:5000/api/v1/foods/getAllFoods'
 export const single_food_url =
   'http://localhost:5000/api/v1/foods/getsingleFood/'
 export const register_user_url = 'http://localhost:5000/api/v1/auth/register'
-export const forgot_password_url = 'http://localhost:5000/api/v1/auth/forgotPassword'
+export const forgot_password_url =
+  'http://localhost:5000/api/v1/auth/forgotPassword'
 export const login_user_url = 'http://localhost:5000/api/v1/auth/login'
 export const logout_user_url = 'http://localhost:5000/api/v1/auth/logout'
 export const create_orders_url =
@@ -51,7 +52,9 @@ export const create_orders_url =
 export const single_user_url = 'http://localhost:5000/api/v1/users/'
 export const update_user_url = 'http://localhost:5000/api/v1/users/'
 export const checkout_url = 'http://localhost:5000/api/v1/orders/checkout'
-
+export const all_orders_url = 'http://localhost:5000/api/v1/orders/getAllOrders'
+export const all_payments_url =
+  'http://localhost:5000/api/v1/payment/getAllPayments'
 export const checkToken = () => {
   const token = localStorage.getItem('token')
   if (token) {

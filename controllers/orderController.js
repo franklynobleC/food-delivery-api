@@ -162,6 +162,7 @@ const getAllPendingOrders = async (req, res) => {
 }
 const getAllOrders = async (req, res) => {
   const allOrders = await OrderSchema.find({})
+  console.log('All ORDERS routes called')
 
   if (!allOrders || allOrders.length === 0) {
     res.status(StatusCodes.NOT_FOUND).json({
@@ -235,7 +236,7 @@ const checkOut = async (req, res) => {
     const checkoutUrl = await generateCheckoutUrl()
     console.log('FROM check  out  get method', checkoutUrl)
 
-    res.json( checkoutUrl )
+    res.json(checkoutUrl)
   } catch (err) {
     console.log(err.message)
     res.status(500).json({ error: 'Failed to generate checkOut  url' })

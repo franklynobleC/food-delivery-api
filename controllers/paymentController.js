@@ -25,7 +25,7 @@ const createPayment = async (req, res) => {
 
 const getAllPayments = async (req, res) => {
   const payments = await PaymentSchema.find({})
-
+     console.log('All payments routes called')
   if (!payments) {
     res
       .stat(StatusCodes.NOT_FOUND)
