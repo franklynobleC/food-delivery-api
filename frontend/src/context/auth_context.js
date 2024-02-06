@@ -20,8 +20,8 @@ import {
 } from '../utils/constants'
 import auth_reducer from '../reducers/auth_reducer'
 
-import { useHistory, withRouter } from 'react-router-dom'
-// import { useFoodsContext } from '../context/foods_context'
+// import { useHistory, withRouter, Link } from 'react-router-dom'
+
 import {
   REGISTER_ERROR,
   REGISTER_SUCCESS,
