@@ -32,7 +32,7 @@ const initialState = {
   is_loading: false
 }
 
-// In   Context  is a feature that allows you to
+//   In  Context  is a feature that allows you to
 //  share data between components without passing it
 //  through intermediate components explicitly.It
 //  provides a way to pass data down the component
@@ -68,13 +68,7 @@ export const CartProvider = ({ children }) => {
 
     setUserToken(retrievedToken)
 
-    console.log(
-      'THIS IS FROM CREAT ORDER  POST REQUEEST  TO BACKEND',
-      cart,
-      id,
-
-      delivery_fee
-    )
+    console.log('THIS IS FROM CREATE ORDER  POST REQUEST  TO BACKEND',cart,id,delivery_fee)
     console.log(localStorage.getItem('access_token'))
     console.log('ABOVE DETAILS FOR  CREATED ORDER BEGIN!!')
     const configuration = {
@@ -124,7 +118,6 @@ export const CartProvider = ({ children }) => {
       } else {
         null
       }
-
       // }, 2000)
     } catch (err) {
       console.log('error', err)

@@ -70,6 +70,8 @@ const makePayment = async (email, amount, orderId, paymentOption) => {
       console.error(error)
     }
   }
+
+  //TODO:REMOVE  PAYMENT  WITH CASH from  DATABASE
   if (paymentOption === 'cash') {
     try {
       const orderDetails = await OrderSchema.findOne({ _id: orderId })
@@ -82,15 +84,12 @@ const makePayment = async (email, amount, orderId, paymentOption) => {
       //generate   customize tran Id for for  cash Payment
       const paymentToDb = await PaymentSchema.create({
         transactionId: 'generate tran  id with Dat  func',
-        amount: amount,
+        amount,
         //status: response.data.status,
         order: orderDetails,
-        paymentOption: paymentOption
+        paymentOption
       })
-      console.log('PAYMENT WITH cash>>>>')
       DataUrlLink.paymentUrl = 'Payment with  cash is initialized'
-
-      console.log(paymentToDb, 'FROM DATABASE')
       //TODO: send  email to users about item  placed and the Payment Option  they have selected
 
       return paymentToDb

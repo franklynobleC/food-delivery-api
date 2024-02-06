@@ -13,14 +13,14 @@ class Middleware {
       if (decodeValue.email === 'essienfrankudom@gmail.com') {
         checkClaims1 = await admin.auth().setCustomUserClaims(decodeValue.sub, {
           role: {
-            admin: true,
-            user: false
+            admin: 'admin'
+            // user: 'user'
           }
         })
       } else {
         checkClaims1 = admin.auth().setCustomUserClaims(decodeValue.sub, {
           role: {
-            user: true
+            user: 'user'
           }
         })
       }
@@ -65,18 +65,20 @@ class Middleware {
     }
   }
 
-  async authorizePermissions (req, res, next) {
-    // return (req, res, next) => {
-    if (!req.user.role.admin) {
-      // throw new CustomError.UnauthorizedError(
-      //   'Unauthorized to access this route'
-      // )
-      console.log('Unauthorize to access This Route!!')
-      return 'Unauthorized to access this route'
+  authorizePermissions = (...roles) => {
+    return (req, res, next) => {
+      if (!roles.includes(req.user.role.admin || req.user.role.user)) {
+        // throw new CustomError.UnauthorizedError(
+        //   'Unauthorized to access this route'
+        console.log(req.user.role)
+        // )
+        console.log('Unauthorize to access This Route!!')
+        return 'Unauthorized to access this route'
+      }
+      console.log('Auth method works authorization Permission', req.user.role)
+      next()
+      // }
     }
-    console.log('Auth method works authorization Permission', req.user.role)
-    next()
-    // }
   }
 }
 
