@@ -8,7 +8,7 @@ import {
   sendPasswordResetEmail,
   signOut,
   verifyBeforeUpdateEmail,
-sendEmailVerification
+  sendEmailVerification
 } from 'firebase/auth'
 import {
   register_user_url,
@@ -188,6 +188,22 @@ export const AuthProvider = ({ children }) => {
       console.log('error', err)
     }
   }
+  //
+  useEffect(() => {
+    //  const  unsubscribe =
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      if (user) {
+        console.log('USER on Auth State change is  logged in', user)
+        console.log(user.uid)
+      } else {
+        console.log('USER on Auth State change IS  NOT  logged in', user)
+      }
+    })
+    return () => {
+      unsubscribe()
+    }
+  }, [])
+
   /**
    * The updateUser function sends a PATCH request to update a user's name, email, and address using
    * the provided userId and authorization token.

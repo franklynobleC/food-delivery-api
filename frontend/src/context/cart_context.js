@@ -68,7 +68,12 @@ export const CartProvider = ({ children }) => {
 
     setUserToken(retrievedToken)
 
-    console.log('THIS IS FROM CREATE ORDER  POST REQUEST  TO BACKEND',cart,id,delivery_fee)
+    console.log(
+      'THIS IS FROM CREATE ORDER  POST REQUEST  TO BACKEND',
+      cart,
+      id,
+      delivery_fee
+    )
     console.log(localStorage.getItem('access_token'))
     console.log('ABOVE DETAILS FOR  CREATED ORDER BEGIN!!')
     const configuration = {
@@ -114,9 +119,9 @@ export const CartProvider = ({ children }) => {
       // setTimeout(() => {
       //  const  paymentUrl =
       if (data) {
-        window.location.href = data
+        window.location.href = await data
       } else {
-        null
+        window.location.href = ''
       }
       // }, 2000)
     } catch (err) {
