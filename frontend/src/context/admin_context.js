@@ -6,7 +6,8 @@ import {
   update_food_url,
   update_user_url,
   delete_food_url,
-  foods_url
+  foods_url,
+  all_users_url
 } from '../utils/constants'
 import axios from 'axios'
 import { FoodsContext } from './foods_context'
@@ -15,7 +16,11 @@ import {
   GET_ALL_PAYMENTS_SUCCESS,
   GET_FOODS_ERROR,
   GET_FOODS_SUCCESS,
-  UPDATE_SINGLE_FOOD
+  UPDATE_SINGLE_FOOD,
+  GET_ALL_FOODS_SUCCESS,
+  GET_ALL_ORDERS_SUCCESS,
+  GET_ALL_USERS_SUCCESS,
+  GET_ALL_USERS_ERROR
 } from '../actions'
 const initialState = {
   is_error: false,
@@ -23,6 +28,8 @@ const initialState = {
   loading: false,
   payments_error: false,
   orders_error: false,
+  foods_error: false,
+users_error:false,
   orders: [],
   payments: [],
   users: []
@@ -40,7 +47,7 @@ export const AdminProvider = ({ children }) => {
       console.log(orders)
       setOrdersData(orders)
       console.log('this  is  orders Data', ordersData)
-      dispatch({ type: GET_FOODS_SUCCESS, payload: orders })
+      dispatch({ type: GET_ALL_ORDERS_SUCCESS, payload: orders })
     } catch (err) {
       console.log(err)
     }
@@ -52,10 +59,21 @@ export const AdminProvider = ({ children }) => {
 
       const foods = await foodsResponse.data
       console.log(foods)
-      dispatch({ type: GET_FOODS_SUCCESS, payload: foods })
+      dispatch({ type: GET_ALL_FOODS_SUCCESS, payload: foods })
     } catch (err) {
       console.log(err)
       dispatch({ type: GET_FOODS_ERROR, payload: err.message })
+    }
+  }
+  const fetchUsers = async () => {
+    try {
+      const userResponse = await axios.get(all_users_url)
+      const users = await userResponse.data
+      console.log(users)
+      dispatch({ type: GET_ALL_USERS_SUCCESS, payload: users })
+    } catch (err) {
+      console.log(err)
+      dispatch({ type: GET_ALL_USERS_ERROR, payload: err.message })
     }
   }
 
@@ -64,7 +82,8 @@ export const AdminProvider = ({ children }) => {
       const responsePayments = await axios.get(all_payments_url)
 
       const payments = await responsePayments.data
-      console.log(responsePaymentData)
+
+      console.log(payments)
       setPaymentsData(payments)
       console.log('all  payment Data', paymentsData)
       dispatch({ type: GET_ALL_PAYMENTS_SUCCESS, payload: payments })
@@ -96,6 +115,7 @@ export const AdminProvider = ({ children }) => {
     fetchPayments()
     fetchFoods()
     fetchOrders()
+    fetchUsers()
   }, [])
 
   return (
