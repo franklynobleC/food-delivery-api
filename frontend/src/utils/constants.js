@@ -51,6 +51,13 @@ export const create_orders_url =
   'http://localhost:5000/api/v1/orders/createOrder'
 export const single_user_url = 'http://localhost:5000/api/v1/users/'
 export const update_user_url = 'http://localhost:5000/api/v1/users/'
+
+//ADMIN
+export const uploadImage_url = 'http://localhost:5000/api/v1/foods/uploadImage'
+export const update_food_url = 'http://localhost:5000/api/v1/foods/id'
+export const create_food_url =
+  'http://localhost:5000/api/v1/foods/createFood'
+export const delete_product_url = 'http://localhost:5000/api/v1/food/id'
 export const checkout_url = 'http://localhost:5000/api/v1/orders/checkout'
 export const all_orders_url = 'http://localhost:5000/api/v1/orders/getAllOrders'
 export const all_payments_url =
