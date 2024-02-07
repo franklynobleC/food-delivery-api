@@ -7,9 +7,9 @@ require('dotenv').config()
 
 //get All  users from Database
 const getAllUsers = async (req, res) => {
-  const allUsers = await UserSchema.find({})
+  const users = await UserSchema.find({})
 
-  if (!allUsers || allUsers.length === 0) {
+  if (!users || users.length === 0) {
     //throw new Error("No users Found in User's table")
 
     res
@@ -18,7 +18,7 @@ const getAllUsers = async (req, res) => {
     return
   }
 
-  res.status(StatusCodes.OK).json({ users: { allUsers } })
+  res.status(StatusCodes.OK).json( users )
 }
 
 /*
@@ -40,8 +40,9 @@ const getSingleUser = async (req, res) => {
   res.status(StatusCodes.OK).json(user)
 }
 
-//TODO
+//TODO: MAKE SURE USER NAMES AND  ALL DETAILS ARE NOT NULL, ALSO, LINK USER NAME WITH ORDERS TABLE
 //addUpdate a SingleUser's  name and  email Functionality
+
 const updateUser = async (req, res) => {
   const { name, email, deliveryAddress } = req.body
   const { id } = req.params

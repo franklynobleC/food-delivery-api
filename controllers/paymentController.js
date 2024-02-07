@@ -25,14 +25,14 @@ const createPayment = async (req, res) => {
 
 const getAllPayments = async (req, res) => {
   const payments = await PaymentSchema.find({})
-     console.log('All payments routes called')
+  console.log('All payments routes called')
   if (!payments) {
     res
       .stat(StatusCodes.NOT_FOUND)
       .json({ message: 'Failed!, no data found  in  payments Db' })
   }
 
-  res.status(StatusCodes.OK).json({ payments: payments })
+  res.status(StatusCodes.OK).json(payments)
 }
 
 const getSInglePayment = async (req, res) => {
@@ -64,9 +64,7 @@ const deletePayment = async (req, res) => {
 }
 
 //TODO: GET  PAYMENTS  BASED ON STATUS(confirmed,pending,failed,success)
-const paymentStatus = async (req, res) => {
-
-}
+const paymentStatus = async (req, res) => {}
 module.exports = {
   createPayment,
   getAllPayments,
