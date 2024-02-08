@@ -2,8 +2,8 @@ const OrderSchema = require('../models/Order')
 const FoodSchema = require('../models/Food')
 const UserSchema = require('../models/User')
 const { StatusCodes } = require('http-status-codes')
-const { restart } = require('nodemon')
-const { json } = require('stream/consumers')
+// const { restart } = require('nodemon')
+// const { json } = require('stream/consumers')
 const { error } = require('console')
 const { STATUS_CODES } = require('http')
 const {
@@ -170,7 +170,7 @@ const getAllOrders = async (req, res) => {
     })
   }
 
-  res.status(StatusCodes.OK).json({ orders: allOrders })
+  res.status(StatusCodes.OK).json(allOrders )
 }
 
 const getSingleOrder = async (req, res) => {

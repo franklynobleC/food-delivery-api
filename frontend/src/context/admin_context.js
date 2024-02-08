@@ -126,7 +126,8 @@ export const AdminProvider = ({ children }) => {
         fetchPayments,
         fetchFoods,
         updateFood,
-        deleteFood
+        deleteFood,
+        fetchUsers
       }}
     >
       {children}

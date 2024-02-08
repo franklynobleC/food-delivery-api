@@ -16,7 +16,7 @@ import {
 } from './pages'
 
 import { Footer, Navbar, Contact, Login, PasswordReset } from './components/'
-
+import { OrdersPage, PaymentsPage, UsersPage } from './pages/dashboardPages'
 function App () {
   return (
     <AuthWrapper>
@@ -43,7 +43,8 @@ function App () {
               </PrivateRoute>
             }
           />
-
+          TODO:
+          {/* ADD  CHECKOUT  PAGE  TO  PROTECTED ROUTE */}
           <Route
           //   path='/checkout'
           //   element={

@@ -193,8 +193,10 @@ export const AuthProvider = ({ children }) => {
     //  const  unsubscribe =
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
-        console.log('USER on Auth State change is  logged in', user)
-        console.log(user.uid)
+        console.log('USER on Auth State change is  logged in', user.UserImpl)
+        const userImp = user
+        console.log('USER  IMP',userImp)
+        console.log(user)
       } else {
         console.log('USER on Auth State change IS  NOT  logged in', user)
       }
