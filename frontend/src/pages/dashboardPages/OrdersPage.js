@@ -1,8 +1,11 @@
 import React from 'react'
-
-function OrdersPage() {
+import       {UserList} from '../../components/dashboard/components'
+const OrdersPage=()=> {
   return (
-    <div>OrdersPage</div>
+    <div>OrdersPage
+    'AdminPage.js
+   <UserList/>
+    </div>
   )
 }
 

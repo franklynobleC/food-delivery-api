@@ -14,9 +14,17 @@ import {
   AuthWrapper,
   ActualCheckOut
 } from './pages'
+import { Orders, Payments, Users } from './pages/dashboardPages'
 
 import { Footer, Navbar, Contact, Login, PasswordReset } from './components/'
-import { OrdersPage, PaymentsPage, UsersPage } from './pages/dashboardPages'
+import {
+  OrdersPage,
+  PaymentsPage,
+  UsersPage,
+  // AdminPage
+} from './pages/dashboardPages'
+import AdminPage from './pages/dashboardPages/AdminPage'
+// import {Admin} from './components/dashboard/components'
 function App () {
   return (
     <AuthWrapper>
@@ -34,6 +42,10 @@ function App () {
           <Route path='/cart' element={<Cart />} />
           <Route path='/checkout' element={<Checkout />} />
           <Route path='/passwordReset' element={<PasswordReset />} />
+          {/* <Route path='/dashboard/users' element={<Users />} /> */}
+
+          {/* TODO:  WRAP   DASHBOARD ROUTE TO A PRIVATE ROUTE */}
+          <Route path='dashboard/*' element={<AdminPage />} />
           <Route path='/actualcheckOut' element={<ActualCheckOut />} />
           <Route
             path='/foods'

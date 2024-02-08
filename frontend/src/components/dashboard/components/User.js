@@ -1,9 +1,20 @@
 
 import React from 'react'
 
-function User() {
+const User =()=>{
   return (
-    <div>User</div>
+    <div>
+      User
+      <p>user</p>
+      <p>user</p>
+      <p>user</p>
+      <p>user</p>
+      <p>user</p>
+      <p>user</p>
+      <p>user</p>
+      <p>user</p>
+
+    </div>
   )
 }
 

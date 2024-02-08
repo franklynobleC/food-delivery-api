@@ -1,3 +1,7 @@
-import { OrdersPage, PaymentsPage, UsersPage } from '../dashboardPages'
+// import { OrdersPage, PaymentsPage, UsersPage } from '../dashboardPages'
+import  Orders from '../dashboardPages/OrdersPage'
+import  Payments from '../dashboardPages/PaymentsPage'
+import  Users from '../dashboardPages/UsersPage'
+// import  OrdersPage from '../dashboardPages/OrdersPage'
 
-export { OrdersPage, PaymentsPage, UsersPage }
+export { Orders, Payments, Users }

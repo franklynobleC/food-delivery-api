@@ -1,8 +1,19 @@
 import React from 'react'
 
-function PaymentList() {
+const PaymentList = () => {
   return (
-    <div>PaymentList</div>
+    <div>
+      PaymentList'
+      <p>paymentList</p>
+      <p>paymentList</p>
+      <p>paymentList</p>
+      <p>paymentList</p>
+      <p>paymentList</p>
+      <p>paymentList</p>
+      <p>paymentList</p>
+      <p>paymentList</p>
+      {console.log('payment Route')}
+    </div>
   )
 }
 
