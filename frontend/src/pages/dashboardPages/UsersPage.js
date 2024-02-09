@@ -1,5 +1,4 @@
 import React from 'react'
-
 const UsersPage = () => {
   return (
     <div>
@@ -12,20 +11,7 @@ const UsersPage = () => {
       <p>user</p>
       <p>user</p>
       <p>user</p>
-      <p>user</p>
-      <p>user</p>
-      <p>user</p>
-      <p>user</p>
-      <p>user</p>
-      <p>user</p>
-      <p>user</p>
-      <p>user</p>
-      <p>user</p>
-      <p>user</p>
-      <p>user</p>
-      <p>user</p>
-      <p>user</p>
-      <p>user</p>
+
       {console.log('USER FROM  DASHBOARD')}
     </div>
   )

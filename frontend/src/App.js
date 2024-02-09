@@ -1,6 +1,11 @@
 // import '/App.css'
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation
+} from 'react-router-dom'
 import {
   Home,
   About,
@@ -20,57 +25,80 @@ import { Footer, Navbar, Contact, Login, PasswordReset } from './components/'
 import {
   OrdersPage,
   PaymentsPage,
-  UsersPage,
+  UsersPage
   // AdminPage
 } from './pages/dashboardPages'
 import AdminPage from './pages/dashboardPages/AdminPage'
-// import {Admin} from './components/dashboard/components'
-function App () {
+
+export function Root () {
   return (
     <AuthWrapper>
       <Router>
-        {/*// add Navbar and Side Bar here  and side bar */}
-        <Navbar />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='about' element={<About />} />
-          <Route path='contact' element={<Contact />} />
-          // <Route path='foods' element={<Foods />} />
-          <Route path='/signin' element={<Auth />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/foods/:id' element={<SingleFood />} />
-          <Route path='/cart' element={<Cart />} />
-          <Route path='/checkout' element={<Checkout />} />
-          <Route path='/passwordReset' element={<PasswordReset />} />
-          {/* <Route path='/dashboard/users' element={<Users />} /> */}
-
-          {/* TODO:  WRAP   DASHBOARD ROUTE TO A PRIVATE ROUTE */}
-          <Route path='dashboard/*' element={<AdminPage />} />
-          <Route path='/actualcheckOut' element={<ActualCheckOut />} />
-          <Route
-            path='/foods'
-            element={
-              <PrivateRoute>
-                <Foods />
-              </PrivateRoute>
-            }
-          />
-          TODO:
-          {/* ADD  CHECKOUT  PAGE  TO  PROTECTED ROUTE */}
-          <Route
-          //   path='/checkout'
-          //   element={
-          //     <PrivateRoute>
-          //       <Checkout />
-          //     </PrivateRoute>
-          //   }
-          />
-          <Route path='*' element={<Error />} />
-        </Routes>
-        <Footer />
+        <App />
       </Router>
     </AuthWrapper>
   )
 }
 
-export default App
+// import {Admin} from './components/dashboard/components'
+
+function App () {
+  const location = useLocation()
+  // const isDashboardPage = location.pathname.startsWith('/dashboard')
+
+  // console.log('Location is', location.pathname)
+  const isDashboardRoute = location.pathname.startsWith('/dashboard')
+ console.log(location.pathname)
+
+  console.log(isDashboardRoute.valueOf())
+  return (
+    <>
+      {/* // <AuthWrapper> */}
+      {/* // <Router> */}
+      {/*// add Navbar and Side Bar here  and side bar */}
+      {!isDashboardRoute && <Navbar />}
+
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='about' element={<About />} />
+        <Route path='contact' element={<Contact />} />
+        // <Route path='foods' element={<Foods />} />
+        <Route path='/signin' element={<Auth />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/foods/:id' element={<SingleFood />} />
+        <Route path='/cart' element={<Cart />} />
+        <Route path='/checkout' element={<Checkout />} />
+        <Route path='/passwordReset' element={<PasswordReset />} />
+        {/* <Route path='/dashboard/users' element={<Users />} /> */}
+        {/* TODO:  WRAP   DASHBOARD ROUTE TO A PRIVATE ROUTE */}
+        <Route path='dashboard/*' element={<AdminPage />} />
+        <Route path='/actualcheckOut' element={<ActualCheckOut />} />
+        <Route
+          path='/foods'
+          element={
+            <PrivateRoute>
+              <Foods />
+            </PrivateRoute>
+          }
+        />
+        TODO:
+        {/* ADD  CHECKOUT  PAGE  TO  PROTECTED ROUTE */}
+        <Route
+        //   path='/checkout'
+        //   element={
+        //     <PrivateRoute>
+        //       <Checkout />
+        //     </PrivateRoute>
+        //   }
+        />
+        <Route path='*' element={<Error />} />
+      </Routes>
+      <Footer />
+      {/* // </Router> */}
+      {/* // </AuthWrapper> */}
+    </>
+  )
+}
+
+//NOTE: THE MAIN APP COMPONENT WOULD  RENDER   ROOT COMPONENTS  INTO  THE  INDEX  PAGE
+export default Root

@@ -7,7 +7,6 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
-  verifyBeforeUpdateEmail,
   sendEmailVerification
 } from 'firebase/auth'
 import {
@@ -188,17 +187,22 @@ export const AuthProvider = ({ children }) => {
       console.log('error', err)
     }
   }
-  //
+  //TODO: IF  LOGIN  IS SUCCESSFULLY,AND  USER IS  ADMIN, CALL ALL  BACKEND  DATA FOR ADMIN
   useEffect(() => {
     //  const  unsubscribe =
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
-        console.log('USER on Auth State change is  logged in', user.UserImpl)
-        const userImp = user
-        console.log('USER  IMP',userImp)
-        console.log(user)
+        user
+          .getIdTokenResult()
+          .then(data => {
+            const cl = data.claims.role?.admin || data.claims.role?.user
+            console.log('Claims>>>>>cCLLL', cl)
+          })
+          .catch(e => {
+            console.log('Erro  claims', e)
+          })
       } else {
-        console.log('USER on Auth State change IS  NOT  logged in', user)
+        // console.log('USER on Auth State change IS  NOT  logged in', user)
       }
     })
     return () => {

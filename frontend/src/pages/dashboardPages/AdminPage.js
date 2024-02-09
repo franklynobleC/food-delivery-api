@@ -14,27 +14,10 @@ const AdminPage = () => {
   return (
     <div>
       {/* Add any common layout or navigation for the admin section */}
-      <h1>Admin Dashboard</h1>
-      <h1>Admin Dashboard</h1>
-      <h1>Admin Dashboard</h1>
-      <h1>Admin Dashboard</h1>
-      <nav>
-        <ul>
-          <li>
-            <Link to='/dashboard/users'>users</Link>
-          </li>
-          <li>
-            <Link to='/payments'>Payment</Link>
-          </li>
-          <li>
-            <Link to='/dashboard/orders'>orders</Link>
-          </li>
-          <li>
-            <Link to='/dashboard/paymentslist'>paymentList</Link>
-            <Link to='/dashboard/pay'>pay</Link>
-          </li>
-        </ul>
-      </nav>
+      <h1>Admin Dashboard  page</h1>
+
+      <Admin />
+
       <Routes>
         <Route path='/' element={<Admin />} />
         <Route path='/dashboard/users' element={<Users />} />
@@ -43,8 +26,17 @@ const AdminPage = () => {
         <Route path='/dashboard/orders' element={<Orders />} />
         <Route path='/dashboard/pay' element={<PaymentsPage />} />
         {/* Add more routes for other admin-related components */}
+        ;
+        <Route
+          path='*'
+          element={
+            <div>
+              {' '}
+              <h2>SOMETHING WENT WRONG</h2>
+            </div>
+          }
+        />
       </Routes>
-
     </div>
   )
 }

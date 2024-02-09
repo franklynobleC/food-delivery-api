@@ -38,7 +38,7 @@ const register = async (req, res) => {
   }
   // TODO
   //check  if registered User  is'admin Or 'user''
-  //TODO:  uncomment to send  email
+  //TODO:  To send  email
   //await emailFunc(email,name)
 
   const createdUser = await UserSchema.create({

@@ -3,6 +3,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App'
+import Root from './App'
 import { FoodsProvider } from './context/foods_context'
 import { CartProvider } from './context/cart_context'
 import { AuthProvider } from './context/auth_context'
@@ -15,7 +16,7 @@ root.render(
       <AdminProvider>
         <FoodsProvider>
           <CartProvider>
-            <App />
+            <Root />
           </CartProvider>
         </FoodsProvider>
       </AdminProvider>
