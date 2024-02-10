@@ -110,12 +110,15 @@ export const AdminProvider = ({ children }) => {
     console.log(deletedResponse)
   }
 
+  //TODO: add     this use Effect to  the Admin Page  instead
   useEffect(() => {
-    console.log('Use effect from admin')
-    fetchPayments()
-    fetchFoods()
-    fetchOrders()
-    fetchUsers()
+
+    //check if  user Data is Logged in and  is admin, call  this
+    // console.log('Use effect from admin')
+    // fetchPayments()
+    // fetchFoods()
+    // fetchOrders()
+    // fetchUsers()
   }, [])
 
   return (

@@ -1,0 +1,18 @@
+.admin {
+  background-color: blue;
+
+}
+
+p {
+  font-family: Roboto, Arial;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.admin-body {
+  height: 1500px;
+  margin: 0;
+  padding-top: 80px;
+  padding-left: 96px;
+  padding-right: 24px;
+  background-color: rgb(252, 252, 252);
+}

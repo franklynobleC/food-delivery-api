@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 
 const Admin = () => {
   return (
-    <div>
-      Admin components Main Page, this should be navbar for admin Page
+    <div className='admin'   style={{ display: 'flex', flexDirection: 'column', backgroundColor: 'red'}}>
+      Admin components Main
       <div>h1</div>
       <nav>
         <ul>
@@ -15,15 +15,10 @@ const Admin = () => {
             <Link to='dashboard/payments'>Payment</Link>
           </li>
           <p>Main Page</p>
-          <li>
-            <Link to='dashboard/orders'>orders</Link>
-          </li>
-          <li>
-            <Link to='dashboard/paymentslist'>paymentList</Link>
-            <Link to='dashboard/pay'>pay</Link>
-          </li>
+
         </ul>
       </nav>
+
     </div>
   )
 }

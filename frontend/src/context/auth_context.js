@@ -188,27 +188,27 @@ export const AuthProvider = ({ children }) => {
     }
   }
   //TODO: IF  LOGIN  IS SUCCESSFULLY,AND  USER IS  ADMIN, CALL ALL  BACKEND  DATA FOR ADMIN
-  useEffect(() => {
-    //  const  unsubscribe =
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      if (user) {
-        user
-          .getIdTokenResult()
-          .then(data => {
-            const cl = data.claims.role?.admin || data.claims.role?.user
-            console.log('Claims>>>>>cCLLL', cl)
-          })
-          .catch(e => {
-            console.log('Erro  claims', e)
-          })
-      } else {
-        // console.log('USER on Auth State change IS  NOT  logged in', user)
-      }
-    })
-    return () => {
-      unsubscribe()
-    }
-  }, [])
+  // useEffect(() => {
+  //   //  const  unsubscribe =
+  //   const unsubscribe = auth.onAuthStateChanged(user => {
+  //     if (user) {
+  //       user
+  //         .getIdTokenResult()
+  //         .then(data => {
+  //           const cl = data.claims.role?.admin || data.claims.role?.user
+  //           console.log('Claims>>>>>cCLLL', cl)
+  //         })
+  //         .catch(e => {
+  //           console.log('Erro  claims', e)
+  //         })
+  //     } else {
+  //       // console.log('USER on Auth State change IS  NOT  logged in', user)
+  //     }
+  //   })
+  //   return () => {
+  //     unsubscribe()
+  //   }
+  // }, [])
 
   /**
    * The updateUser function sends a PATCH request to update a user's name, email, and address using

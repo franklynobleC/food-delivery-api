@@ -44,10 +44,8 @@ export function Root () {
 
 function App () {
   const location = useLocation()
-  // const isDashboardPage = location.pathname.startsWith('/dashboard')
-
-  // console.log('Location is', location.pathname)
-  const isDashboardRoute = location.pathname.startsWith('/dashboard')
+//  change  thePathsName to  '/dashboard'
+   const isDashboardRoute = (location.pathname.startsWith('/dashboard')|| location.pathname.startsWith('/'))
  console.log(location.pathname)
 
   console.log(isDashboardRoute.valueOf())
@@ -59,7 +57,10 @@ function App () {
       {!isDashboardRoute && <Navbar />}
 
       <Routes>
-        <Route path='/' element={<Home />} />
+        TODO:
+        {/* change  path  back to  '/' for HOME PAGE */}
+        {/* <Route path='/' element={<Home />} /> */}
+        <Route path='/' element={<AdminPage />} />
         <Route path='about' element={<About />} />
         <Route path='contact' element={<Contact />} />
         // <Route path='foods' element={<Foods />} />
