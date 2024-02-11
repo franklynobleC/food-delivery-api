@@ -34,8 +34,8 @@ const admin_reducer = (state, action) => {
   }
   if (action.type === GET_ALL_USERS_SUCCESS) {
     // const { _id, name } = action.payload
-    console.log(action.payload)
-    return { ...state, users_error: false, users: action.payload }
+    console.log("All  user Data", action.payload)
+    return { ...state, users: action.payload }
   }
   if (action.type === GET_ALL_USERS_ERROR) {
     // const { _id, name } = action.payload

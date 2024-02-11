@@ -10,7 +10,7 @@ import {
   all_users_url
 } from '../utils/constants'
 import axios from 'axios'
-import { FoodsContext } from './foods_context'
+
 import {
   GET_ALL_PAYMENTS_ERROR,
   GET_ALL_PAYMENTS_SUCCESS,
@@ -29,10 +29,10 @@ const initialState = {
   payments_error: false,
   orders_error: false,
   foods_error: false,
-users_error:false,
+  users_error: false,
+  users: [],
   orders: [],
   payments: [],
-  users: []
 }
 export const AdminContext = React.createContext()
 
@@ -112,7 +112,6 @@ export const AdminProvider = ({ children }) => {
 
   //TODO: add     this use Effect to  the Admin Page  instead
   useEffect(() => {
-
     //check if  user Data is Logged in and  is admin, call  this
     // console.log('Use effect from admin')
     // fetchPayments()

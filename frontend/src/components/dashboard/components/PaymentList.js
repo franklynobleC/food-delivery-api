@@ -10,6 +10,9 @@ const PaymentList = () => {
 
   return (
     <div className='payments-div'>
+<div>
+  <h2>ALL PAYMENTS</h2>
+</div>
 
       <div className='payment-header-container'>
         <div className='main-header-content'>Payment ID</div>

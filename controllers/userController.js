@@ -1,13 +1,14 @@
 const UserSchema = require('../models/User')
 const { StatusCodes } = require('http-status-codes')
 const { json } = require('stream/consumers')
-
 const { attachCookiesToResponse, createTokenUser } = require('../utils/index')
 require('dotenv').config()
 
 //get All  users from Database
 const getAllUsers = async (req, res) => {
   const users = await UserSchema.find({})
+
+  console.log('ALL USERS DATA CALLED')
 
   if (!users || users.length === 0) {
     //throw new Error("No users Found in User's table")
@@ -17,8 +18,8 @@ const getAllUsers = async (req, res) => {
       .json({ message: 'No Data Found In Database' })
     return
   }
-
-  res.status(StatusCodes.OK).json( users )
+  // console.log('type of  data ', typeof users)
+  res.status(StatusCodes.OK).json(users)
 }
 
 /*
@@ -46,8 +47,17 @@ const getSingleUser = async (req, res) => {
 const updateUser = async (req, res) => {
   const { name, email, deliveryAddress } = req.body
   const { id } = req.params
-  console.log("ID IS",id ,"Name  is",name, "Email is",email, "Delivery Address",deliveryAddress )
-console.log(``)
+  console.log(
+    'ID IS',
+    id,
+    'Name  is',
+    name,
+    'Email is',
+    email,
+    'Delivery Address',
+    deliveryAddress
+  )
+  console.log(``)
   if (!name || !email || !deliveryAddress) {
     res
       .status(StatusCodes.BAD_REQUEST)

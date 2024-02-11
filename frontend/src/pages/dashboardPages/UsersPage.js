@@ -1,20 +1,11 @@
 import React from 'react'
 // import '../../../styles/admindashboard/users.css'
-import  '../../styles/admindashboard/users.css'
-
+import '../../styles/admindashboard/users.css'
+import User from '../../components/dashboard/components/User.js'
 const UsersPage = () => {
   return (
     <div className='users'>
-      UsersPage
-      <p>user</p>
-      <p>user</p>
-      <p>user</p>
-      <p>user</p>
-      <p>user</p>
-      <p>user</p>
-      <p>user</p>
-      <p>user</p>
-      {console.log('USER FROM  DASHBOARD')}
+      <User />
     </div>
   )
 }

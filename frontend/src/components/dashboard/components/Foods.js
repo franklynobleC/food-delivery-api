@@ -6,7 +6,7 @@ function Foods () {
   const { fetchFoods, foods } = useFoodsContext()
 
   if (!foods) {
-    return <div>Foods Data Not Found</div>
+    return <div className='foods-data-parent-div'>Foods Data Not Found</div>
   }
   return (
     <div className='foods-data-parent-div'>
