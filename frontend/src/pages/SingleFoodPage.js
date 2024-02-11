@@ -8,7 +8,6 @@ import { useFoodsContext } from '../context/foods_context'
 import { useCartContext } from '../context/cart_context'
 import '../styles/singlefood.css'
 const SingleFoodPage = () => {
-  // const { id } = food
 
   //Get Params  id  from  the request  current url
   const { id } = useParams()

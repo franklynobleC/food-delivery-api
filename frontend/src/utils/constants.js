@@ -61,6 +61,7 @@ export const create_food_url = 'http://localhost:5000/api/v1/foods/createFood'
 export const delete_food_url = 'http://localhost:5000/api/v1/food/id'
 export const checkout_url = 'http://localhost:5000/api/v1/orders/checkout'
 export const all_orders_url = 'http://localhost:5000/api/v1/orders/getAllOrders'
+export const single_order_url = 'http://localhost:5000/api/v1/orders/'
 export const all_payments_url =
   'http://localhost:5000/api/v1/payment/getAllPayments'
 export const checkToken = () => {

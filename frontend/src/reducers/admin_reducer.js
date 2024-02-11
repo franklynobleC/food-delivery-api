@@ -7,13 +7,25 @@ import {
   GET_ALL_PAYMENTS_SUCCESS,
   GET_ALL_FOODS_SUCCESS,
   GET_ALL_USERS_SUCCESS,
-  GET_ALL_USERS_ERROR
+  GET_ALL_USERS_ERROR,
+  GET_SINGLE_ORDER_SUCCESS,
+  GET_SINGLE_ORDER_ERROR,
 } from '../actions'
 
 const admin_reducer = (state, action) => {
   if (action.type === GET_ALL_ORDERS_SUCCESS) {
     console.log('all  Orders payload', action.payload)
     return { ...state, orders: action.payload }
+  }
+  if (action.type === GET_SINGLE_ORDER_SUCCESS) {
+    // console.log('all  Orders payload', action.payload)
+    console.log('singleOrder payload success', action.payload)
+
+    return { ...state, single_order: action.payload }
+  }
+  if (action.type === GET_SINGLE_ORDER_ERROR) {
+    console.log('singleOrder payload error', action.payload)
+    return { ...state, single_order: null }
   }
   if (action.type === GET_ALL_PAYMENTS_SUCCESS) {
     console.log('payload data payments', action.payload)
@@ -34,7 +46,7 @@ const admin_reducer = (state, action) => {
   }
   if (action.type === GET_ALL_USERS_SUCCESS) {
     // const { _id, name } = action.payload
-    console.log("All  user Data", action.payload)
+    console.log('All  user Data', action.payload)
     return { ...state, users: action.payload }
   }
   if (action.type === GET_ALL_USERS_ERROR) {

@@ -7,7 +7,8 @@ import {
   update_user_url,
   delete_food_url,
   foods_url,
-  all_users_url
+  all_users_url,
+  single_order_url
 } from '../utils/constants'
 import axios from 'axios'
 
@@ -20,7 +21,9 @@ import {
   GET_ALL_FOODS_SUCCESS,
   GET_ALL_ORDERS_SUCCESS,
   GET_ALL_USERS_SUCCESS,
-  GET_ALL_USERS_ERROR
+  GET_ALL_USERS_ERROR,
+  GET_SINGLE_ORDER_ERROR,
+  GET_SINGLE_ORDER_SUCCESS
 } from '../actions'
 const initialState = {
   is_error: false,
@@ -33,6 +36,7 @@ const initialState = {
   users: [],
   orders: [],
   payments: [],
+  single_order: [],
 }
 export const AdminContext = React.createContext()
 
@@ -50,6 +54,19 @@ export const AdminProvider = ({ children }) => {
       dispatch({ type: GET_ALL_ORDERS_SUCCESS, payload: orders })
     } catch (err) {
       console.log(err)
+    }
+  }
+
+  const fetchSingleOrder = async id => {
+    try {
+      const singleOrderResponse = await axios.get(`${single_order_url + id}`)
+      const order = await singleOrderResponse.data
+      console.log(order)
+
+      dispatch({ type: GET_SINGLE_ORDER_SUCCESS, payload: order })
+    } catch (err) {
+      console.log('erro', err)
+      dispatch({ type: GET_SINGLE_ORDER_ERROR, payload: err.message })
     }
   }
 
@@ -129,7 +146,8 @@ export const AdminProvider = ({ children }) => {
         fetchFoods,
         updateFood,
         deleteFood,
-        fetchUsers
+        fetchUsers,
+        fetchSingleOrder
       }}
     >
       {children}

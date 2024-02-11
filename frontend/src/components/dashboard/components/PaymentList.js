@@ -5,14 +5,13 @@ const PaymentList = () => {
   const { fetchPayments, payments } = useAdminContext()
   useEffect(() => {
     fetchPayments()
-    console.log('fetching payments')
   }, [])
 
   return (
     <div className='payments-div'>
-<div>
-  <h2>ALL PAYMENTS</h2>
-</div>
+      <div>
+        <h2>ALL PAYMENTS</h2>
+      </div>
 
       <div className='payment-header-container'>
         <div className='main-header-content'>Payment ID</div>
@@ -23,7 +22,7 @@ const PaymentList = () => {
         <div key={index} className='payment-content-container'>
           <div className='content'>{paymentData._id}</div>
           <div className='content'>{paymentData.paymentStatus}</div>
-          <div className='content'>{paymentData.amount + 'ite'}</div>
+          <div className='content'>{paymentData.amount}</div>
           <div className='btn-dashboard-payment'>
             <div>
               <button className='edit'>update</button>
