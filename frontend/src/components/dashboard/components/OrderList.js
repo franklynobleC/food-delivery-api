@@ -9,7 +9,7 @@ const OrderList = () => {
   if (!orders) {
     return (
       <div className='orders'>
-        {' '}
+
         <h2>No Orders Found from dashboard</h2>
       </div>
     )

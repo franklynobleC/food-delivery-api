@@ -1,19 +1,15 @@
-.payments-div {
+.foods-data-parent-div {
   display: flex;
   max-width: 100%;
   flex-direction: column;
   justify-content: center;
   /* margin: auto;
-  */padding: 0px 10px;
+  */
+  padding: 0px 10px;
   background-color: rgb(248, 249, 250);
-  /* border-radius: 20px;
-  -webkit-border-radius: 20px; */
-  /* -moz-border-radius: 20px; */
-  /* -ms-border-radius: 20px; */
-  /* -o-border-radius: 20px; */
 }
 
-.payment-header-container {
+.foods-table-header {
   display: flex;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -28,15 +24,13 @@
   margin: 0px 0px 20px 0px;
 }
 
-.payment-content-container {
+.foods-data-header {
   display: flex;
   /* text-align: center; */
   border: 1.5px solid rgb(240, 237, 237);
 }
 
 .content {
-  /* width: 100%; Allow the element to take up the available width */
-  /* display: flex; */
   padding-top: 20px;
   padding-bottom: 20px;
   color: rgb(85, 84, 84);
@@ -48,45 +42,26 @@
 
   /* text-align: center; */
   margin: 0px 0px 10px 0px;
+  word-wrap: nowrap;
 }
-
-.main-header-content {
-  /* margin: 0 auto; */
-  display: flex;
-  padding: 20px;
-  max-width: 800px;
-  width: 100%;
-  background-color: black;
-}
-.btn-edit,
-.btn-edit {
-  text-wrap: nowrap;
-}
-.btn-dashboard-payment {
+.btn-dashboard-foods {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-/* row-gap: 50px; */
-column-gap: 5px;
-  /* color: yellow; */
+  /* row-gap: 50px; */
+  column-gap: 5px;
 }
-/* styles buttons */
-.delete,
-.edit {
+
+.add-food-btn-container{
+  display: flex;
+  justify-content: end ;
+}
+.btn-add-food {
+    font-weight: bold;
+
+  display: flex;
   padding: 10px;
   border: none;
-}
-
-.delete {
-  background: rgb(247, 93, 33);
-}
-.edit {
-  background: rgb(34, 102, 0);
-  /* border: 2px solid rgb(34, 102, 0); */
-}
-.edit,
-.delete {
-
   margin-top: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -95,6 +70,7 @@ column-gap: 5px;
   border-radius: 5px;
   -webkit-border-radius: 5px;
   color: rgb(255, 255, 255);
+  background-color: deepskyblue;
 
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -102,10 +78,8 @@ column-gap: 5px;
   -o-border-radius: 5px;
 }
 
-.btn-dashboard {
-  display: flex;
-  padding-right: 50px;
-}
-.payment-content-container:hover {
+/* add hover */
+
+.foods-data-header:hover {
   background-color: rgb(228, 228, 228);
 }

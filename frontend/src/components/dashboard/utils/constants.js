@@ -22,5 +22,10 @@ export const dashboardLinks = [
     id: 4,
     text: 'orders',
     url: 'orders'
+  },
+  {
+    id: 5,
+    text: 'foods',
+    url: 'foods'
   }
 ]

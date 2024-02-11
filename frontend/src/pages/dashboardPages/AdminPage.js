@@ -10,6 +10,7 @@ import {
 } from '../../components/dashboard/components/index'
 import { Orders, Payments, Users } from '../../pages/dashboardPages'
 import PaymentsPage from '../dashboardPages/PaymentsPage'
+import Foods from '../dashboardPages/FoodPage'
 
 import Navbar from '../../components/dashboard/components/Navbar'
 
@@ -27,6 +28,7 @@ const AdminPage = () => {
       <Routes>
         <Route path='/' element={<Admin />} />
         <Route path='users' element={<Users />} />
+        <Route path='foods' element={<Foods />} />
         <Route path='payments' element={<Payments />} />
         <Route path='paymentslist' element={<PaymentList />} />
         <Route path='orders' element={<Orders />} />
