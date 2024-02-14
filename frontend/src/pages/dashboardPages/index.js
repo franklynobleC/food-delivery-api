@@ -3,6 +3,6 @@ import Orders from '../dashboardPages/OrdersPage'
 import Payments from '../dashboardPages/PaymentsPage'
 import Users from '../dashboardPages/UsersPage'
 import Foods from '../dashboardPages/FoodPage'
-// import  OrdersPage from '../dashboardPages/OrdersPage'
+import SingleOrder from './SingleOrderPage'
 
-export { Orders, Payments, Users, Foods }
+export { Orders, Payments, Users, Foods, SingleOrder }

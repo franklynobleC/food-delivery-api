@@ -9,7 +9,7 @@ import {
   GET_ALL_USERS_SUCCESS,
   GET_ALL_USERS_ERROR,
   GET_SINGLE_ORDER_SUCCESS,
-  GET_SINGLE_ORDER_ERROR,
+  GET_SINGLE_ORDER_ERROR
 } from '../actions'
 
 const admin_reducer = (state, action) => {
@@ -20,8 +20,9 @@ const admin_reducer = (state, action) => {
   if (action.type === GET_SINGLE_ORDER_SUCCESS) {
     // console.log('all  Orders payload', action.payload)
     console.log('singleOrder payload success', action.payload)
+    const { order } = action.payload
 
-    return { ...state, single_order: action.payload }
+    return { ...state, order: order.OrderItems }
   }
   if (action.type === GET_SINGLE_ORDER_ERROR) {
     console.log('singleOrder payload error', action.payload)
@@ -45,7 +46,6 @@ const admin_reducer = (state, action) => {
     return { ...state, foods_error: false, foods: action.payload }
   }
   if (action.type === GET_ALL_USERS_SUCCESS) {
-    // const { _id, name } = action.payload
     console.log('All  user Data', action.payload)
     return { ...state, users: action.payload }
   }

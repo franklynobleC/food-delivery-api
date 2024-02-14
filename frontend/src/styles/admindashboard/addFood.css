@@ -1,0 +1,86 @@
+.add-food-component {
+  font-family: Roboto, AriAl;
+  position: fixed;
+  height: 60%;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust for exact centering */
+  width: 80%; /* Width of the form */
+  max-width: 500px; /* Max form width */
+  background: rgb(237, 237, 237); /* Form background color */
+  padding: 20px rgb(246, 244, 244);
+  border-radius: 5px; /* Rounded corners for the form */
+  z-index: 1000;
+}
+
+.add-food-component form {
+  /* align-self: center; */
+  max-width: 500px; /* Max form width */
+  margin: 0 auto; /* Center form horizontally */
+  /* background: transparent; Form background color */
+  padding: 20px; /* Form padding */
+  border-radius: 5px;
+  height: 300px;
+  /* Rounded corners for the form */
+}
+
+.add-food-inputs {
+  display: grid;
+  column-gap: 5px;
+}
+
+.overlay {
+  position: fixed; /* Fixed position */
+  top: 0; /* Align to the top */
+  left: 0; /* Align to the left */
+  right: 0; /* Align to the right */
+  bottom: 0; /* Align to the bottom */
+
+  z-index: 999; /* Just below the form overlay to block interaction */
+}
+.input {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+.img-upload {
+  padding: 30px;
+  border: none;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+.label-input {
+  padding: 10px;
+}
+
+.img-upload {
+  background-color: write;
+}
+
+.close-div {
+  position: fixed;
+  top: 1%;
+  left: 90%;
+  right: 10%;
+  cursor: pointer;
+}
+.btn-close {
+  font-size:medium;
+  font-family: Roboto, Arial;
+  border: none;
+  color: rgb(255, 98, 98);
+  /* border-radius: 5px; */
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}

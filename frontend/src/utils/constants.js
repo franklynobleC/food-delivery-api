@@ -49,13 +49,14 @@ export const login_user_url = 'http://localhost:5000/api/v1/auth/login'
 export const logout_user_url = 'http://localhost:5000/api/v1/auth/logout'
 export const create_orders_url =
   'http://localhost:5000/api/v1/orders/createOrder'
-export const single_user_url = 'http://localhost:5000/api/v1/users/'
+// export const single_user_url = 'http://localhost:5000/api/v1/users/'
 export const update_user_url = 'http://localhost:5000/api/v1/users/'
 
 //ADMIN
 export const uploadImage_url = 'http://localhost:5000/api/v1/foods/uploadImage'
 export const update_food_url = 'http://localhost:5000/api/v1/foods/id'
 export const all_users_url = 'http://localhost:5000/api/v1/users/getAllUsers'
+export const single_user_url = 'http://localhost:5000/api/v1/users/'
 
 export const create_food_url = 'http://localhost:5000/api/v1/foods/createFood'
 export const delete_food_url = 'http://localhost:5000/api/v1/food/id'

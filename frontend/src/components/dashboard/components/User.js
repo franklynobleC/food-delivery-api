@@ -20,7 +20,7 @@ const User = () => {
       </div>
       {users.map((data, index) => (
         <div key={index} className='payment-content-container'>
-          <div className='content'>{'John doe'}</div>
+          <div className='content'>{data.name}</div>
           <div className='content'>{data.email}</div>
           <div className='content'>{data.role}</div>
         </div>

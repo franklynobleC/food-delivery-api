@@ -13,6 +13,7 @@ import PaymentsPage from '../dashboardPages/PaymentsPage'
 import Foods from '../dashboardPages/FoodPage'
 
 import Navbar from '../../components/dashboard/components/Navbar'
+import SingleOrder from '../../components/dashboard/components/SingleOrder'
 
 import '../../styles/admindashboard/adminPage.css'
 import '../../styles/fonts.css'
@@ -32,14 +33,14 @@ const AdminPage = () => {
         <Route path='payments' element={<Payments />} />
         <Route path='paymentslist' element={<PaymentList />} />
         <Route path='orders' element={<Orders />} />
+        <Route path='orders/:id' element={<SingleOrder />} />
         <Route path='payments' element={<PaymentsPage />} />
         {/* Add more routes for other admin-related components */}
-        ;
+
         <Route
           path='*'
           element={
             <div>
-              {' '}
               <h2>SOMETHING WENT WRONG</h2>
             </div>
           }

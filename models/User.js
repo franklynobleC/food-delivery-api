@@ -6,8 +6,8 @@ const Bcrypt = require('bcryptjs')
 for the user object. */
 
 //NOTE: This  schema  is  to store user Data, Note, The Password and  email is  managed  by  3rd Party Auth  fireBase,  the Schema  is  just  to Store All user Details
-TODO: // make  sure to implement customer's Delivery Address and Customer's   phone Number
-const UserSchema = new mongoose.Schema({
+// TODO: // make  sure to implement customer's Delivery Address and Customer's   phone Number
+UserSchema = new mongoose.Schema({
   name: {
     type: String,
     required: false

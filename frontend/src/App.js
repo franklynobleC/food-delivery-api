@@ -44,9 +44,11 @@ export function Root () {
 
 function App () {
   const location = useLocation()
-//  change  thePathsName to  '/dashboard'
-   const isDashboardRoute = (location.pathname.startsWith('/dashboard')|| location.pathname.startsWith('/'))
- console.log(location.pathname)
+  //  change  thePathsName to  '/dashboard'
+  const isDashboardRoute =
+    location.pathname.startsWith('/dashboard') ||
+    location.pathname.startsWith('/')
+  console.log(location.pathname)
 
   console.log(isDashboardRoute.valueOf())
   return (
@@ -54,7 +56,8 @@ function App () {
       {/* // <AuthWrapper> */}
       {/* // <Router> */}
       {/*// add Navbar and Side Bar here  and side bar */}
-      {!isDashboardRoute && <Navbar />}
+      {/* {!isDashboardRoute && <Navbar />} */}
+      <Navbar />
 
       <Routes>
         TODO:
