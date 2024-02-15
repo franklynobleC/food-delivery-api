@@ -2,9 +2,9 @@ import React, { useEffect } from 'react'
 import { useAdminContext } from '../../../context/admin_context'
 
 const User = () => {
-  const { users, fetchUsers } = useAdminContext()
+  const { users, } = useAdminContext()
   useEffect(() => {
-    fetchUsers()
+    // fetchUsers()
   }, [])
   return (
     <div className='payments-div'>

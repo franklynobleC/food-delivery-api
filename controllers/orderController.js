@@ -25,8 +25,10 @@ const createOrder = async (req, res) => {
     OrderItems: cart,
     _id: id,
     paymentOption: paymentoption,
-    deliveryFee
+    deliveryFee: deliveryFee
   } = req.body
+
+  console.log(deliveryFee)
   console.log(typeof cart, 'AND CART IS', cart)
   console.log('CHECKING CART ID>>>>', cart.id)
   console.log(cart, paymentoption, deliveryFee)
@@ -72,9 +74,6 @@ const createOrder = async (req, res) => {
     }
 
     itemTotalQuantity += cartToItems[i].quantity
-    //orderItems.push[singleOrderItem]
-
-    //orderItems += OrderItems[i]
 
     orderItems = [...orderItems, singleOrderItem]
 
@@ -87,7 +86,7 @@ const createOrder = async (req, res) => {
   //add payment and  amount,
   //send Email for Order placement. this email should contain, food name, quantity,and price of  the  total  Food
   //NOTE: total price  is  including  Delivery Fee
-  //TODO: pass  this back  to        userSchema to find  the user  that created  this order payment (req.user.userId NOTE you will  get this from  the request Body)
+  //TODO: pass  this back  to  userSchema to find  the user  that created  this order payment (req.user.userId NOTE you will  get this from  the request Body)
 
   const userProperty = await UserSchema.findOne({ _id: id })
   console.log(userProperty, 'From User DB')

@@ -86,17 +86,22 @@ export const AdminProvider = ({ children }) => {
       dispatch({ type: GET_FOODS_ERROR, payload: err.message })
     }
   }
-  const fetchUsers = async () => {
-    try {
-      const userResponse = await axios.get(all_users_url)
-      const users = await userResponse.data
-      console.log(users)
-      dispatch({ type: GET_ALL_USERS_SUCCESS, payload: users })
-    } catch (err) {
-      console.log(err)
-      dispatch({ type: GET_ALL_USERS_ERROR, payload: err.message })
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const userResponse = await axios.get(all_users_url)
+        const users = await userResponse.data
+        console.log(users)
+        dispatch({ type: GET_ALL_USERS_SUCCESS, payload: users })
+      } catch (err) {
+        console.log(err)
+        dispatch({ type: GET_ALL_USERS_ERROR, payload: err.message })
+      }
     }
-  }
+
+    fetchUsers()
+  }, [])
 
   const fetchSingleUser = async id => {
     try {
@@ -144,14 +149,6 @@ export const AdminProvider = ({ children }) => {
   }
 
   //TODO: add     this use Effect to  the Admin Page  instead
-  useEffect(() => {
-    //check if  user Data is Logged in and  is admin, call  this
-    // console.log('Use effect from admin')
-    // fetchPayments()
-    // fetchFoods()
-    // fetchOrders()
-    // fetchUsers()
-  }, [])
 
   return (
     <AdminContext.Provider
@@ -162,9 +159,9 @@ export const AdminProvider = ({ children }) => {
         fetchFoods,
         updateFood,
         deleteFood,
-        fetchUsers,
+
         fetchSingleOrder,
-        fetchSingleUser,
+        fetchSingleUser
       }}
     >
       {children}

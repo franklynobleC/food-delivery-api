@@ -29,7 +29,7 @@ router.post(
   '/createOrder',
   // authMiddleware,
   Middleware.decode,
-  Middleware.authorizePermissions('admin'),
+  Middleware.authorizePermissions('admin', 'user'),
   createOrder
 )
 router.patch('/:id', updateOrder)

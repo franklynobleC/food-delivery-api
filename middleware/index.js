@@ -4,44 +4,42 @@ class Middleware {
   async decode (req, res, next) {
     console.log(req.headers.authorization)
     const token = req.headers.authorization.split(' ')[1]
-    let checkClaims1
+
     console.log('FROM FIRE  BASE AUTH  TEST  TOKEN  CHECK')
     try {
       const decodeValue = await admin.auth().verifyIdToken(token)
       // decodeValue.email_verified = true
-      console.log('UUID:', decodeValue.uid)
-      if (decodeValue.email === 'essienfrankudom@gmail.com') {
-        checkClaims1 = await admin.auth().setCustomUserClaims(decodeValue.sub, {
-          role: {
-            admin: 'admin'
-            // user: 'user'
-          }
-        })
-      } else {
-        checkClaims1 = admin.auth().setCustomUserClaims(decodeValue.sub, {
-          role: {
-            user: 'user'
-          }
+      // console.log('UUID:', decodeValue.uid)
+      console.log('Checking Mail Verification',         decodeValue)
+      if (decodeValue.email_verified === false) {
+        return res.json({ message: 'unauthorize, email not verified' })
+      }
+      if (
+        decodeValue.email === 'essienfrankudom@gmail.com' &&
+        decodeValue.email_verified === true
+      ) {
+        await admin.auth().setCustomUserClaims(decodeValue.sub, {
+          role: 'admin'
         })
       }
-
-      // console.log('checking what  Claims  is', claims)
-
+      if (
+        decodeValue.email_verified === true &&
+        decodeValue.email !== 'essienfrankudom@gmail.com'
+      ) {
+        await admin.auth().setCustomUserClaims(decodeValue.sub, {
+          role: 'user'
+        })
+      }
+      ;(await admin.auth().getUser(decodeValue.uid)).customClaims
       console.log('Token Value from Server:', decodeValue, 'user is', req.user)
-      // (await admin.auth().getUser()).customClaims
-      // console.log('check claims', checkClaims)
+      console.log('Token Value from Server:', decodeValue, 'user is', req.user)
+      // console.log('from  firebase Auth claims', checkClaims1)
       if (decodeValue) {
-        console.log('DECODE VALUE SEARCHING ROLES', decodeValue.role)
         req.user = {
           role: decodeValue.role,
           email: decodeValue.email
         }
-        // req.user = decodeValue.role,
-
-        // console.log(checkClaims1)
-        // req.user = checkClaims1
-
-        console.log('USER  IS', req.user.role)
+        console.log('USER  IS', req.user)
 
         // console.log('from  firebase Auth claims', checkClaims1)
 
@@ -67,16 +65,19 @@ class Middleware {
 
   authorizePermissions = (...roles) => {
     return (req, res, next) => {
-      if (!roles.includes(req.user.role.admin || req.user.role.user)) {
-        // throw new CustomError.UnauthorizedError(
-        //   'Unauthorized to access this route'
-        console.log(req.user.role)
+      console.log('Auth method works authorization Permission', req.user.role)
+      if (roles.includes(req.user.role)) {
+        req.user.role.admin === true || req.user.role.user === true
+
+        next()
+      } else {
         // )
         console.log('Unauthorize to access This Route!!')
         return 'Unauthorized to access this route'
       }
+
       console.log('Auth method works authorization Permission', req.user.role)
-      next()
+
       // }
     }
   }

@@ -9,7 +9,9 @@ import {
   GET_ALL_USERS_SUCCESS,
   GET_ALL_USERS_ERROR,
   GET_SINGLE_ORDER_SUCCESS,
-  GET_SINGLE_ORDER_ERROR
+  GET_SINGLE_ORDER_ERROR,
+  GET_SINGLE_USER_SUCCESS,
+  GET_SINGLE_USER_ERROR
 } from '../actions'
 
 const admin_reducer = (state, action) => {
@@ -27,6 +29,14 @@ const admin_reducer = (state, action) => {
   if (action.type === GET_SINGLE_ORDER_ERROR) {
     console.log('singleOrder payload error', action.payload)
     return { ...state, single_order: null }
+  }
+  if (action.type === GET_SINGLE_USER_SUCCESS) {
+    // console.log('singleOrder payload error', singleUser: action.payload)
+    return { ...state, singleUser: action.payload }
+  }
+  if (action.type === GET_SINGLE_USER_ERROR) {
+    // console.log('singleOrder payload error', singleUser: action.payload)
+    return { ...state, singleUser: null }
   }
   if (action.type === GET_ALL_PAYMENTS_SUCCESS) {
     console.log('payload data payments', action.payload)
