@@ -4,6 +4,7 @@ import { useAdminContext } from '../../../context/admin_context'
 import { useParams } from 'react-router-dom'
 import SingleOrderTotal from './SingleOrderTotal'
 import { convertDate } from './convertDate'
+import '../../../styles/admindashboard/userOrderInfo.css'
 const SingleOrder = () => {
   const [userData, setUserData] = useState({ name: '', deliveryAddress: '' })
   const [orderInfo, setOrderInfo] = useState({
@@ -12,16 +13,14 @@ const SingleOrder = () => {
     deliveryFee: '',
     orderDate: ''
   })
-  const { order, fetchSingleOrder, orders, users, fetchOrders } =
-    useAdminContext()
+  const { fetchSingleOrder, orders, users } = useAdminContext()
   const { id } = useParams()
 
   useEffect(() => {
     console.log(id)
-    console.log(orders)
-    console.log(users)
+
     const userId = users.find(user => user._id)
-    console.log(userId)
+
     if (userId && orders) {
       orders.map((orderData, index) => {
         if (orderData._id === id) {
@@ -46,9 +45,9 @@ const SingleOrder = () => {
           OrderItems.map(singleOrder => {
             console.log('NEW ORDER', singleOrder)
           })
-        } else {
           return
         }
+        return
 
         // console.log(userData.name, userData.deliveryAddress)
       })
@@ -57,15 +56,24 @@ const SingleOrder = () => {
   }, [id, orders])
 
   return (
-    <div>
-      <div>{userData.name}</div>
-      <div>{userData.name}</div>
-      <div>{userData.deliveryAddress}</div>
-      <div>Order Info</div>
-      <div>Total Price:{orderInfo.totalPrice}</div>
-      <div> Delivery Fee: {orderInfo.deliveryFee}</div>
-      <div> OrderQuantity:{orderInfo.totalQuantity}</div>
-      <div> Order Date: {orderInfo.orderDate}</div>
+    <div className='user-info-header'>
+      <div className='user-info'>
+        <h2>User's Order Information</h2>
+        <div className='content-order'>Name: {userData.name}</div>
+        <div className='content-order'>Address: {userData.deliveryAddress}</div>
+      </div>
+      <h3>Order Information</h3>
+      <div className='order-info'>
+        <div className='content-order'>Total Price: {orderInfo.totalPrice}</div>
+        <div className='content-order'>
+          Delivery Fee: {orderInfo.deliveryFee}
+        </div>
+        <div className='content-order'>
+          {' '}
+          OrderQuantity:  {orderInfo.totalQuantity}
+        </div>
+        <div className='content-order'> Order Date:  {orderInfo.orderDate}</div>
+      </div>
     </div>
   )
 }
