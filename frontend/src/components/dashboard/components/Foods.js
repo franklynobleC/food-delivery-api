@@ -13,9 +13,21 @@ function Foods () {
     category: '',
     image_url: ''
   })
+
+  const [selectedImage, setSelectedImage] = useState([])
+  const [imageString, setImageString] = useState([])
+
   const [uploadImage, setUploadImage] = useState(false)
   const { fetchFoods, foods } = useFoodsContext()
-  const { getAllFoodsImages, foods_images } = useAdminContext()
+  const { foods_images } = useAdminContext()
+
+  const handleSelectedImage = image => {
+    // e.preventDefault()
+    setImageString(image)
+    setSelectedImage(selectedImage => [...selectedImage, image])
+    console.log('Selected Image', image)
+  }
+
   const handleAddFood = () => {
     setIsAddFood(!isAddFood)
   }
@@ -28,12 +40,13 @@ function Foods () {
       ...addFood,
       [e.target.name]: e.target.value
     })
-    console.log(addFood)
+    console.log('All Foods Data', addFood)
   }
   const handleCreateFood = e => {
     //TODO:  pass    the   method  to  create  new Food item
     e.preventDefault()
     console.log('handle add food called', addFood)
+    console.log('single Image String', imageString)
   }
   if (!foods) {
     return <div className='foods-data-parent-div'>Foods Data Not Found</div>
@@ -128,7 +141,22 @@ function Foods () {
                   </div>
                   <button type='submit'>save</button>
                 </form>
-                {uploadImage && <UploadImg />}
+                {uploadImage && (
+                  <div className='image-container'>
+                    {foods_images.map((image, index) => (
+                      <div key={index} className='image-card'>
+                        <img
+                          src={image}
+                          // width={40}
+
+                          alt='add-image'
+                          className='image'
+                          onClick={() => handleSelectedImage(image)}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </>
           )}

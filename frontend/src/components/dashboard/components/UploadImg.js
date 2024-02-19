@@ -34,7 +34,7 @@ const UploadImg = () => {
 
           </div>
         ))}
-        {/* return (<div key={index} className='image-card'></div>) */}
+
       </div>
     </div>
   )
