@@ -1,0 +1,26 @@
+.image-container {
+  display: flex;
+}
+
+.image-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  /* display: flex; */
+  background-color: white;
+  scroll-snap-align: start;
+  scrollbar-width: auto;
+  /* width:   10px; */
+  /* border-color: red; */
+  /* border-width: 5px; */
+  border-style: solid;
+}
+
+.image-card img{
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+
+}

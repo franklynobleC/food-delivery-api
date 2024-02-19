@@ -1,15 +1,39 @@
 import React, { useState } from 'react'
 import { useFoodsContext } from '../../../context/foods_context'
+import { useAdminContext } from '../../../context/admin_context'
 import '../../../styles/admindashboard/foods.css'
 import AddFoods from './AddFoods'
+import UploadImg from './UploadImg'
 function Foods () {
   const [isAddFood, setIsAddFood] = useState(false)
+  const [addFood, setAddFood] = useState({
+    name: '',
+    description: '',
+    price: '',
+    category: '',
+    image_url: ''
+  })
+  const [uploadImage, setUploadImage] = useState(false)
   const { fetchFoods, foods } = useFoodsContext()
+  const { getAllFoodsImages, foods_images } = useAdminContext()
   const handleAddFood = () => {
     setIsAddFood(!isAddFood)
   }
-  const createFood = e => {
+  const handleUploadImage = () => {
+    setUploadImage(!uploadImage)
+  }
+  const handleChange = e => {
     e.preventDefault()
+    setAddFood({
+      ...addFood,
+      [e.target.name]: e.target.value
+    })
+    console.log(addFood)
+  }
+  const handleCreateFood = e => {
+    //TODO:  pass    the   method  to  create  new Food item
+    e.preventDefault()
+    console.log('handle add food called', addFood)
   }
   if (!foods) {
     return <div className='foods-data-parent-div'>Foods Data Not Found</div>
@@ -47,35 +71,64 @@ function Foods () {
               <div className='overlay'></div>
 
               <div className='add-food-component'>
-                <form action='' onSubmit={createFood}>
+                <form onSubmit={handleCreateFood}>
                   <div className='close-div'>
-                    <button className='btn-close' onClick={() => handleAddFood()}>close</button>
+                    <button
+                      className='btn-close'
+                      onClick={() => handleAddFood()}
+                    >
+                      close
+                    </button>
                   </div>
                   <div className='add-food-inputs'>
                     Add Food
                     <label htmlFor='' className='label-input'>
                       Name
                     </label>
-                    <input type='text' name='' id='' className='input' />;
+                    <input
+                      type='text'
+                      name='name'
+                      className='input'
+                      value={addFood.name}
+                      onChange={handleChange}
+                    />
                     <label htmlFor='' className='label-input'>
                       Description
                     </label>
-                    <input type='text' name='' id='' className='input' />
+                    <input
+                      type='text'
+                      name='description'
+                      className='input'
+                      value={addFood.description}
+                      onChange={handleChange}
+                    />
                     <label htmlFor='' className='label-input'>
                       Price
                     </label>
-                    <input type='text' name='' id='' className='input' />
+                    <input
+                      type='text'
+                      name='price'
+                      className='input'
+                      onChange={handleChange}
+                      value={addFood.price}
+                    />
                     <label htmlFor='' className='label-input'>
-                      Category
+                      category
                     </label>
-                    <input type='text' name='' id='' className='input' />
-                    <label htmlFor='' className='label-input'>
-                      Image
-                    </label>
-                    <input type='file' name='' id='' className='img-upload' />
+                    <input
+                      type='text'
+                      name='category'
+                      className='input'
+                      onChange={handleChange}
+                      value={addFood.category}
+                    />
+                    <button onClick={() => handleUploadImage()}>
+                      upload image
+                    </button>
                   </div>
                   <button type='submit'>save</button>
                 </form>
+                {uploadImage && <UploadImg />}
               </div>
             </>
           )}

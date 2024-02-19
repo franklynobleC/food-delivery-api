@@ -54,6 +54,8 @@ export const update_user_url = 'http://localhost:5000/api/v1/users/'
 
 //ADMIN
 export const uploadImage_url = 'http://localhost:5000/api/v1/foods/uploadImage'
+export const get_all_foods_images_url =
+  'http://localhost:5000/api/v1/foods/getFoodImages'
 export const update_food_url = 'http://localhost:5000/api/v1/foods/id'
 export const all_users_url = 'http://localhost:5000/api/v1/users/getAllUsers'
 export const single_user_url = 'http://localhost:5000/api/v1/users/'

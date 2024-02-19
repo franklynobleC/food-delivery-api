@@ -6,7 +6,8 @@
   justify-content: center;
   max-width: 30%;
   min-width: 10%;
-  padding: auto;
+  /* padding: auto; */
+  padding-left: 10px;
   width: 100%;
   height: auto;
 
@@ -31,6 +32,10 @@
   border-bottom-color: greenyellow;
   border-bottom-width: 3px;
   border-bottom-style: solid;
+}
+.order-info {
+  padding-bottom: 15px;
+  padding-left: 5px;
 }
 .content-order {
   font-family: Roboto, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif,

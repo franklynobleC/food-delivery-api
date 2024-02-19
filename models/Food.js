@@ -38,21 +38,18 @@ const FoodSchema = new mongoose.Schema(
       ],
       default: 'dinner'
     },
-    delivery: {
-      type: Boolean,
-      default: false
-    },
+
     quantity: {
       type: Number,
       default: 1,
       required: false
-    },
-
-    user: {
-      type: mongoose.Types.ObjectId,
-      ref: 'User',
-      required: true
     }
+
+    // user: {
+    //   type: mongoose.Types.ObjectId,
+    //   ref: 'User',
+    //   required: true
+    // }
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
   //TODO

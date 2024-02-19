@@ -11,35 +11,31 @@ import {
   GET_SINGLE_ORDER_SUCCESS,
   GET_SINGLE_ORDER_ERROR,
   GET_SINGLE_USER_SUCCESS,
-  GET_SINGLE_USER_ERROR
+  GET_SINGLE_USER_ERROR,
+  CREATE_SINGLE_FOOD_SUCCESS,
+  CREATE_SINGLE_FOOD_ERROR,
+  GET_IMAGES_SUCCESS
 } from '../actions'
 
 const admin_reducer = (state, action) => {
   if (action.type === GET_ALL_ORDERS_SUCCESS) {
-    console.log('all  Orders payload', action.payload)
     return { ...state, orders: action.payload }
   }
   if (action.type === GET_SINGLE_ORDER_SUCCESS) {
-    // console.log('all  Orders payload', action.payload)
-    console.log('singleOrder payload success', action.payload)
     const { order } = action.payload
 
     return { ...state, order: order.OrderItems }
   }
   if (action.type === GET_SINGLE_ORDER_ERROR) {
-    console.log('singleOrder payload error', action.payload)
     return { ...state, single_order: null }
   }
   if (action.type === GET_SINGLE_USER_SUCCESS) {
-    // console.log('singleOrder payload error', singleUser: action.payload)
     return { ...state, singleUser: action.payload }
   }
   if (action.type === GET_SINGLE_USER_ERROR) {
-    // console.log('singleOrder payload error', singleUser: action.payload)
     return { ...state, singleUser: null }
   }
   if (action.type === GET_ALL_PAYMENTS_SUCCESS) {
-    console.log('payload data payments', action.payload)
     return { ...state, payments: action.payload }
   }
 
@@ -56,12 +52,23 @@ const admin_reducer = (state, action) => {
     return { ...state, foods_error: false, foods: action.payload }
   }
   if (action.type === GET_ALL_USERS_SUCCESS) {
-    console.log('All  user Data', action.payload)
     return { ...state, users: action.payload }
   }
+  if (action.type === CREATE_SINGLE_FOOD_SUCCESS) {
+    return { ...state, create_food: action.payload }
+  }
+  if (action.type === CREATE_SINGLE_FOOD_ERROR) {
+    return { ...state, created_food_error: true, create_food: null }
+  }
+  if (action.type === GET_IMAGES_SUCCESS) {
+    console.log('action.payload', action.payload)
+    return { ...state, foods_images: action.payload }
+  }
+  if (action.type === GET_IMAGES_ERROR) {
+    return { ...state, foods_images: null }
+  }
+
   if (action.type === GET_ALL_USERS_ERROR) {
-    // const { _id, name } = action.payload
-    console.log(action.payload)
     return { ...state, users_error: true, users: null }
   }
 

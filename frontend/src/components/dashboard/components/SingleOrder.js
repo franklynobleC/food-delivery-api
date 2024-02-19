@@ -17,8 +17,6 @@ const SingleOrder = () => {
   const { id } = useParams()
 
   useEffect(() => {
-    console.log(id)
-
     const userId = users.find(user => user._id)
 
     if (userId && orders) {
@@ -30,20 +28,15 @@ const SingleOrder = () => {
             deliveryFee: orderData.deliveryFee,
             orderDate: convertDate(orderData.createdAt)
           })
-          console.log(orderData)
+
           if (orderData.user !== userId._id) return
           const { name, deliveryAddress } = userId
 
           setUserData({ name: name, deliveryAddress: deliveryAddress })
-          console.log(
-            name,
-            deliveryAddress,
-            orderData.totalPrice,
-            orderData.totalQuantity
-          )
+
           const { OrderItems } = orderData
           OrderItems.map(singleOrder => {
-            console.log('NEW ORDER', singleOrder)
+
           })
           return
         }
@@ -69,10 +62,10 @@ const SingleOrder = () => {
           Delivery Fee: {orderInfo.deliveryFee}
         </div>
         <div className='content-order'>
-          {' '}
-          OrderQuantity:  {orderInfo.totalQuantity}
+          OrderQuantity: {orderInfo.totalQuantity}
         </div>
-        <div className='content-order'> Order Date:  {orderInfo.orderDate}</div>
+        <div className='content-order'> Order Date: {orderInfo.orderDate}</div>
+
       </div>
     </div>
   )

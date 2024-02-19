@@ -47,7 +47,7 @@ export const FoodsProvider = ({ children }) => {
   //fetch Data from API   using axios
 
   const fetchFoods = async () => {
-    console.log('TYPE 1 FOR TOKEN', typeof localStorage.getItem('token'))
+
     //NOTE: convert  to  valid  json String Object: this would   would enable  possible read from  the Backend;
     // if   allocated directly without  using  JSON.parse, it would  read "null"from  the  backend
 
@@ -60,7 +60,7 @@ export const FoodsProvider = ({ children }) => {
       // console.log(configuration)
       const response = await axios.get(url)
 
-      const foods = response.data
+      const foods = await response.data
       console.log('FETCH FOODS  ', foods)
       setFoodsData(foods)
       dispatch({ type: GET_FOODS_SUCCESS, payload: foods })

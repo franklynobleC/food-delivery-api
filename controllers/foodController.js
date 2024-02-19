@@ -41,10 +41,8 @@ const getSingleFood = async (req, res) => {
 }
 
 const createFood = async (req, res) => {
-  req.body.user = req.user.userId
-
-  console.log(req.user, '/n from create food route')
-  console.log(req.body)
+  //TODO: uncomment this  getting user id from req.user
+  // req.body.user = req.user.userId
 
   if (!req.body) {
     res
@@ -212,9 +210,23 @@ const searchFood = async (req, res) => {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: `Failed!${error}` })
+  }
+}
 
-    console.log('ERROR>>>>>>>')
-    console.log(err)
+const getFoodImages = async (req, res) => {
+  try {
+    const { resources } = await cloudinary.api.resources({
+      type: 'upload',
+      prefix: 'file-upload'
+    })
+    const imageURL = await resources.map(resource => {
+      // console.log('image  url  is', resource.secure_url)
+      return resource.secure_url
+    })
+    // console.log(imageURL)
+    res.status(StatusCodes.OK).json(imageURL)
+  } catch (err) {
+    res.status(StatusCodes.BAD_REQUEST).json({ message: `Failed!${error}` })
   }
 }
 
@@ -225,5 +237,6 @@ module.exports = {
   updateFood,
   deleteFood,
   uploadImage,
-  searchFood
+  searchFood,
+  getFoodImages
 }

@@ -5,11 +5,13 @@ import {
   all_payments_url,
   update_food_url,
   update_user_url,
+  create_food_url,
   delete_food_url,
   foods_url,
   all_users_url,
   single_order_url,
-  single_user_url
+  single_user_url,
+  get_all_foods_images_url
 } from '../utils/constants'
 import axios from 'axios'
 
@@ -26,7 +28,11 @@ import {
   GET_SINGLE_ORDER_ERROR,
   GET_SINGLE_ORDER_SUCCESS,
   SINGLE_USER_SUCCESS,
-  SINGLE_USER_ERROR
+  SINGLE_USER_ERROR,
+  CREATE_SINGLE_FOOD_ERROR,
+  CREATE_SINGLE_FOOD_SUCCESS,
+  GET_IMAGES_ERROR,
+  GET_IMAGES_SUCCESS,
 } from '../actions'
 const initialState = {
   is_error: false,
@@ -40,7 +46,10 @@ const initialState = {
   orders: [],
   payments: [],
   order: [],
-  singleUser: []
+  singleUser: [],
+  created_food: [],
+  created_food_error: false,
+  foods_images: []
 }
 export const AdminContext = React.createContext()
 
@@ -48,6 +57,7 @@ export const AdminProvider = ({ children }) => {
   const [state, dispatch] = useReducer(admin_reducer, initialState)
   const [ordersData, setOrdersData] = useState([])
   const [paymentsData, setPaymentsData] = useState([])
+  const [imagesData, setImagesData] = useState([])
   const fetchOrders = async () => {
     try {
       const responseOrders = await axios.get(all_orders_url)
@@ -69,7 +79,7 @@ export const AdminProvider = ({ children }) => {
 
       dispatch({ type: GET_SINGLE_ORDER_SUCCESS, payload: order })
     } catch (err) {
-      console.log('erro', err)
+      console.log('error', err)
       dispatch({ type: GET_SINGLE_ORDER_ERROR, payload: err.message })
     }
   }
@@ -86,6 +96,25 @@ export const AdminProvider = ({ children }) => {
       dispatch({ type: GET_FOODS_ERROR, payload: err.message })
     }
   }
+  useEffect(() => {
+    const getAllFoodsImages = async () => {
+      try {
+        const FoodImagesResp = await axios.get(get_all_foods_images_url)
+        const FoodImages = await FoodImagesResp.data
+        setImagesData(FoodImages)
+        console.log(FoodImages, 'all  images  Data')
+
+        dispatch({ type: GET_IMAGES_SUCCESS, payload: FoodImages })
+      } catch (err) {
+        console.log(err)
+        dispatch({ type: GET_IMAGES_ERROR, payload: err.message })
+      }
+
+      console.log(imagesData, 'all  images  Data')
+    }
+    console.log('images  called')
+    getAllFoodsImages()
+  }, [])
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -148,6 +177,24 @@ export const AdminProvider = ({ children }) => {
     console.log(deletedResponse)
   }
 
+  const createFoods = async (name, description, price, image_url, category) => {
+    try {
+      const createFoods = await axios.post(create_food_url, {
+        name,
+        price,
+        description,
+        image: image_url,
+        category
+      })
+
+      const createdFood = await createFoods.data
+      dispatch({ type: CREATE_SINGLE_FOOD_SUCCESS, payload: createdFood })
+    } catch (err) {
+      console.log(err)
+      dispatch({ type: CREATE_SINGLE_FOOD_ERROR, payload: err.message })
+    }
+  }
+
   //TODO: add     this use Effect to  the Admin Page  instead
 
   return (
@@ -161,7 +208,8 @@ export const AdminProvider = ({ children }) => {
         deleteFood,
 
         fetchSingleOrder,
-        fetchSingleUser
+        fetchSingleUser,
+        createFoods
       }}
     >
       {children}
