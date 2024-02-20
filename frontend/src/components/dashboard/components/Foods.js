@@ -84,7 +84,7 @@ function Foods () {
               <div className='overlay'></div>
 
               <div className='add-food-component'>
-                <form onSubmit={handleCreateFood}>
+                <form onSubmit={handleCreateFood} className='food-form'>
                   <div className='close-div'>
                     <button
                       className='btn-close'
@@ -95,6 +95,8 @@ function Foods () {
                   </div>
                   <div className='add-food-inputs'>
                     Add Food
+                    <div className='input-group'>
+
                     <label htmlFor='' className='label-input'>
                       Name
                     </label>
@@ -105,6 +107,9 @@ function Foods () {
                       value={addFood.name}
                       onChange={handleChange}
                     />
+                    </div>
+                    <div className='input-group'>
+
                     <label htmlFor='' className='label-input'>
                       Description
                     </label>
@@ -113,8 +118,11 @@ function Foods () {
                       name='description'
                       className='input'
                       value={addFood.description}
+
                       onChange={handleChange}
                     />
+                     </div>
+                    <div className='input-group'>
                     <label htmlFor='' className='label-input'>
                       Price
                     </label>
@@ -125,6 +133,9 @@ function Foods () {
                       onChange={handleChange}
                       value={addFood.price}
                     />
+                     </div>
+                    <div className='input-group'>
+
                     <label htmlFor='' className='label-input'>
                       category
                     </label>
@@ -135,11 +146,12 @@ function Foods () {
                       onChange={handleChange}
                       value={addFood.category}
                     />
-                    <button onClick={() => handleUploadImage()}>
+                    </div>
+                    <button  type='button' onClick={() => handleUploadImage()} className='btn-upload'>
                       upload image
                     </button>
                   </div>
-                  <button type='submit'>save</button>
+                  <button type='submit' className='btn-save'>save</button>
                 </form>
                 {uploadImage && (
                   <div className='image-container'>
@@ -149,7 +161,6 @@ function Foods () {
                           src={image}
                           // width={40}
 
-                          alt='add-image'
                           className='image'
                           onClick={() => handleSelectedImage(image)}
                         />
