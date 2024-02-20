@@ -8,7 +8,7 @@
   min-height: 345px;
   border: solid;
   border: 1px solid #eee;
-  border-color: yellowgreen;
+
   border-width: 1px;
   border-radius: 2px;
   margin-bottom: 30px;
@@ -38,9 +38,6 @@
   background-color: white;
   scroll-snap-align: start;
   scrollbar-width: auto;
-  /* width:   10px; */
-  /* border-color: red; */
-  /* border-width: 5px; */
 
   border-style: solid;
 }
@@ -93,8 +90,7 @@
 
 .close-div {
   display: flex;
-  /* flex-direction: ; */
-  /* background-color: rgb(241, 34, 34); */
+
   color: white;
   border: none;
   padding: 10px 10px;
@@ -114,11 +110,12 @@
   padding: auto;
   background-color: rgb(211, 0, 0);
   color: rgb(255, 255, 255);
-  right: 2px;
+  right: 1px;
   top: 1px;
 }
 .btn-close:hover {
   background-color: rgb(254, 63, 63);
+  cursor: pointer;
 }
 .input-group {
   margin-bottom: 10px;
@@ -131,5 +128,4 @@
 }
 .add-food-component {
   min-width: 50px;
-  background-color: red;
 }

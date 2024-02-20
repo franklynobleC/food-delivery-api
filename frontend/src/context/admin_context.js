@@ -32,7 +32,7 @@ import {
   CREATE_SINGLE_FOOD_ERROR,
   CREATE_SINGLE_FOOD_SUCCESS,
   GET_IMAGES_ERROR,
-  GET_IMAGES_SUCCESS,
+  GET_IMAGES_SUCCESS
 } from '../actions'
 const initialState = {
   is_error: false,
@@ -188,6 +188,7 @@ export const AdminProvider = ({ children }) => {
       })
 
       const createdFood = await createFoods.data
+      console.log('Success sent  to DB', createdFood)
       dispatch({ type: CREATE_SINGLE_FOOD_SUCCESS, payload: createdFood })
     } catch (err) {
       console.log(err)

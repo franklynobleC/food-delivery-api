@@ -19,7 +19,7 @@ function Foods () {
 
   const [uploadImage, setUploadImage] = useState(false)
   const { fetchFoods, foods } = useFoodsContext()
-  const { foods_images } = useAdminContext()
+  const { foods_images,createFoods } = useAdminContext()
 
   const handleSelectedImage = image => {
     // e.preventDefault()
@@ -47,6 +47,7 @@ function Foods () {
     e.preventDefault()
     console.log('handle add food called', addFood)
     console.log('single Image String', imageString)
+    createFoods( addFood.name, addFood.description, addFood.price, imageString, addFood.category)
   }
   if (!foods) {
     return <div className='foods-data-parent-div'>Foods Data Not Found</div>
