@@ -28,7 +28,8 @@ const initialState = {
   foods: [],
   single_food_error: false,
   single_food_loading: false,
-  single_food: {}
+  single_food: {},
+  is_data_fetched: false
 }
 
 //declare global context and  make it  Available Globally
@@ -47,7 +48,6 @@ export const FoodsProvider = ({ children }) => {
   //fetch Data from API   using axios
 
   const fetchFoods = async () => {
-
     //NOTE: convert  to  valid  json String Object: this would   would enable  possible read from  the Backend;
     // if   allocated directly without  using  JSON.parse, it would  read "null"from  the  backend
 
@@ -75,10 +75,11 @@ export const FoodsProvider = ({ children }) => {
     fetchFoods()
   }, [userTokenData])
   //end here
-  const fetchSingleFood = async single_url => {
+
+  const fetchSingleFood = async id => {
     dispatch({ type: GET_SINGLE_FOOD_BEGIN })
     try {
-      const response = await axios.get(single_url)
+      const response = await axios.get(single_url + id)
       const singleFood = response.data
 
       dispatch({ type: GET_SINGLE_FOOD_SUCCESS, payload: singleFood })
@@ -89,6 +90,11 @@ export const FoodsProvider = ({ children }) => {
       dispatch({ type: GET_SINGLE_FOOD_ERROR, payload: error.message })
     }
   }
+    //    useEffect(() => {
+    //       }, [id])
+    // }
+    // fetchSingleFood(id)
+
   const updateSort = e => {
     const value = e.target.value
     console.log('Value from  sort  is', value)

@@ -207,7 +207,6 @@ export const AdminProvider = ({ children }) => {
         fetchFoods,
         updateFood,
         deleteFood,
-
         fetchSingleOrder,
         fetchSingleUser,
         createFoods

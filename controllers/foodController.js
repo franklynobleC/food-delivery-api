@@ -20,6 +20,7 @@ const getAllFoods = async (req, res) => {
 }
 
 const getSingleFood = async (req, res) => {
+  console.log('Single Food ')
   const { id: foodId } = req.params
   console.log(foodId, 'params  id and  added')
   if (!foodId) {

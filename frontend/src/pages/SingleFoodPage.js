@@ -8,7 +8,6 @@ import { useFoodsContext } from '../context/foods_context'
 import { useCartContext } from '../context/cart_context'
 import '../styles/singlefood.css'
 const SingleFoodPage = () => {
-
   //Get Params  id  from  the request  current url
   const { id } = useParams()
 
@@ -22,7 +21,7 @@ const SingleFoodPage = () => {
   } = useFoodsContext()
 
   useEffect(() => {
-    fetchSingleFood(`${single_url}${id}`)
+    fetchSingleFood(id)
   }, [id])
 
   useEffect(() => {

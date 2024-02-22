@@ -4,7 +4,7 @@ const FoodSchema = new mongoose.Schema(
   {
     name: {
       type: String
-      //required: [true, 'Please provide food  name'],
+      //required: [true, 'Please provid e food  name'],
       // maxlength: [150, 'name can not be more than 150 characters']
     },
     price: {

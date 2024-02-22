@@ -35,7 +35,12 @@ const foods_reducer = (state, action) => {
     return { ...state, single_food_loading: true, single_food_error: false }
   }
   if (action.type === GET_SINGLE_FOOD_SUCCESS) {
-    return { ...state, single_food_loading: false, single_food: action.payload }
+    return {
+      ...state,
+      single_food_loading: false,
+      is_data_fetched: true,
+      single_food: action.payload
+    }
   }
   if (action.type === GET_SINGLE_FOOD_ERROR) {
     return { ...state, single_food_loading: false, single_food_error: true }

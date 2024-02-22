@@ -14,6 +14,7 @@ import Foods from '../dashboardPages/FoodPage'
 
 import Navbar from '../../components/dashboard/components/Navbar'
 import SingleOrder from '../../components/dashboard/components/SingleOrder'
+import EditFood from '../../components/dashboard/components/EditFood'
 
 import '../../styles/admindashboard/adminPage.css'
 import '../../styles/fonts.css'
@@ -30,6 +31,7 @@ const AdminPage = () => {
         <Route path='/' element={<Admin />} />
         <Route path='users' element={<Users />} />
         <Route path='foods' element={<Foods />} />
+        <Route path='foods/:id' element={<EditFood />} />
         <Route path='payments' element={<Payments />} />
         <Route path='paymentslist' element={<PaymentList />} />
         <Route path='orders' element={<Orders />} />
