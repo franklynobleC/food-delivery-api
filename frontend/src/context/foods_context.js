@@ -56,7 +56,6 @@ export const FoodsProvider = ({ children }) => {
     try {
       dispatch({ type: GET_FOODS_BEGIN })
 
-      console.log(userTokenData)
       // console.log(configuration)
       const response = await axios.get(url)
 

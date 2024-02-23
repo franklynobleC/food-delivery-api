@@ -143,6 +143,7 @@ export const AdminProvider = ({ children }) => {
       dispatch({ type: SINGLE_USER_ERROR, payload: err.message })
     }
   }
+  // const deleteFood = async id => {}
 
   const fetchPayments = async () => {
     try {
@@ -160,21 +161,39 @@ export const AdminProvider = ({ children }) => {
     }
   }
 
-  const updateFood = async id => {
+  const updateFood = async (name, description, price, image_url, id) => {
+    console.log(
+      'Before    backend Submit',
+      name,
+      description,
+      price,
+      image_url,
+      id
+    )
     try {
-      const responseFood = await axios.patch(update_food_url + id)
+      const responseFood = await axios.patch(`${update_food_url + id}`, {
+        name: name,
+        description,
+        price,
+        image: image_url
+      })
       const responseFoodData = await responseFood.data
 
-      console.log(responseFoodData)
+      console.log('updated Food', responseFoodData)
       // dispatch({type: UPDATE_SINGLE_FOOD})
     } catch (err) {
       console.log(err)
     }
   }
   const deleteFood = async id => {
-    const responseDeleteFood = await axios.delete(delete_food_url + id)
-    const deletedResponse = await responseDeleteFood.data
-    console.log(deletedResponse)
+    try {
+      const responseDeleteFood = await axios.delete(delete_food_url + id)
+      const deletedResponse = await responseDeleteFood.data
+      console.log(deletedResponse)
+      console.log('success Data Deleted Successfully')
+    } catch (err) {
+      console.log(err, 'Error Data')
+    }
   }
 
   const createFoods = async (name, description, price, image_url, category) => {

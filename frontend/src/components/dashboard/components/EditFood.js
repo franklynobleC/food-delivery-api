@@ -1,20 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import '../../../styles/admindashboard/foods.css'
 import { useFoodsContext } from '../../../context/foods_context'
+import { useAdminContext } from '../../../context/admin_context'
 import { useParams } from 'react-router-dom'
 
 function EditFood () {
   // console.log(Id)
+  const [uploadImage, setUploadImage] = useState(false)
+  const [selectedImage, setSelectedImage] = useState('')
   const { id } = useParams()
+
   console.log(id)
-  const { fetchSingleFood, single_food, is_data_fetched, foods } =
-    useFoodsContext()
+  const { foods } = useFoodsContext()
+  const { foods_images, updateFood } = useAdminContext()
   const [editFood, setEditFood] = useState({
     name: '',
     description: '',
     price: '',
-    category: ''
+    category: '',
+    image_url: ''
   })
+
+  const handleUploadImage = () => {
+    setUploadImage(!uploadImage)
+  }
+  const handleSelectedImage = image => {
+    // e.preventDefault()
+    setSelectedImage(image)
+    console.log('Selected Image from Edit', image)
+  }
 
   const [isAddFood, setIsAddFood] = useState(true)
   const handleChange = e => {
@@ -23,7 +37,46 @@ function EditFood () {
       ...editFood,
       [e.target.name]: e.target.value
     })
-    console.log('All Foods Data', editFood)
+    console.log('All Foods Data', editFood, 'Selected Image', selectedImage)
+  }
+
+  //TODO:  send Handle to backend update  food Data
+  const handleUpdateFood = () => {
+    console.log(editFood)
+    if (selectedImage && id) {
+      console.log(id)
+      console.log(selectedImage)
+      editFood.image_url = selectedImage
+      console.log('Edit Food Data 1', editFood)
+      setEditFood({
+        ...editFood,
+        image_url: selectedImage
+      })
+      updateFood(
+        editFood.name,
+        editFood.description,
+        editFood.price,
+        editFood.image_url,
+        id
+      )
+    }
+
+    if (id) {
+      updateFood(
+        editFood.name,
+        editFood.description,
+        editFood.price,
+        editFood.image_url,
+        id
+      )
+      // setEditFood({
+      //   name: '',
+      //   description: '',
+      //   price: '',
+      //   category: '',
+      //   image_url: ''
+      // })
+    }
   }
   const handleAddFood = () => {
     setIsAddFood(!isAddFood)
@@ -53,7 +106,7 @@ function EditFood () {
   if (isAddFood) {
     return (
       <div className='add-food-component'>
-        <form onSubmit={handleCreateFood} className='food-form'>
+        <form onSubmit={handleUpdateFood} className='food-form'>
           <div className='close-div'>
             <button
               className='btn-close'
@@ -117,17 +170,18 @@ function EditFood () {
                 value={editFood.category}
               />
             </div>
-            <div>
+            <div className='image-card'>
               <img
-                src={editFood.image_url}
-                height={100}
+                src={selectedImage || editFood.image_url}
+                className='image'
+                // height={100}
                 width={100}
                 alt='image_data'
               />
             </div>
             <button
               type='button'
-              // onClick={() => handleUploadImage()}
+              onClick={() => handleUploadImage()}
               className='btn-upload'
             >
               upload image
@@ -137,6 +191,21 @@ function EditFood () {
             update
           </button>
         </form>
+        {uploadImage && (
+          <div className='image-container'>
+            {foods_images.map((image, index) => (
+              <div key={index} className='image-card'>
+                <img
+                  src={image}
+                  // width={40}
+
+                  className='image'
+                  onClick={() => handleSelectedImage(image)}
+                />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     )
   } else {

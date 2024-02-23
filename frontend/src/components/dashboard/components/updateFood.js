@@ -11,7 +11,7 @@ function UpdateFood ({ id }) {
     category: ''
   })
 
-  const [isAddFood, setIsAddFood] = useState(true)
+  const [isAddFood, setIsAddFood] = useState(false)
   const handleChange = e => {
     // e.preventDefault()
     setEditFood({

@@ -25,7 +25,7 @@ function Foods () {
   const [uploadImage, setUploadImage] = useState(true)
   const { fetchFoods, foods, fetchSingleFood, single_food, is_data_fetched } =
     useFoodsContext()
-  const { foods_images, createFoods } = useAdminContext()
+  const { foods_images, createFoods, deleteFood } = useAdminContext()
 
   const handleUpdateFood = async id => {
     console.log('handle From Foods', id)
@@ -42,6 +42,17 @@ function Foods () {
       setIsUpdate(!isUpdate)
     } catch (error) {
       console.log('error')
+    }
+  }
+  const handleDeleteFood = async id => {
+    console.log('handle delete food called', id)
+    if (!id) {
+      return
+    }
+    try {
+      await deleteFood(id)
+    } catch (err) {
+      console.log('error  from component err')
     }
   }
 
@@ -127,14 +138,20 @@ function Foods () {
                 </button>
               </div>
               <div>
-                <button className='delete'>delete</button>
+                <button
+                  className='delete'
+                  type='button'
+                  onClick={() => handleDeleteFood(foodsData._id)}
+                >
+                  delete
+                </button>
               </div>
             </div>
           </div>
         )
       })}
 
-      {isUpdate && <UpdateFood/>}
+      {isUpdate && <UpdateFood />}
 
       {isAddFood && (
         <>

@@ -59,18 +59,19 @@ const createFood = async (req, res) => {
 const updateFood = async (req, res) => {
   // this value would OnlyUpdate for  name,  category, description, price
   // image update would have  anotherUpdate
-  const { id: foodId } = req.params
 
-  const updateFood = await FoodSchema.findOneAndUpdate(
-    { _id: foodId },
-    req.body,
-    {
-      runValidators: true,
-      new: true
-    }
-  )
+  // console.log(req.params, 'params')
+  const { id } = req.params
+  console.log('ID las Updated IS', id, 'FoodId is')
 
-  if (!foodId || updateFood.length === 0 || updateFood === null) {
+  console.log('update Id  is', id)
+
+  const updateFood = await FoodSchema.findOneAndUpdate({ _id: id }, req.body, {
+    runValidators: true,
+    new: true
+  })
+
+  if (!id || updateFood.length === 0 || updateFood === null) {
     res.status(StatusCodes.BAD_REQUEST).json({
       failed: 'Product not found in database, please provide a valid  id'
     })
@@ -81,7 +82,17 @@ const updateFood = async (req, res) => {
 }
 
 const deleteFood = async (req, res) => {
+  console.log('Delet func')
   const { id: foodId } = req.params
+  // if (foodId) {
+  //   console.log('food  id', foodId)
+  //   return
+  // } else {
+  //   console.log('Food ID  in else', foodId)
+  //   return
+  // }
+
+  console.log(foodId, 'params  id and  added')
   const singleFoodToDelete = await FoodSchema.findOneAndDelete({ _id: foodId })
   if (
     !singleFoodToDelete ||
