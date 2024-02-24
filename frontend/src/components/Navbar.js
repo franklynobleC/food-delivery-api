@@ -32,51 +32,46 @@ const Nav = () => {
   return (
     <nav className='nav-links'>
       <div className='nav-link-user'>
-        <ul className='user-ul-container'>
-          <li className='signin-link-parent'>
-            <Link to='signin' className='signin-link'>
-              <FaRegUser className='sign-in-icon' />
-              Sign in
-            </Link>
-          </li>
-        </ul>
+        <Link to='signin' className='signin-link'>
+          <FaRegUser className='sign-in-icon'/>
+          Sign in
+        </Link>
       </div>
       <div className='nav-center'>
-        <ul className='nav-links-other-url'>
-          {links.map((link, index) => {
-            return (
-              <li key={index}>
-                <Link to={link.url} className='link-text'>
-                  {link.icon}
+        {/* <ul className='nav-links-other-url'> */}
+        {links.map((link, index) => (
+          <div className='nav-links-other-url'>
+            <Link to={link.url} className='link-text'>
+              {link.icon}
 
-                  {link.text}
-                </Link>
-              </li>
-            )
-          })}
+              {link.text}
+            </Link>
+          </div>
+        ))}
 
-          {/* add my user,  if  user? show check out  page   */}
-        </ul>
-      </div>
-      <div className='cart-items-here-dont-style'>
-        <Link to='/cart'>
-          {total_quantity ? (
-            <>
-              <div className='cart-total-quantity-count'>{total_quantity}</div>
-            </>
-          ) : (
-            <></>
-          )}
-          cart
-          <IoCartOutline className='item-cart-content-icon' />
-        </Link>
-        {console.log('cartTotal is ', total_quantity)}
+        <div className='cart-items-here-dont-style'>
+          <Link to='/cart'>
+            {total_quantity ? (
+              <div className='cart-item-present-div'>
+                <IoCartOutline className='item-cart-content-icon' />
+                <div className='cart-total-quantity'>{total_quantity}</div>{' '}
+              </div>
+            ) : (
+              <>
+                <div>
+                  <IoCartOutline className='item-cart-content-icon' />
+                </div>
+              </>
+            )}
+          </Link>
+          {console.log('cartTotal is ', total_quantity)}
+        </div>
       </div>
 
       <div>
         {token ? <button onClick={handleLogout}>logOut</button> : null}
         {console.log(
-          'Checking Loging And Checking LogOut',
+          'Checking Logging And Checking LogOut',
           is_authenticated
           // setCheckLogin(is_logged_in)
         )}

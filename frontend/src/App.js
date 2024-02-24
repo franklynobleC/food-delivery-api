@@ -62,8 +62,8 @@ function App () {
       <Routes>
         TODO:
         {/* change  path  back to  '/' for HOME PAGE */}
-        {/* <Route path='/' element={<Home />} /> */}
-        <Route path='/' element={<AdminPage />} />
+        <Route path='/' element={<Home />} />
+        <Route path='/dashboard' element={<AdminPage />} />
         <Route path='about' element={<About />} />
         <Route path='contact' element={<Contact />} />
         // <Route path='foods' element={<Foods />} />
