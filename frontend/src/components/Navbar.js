@@ -33,7 +33,7 @@ const Nav = () => {
     <nav className='nav-links'>
       <div className='nav-link-user'>
         <Link to='signin' className='signin-link'>
-          <FaRegUser className='sign-in-icon'/>
+          <FaRegUser className='sign-in-icon' />
           Sign in
         </Link>
       </div>

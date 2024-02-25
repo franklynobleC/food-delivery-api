@@ -7,24 +7,24 @@ export const links = [
     id: 1,
     icon: <FiHome />,
 
-    text: 'home',
+    text: 'Home',
     url: '/'
   },
   {
     id: 2,
-    text: 'about',
+    text: 'About',
     url: '/about'
   },
   {
     id: 3,
-    text: 'foods',
+    text: 'Foods',
     icon: <IoFastFoodSharp />,
 
     url: '/foods'
   },
   {
     id: 4,
-    text: 'contact us',
+    text: 'Contact us',
     url: '/contact'
   }
 ]

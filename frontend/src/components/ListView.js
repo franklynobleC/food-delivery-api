@@ -112,8 +112,6 @@ const ListView = ({ foods }) => {
             </div>
             <div>
               <AddToCart food={food} />
-              /**add to cat */ ;
-
             </div>
 
             <div className='food-spacer'></div>
