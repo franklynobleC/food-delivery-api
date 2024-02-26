@@ -1,5 +1,5 @@
 .cart-summary-final {
-  display: grid;
+  /* display: grid; */
   /* justify-content: center; */
   background-color: rgb(245, 245, 245);
   border-radius: 5px;
@@ -177,8 +177,8 @@
   justify-content: center;
   color: rgb(136, 136, 136);
 }
-.update-data-form-div{
-color: rgb(58, 78, 102);
+.update-data-form-div {
+  color: rgb(58, 78, 102);
 }
 .inside-form-container {
   display: flex;
@@ -190,17 +190,16 @@ color: rgb(58, 78, 102);
 .form-input-address,
 .form-input-email,
 .form-input-name {
-
   margin: 5px;
   padding-left: 10px;
   display: flex;
   justify-content: center;
   border: none;
 }
-.total-quantity-summary{
+.total-quantity-summary {
   color: rgb(58, 78, 102);
 }
-.btn-back{
+.btn-back {
   margin-bottom: 5px;
 }
 /* .update-btn-container > button{

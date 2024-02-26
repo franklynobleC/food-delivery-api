@@ -17,11 +17,15 @@ import {
 function getLocalStorageData () {
   const localData = localStorage.getItem('cart')
 
+  if (!localData) {
+    return []
+  }
+
   return JSON.parse(localData)
 }
 
 const initialState = {
-  cart: [],
+  cart: getLocalStorageData(),
   total_quantity: 0,
   total_price: 0,
   payment_option: '',

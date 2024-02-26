@@ -133,8 +133,8 @@
 .nav-links a .cart-items-here-dont-style:hover,
 .cart-items-here-dont-style:focus {
   background-color: blue;
-  text-decoration: none;
-  text-decoration: none;
+  /* text-decoration: none; */
+  text-decoration: underline;
   color: none;
 
   box-shadow: none;

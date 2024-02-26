@@ -7,7 +7,7 @@ const CartItem = ({ name, price, description, image, quantity, id }) => {
   const { removeItem } = useCartContext()
 
   return (
-    <section className='cart-item-container'>
+    <div className='cart-item-container'>
       <div className='cart-item-image-container'>
         <img src={image} alt={name} className='cart-image' />
       </div>
@@ -28,7 +28,7 @@ const CartItem = ({ name, price, description, image, quantity, id }) => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   )
 }
 
