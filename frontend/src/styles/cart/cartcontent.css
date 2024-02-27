@@ -1,19 +1,36 @@
 .cart-content {
-  display: grid;
-  align-items: start;
-  background-color: rgb(159, 40, 40);
+  display: flex;
+  justify-content: space-between;
+  /* display: grid;
+  align-items: start; */
+  /* background-color: rgb(255, 255, 255); */
+  background-color: yellow;
 
-  /* grid-template-columns: 1fr; */
-  grid-template-columns: 1fr;
-  column-gap: 12px;
-  row-gap: 20px;
-  width: 70%;
+  /* grid-template-columns: 400px 1fr  1fr; */
+  /* grid-template-columns: 1fr, auto; */
+  align-items: center;
+  justify-items: center;
+  width: 100%;
   /* max-width: 850px; */
   margin-left: auto;
   margin-right: auto;
-  padding-left: 20px;
+}
+.order-summary-div {
+  /* display: flex; */
+  /* flex-direction: row; */
+  /* justify-content: flex-end; */
+  /* justify-items: center;
+   */
+  /* text-align: right; */
+  margin-right: 600px;
 }
 
+.order-summary-div {
+  flex: 1; /* Adjust the flex value to control the width */
+  /* display: flex; */
+  /* background-color: black; */
+  /* margin-right: 200px; */
+}
 .cart-item-container {
   padding: 40px 25px;
   border: 1px solid rgb(222, 222, 222);
@@ -31,7 +48,21 @@
   /* row-gap: 20px; */
   align-items: center;
 }
+/* .cart-item {
+  align-items: center;
+} */
+.items-flex {
+  flex: 2; /* Adjust the flex value to control the width */
+  display: flex;
+  flex-direction: column;
 
+  /* display: flex; */
+  flex-direction: column;
+  /* grid-template-columns: 110px 1fr 220px; */
+  /* column-gap: 38px; */
+  /* row-gap: 20px; */
+  align-items: end;
+}
 .cart-item-image-container {
   text-align: center;
   /* margin-bottom: 25px; */
@@ -45,7 +76,7 @@
   font-family: sans-serif;
   font-size: 100%;
   /* margin: 0px; */
-  vertical-align: baseline;
+  /* vertical-align: baseline;
   line-height: normal;
   appearance: button;
   cursor: pointer;
@@ -57,13 +88,33 @@
   max-width: 30%;
   margin-left: 30%;
   padding: 9px 1.4em;
+  font-weight: 400; */
+  margin: 0px;
+  line-height: normal;
+  appearance: button;
+  cursor: pointer;
+  display: inline-block;
+  height: auto;
+  max-width: 30%;
+  margin-left: 30%;
+  padding: 9px 1.4em;
   font-weight: 400;
+  background-color: #f44336; /* Red color for clear/delete actions */
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px; /* Add some space above the button */
+  transition: background-color 0.3s ease;
+
   text-align: center;
   border-radius: 3px;
   transition: opacity 0.2s ease 0s, background-color 0.15s ease 0s,
     border-color 0.15s ease 0s, filter 0.2s ease 0s, -webkit-filter 0.2s ease 0s;
   position: relative;
-  outline: rgb(66, 153, 225) solid 1px !important;
+  /* outline: rgb(163, 163, 163) solid 1px !important; */
 }
 
 .checkout-link {
@@ -71,7 +122,7 @@
   margin-bottom: 20px;
   background-color: black;
   height: 200px;
-  width: 400px;
+  /* width: 400px; */
 }
 
 .signin-or-checkout {
@@ -90,4 +141,11 @@
   height: 200px;
   width: 400px;
   display: inline-block;
+}
+
+.cart-item {
+  background-color: green;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
 }

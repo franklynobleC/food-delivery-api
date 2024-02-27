@@ -116,7 +116,7 @@
 .category .list-items .card-list {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);           /*create  columns  with 4      */
 }
 .category .list-items .card {
   margin-left: 20px;

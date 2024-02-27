@@ -173,11 +173,12 @@ const uploadImage = async (req, res) => {
 }
 
 const searchFood = async (req, res) => {
-  //take a query from   req, use  the word to search  if  it  matches  any name  in  the,  food name value,  if  match  is found,  return  match, else return  error
+  //take a query from   req, use  the word to search  if  it  matches  any name  in  the,
+ //  food name value,  if  match  is found,  return match, else return error
   await FoodSchema.createIndexes({ name: 'text' })
 
   const searchWord = req.query.searchWord
-  //req.params.searchWord
+
   console.log(searchWord)
   //const convword = String(searchWord)
 

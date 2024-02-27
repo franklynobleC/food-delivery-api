@@ -1,11 +1,12 @@
 .cart-summary-final {
-  /* display: grid; */
-  /* justify-content: center; */
+  display: grid;
+
   background-color: rgb(245, 245, 245);
   border-radius: 5px;
   padding-left: 10px;
   padding-right: 10px;
   min-width: 40%;
+
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -16,7 +17,6 @@
 .customer-address {
   margin-top: 20px;
   color: rgb(58, 78, 102);
-  /* background-color: black; */
 }
 
 .modify-cart {
@@ -40,7 +40,7 @@
   box-shadow: 0px 1;
   border: 1px solid rgb(222, 222, 222);
   border-radius: 4px;
-  /* box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2); */
+
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   -ms-border-radius: 2px;
@@ -49,7 +49,6 @@
 .delivery-grid {
   display: flex;
   flex-direction: row;
-  /* grid-template-columns: 1fr, 1fr; */
 }
 
 .delivery-details {
@@ -71,14 +70,13 @@
   border-radius: 2px;
   padding-top: 15px;
   padding-bottom: 15px;
-  /* padding-left: 10px; */
+
   border-width: 1px;
   box-shadow: 0px 1;
   border: 1px solid rgb(222, 222, 222);
   border-radius: 4px;
 }
 .change-address-btn {
-  /* position: relative; */
   border: none;
   color: green;
   font-size: 100%;
@@ -202,7 +200,3 @@
 .btn-back {
   margin-bottom: 5px;
 }
-/* .update-btn-container > button{
-  display: flex;
-  justify-content: center;
-} */

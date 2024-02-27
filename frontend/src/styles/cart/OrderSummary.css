@@ -1,16 +1,26 @@
 .cart-summary {
   grid-row: 1;
-  width: 45%;
+  grid-column: auto;
+  width: 150%;
+  height: 300px;
   margin-bottom: 12px;
-  border: 1px solid rgb(222, 222, 222);
+  margin-right: 120px;
+  /* border: 1px solid rgb(222, 222, 222); */
   border-radius: 4px;
   padding: 18px;
   padding-bottom: 5px;
+  /* background-color: rgb(240, 240, 240); */
+  background-color: red;
+
+  /* align-items: start; */
+
+  /* grid-template-columns: 1fr 350px; */
 }
-.div ,h3 {
+.div,
+h3 {
   color: rgb(18, 44, 71);
 }
-h5{
+h5 {
   color: rgb(18, 44, 71);
 }
 
@@ -18,7 +28,7 @@ h5{
   margin-top: 10px;
   margin-bottom: 10px;
   font-weight: 700;
-  color: rgb(58,78,102);
+  color: rgb(58, 78, 102);
 }
 .cart-total {
   display: grid;
