@@ -72,7 +72,7 @@ const Wrapper = styled.section`
   .checkout-link {
     display: flex;
     justify-content: space-between;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
   }
   .foods-link {
     background-color: green;

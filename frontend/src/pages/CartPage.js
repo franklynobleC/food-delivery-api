@@ -2,7 +2,7 @@ import React from 'react'
 import { useCartContext } from '../context/cart_context'
 import useCartContent from '../components/CartContent'
 import { CartContent } from '../components/'
-import '../styles/cart/cartpage.css'
+// import '../styles/cart/cartpage.css'
 import styled from 'styled-components'
 
 const CartPage = () => {

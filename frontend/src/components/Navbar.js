@@ -69,7 +69,7 @@ const Nav = () => {
       </div>
 
       <div>
-        {token ? <button onClick={handleLogout}>logOut</button> : null}
+        {token ? <button onClick={handleLogout} className='btn-logout'>Logout</button> : null}
         {console.log(
           'Checking Logging And Checking LogOut',
           is_authenticated

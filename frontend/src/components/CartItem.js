@@ -61,7 +61,8 @@ const Wrapper = styled.article`
     width: 100%;
     height: 100%;
     display: block;
-    border-radius: var(--radius);
+    /* border-radius: var(--radius); */
+    border-radius: 5px;
     object-fit: cover;
   }
   /* background-color: var(--clr-white); */

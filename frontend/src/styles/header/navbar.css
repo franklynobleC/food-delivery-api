@@ -191,3 +191,18 @@
   margin-top: 2px;
   display: inline-block;
 }
+.btn-logout {
+  font-weight: bold;
+  padding: 10px 20px;
+  color: rgb(2, 134, 20);
+  border-color: rgb(166, 250, 30);
+  border-style: solid;
+  border-width: 1px;
+  /* border: 1px solid #ccc; */
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  cursor: pointer;
+}
