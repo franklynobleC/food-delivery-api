@@ -120,7 +120,7 @@ function UpdateFood ({ id }) {
         </div>
       )
     } else {
-      ;<></>
+      <></>
     }
   }
 }

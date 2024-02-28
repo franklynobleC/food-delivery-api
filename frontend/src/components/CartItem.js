@@ -1,5 +1,5 @@
 import React from 'react'
-// import '../styles/cart/cartitem.css'
+
 import { useCartContext } from '../context/cart_context'
 import { OrderSummary } from '../components'
 import styled from 'styled-components'
@@ -34,14 +34,17 @@ const Wrapper = styled.article`
   .price {
     display: none;
   }
+  align-items: center;
   background-color: white;
   display: grid;
   grid-template-columns: 200px auto auto;
   grid-template-rows: 75px;
-  gap: 3rem 1rem;
+  gap: 2rem 1rem;
   justify-items: center;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
   align-items: center;
+  max-width: fit-content;
+  margin-left: 15%;
 
   /* border-style: solid ; */
   border-color: red;

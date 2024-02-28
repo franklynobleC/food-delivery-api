@@ -31,33 +31,20 @@ const CartContent = () => {
     }
 
     return (
-      <Wrapper className='section'>
+      <Wrapper>
         cart Content page
-        <div className='items-flex '>
+        <div>
           {cart.map((item, index) => (
             <CartItem key={index} {...item} />
           ))}
         </div>
-        <div>
-          <Link to='/foods'>add more orders</Link>
+        <div className='add-more-link'>
+          <Link to='/foods'>add more to cart</Link>
         </div>
-        {<OrderSummary />}
-        <div>
-          <button className='clear-btn' onClick={clearCart}>
-            clear cart
-          </button>
-        </div>
-        <div className='signin-or-checkout'>
-          {token ? (
-            <div className='checkout-link'>
-              <Link to='/checkout'>proceed to Checkout</Link>
-            </div>
-          ) : (
-            <div className='signin-link'>
-              <Link to='/signin'>login to checkout</Link>
-            </div>
-          )}
-        </div>
+        <OrderSummary />;{/* <div className='clear'> */}
+        <button className='clear' onClick={clearCart}>
+          Clear cart
+        </button>
       </Wrapper>
     )
   }
@@ -80,9 +67,37 @@ const Wrapper = styled.section`
     font-weight: 400;
     cursor: pointer;
   }
-  background-color: white;
+  .add-more-link {
+    /* display: grid; */
+    /* justify-content: space-between; */
+    /* margin-top: 10rem; */
+    /* background-color: white;
+    border-width: 1px;
+    border-style: solid;
+    max-width: fit-content;
+    padding: 1rem 1rem; */
+  }
+background-color:white;
   .clear-btn {
     background: var(--clr-black);
+  }
+  .clear {
+    background-color: red;
+    padding: 1rem 8rem;
+    display: flex;
+    /* max-width: fit-content; */
+    border-radius: 4px;
+    position: relative;
+    color: whitesmoke;
+    font-weight: Bold;
+    cursor: pointer;
+
+    top: 1px;
+    right: 0px;
+    left: 72.5%;
+    justify-content: flex-end;
+
+    border: none;
   }
 `
 export default CartContent
