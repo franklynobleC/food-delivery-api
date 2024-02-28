@@ -10,7 +10,6 @@ const OrderSummary = () => {
   const { user, getSingleUser, single_userInfo } = useAuthContext()
   const [paymentOption, setPaymentOption] = useState('')
   const [isTokenPresent, setIsTokenPresent] = useState(false)
-  // const token = localStorage.getItem('token')
 
   let navigate = useNavigate()
   const token = localStorage.getItem('token')
@@ -59,19 +58,15 @@ const OrderSummary = () => {
           </div>
         </article>
 
-        <div>
+        <div className='btn-container'>
           {token ? (
-            <div>
-              <button className='btn'>
-                <Link to='/checkout'>Proceed to Checkout</Link>
-              </button>
-            </div>
+            <Link to='/checkout' className='btn-checkout'>
+              Proceed To Checkout
+            </Link>
           ) : (
-            <div className=''>
-              <button className='btn'>
-                <Link to='/signin'>Login</Link>
-              </button>
-            </div>
+            <Link to='/signin' className='btn-login'>
+              Login
+            </Link>
           )}
         </div>
       </div>
@@ -79,33 +74,26 @@ const OrderSummary = () => {
   )
 }
 const Wrapper = styled.section`
-  margin-top: 0.5rem;
-  display: grid;
-  align-items: center;
-  color: rgb(53, 53, 53);
-  max-width: fit-content;
   /* justify-content: center; */
   /* background-color: grey; */
-  border-radius: 4px;
-  position: relative;
-  /* left: 10px; */
-  top: 0px;
-  right: 0px;
-  left: 70%;
-  justify-content: flex-end;
-  /* justify-content: center; */
+  background-color: white;
   border-color: green;
+
   border-style: solid;
-  border-width: 1px;
+  border-radius: 5px;
+  width: auto;
+  max-width: fit-content;
+  display: flex;
+  flex-direction: flex-end;
+
   article {
     border: 1px solid var(--clr-grey-8);
     border-radius: var(--radius);
 
-    padding: 4.5rem 6rem;
-    /* padding-left: 20px; */
+    padding: 1.5rem 4rem;
   }
   span {
-    margin-top: 10px;
+    margin-top: 5px;
   }
   h4,
   h5,
@@ -122,14 +110,22 @@ const Wrapper = styled.section`
   @media (min-width: 776px) {
     justify-content: flex-end;
   }
-  .btn {
-    width: 100%;
+  .btn-checkout,
+  .btn-login {
+    width: fit-content;
     margin-top: 1rem;
     text-align: center;
     font-weight: 700;
     padding: 10px;
     margin-bottom: 5px;
     border: none;
+    color: whitesmoke;
+    background-color: green;
+    vertical-align: auto;
+    cursor: pointer;
+    /* border-radius: 5px; */
+    border-radius: 4px;
+    padding: 1.0rem 1.5rem;
   }
   .clear {
     width: 100%;
@@ -138,6 +134,12 @@ const Wrapper = styled.section`
     font-weight: 700;
     padding: 10px;
     background-color: red;
+  }
+
+  .btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `
 

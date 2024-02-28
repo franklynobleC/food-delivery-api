@@ -19,7 +19,7 @@ const CartItem = ({ name, price, description, image, quantity, id }) => {
         </div>
       </div>
       <h5 className='price'>{price}</h5>
-      <button>-</button>
+
       <button> + </button>
       <button className='remove-btn' onClick={() => removeItem(id)}>
         remove item
@@ -41,14 +41,14 @@ const Wrapper = styled.article`
   grid-template-rows: 75px;
   gap: 2rem 1rem;
   justify-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   align-items: center;
   max-width: fit-content;
   margin-left: 15%;
+  margin-top: 0.5rem;
 
-  /* border-style: solid ; */
   border-color: red;
-  /* background-color:red; */
+
   .title {
     grid-template-rows: 75px;
     display: grid;
@@ -64,7 +64,7 @@ const Wrapper = styled.article`
     border-radius: var(--radius);
     object-fit: cover;
   }
-  background-color: var(--clr-white);
+  /* background-color: var(--clr-white); */
   h5 {
     font-size: 0.75rem;
     margin-bottom: 0;
