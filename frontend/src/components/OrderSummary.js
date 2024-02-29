@@ -74,11 +74,10 @@ const OrderSummary = () => {
   )
 }
 const Wrapper = styled.section`
-  /* justify-content: center; */
-  /* background-color: grey; */
   background-color: white;
   border-color: green;
 
+  border-width: 0.5px;
   border-style: solid;
   border-radius: 5px;
   width: auto;
@@ -125,7 +124,7 @@ const Wrapper = styled.section`
     cursor: pointer;
     /* border-radius: 5px; */
     border-radius: 4px;
-    padding: 1.0rem 1.5rem;
+    padding: 1rem 1.5rem;
   }
   .clear {
     width: 100%;
