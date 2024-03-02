@@ -7,7 +7,7 @@ const {
   authorizedPermissions
 } = require('../middleware/authentication')
 const Middleware = require('../middleware/index')
-const authMiddleware = require('../middleware/authMid')
+// const authMiddleware = require('../middleware/authMid')
 
 const {
   createOrder,
@@ -29,8 +29,9 @@ router.post(
   '/createOrder',
   // authMiddleware,
   Middleware.decode,
-  Middleware.authorizePermissions('admin', 'user'),
-  createOrder
+  Middleware.authorizePermissions('admin', 'user')
+  // TODO:  //uncomment this to  create  order
+  // createOrder
 )
 router.patch('/:id', updateOrder)
 router.delete('/:id', deleteOrder)

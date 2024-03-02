@@ -14,7 +14,9 @@ import {
   GET_SINGLE_USER_ERROR,
   CREATE_SINGLE_FOOD_SUCCESS,
   CREATE_SINGLE_FOOD_ERROR,
-  GET_IMAGES_SUCCESS
+  GET_IMAGES_SUCCESS,
+  GET_IMAGES_ERROR
+
 } from '../actions'
 
 const admin_reducer = (state, action) => {

@@ -28,7 +28,7 @@ const initialState = {
   cart: getLocalStorageData(),
   total_quantity: 0,
   total_price: 0,
-  payment_option: '',
+  payment_option: 'card',
   delivery_fee: 0,
   quantity: 2,
   is_order_created_success: false,
@@ -96,9 +96,10 @@ export const CartProvider = ({ children }) => {
     }
 
     try {
-      const response = await axios(configuration)
+      //TODO: UNCOMMENT THIS TO CREATE ORDER
+      //const response = await axios(configuration)
 
-      const createdOrder = (await response.data) && response.statuscode === 201
+      // const createdOrder = (await response.data) && response.statuscode === 201
 
       console.log('CREATED ORDER SUCCESS')
       console.log('ORDER SUCCESS MESSAGE', await createOrder.data)

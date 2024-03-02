@@ -1,8 +1,8 @@
 import {
   REGISTER_SUCCESS,
-  REGISTER_BEGIN,
+
   REGISTER_ERROR,
-  REGISTER_USER,
+
   LOGIN_USER_BEGIN,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_ERROR,
@@ -13,7 +13,6 @@ import {
   SINGLE_USER_SUCCESS,
   REGISTER_USER_BEGIN,
 } from '../actions'
-import { SingleFood } from '../pages'
 
 const auth_reducer = (state, action) => {
   if (action.type === REGISTER_USER_BEGIN) {
@@ -153,15 +152,16 @@ const auth_reducer = (state, action) => {
   }
   if (action.type === SINGLE_USER_SUCCESS) {
     console.log('from actions  payload', action.payload)
-    const { deliveryAddress, name, email } = action.payload
+    const { deliveryAddress, name, email, phone } = action.payload
     console.log('The Address Details', deliveryAddress, name)
     return {
       ...state,
       single_userInfoError: false,
       single_userInfoLoading: false,
-      single_userInfo: deliveryAddress,
-      userInfo_name: name,
-      user_email: email
+      user_address: deliveryAddress,
+      user_name: name,
+      user_email: email,
+      user_phone: phone
     }
   }
   if (action.type === SINGLE_USER_ERROR) {

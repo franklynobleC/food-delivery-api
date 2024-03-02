@@ -48,8 +48,10 @@ const initialState = {
   user: {},
   single_userInfoError: false,
   single_userInfoLoading: false,
-  single_userInfo: '',
-  userInfo_name: '',
+  single_userInfo: {},
+  user_name: '',
+  user_address: '',
+  user_phone: '',
   user_email: ''
 }
 //declare global context and  make it  Available Globally
@@ -223,18 +225,19 @@ export const AuthProvider = ({ children }) => {
    * the user's delivery address in the database.
    */
 
-  const updateUser = async (userId, name, email, address) => {
+  const updateUser = async (userId, name, email, deliveryAddress, phone) => {
     try {
       const configuration = {
         method: 'patch',
         url: update_user_url + userId,
         headers: {
-          Authorization: `Bearer ${JSON.parse(localStorage.getItem('token'))}`
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`
         },
         data: {
           name: name,
           email: email,
-          deliveryAddress: address
+          deliveryAddress: deliveryAddress,
+          phone: phone
         }
       }
 
@@ -251,8 +254,8 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await axios.get(single_user_url + userId)
       const userData = await response.data
-      setUserInfo(userData)
-      console.log('USER  INFO  IS', userInfo)
+      // setUserInfo(userData)
+      console.log('USER  INFO  IS', userData)
 
       dispatch({ type: SINGLE_USER_SUCCESS, payload: userData })
       console.log(userData, 'RAW DATA FROM RESPONSE')

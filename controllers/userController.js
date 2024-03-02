@@ -1,6 +1,6 @@
 const UserSchema = require('../models/User')
 const { StatusCodes } = require('http-status-codes')
-const { json } = require('stream/consumers')
+// const { json } = require('stream/consumers')
 const { attachCookiesToResponse, createTokenUser } = require('../utils/index')
 require('dotenv').config()
 
@@ -45,20 +45,25 @@ const getSingleUser = async (req, res) => {
 //addUpdate a SingleUser's  name and  email Functionality
 
 const updateUser = async (req, res) => {
-  const { name, email, deliveryAddress } = req.body
+  const { name, deliveryAddress, phone } = req.body
   const { id } = req.params
+  console.log(name, deliveryAddress, phone)
+
   console.log(
-    'ID IS',
-    id,
-    'Name  is',
+    'update Data Called?>>>>>>>>>??????>>>>>',
     name,
-    'Email is',
-    email,
-    'Delivery Address',
-    deliveryAddress
+
+    deliveryAddress,
+    phone
   )
-  console.log(``)
-  if (!name || !email || !deliveryAddress) {
+  if (!name || !deliveryAddress || !phone) {
+    console.log(
+      'Please Provide All Required Fields',
+
+      phone,
+      deliveryAddress,
+      name
+    )
     res
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: 'Please Provide All Required Fields' })
@@ -69,11 +74,12 @@ const updateUser = async (req, res) => {
 is updating a single user in the database. */
   //NOTE: UNCOMMENT  THIS AND  PASS  THE  ID  THROUGH THE REQUEST   BODY TO  THE DB
   // const userFromDb = await UserSchema.findOne({ _id: req.user.userId })
-  const userFromDb = await UserSchema.findOne({ _id: id })
-  userFromDb.email = email
+  //check  if  user Email  is already registered
+  TODO: userFromDb = await UserSchema.findOne({ _id: id })
+
   userFromDb.name = name
   userFromDb.deliveryAddress = deliveryAddress
-
+  userFromDb.phone = phone
   await userFromDb.save()
 
   const tokenUser = createTokenUser(userFromDb)
@@ -84,6 +90,7 @@ is updating a single user in the database. */
     message: 'Successful! User name and email  updated'
   })
 }
+
 // this takes new password  and  old  password from  the  req.body
 const updateUserPassword = async (req, res) => {
   const { newPassword, oldPassword } = req.body

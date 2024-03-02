@@ -24,6 +24,13 @@ export const links = [
   },
   {
     id: 4,
+    text: 'Menu',
+    icon: <IoFastFoodSharp />,
+
+    url: '/menu'
+  },
+  {
+    id: 5,
     text: 'Contact us',
     url: '/contact'
   }

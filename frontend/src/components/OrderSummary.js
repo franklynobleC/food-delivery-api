@@ -8,12 +8,13 @@ import { useNavigate } from 'react-router-dom'
 const OrderSummary = () => {
   const { total_quantity, delivery_fee, total_price, cart } = useCartContext()
   const { user, getSingleUser, single_userInfo } = useAuthContext()
-  const [paymentOption, setPaymentOption] = useState('')
-  const [isTokenPresent, setIsTokenPresent] = useState(false)
+  // const [paymentOption, setPaymentOption] = useState('')
+  // const [isTokenPresent, setIsTokenPresent] = useState(false)
+const userId = localStorage.getItem('userId')
 
   let navigate = useNavigate()
   const token = localStorage.getItem('token')
-  const userId = localStorage.getItem('userId')
+  // const userId = localStorage.getItem('userId')
 
   const handConfirm = () => {
     console.log('handle Submit Clicked')

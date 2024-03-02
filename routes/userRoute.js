@@ -6,6 +6,7 @@ const {
   authorizeRoles
 } = require('../middleware/authentication')
 const authMiddleware = require('../middleware/authMid')
+const Middleware = require('../middleware/index')
 
 //import  all  from  the controller
 
@@ -36,8 +37,10 @@ router.patch(
 //update user name and Email, deliveryAddress
 router.patch(
   '/:id',
-  authMiddleware,
-  // authorizedPermissions('admin', 'user'),
+
+  Middleware.decode,
+  Middleware.authorizePermissions('admin', 'user'),
+
   updateUser
 )
 router.delete(

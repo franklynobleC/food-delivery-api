@@ -21,7 +21,14 @@ import {
 } from './pages'
 import { Orders, Payments, Users } from './pages/dashboardPages'
 
-import { Footer, Navbar, Contact, Login, PasswordReset } from './components/'
+import {
+  Footer,
+  Navbar,
+  Contact,
+  Login,
+  PasswordReset,
+  Menu
+} from './components/'
 import {
   OrdersPage,
   PaymentsPage,
@@ -65,6 +72,7 @@ function App () {
         <Route path='/' element={<Home />} />
         <Route path='/dashboard' element={<AdminPage />} />
         <Route path='about' element={<About />} />
+        <Route path='menu' element={<Menu />} />
         <Route path='contact' element={<Contact />} />
         // <Route path='foods' element={<Foods />} />
         <Route path='/signin' element={<Auth />} />

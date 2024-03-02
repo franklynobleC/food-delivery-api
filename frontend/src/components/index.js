@@ -18,11 +18,13 @@ import PrivateRoute from '../pages/PrivateRoute'
 import SvgComponent from './SvgComponent'
 import ActualPay from './ActualPay'
 import PasswordReset from './PasswordReset'
+import Menu from './Menu'
 export {
   FoodList,
   Services,
   CartItem,
   Footer,
+  Menu,
   Navbar,
   Contact,
   ListView,

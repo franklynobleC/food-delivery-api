@@ -40,7 +40,7 @@ const Nav = () => {
       <div className='nav-center'>
         {/* <ul className='nav-links-other-url'> */}
         {links.map((link, index) => (
-          <div className='nav-links-other-url'>
+          <div className='nav-links-other-url' key={index}>
             <Link to={link.url} className='link-text'>
               {link.icon}
 
@@ -69,7 +69,11 @@ const Nav = () => {
       </div>
 
       <div>
-        {token ? <button onClick={handleLogout} className='btn-logout'>Logout</button> : null}
+        {token ? (
+          <button onClick={handleLogout} className='btn-logout'>
+            Logout
+          </button>
+        ) : null}
         {console.log(
           'Checking Logging And Checking LogOut',
           is_authenticated

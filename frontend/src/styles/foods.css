@@ -1,8 +1,7 @@
 .main {
-  margin-top: 10%;
+  margin-top: 5%;
   display: grid;
-  /* background-color: rgb(247, 247, 248); */
-background-color:#f2f2f2;
+
   grid-template-columns: repeat(4, 1fr);
 
   /* // grid-template-columns: repeat(4, 1fr); */
@@ -70,7 +69,7 @@ background-color:#f2f2f2;
 }
 .form-container {
   /*      */
-  margin-top: 30px;
+  margin-top: 10px;
 
   display: flex;
   align-items: center;
@@ -98,8 +97,8 @@ background-color:#f2f2f2;
   justify-content: center;
   align-items: center;
   max-width: 850px;
-  margin-top: 50px;
-  margin-bottom: 10px;
+  margin-top: 20px;
+  margin-bottom: 5px;
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -166,16 +165,17 @@ input:focus {
   flex-grow: 1;
   margin-top: 10%;
 
-  margin-bottom: 10% !important;
-  width: calc(40px - 20px);
+  margin-bottom: 5% !important;
+  /* width: calc(40px - 20px); */
   /* float: left; */
-  padding-left: 20px;
-  padding-right: 20px;
+  /* padding-left: 20px; */
+  /* padding-right: 20px; */
   padding: 20px;
   min-width: 50%;
-  flex: 0 0 auto;
+  /* flex: 0 0 auto; */
   text-align: center;
-  margin-left: 80px;
+  /* margin-left: 80px; */
+  margin: auto;
 
   /* margin-left: -1px; */
   border: 1px solid rgb(226, 226, 226);
@@ -198,7 +198,7 @@ input:focus {
   justify-content: center;
   align-items: center;
 
-  margin-bottom: 8px;
+  margin-bottom: 2px;
 }
 
 .food-image {
@@ -262,16 +262,14 @@ input:focus {
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
 }
-.food-name > h4{
+.food-name > h4 {
   color: rgb(18, 44, 71);
-
 }
-.food-price{
-
- color: rgb(58,78,102);
+.food-price {
+  color: rgb(58, 78, 102);
 }
 .food-spacer {
-  flex: 1;
+  /* flex: 1; */
 }
 .food-description {
   padding-top: 10px;
@@ -302,29 +300,6 @@ input:focus {
     border-color 0.15s ease 0s, filter 0.2s ease 0s, -webkit-filter 0.2s ease 0s;
   position: relative;
   outline: rgb(66, 153, 225) solid 1px !important;
-}
-.oder-now-btn {
-  /* font-size: 0.9rem;
-  font-weight: 600;
-  margin-top: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 25px;
-  padding-right: 25px;
-  color: whitesmoke; */
-  /* background-color: #028c6a; */
-  /* background-color:#376604;
-  transition: all 0.4s ease 0s;
-  -webkit-transition: all 0.4s ease 0s;
-  -moz-transition: all 0.4s ease 0s;
-  -ms-transition: all 0.4s ease 0s;
-  -o-transition: all 0.4s ease 0s;
-  border-radius: 8px;
-  border-style: none;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  -ms-border-radius: 8px;
-  -o-border-radius: 8px; */
 }
 
 .oder-now-btn:hover {

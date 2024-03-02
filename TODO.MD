@@ -30,17 +30,22 @@ TODO:
 
 ### UI
 
-- [] Create dashboard to manage all data
+- [x] Create dashboard to manage all data
+
 ## NOTE:
+
 #### customers'UI
 
-- []   if User Register's Navigate to a  mail, where a message, asking  user to  confirm  their  mail
+- [] if User Register's Navigate to a mail, where a message, asking user to confirm their mail
 - [] fix bug for cart summary
 - [] fix bug for cart summary
-- [] Must Set up customers Data (name and Address phone Number,and email) before  payment Can  be made
-- [] Payment Total Page, this would navigate to PayStack
+- [x] Must Set up customers Data (name and Address phone Number,and email) before payment Can be made
+- [x] Payment Total Page, this would navigate to PayStack
 - [] Add food Menu
 - [] Would Display food based On Food Data Menu Selected
+- [] add suspense to show if Data is not yet Displayed
+- [] Add Loader to show if Data is not yet Display
+- [] Add if payment is successful, show payment successFul Page
 
 #### Backend
 

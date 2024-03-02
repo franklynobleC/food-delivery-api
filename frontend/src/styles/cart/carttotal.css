@@ -76,5 +76,85 @@
 }
 .user-invalid {
   color: red;
-z-index: 2;
+  z-index: 2;
+}
+/* The Code */
+
+.form-container {
+  /* background-color: green; */
+  margin-top: 5rem;
+  /* background-color: white; */
+  padding: 40px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px grey;
+  max-width: auto;
+  height: auto;
+
+  /* margin: auto; */
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.btn-pay {
+  background-color: green;
+  color: white;
+  padding: 0.5rem;
+  /* width: auto; */
+  width: 50%;
+
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+btn-pay:hover {
+  background-color: darkgreen;
+}
+
+.form-grid {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center; /* Center children horizontally */
+  align-items: center; /* Center children vertically */
+
+  border-radius: 5px;
+
+  box-sizing: border-box; /* Include padding in the width and height */
+}
+.btn-pay-container {
+  display: flex;
+}
+
+.image-data {
+  width: 10%;
+  height: auto;
+}
+
+.images-container {
+  display: flex;
+  justify-items: flex-end;
+  align-items: center;
+
+  width: 70%;
+}
+.form-grid > p {
+  margin-bottom: 30px;
+  margin-top: 0px;
 }
