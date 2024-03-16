@@ -7,7 +7,9 @@ import {
   GET_FOODS_SUCCESS,
   GET_FOODS_ERROR,
   GET_IMAGES_ERROR,
-  GET_IMAGES_SUCCESS
+  GET_IMAGES_SUCCESS,
+  COUNT_SINGLE_FOOD_QUANTITY
+
 } from '../actions'
 
 //state is  the  initial state Before the Update

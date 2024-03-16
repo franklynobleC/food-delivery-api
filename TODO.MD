@@ -50,3 +50,6 @@ TODO:
 #### Backend
 
 - [] After Order Placed send the user Email and with order breakDown and Total Cost
+- [] Backend write  Your Password and  to access pt Email and password  from  nodejs
+
+- [] After login with Your Email and password

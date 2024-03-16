@@ -22,8 +22,7 @@ const {
 //TOD//update user password, (pass in  the new and  old  password)
 router.get(
   '/showCurrentUser',
-  authMiddleware,
-  // authorizedPermissions('admin', 'user'),
+
   showCurrentUser
 )
 
@@ -34,12 +33,11 @@ router.patch(
   updateUserPassword
 )
 
-//update user name and Email, deliveryAddress
+//NOTE: update user name and Email, deliveryAddress
 router.patch(
   '/:id',
 
   Middleware.decode,
-  Middleware.authorizePermissions('admin', 'user'),
 
   updateUser
 )
@@ -60,10 +58,7 @@ router.get(
 ),
   router.get(
     '/:id',
-    // authenticateUser,
 
-    // authMiddleware,
-    // authorizeRoles('admin', 'user'),
     getSingleUser
   )
 

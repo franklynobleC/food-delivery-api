@@ -21,8 +21,10 @@ const AddToCart = ({ food }) => {
     // console.log('THIS IS  FROM FOOD   ADD TO CART', food)
     addToCart(_id, quantity, food)
     setIsAdded(true)
+
     toastConfigAlert.theme = 'success'
-    ShowToast('Item successfully added to cart',)
+    toastConfigAlert.position = 'top-right'
+    ShowToast('Item successfully added to cart')
   }
 
   return (

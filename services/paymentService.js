@@ -38,7 +38,7 @@ const makePayment = async (email, amount, orderId, paymentOption) => {
       const { reference } = await response.data
       console.log('from respons Data services', response)
       console.log('from respons Data services', response.data)
-      DataUrlLink.paymentUrl = response.data.authorization_url
+      DataUrlLink.paymentUrl = await response.data.authorization_url
 
       console.log('FROM API')
 

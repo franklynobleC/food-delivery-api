@@ -10,11 +10,10 @@ const OrderSummary = () => {
   const { user, getSingleUser, single_userInfo } = useAuthContext()
   // const [paymentOption, setPaymentOption] = useState('')
   // const [isTokenPresent, setIsTokenPresent] = useState(false)
-const userId = localStorage.getItem('userId')
+  const userId = localStorage.getItem('userId')
 
   let navigate = useNavigate()
-  const token = localStorage.getItem('token')
-  // const userId = localStorage.getItem('userId')
+  const token = localStorage.getItem('Access_Token')
 
   const handConfirm = () => {
     console.log('handle Submit Clicked')
@@ -37,6 +36,8 @@ const userId = localStorage.getItem('userId')
 
   useEffect(() => {
     getSingleUser(userId)
+    console.log(userId)
+    console.log('single user info', single_userInfo)
   }, [userId])
   return (
     <Wrapper>
@@ -65,7 +66,7 @@ const userId = localStorage.getItem('userId')
               Proceed To Checkout
             </Link>
           ) : (
-            <Link to='/signin' className='btn-login'>
+            <Link to='/login' className='btn-login'>
               Login
             </Link>
           )}

@@ -18,6 +18,7 @@ const Nav = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('token')
+    localStorage.removeItem('Access_Token')
     localStorage.removeItem('userId')
 
     logoutUser()
@@ -32,9 +33,9 @@ const Nav = () => {
   return (
     <nav className='nav-links'>
       <div className='nav-link-user'>
-        <Link to='signin' className='signin-link'>
+        <Link to='login' className='signin-link'>
           <FaRegUser className='sign-in-icon' />
-          Sign in
+          Login
         </Link>
       </div>
       <div className='nav-center'>

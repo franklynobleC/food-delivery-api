@@ -19,7 +19,7 @@ import { toastConfigAlert, ShowToast } from '../toastConfigAlert'
 const ListView = ({ foods }) => {
   let navigate = useNavigate()
   const { addToCart, cart, _id } = useCartContext()
-  const [quantity, setQuantity] = useState(1)
+  const [quantity, setQuantity] = useState(0)
   const [isAdded, setIsAdded] = useState(false)
 
   const [searchFood, setSearchFood] = useState('')
@@ -48,7 +48,7 @@ const ListView = ({ foods }) => {
     ShowToast('Item successfully added to cart')
 
     console.log('Add To Cart Now')
-    // return <Link to='/cart' />
+
     return (window.location.href = '/cart')
   }
 
@@ -164,6 +164,11 @@ const Wrapper = styled.section`
     margin-left: 100px;
     margin-right: 100px;
     /* padding: 0 */
+  }
+  .search-input-search {
+    border: 1px solid #cecece;
+    border-radius: 5px;
+    color: #e0eafc;
   }
   /* @media (max-width: 600px) {
     .food-container {

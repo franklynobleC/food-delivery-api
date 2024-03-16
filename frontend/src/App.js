@@ -14,7 +14,7 @@ import {
   SingleFood,
   Cart,
   Checkout,
-  Auth,
+  LoginPage,
   PrivateRoute,
   AuthWrapper,
   ActualCheckOut
@@ -26,9 +26,12 @@ import {
   Navbar,
   Contact,
   Login,
+  Register,
   PasswordReset,
-  Menu
+  Menu,
+  LoginClick
 } from './components/'
+
 import {
   OrdersPage,
   PaymentsPage,
@@ -51,10 +54,10 @@ export function Root () {
 
 function App () {
   const location = useLocation()
+
   //  change  thePathsName to  '/dashboard'
   const isDashboardRoute =
-    location.pathname.startsWith('/dashboard') ||
-    location.pathname.startsWith('/')
+    location.pathname.startsWith('/dashboard') ||  location.pathname.startsWith('/')
   console.log(location.pathname)
 
   console.log(isDashboardRoute.valueOf())
@@ -75,8 +78,8 @@ function App () {
         <Route path='menu' element={<Menu />} />
         <Route path='contact' element={<Contact />} />
         // <Route path='foods' element={<Foods />} />
-        <Route path='/signin' element={<Auth />} />
-        <Route path='/login' element={<Login />} />
+        <Route path='/login' element={<Register />} />
+        {/* <Route path='/loginClick' element={<LoginClick />} /> */}
         <Route path='/foods/:id' element={<SingleFood />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/checkout' element={<Checkout />} />
@@ -96,12 +99,12 @@ function App () {
         TODO:
         {/* ADD  CHECKOUT  PAGE  TO  PROTECTED ROUTE */}
         <Route
-        //   path='/checkout'
-        //   element={
-        //     <PrivateRoute>
-        //       <Checkout />
-        //     </PrivateRoute>
-        //   }
+          path='/checkout'
+          element={
+            <PrivateRoute>
+              <Checkout />
+            </PrivateRoute>
+          }
         />
         <Route path='*' element={<Error />} />
       </Routes>

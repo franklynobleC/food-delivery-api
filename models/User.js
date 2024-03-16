@@ -81,7 +81,7 @@ UserSchema.methods.checkPassword = async function (password) {
   return isMatch
 }
 
-//UserSchema.pre('save', async function () => {
+// UserSchema.pre('save', async function () => {
 
 //   TODO
 //hash The Password field,  using BCrypt.

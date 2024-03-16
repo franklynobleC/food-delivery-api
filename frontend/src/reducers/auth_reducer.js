@@ -1,17 +1,15 @@
 import {
   REGISTER_SUCCESS,
-
   REGISTER_ERROR,
-
   LOGIN_USER_BEGIN,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_ERROR,
   LOGOUT_USER_SUCCESS,
   LOGOUT_USER_ERROR,
   GET_SINGLE_USER_BEGIN,
-  SINGLE_USER_ERROR,
-  SINGLE_USER_SUCCESS,
-  REGISTER_USER_BEGIN,
+  SINGLE_USER_UPDATE_ERROR,
+  SINGLE_USER_UPDATE_SUCCESS,
+  REGISTER_USER_BEGIN
 } from '../actions'
 
 const auth_reducer = (state, action) => {
@@ -22,7 +20,14 @@ const auth_reducer = (state, action) => {
     // console.log(token, tokenUser)
     console.log(state.user)
 
-    return { ...state, is_registered:false, register_loading: true,is_authenticated: false, loading:true, user: null }
+    return {
+      ...state,
+      is_registered: false,
+      register_loading: true,
+      is_authenticated: false,
+      loading: true,
+      user: null
+    }
   }
   if (action.type === REGISTER_SUCCESS) {
     console.log('FROM REGISTER USER Success REDUCER')
@@ -79,6 +84,7 @@ const auth_reducer = (state, action) => {
     // const { userId, name } = action.payload
     const { token, tokenUser } = action.payload
 
+    console.log('LOGIN SUCCESS FROM  REDUCERS', tokenUser)
     const { name, userId, role } = tokenUser
     localStorage.setItem('userId', tokenUser.userId)
 
@@ -150,12 +156,14 @@ const auth_reducer = (state, action) => {
       single_userInfo: null
     }
   }
-  if (action.type === SINGLE_USER_SUCCESS) {
+  if (action.type === SINGLE_USER_UPDATE_SUCCESS) {
     console.log('from actions  payload', action.payload)
     const { deliveryAddress, name, email, phone } = action.payload
     console.log('The Address Details', deliveryAddress, name)
     return {
       ...state,
+      single_user_update: true,
+      // updated_user: true,
       single_userInfoError: false,
       single_userInfoLoading: false,
       user_address: deliveryAddress,
@@ -164,10 +172,12 @@ const auth_reducer = (state, action) => {
       user_phone: phone
     }
   }
-  if (action.type === SINGLE_USER_ERROR) {
+  if (action.type === SINGLE_USER_UPDATE_ERROR) {
     console.log('from actions  payload Error!', action.payload)
     return {
       ...state,
+
+      single_user_update: false,
       single_userInfoError: true,
       single_userInfoLoading: false,
       single_userInfo: null

@@ -23,7 +23,7 @@
     "node": "^20.6.0",
     "nodemon": "^3.0.1",
     "paystack": "^2.0.1",
-    "react-router-dom": "^6.17.0",
+
     "sort-by": "^1.2.0",
     "validator": "^13.11.0"
   },

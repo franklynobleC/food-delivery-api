@@ -29,9 +29,9 @@ router.post(
   '/createOrder',
   // authMiddleware,
   Middleware.decode,
-  Middleware.authorizePermissions('admin', 'user')
+  // Middleware.authorizePermissions('essienfrankudom@gmail.com')
   // TODO:  //uncomment this to  create  order
-  // createOrder
+  createOrder
 )
 router.patch('/:id', updateOrder)
 router.delete('/:id', deleteOrder)

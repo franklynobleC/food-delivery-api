@@ -11,11 +11,12 @@ const {
   forgotPassword
 } = require('../controllers/authController')
 
-router.post('/register', register)
-router.post('/login', login)
-
 router.post('/resetPassword', resetPassword)
+
 router.post('/forgotPassword', forgotPassword)
+router.post('/login', login)
+router.post('/register', register)
+
 router.get('/logout', logout)
 
 module.exports = router

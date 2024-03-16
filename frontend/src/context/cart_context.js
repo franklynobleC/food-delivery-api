@@ -29,7 +29,7 @@ const initialState = {
   total_quantity: 0,
   total_price: 0,
   payment_option: 'card',
-  delivery_fee: 0,
+  delivery_fee: 100,
   quantity: 2,
   is_order_created_success: false,
   is_order_error: false,
@@ -54,6 +54,10 @@ export const CartProvider = ({ children }) => {
   const addToCart = (id, quantity, food) => {
     dispatch({ type: ADD_TO_CART, payload: { id, quantity, food } })
   }
+  //   const foodQuantity = quantity => {
+  // console.log('quantity', quantity)
+  //     dispatch({ type: COUNT_SINGLE_FOOD_QUANTITY, payload: quantity })
+  //   }
   //remove an  item from  cart
   const removeItem = id => {
     dispatch({ type: REMOVE_CART_ITEM, payload: id })
@@ -61,6 +65,16 @@ export const CartProvider = ({ children }) => {
   //clear  the entire  cart
   const clearCart = () => {
     dispatch({ type: CLEAR_CART })
+  }
+  const updateItemQuantity = (id, newQuantity) => {
+    const updatedCart = state.cart.map(item => {
+      if (item.id === id) {
+        return { ...item, quantity: newQuantity }
+      }
+      return item
+    })
+    setCart(updatedCart)
+    localStorage.setItem('cart', JSON.stringify(updatedCart))
   }
 
   const createOrder = async (cart, id, paymentoption, delivery_fee) => {
@@ -84,7 +98,7 @@ export const CartProvider = ({ children }) => {
       method: 'post',
       url: create_orders_url,
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('access_token')}`
+        Authorization: `Bearer ${localStorage.getItem('Access_Token')}`
       },
       data: {
         OrderItems: cart,
@@ -97,9 +111,9 @@ export const CartProvider = ({ children }) => {
 
     try {
       //TODO: UNCOMMENT THIS TO CREATE ORDER
-      //const response = await axios(configuration)
+      const response = await axios(configuration)
 
-      // const createdOrder = (await response.data) && response.statuscode === 201
+      const createdOrder = (await response.data) && response.statuscode === 201
 
       console.log('CREATED ORDER SUCCESS')
       console.log('ORDER SUCCESS MESSAGE', await createOrder.data)
@@ -110,7 +124,7 @@ export const CartProvider = ({ children }) => {
       console.log(error)
       dispatch({
         type: CREATE_ORDER_ERROR,
-        payload: error.response.message
+        payload: error.response
       })
     }
   }
@@ -121,14 +135,8 @@ export const CartProvider = ({ children }) => {
       const data = await response.data
 
       console.log('response Payment url Link', data)
-      // setTimeout(() => {
-      //  const  paymentUrl =
-      if (data) {
-        window.location.href = await data
-      } else {
-        window.location.href = ''
-      }
-      // }, 2000)
+
+      window.location.href = data ? await data : 'Error Data'
     } catch (err) {
       console.log('error', err)
     }
@@ -156,7 +164,7 @@ export const CartProvider = ({ children }) => {
   }, [
     state.cart,
     JSON.parse(
-      JSON.stringify(localStorage.getItem('token')),
+      JSON.stringify(localStorage.getItem('Access_Token')),
       state.totalPrice,
       state.total_quantity,
       localStorage.getItem('userId')
@@ -172,7 +180,10 @@ export const CartProvider = ({ children }) => {
         removeItem,
         createOrder,
         checkOut,
-        clearFromLocalStorage
+        clearFromLocalStorage,
+        updateItemQuantity
+
+        // foodQuantity
       }}
     >
       {children}

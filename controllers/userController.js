@@ -47,6 +47,7 @@ const getSingleUser = async (req, res) => {
 const updateUser = async (req, res) => {
   const { name, deliveryAddress, phone } = req.body
   const { id } = req.params
+  console.log('update Data Called?>>>>>>>>>??????>>>>>', id)
   console.log(name, deliveryAddress, phone)
 
   console.log(
@@ -69,7 +70,7 @@ const updateUser = async (req, res) => {
       .json({ message: 'Please Provide All Required Fields' })
     return
   }
-  console.log('update Single User')
+  console.log('update Single User', id)
   /* The code `const updateSingleUser = await UserSchema.findByIdAndUpdate(id, req.body, { new: true })`
 is updating a single user in the database. */
   //NOTE: UNCOMMENT  THIS AND  PASS  THE  ID  THROUGH THE REQUEST   BODY TO  THE DB

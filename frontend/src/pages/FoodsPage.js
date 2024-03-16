@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { DotLoader, BeatLoader, ClipLoader } from 'react-spinners'
 import { FoodList } from '../components'
@@ -38,7 +38,7 @@ const FoodsPage = () => {
               cssOverride={override}
               size={80}
               color='#36d7b7'
-              className='spinner-component'
+              // className='spinner-component'
             />
           </div>
         ) : foods.length > 0 ? (

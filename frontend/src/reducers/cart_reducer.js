@@ -5,7 +5,8 @@ import {
   ADD_TO_CART,
   CREATE_ORDER_BEGIN,
   CREATE_ORDER_ERROR,
-  CREATE_ORDER_SUCCESS
+  CREATE_ORDER_SUCCESS,
+  COUNT_SINGLE_FOOD_QUANTITY
 } from '../actions'
 
 const cart_reducer = (state, action) => {
@@ -69,6 +70,21 @@ const cart_reducer = (state, action) => {
   if (action.type === CLEAR_CART) {
     return { ...state, cart: [] }
   }
+
+  // if (action.type === COUNT_SINGLE_FOOD_QUANTITY) {
+  //   const { quantity } = action.payload
+  //   console.log(action.payload)
+  //   console.log('SINGLE QUANTITY', quantity)
+  //   let tempCart = state.cart.map(itemCart => {
+  //     const { price, quantity } = itemCart
+  //     itemCart.quantity = action.payload
+  //     itemCart.price = quantity * price
+  //   })
+  //   return {
+  //     ...state,
+  //     quantity: action.payload
+  //   }
+  // }
   //remove single item  from cart
   if (action.type === REMOVE_CART_ITEM) {
     const id = action.payload

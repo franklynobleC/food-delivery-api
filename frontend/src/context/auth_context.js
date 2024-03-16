@@ -1,14 +1,9 @@
 import React, { useEffect, useReducer, useContext, useState } from 'react'
 import axios from 'axios'
 import '../config/firebase-config'
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-  signOut,
-  sendEmailVerification
-} from 'firebase/auth'
+import { createClient } from '@supabase/supabase-js'
+// import { Auth } from '@supabase/auth-ui-react'
+
 import {
   register_user_url,
   login_user_url,
@@ -30,8 +25,8 @@ import {
   LOGOUT_USER_SUCCESS,
   LOGOUT_USER_ERROR,
   GET_SINGLE_USER_BEGIN,
-  SINGLE_USER_ERROR,
-  SINGLE_USER_SUCCESS,
+  SINGLE_USER_UPDATE_ERROR,
+  SINGLE_USER_UPDATE_SUCCESS,
   REGISTER_USER_BEGIN
 } from '../actions'
 
@@ -46,14 +41,21 @@ const initialState = {
   email: '',
   password: '',
   user: {},
+  single_user_update: false,
   single_userInfoError: false,
   single_userInfoLoading: false,
   single_userInfo: {},
   user_name: '',
   user_address: '',
   user_phone: '',
-  user_email: ''
+  user_email: '',
+  single_user_update: false
 }
+const supabase = createClient(
+  'https://jurdjjlfvoekzffnpbdx.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp1cmRqamxmdm9la3pmZm5wYmR4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk0OTcxMzYsImV4cCI6MjAyNTA3MzEzNn0.ajICLrrMh6cabPQKLuRZYR4RmQkXcFAdVggOm_KePZk'
+)
+
 //declare global context and  make it  Available Globally
 // also here, Set All  the Actions using Dispatch
 export const AuthContext = React.createContext()
@@ -63,7 +65,6 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null)
   const [user, setUser] = useState({})
   const [userInfo, setUserInfo] = useState({})
-  const auth = getAuth()
 
   //pass reducer function and  initial state Object
   //TODO: import and  use user sign_in_reducer
@@ -82,23 +83,7 @@ export const AuthProvider = ({ children }) => {
         'PASSWORD',
         password
       )
-      console.log(email, password, 'FROM   REGISTER CONTEXT>>>>>')
-      const firebaseRegisterUserResponse = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      )
 
-      const userd = firebaseRegisterUserResponse.user
-      // await user.sendEmailVerification()
-      sendEmailVerification(userd)
-
-      // verifyBeforeUpdateEmail(email)
-
-      console.log(
-        'from  created fireBase Auth'
-        // firebaseRegisterUserResponse.user.uid
-      )
       const response = await axios.post(register_user_url, {
         // name: name,
         email: email,
@@ -119,28 +104,21 @@ export const AuthProvider = ({ children }) => {
         'FROM  REGISTER CONTEXT, ERROR, NOT!! SUCCESSFUL',
         error.message
       )
+      console.log(error.response)
       dispatch({ type: REGISTER_ERROR, payload: error.message })
     }
   }
 
-  const loginUser = async (email, password) => {
+  const login = async (email, password) => {
     dispatch({ type: LOGIN_USER_BEGIN })
+    console.log('LOGIN ACTION BEGIN')
     try {
-      const firebaseLoginResponse = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      )
-      const tokenData = await (
-        await firebaseLoginResponse.user.getIdTokenResult()
-      ).token
-      localStorage.setItem('access_token', tokenData)
-      console.log('login from fireBase Token', tokenData)
-      const response = await axios.post(
-        login_user_url,
-
-        { email: email, password: password }
-      )
+      // localStorage.setItem('access_token', tokenData)
+      // console.log('login from fireBase Token', tokenData)
+      const response = await axios.post(login_user_url, {
+        email: email,
+        password: password
+      })
 
       const userLoginData = await response.data
 
@@ -152,14 +130,10 @@ export const AuthProvider = ({ children }) => {
       // setToken(token)
       setUser(tokenUser)
 
-      console.log('LOGIN SUCCESS FROM  USER 1', tokenUser, 'tokenUser', token)
-      console.log('LOGIN SUCCESS FROM  USER 2', token, user)
-
-      console.log('call foods Context Here')
-
       dispatch({ type: LOGIN_USER_SUCCESS, payload: userLoginData })
     } catch (err) {
-      console.log('LOGIN ERROR CONTEXT')
+      console.log('LOGIN ERROR CONTEXT', err)
+      console.log('LOGIN ERROR CONTEXT', err.response.data)
 
       dispatch({ type: LOGIN_USER_ERROR, payload: err.message })
     }
@@ -169,12 +143,12 @@ export const AuthProvider = ({ children }) => {
     // /  dispatch({ type: FORGOT_PASSWORD_BEGIN })
 
     try {
-      const firbaseForgotPasswordLink = await sendPasswordResetEmail(
-        auth,
-        email
-      )
+      // const firbaseForgotPasswordLink = await sendPasswordResetEmail(
+      //   auth,
+      //   email
+      // )
 
-      console.log(firbaseForgotPasswordLink)
+      // console.log(firbaseForgotPasswordLink)
 
       // const forgotPassword = await firebaseLoginResponse.user.getIdTokenResult()
 
@@ -231,7 +205,7 @@ export const AuthProvider = ({ children }) => {
         method: 'patch',
         url: update_user_url + userId,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('access_token')}`
+          Authorization: `Bearer ${localStorage.getItem('Access_Token')}`
         },
         data: {
           name: name,
@@ -257,11 +231,11 @@ export const AuthProvider = ({ children }) => {
       // setUserInfo(userData)
       console.log('USER  INFO  IS', userData)
 
-      dispatch({ type: SINGLE_USER_SUCCESS, payload: userData })
+      dispatch({ type: SINGLE_USER_UPDATE_SUCCESS, payload: userData })
       console.log(userData, 'RAW DATA FROM RESPONSE')
     } catch (error) {
       console.log(error)
-      dispatch({ type: SINGLE_USER_ERROR, payload: error })
+      dispatch({ type: SINGLE_USER_UPDATE_ERROR, payload: error })
     }
   }
 
@@ -299,7 +273,7 @@ export const AuthProvider = ({ children }) => {
       value={{
         ...state,
         registerUser,
-        loginUser,
+        login,
         logoutUser,
         token,
         user,

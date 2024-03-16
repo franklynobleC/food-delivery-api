@@ -1,10 +1,8 @@
 const UserSchema = require('../models/User')
 const { StatusCodes } = require('http-status-codes')
-const { json } = require('stream/consumers')
-const { createJWT } = require('../utils/jwt')
-const jwt = require('jsonwebtoken')
+
+// const jwt = require('jsonwebtoken')
 const crypto = require('crypto')
-const bcrypt = require('bcrypt')
 
 const {
   attachCookiesToResponse,
@@ -19,16 +17,16 @@ require('dotenv').config()
 
 //add Register, Login,  logOut,
 const register = async (req, res) => {
-  console.log(req)
-  const { email,password,role } = req.body
+  // console.log(req)
+  const { email, password, role } = req.body
 
   //console.log(req.body, 'FROM  REQUEST BODY')
-  console.log( email, password)
+  console.log(email, password)
 
-  if ((!email || !password)) {
+  if (!email || !password) {
     console.log('Registration Error!')
-    //  throw new Error('Please fill all the fields')
-    return res.status(StatusCodes.BAD_REQUEST).json({ error: res.error })
+    throw new Error('Please fill all the fields')
+    // return res.status(StatusCodes.BAD_REQUEST).json({ error: res.error })
   }
 
   //check  if user Already exist,
@@ -42,7 +40,6 @@ const register = async (req, res) => {
   //await emailFunc(email,name)
 
   const createdUser = await UserSchema.create({
-
     email,
     role,
 
@@ -74,24 +71,23 @@ const register = async (req, res) => {
 //add userLogin       Method
 const login = async (req, res) => {
   const { email, password } = req.body
-  console.log(req.body, 'FROM  REQUEST BODY')
+  // console.log('FROM  LOGIN REQUEST BODY')
   if (!email || !password) {
     console.log('Login Error!')
-
     res
       .status(StatusCodes.BAD_REQUEST)
       .json({ error: 'Please fill all the fields' })
   }
 
-  console.log(email, password)
+  console.log('email and  pass to  check', email, password)
   const user = await UserSchema.findOne({ email })
 
-  if (!user) {
+  if (!user || user === null) {
+    console.log('check22', user)
     res
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: 'no User found!, Invalid credentials' })
     return
-    // throw new Error('no User found!, Invalid credentials')
   }
   const isPasswordCorrect = await user.checkPassword(password)
   if (!isPasswordCorrect) {
@@ -163,7 +159,7 @@ const resetPassword = async (req, res) => {
   }
   const tenMinutes = 1000 * 60 * 10
 
-  const user = await UserSchema.findOne({ email })
+  const user = await UserSchema.findOne(email)
   if (user) {
     console.log(user)
     /* The code is creating two Date objects: `currentDate` and `tokenExpirationDate`.

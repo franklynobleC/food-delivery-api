@@ -117,9 +117,10 @@
   padding-left: 50px;
   padding-bottom: 20px;
   padding-right: 50px;
-  border-radius: 50px;
-  border: none;
+  /* border-radius: 50px;
+  */
 
+  border: none;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   -ms-border-radius: 50px;

@@ -25,7 +25,8 @@ const CartSummary = () => {
   const [newCustomerEmail, setNewCustomerEmail] = useState(user_email)
   const [isOpen, setIsOpen] = useState(false)
   let navigate = useNavigate()
-  const token = localStorage.getItem('token')
+  // const token = localStorage.getItem('Token_Access')
+  const token = localStorage.getItem('Access_Token')
   const userId = localStorage.getItem('userId')
 
   const handleEditData = () => {
@@ -56,108 +57,7 @@ const CartSummary = () => {
   }, [newCustomerAddress, newCustomerEmail, newCustomerName])
 
   if (token) {
-    return (
-      <CartToTal />
-
-      // <div className='cart-summary-final'>
-      //   <div>
-      //     <h3>ORDER SUMMARY place Order Now:</h3>
-      //   </div>
-
-      //   <div className='total-quantity-summary'>
-      //     <div>Total Quantity:</div>
-      //     <div className='actual-total-quantity'>{total_quantity}</div>
-      //   </div>
-      //   <div className='total-quantity-summary'>
-      //     <div>Sub-Total:</div>
-      //     <div className='actual-total-price'>{total_price}</div>
-      //   </div>
-      //   <section className='customer-address'>
-      //     <div className='delivery-details'>
-      //       <h4>Customer Delivery Details:</h4>
-      //     </div>
-      //     <div className='address-grid'>
-      //       <div className='user-address'>{single_userInfo}</div>
-
-      //       <div className='change-address'>
-      //         <button
-      //           className='change-address-btn'
-      //           type='submit'
-      //           onClick={handleEditData}
-      //         >
-      //           change address
-      //           <FiChevronRight className='icon-size' />
-      //         </button>
-      //       </div>
-      //     </div>
-
-      //     <div className='cart-details-summary'>
-      //       <div>cart here</div>
-      //     </div>
-      //     <div className='modify-cart-div'>
-      //       <Link to='/cart' className='modify-summary-cart-link'>
-      //         modify cart
-      //       </Link>
-      //     </div>
-      //   </section>
-      //   {isOpen && (
-      //     <div className='update-data-form-div'>
-      //       <h4>Update User Data</h4>
-      //       <form onSubmit={handleUpdate}>
-      //         <div className='inside-form-container'>
-      //           <div className='form-input-name'>
-      //             Name:
-      //             <input
-      //               required
-      //               type='text'
-      //               name='name'
-      //               value={newCustomerName}
-      //               onChange={handleChangeName}
-      //             />
-      //           </div>
-      //           <div className='form-input-email'>
-      //             Email:
-      //             <input
-      //               required
-      //               type='email'
-      //               name='email'
-      //               value={newCustomerEmail}
-      //               onChange={handleChangeEmail}
-      //             />
-      //           </div>
-      //           <div className='form-input-address'>
-      //             Address:
-      //             <input
-      //               required
-      //               type='text'
-      //               name='address'
-      //               value={newCustomerAddress}
-      //               onChange={handleChangeAddress}
-      //             />
-      //           </div>
-
-      //           <div className='form-input-address'>
-      //             <button className='btn-update' type='handleSubmit'>
-      //               update
-      //             </button>
-      //           </div>
-      //           <div className='update-btn-container'></div>
-      //         </div>
-      //       </form>
-      //       <button className='btn-back' type='click' onClick={handleBackBtn}>
-      //         <FiArrowLeft className='back-icon' />
-      //         back
-      //       </button>
-      //     </div>
-      //   )}
-
-      //   {console.log(
-      //     'checking Single user Data',
-      //     single_userInfo,
-      //     userInfo_name
-      //   )}
-      // </div>
-    )
+    return <CartToTal />
   }
   return navigate('/login')
 }

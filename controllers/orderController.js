@@ -127,7 +127,7 @@ const createOrder = async (req, res) => {
       orderItemId._id,
       paymentOption
     )
-    // console.log(paymentData, 'From Payment DB')
+    console.log(paymentData, 'From Payment DB')
     //TODO: send email to user
   }
   //Todo: code clean  up to  handle  order  and and  payment and  send  emails

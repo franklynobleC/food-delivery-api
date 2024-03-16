@@ -8,6 +8,7 @@ import '../styles/cart/cartcontent.css'
 import OrderSummary from './OrderSummary'
 import { checkToken } from '../utils/constants'
 import styled from '@emotion/styled'
+import ItemQuantity from './ItemQuantity'
 
 const CartContent = () => {
   const { cart, clearCart } = useCartContext()
@@ -15,7 +16,7 @@ const CartContent = () => {
 
   // pass the cart  item  here
   localStorage.setItem('cart', JSON.stringify(cart))
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem('Access_Token')
 
   {
     // token ? setIsTokenPresent(true) : setIsTokenPresent(false)
@@ -90,7 +91,8 @@ const Wrapper = styled.section`
     border: none;
   }
   .btn-add-more {
-    font-weight: Bold;
+    font-weight: Bolder;
+    font-size: larger;
     cursor: pointer;
     border-radius: 4px;
     background: grey;
@@ -98,15 +100,12 @@ const Wrapper = styled.section`
 
     text-transform: capitalize;
     padding: 1rem 0.5rem;
-
-    color: whitesmoke;
+    color: white;
 
     letter-spacing: var(--spacing);
     font-weight: 400;
     cursor: pointer;
   }
-
-  /* background-color: whitesmoke; */
 
   .link-btn {
     background: transparent;

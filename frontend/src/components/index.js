@@ -9,9 +9,10 @@ import AddToCart from './AddToCart'
 import CartContent from './CartContent'
 import CartSummary from './CartSummary'
 import CartToTal from './CartTotal'
-import Auth from './Auth'
+
 import OrderSummary from './OrderSummary'
-import Login from './Login'
+import Register from './Register'
+import LoginClick from './LoginClick'
 import AuthWrapper from '../pages/AuthWrapper'
 //TODO: import all data from  component and  give  it  a component  name
 import PrivateRoute from '../pages/PrivateRoute'
@@ -31,13 +32,13 @@ export {
   AddToCart,
   CartContent,
   CartToTal,
-  Auth,
-  Login,
+  Register,
   PrivateRoute,
   AuthWrapper,
   SvgComponent,
   CartSummary,
   OrderSummary,
   ActualPay,
-  PasswordReset
+  PasswordReset,
+  LoginClick
 }

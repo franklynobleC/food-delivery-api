@@ -6,7 +6,7 @@ import Error from './ErrorPage'
 import Contact from '../components/Contact'
 import Cart from './CartPage'
 import Checkout from './CheckoutPage'
-import Auth from './AuthPage'
+import LoginPage from './LoginPage'
 import AuthWrapper from './AuthWrapper'
 import PrivateRoute from './PrivateRoute'
 import ActualCheckOut from './ActualCheckOut'
@@ -21,7 +21,7 @@ export {
   Contact,
   Cart,
   Checkout,
-  Auth,
+  LoginPage,
   AuthWrapper,
   PrivateRoute,
   ActualCheckOut,

@@ -1,82 +1,52 @@
-const admin = require('../config/firebase-config')
+// const admin = require('../config/firebase-config')
+const jwt = require('jsonwebtoken')
+require('dotenv').config()
 
 class Middleware {
-  async decode (req, res, next) {
-    console.log(req.headers.authorization)
-    const token = req.headers.authorization.split(' ')[1]
-
-    console.log('FROM FIRE  BASE AUTH  TEST  TOKEN  CHECK')
+  async decode (req, resp, next) {
     try {
-      let decodeValue = await admin.auth().verifyIdToken(token)
-
-      console.log('Checking Mail Verification', decodeValue)
-      if (decodeValue.email_verified === false) {
-        return res.json({ message: 'unauthorize, email not verified' })
+      // Get the authorization header from the request
+      const authHeader = req.headers.authorization
+      let check = authHeader.startsWith('Bearer ')
+      console.log('CHECKING  SECRET', check)
+      console.log(authHeader)
+      // Check if the authorization header exists
+      if (!authHeader && !check) {
+        console.log(authHeader, 'From Header')
+        return res.status(401).json({ message: 'Unauthorized invalid  header' })
       }
 
-      if (decodeValue.email_verified === true) {
-        if (
-          decodeValue.email === 'franklynoblez@gmail.com' ||
-          decodeValue.email === 'essienfrankudom@gmail.com'
-        ) {
-          await admin.auth().setCustomUserClaims(decodeValue.sub, {
-            role: 'admin'
-          })
-        } else {
-          await admin.auth().setCustomUserClaims(decodeValue.sub, {
-            role: 'user'
-          })
-        }
-        if (decodeValue) {
-          req.user = {
-            role: decodeValue.role,
-            email: decodeValue.email
-          }
-          console.log('USER  IS', req.user)
+      // Extract the token from the authorization header
+      const token = authHeader.split(' ')[1]
+      console.log('From Token',token)
 
-          return next()
-        }
-      } else {
-        return res.json({ message: 'unauthorized, email not verified' })
-      }
+      let decodedToken = jwt.verify(token, process.env.JWT_SECRET_SUPABASE)
+      const { email, role } = decodedToken
 
-      return res.json({ message: 'unauthorize' })
-    } catch (e) {
-      console.log('Error', e.message)
-      if (!token) {
-        console.log(
-          'ERROR FROM  FIRE BASE CONFIG TOKEN  IS nULL  OR iNVALID',
-          token
-        )
-        console.log(token)
-        return res.json({ message: 'user Not Logged In' })
-      }
-      console.log('Error Occurred In ', e)
+      req.user = { email, role }
 
-      return res.json({ message: 'Internal server Error' })
+      console.log(decodedToken, 'From Decode  Token>>>>>>>>|||||')
+      return next()
+    } catch (error) {
+      console.log(error)
+
+      return resp.json({ message: error.message })
     }
   }
-
   authorizePermissions = (...roles) => {
     return (req, res, next) => {
-      console.log('Auth method works authorization Permission', req.user.role)
-      if (roles.includes(req.user.role) || roles.includes(req.user.email)) {
-        if (
-          req.user.role.admin === true ||
-          req.user.role.user === true ||
-          req.user.email
-        ) {
-          next()
-        }
+      console.log('Auth method works authorization', req.user.email)
+      if (
+        roles.includes(req.user.email) &&
+        req.user.email === 'essienfrankudom@gmail.com'
+      ) {
+        console.log('AUTH PASSED!!')
+        return next()
       } else {
         // )
         console.log('Unauthorize to access This Route!!')
         return 'Unauthorized to access this route'
       }
-
-      console.log('Auth method works authorization Permission', req.user.role)
-
-      // }
     }
   }
 }
