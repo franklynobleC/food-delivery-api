@@ -35,12 +35,13 @@ const makePayment = async (email, amount, orderId, paymentOption) => {
         publicKey: process.env.PAYSTACK_API_PUBLICK_KEY,
         callback_url: 'https://paystacktest.com'
       })
+      console.log('RESPONSE BODY',response.body)
+      console.log('FROM API EVENT  TEST >>??????????', response.event)
+
       const { reference } = await response.data
       console.log('from respons Data services', response)
       console.log('from respons Data services', response.data)
       DataUrlLink.paymentUrl = await response.data.authorization_url
-
-      console.log('FROM API')
 
       const orderDetails = await OrderSchema.findOne({ _id: orderId })
       console.log('PAYMENT WITH CARD>>>')

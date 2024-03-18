@@ -97,8 +97,8 @@ const CartTotal = () => {
         )
         console.log('update user', single_user_update)
         // single_user_update
-          createOrder(CartItems, userId, paymentOption, delivery_fee)
-          // : null
+        createOrder(CartItems, userId, paymentOption, delivery_fee)
+        // : null
       } catch (error) {
         console.log(error)
       }
@@ -178,7 +178,9 @@ const CartTotal = () => {
             <button className='btn-pay'>
               Pay &#8358;{total_price + delivery_fee}
             </button>
-            <button className='back' type='button' onClick={() => navigate(-1)}>back</button>
+            <button className='back' type='button' onClick={() => navigate(-1)}>
+              back
+            </button>
           </div>
         </form>
 
@@ -208,9 +210,13 @@ const Wrapper = styled.section`
     color: white;
     border: none;
     display: flex;
-    margin-top: 10px;
+    /* margin-top: 40px; */
     margin-right: auto;
     align-items: left;
+    position: relative;
+    top: 20px;
+    right: 25px;
+
     background-color: grey;
   }
   .class-spinner-container {

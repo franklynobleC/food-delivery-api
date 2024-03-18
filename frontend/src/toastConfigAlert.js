@@ -5,7 +5,7 @@ import toast, { toastConfig } from 'react-simple-toasts'
 
 export const toastConfigAlert = {
   position: 'center',
-  autoClose: 2000,
+  autoClose: 1500,
   theme: ''
 }
 

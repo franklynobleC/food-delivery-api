@@ -130,7 +130,9 @@ const Wrapper = styled.section`
   }
   .clear {
     background-color: red;
-    padding: 1rem 8rem;
+
+      margin-bottom: 0.5rem;
+      padding: 1rem 1rem;
     display: flex;
     /* max-width: fit-content; */
     border-radius: 4px;
