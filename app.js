@@ -80,7 +80,7 @@ app.use('/api/v1/payment', paymentRouter)
 
 //   Add Port
 /* This code is setting up the server to listen on a specific port. */
-const port = process.env.PORT || 3000 // if  the Port  is  undefined, use port 3000
+const port = process.env.PORT  // if  the Port  is  undefined, use port 3000
 
 const start = async () => {
   try {
