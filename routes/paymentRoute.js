@@ -1,6 +1,12 @@
 const express = require('express')
 const router = express.Router()
-const {createPayment, getSInglePayment,getAllPayments,deletePayment} = require('../controllers/paymentController')
+const {
+  createPayment,
+  getSInglePayment,
+  getAllPayments,
+  deletePayment
+} = require('../controllers/paymentController')
+const { paymentWebHook } = require('../services/paymentService')
 const {
   authorizedPermissions,
   authenticateUser
@@ -12,6 +18,7 @@ router.post(
   // authorizedPermissions('admin', 'user'),
   createPayment
 )
+router.post('https://food-delivery-api-wucx.onrender.com/webhook',paymentWebHook)
 router.get(
   '/getAllPayments',
   // authenticateUser,
@@ -22,13 +29,13 @@ router.get(
   '/:id',
   // authenticateUser,
   // authorizedPermissions('admin', 'user'),
-getSInglePayment
+  getSInglePayment
 )
 router.delete(
   '/:id',
   // authenticateUser,
   // authorizedPermissions('admin', 'user'),
-deletePayment
+  deletePayment
 )
 
 module.exports = router

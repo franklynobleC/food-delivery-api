@@ -35,7 +35,7 @@ const makePayment = async (email, amount, orderId, paymentOption) => {
         publicKey: process.env.PAYSTACK_API_PUBLICK_KEY,
         callback_url: 'https://paystacktest.com'
       })
-      console.log('RESPONSE BODY',response.body)
+      console.log('RESPONSE BODY', response.body)
       console.log('FROM API EVENT  TEST >>??????????', response.event)
 
       const { reference } = await response.data
@@ -109,8 +109,40 @@ const makePayment = async (email, amount, orderId, paymentOption) => {
 const generateCheckoutUrl = () => {
   return DataUrlLink.paymentUrl
 }
+// const paymentWebHook = async (req, res) => {
+//   //
+
+// }
+
+const paymentWebHook = async (req, res) => {
+  try {
+    // Extract necessary information from the webhook payload
+    const { reference, status } = req.body
+
+    // Handle the payment status
+    if (status === 'success') {
+      // Payment was successful
+      // Send a success message to the frontend
+      res.status(200).json({ message: 'Payment successful' })
+    } else if (status === 'failed') {
+      // Payment failed
+      // Send a failure message to the frontend
+      res.status(200).json({ message: 'Payment failed' })
+    } else {
+      // Unknown payment status
+      // Send an error message to the frontend
+      res.status(400).json({ message: 'Unknown payment status' })
+    }
+  } catch (error) {
+    // Handle any errors that occur during webhook processing
+    console.error(error)
+    res.status(500).json({ message: 'Error processing webhook' })
+  }
+}
+
 const verifyPaymentTransaction = async ref => {}
 module.exports = {
   makePayment,
-  generateCheckoutUrl
+  generateCheckoutUrl,
+  paymentWebHook,
 }
