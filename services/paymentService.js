@@ -123,18 +123,25 @@ const paymentWebHook = async (req, res) => {
     if (status === 'success') {
       // Payment was successful
       // Send a success message to the frontend
+      console.log('THIS IS  FROM  PAYMENT  WEBHOOK reference', reference)
       res.status(200).json({ message: 'Payment successful' })
     } else if (status === 'failed') {
       // Payment failed
       // Send a failure message to the frontend
+      console.log('THIS IS  FROM  PAYMENT  WEBHOOK reference',status)
+
       res.status(200).json({ message: 'Payment failed' })
     } else {
       // Unknown payment status
       // Send an error message to the frontend
+      console.log('THIS IS  FROM  PAYMENT  WEBHOOK reference', status)
+
       res.status(400).json({ message: 'Unknown payment status' })
     }
   } catch (error) {
     // Handle any errors that occur during webhook processing
+    console.log('THIS IS  FROM  PAYMENT  WEBHOOK reference', error)
+
     console.error(error)
     res.status(500).json({ message: 'Error processing webhook' })
   }
