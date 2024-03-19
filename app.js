@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 // parse application/json
+const { paymentWebHook } = require('./services/paymentService')
 
 require('dotenv').config()
 // const {sendEmail} = require('./service/mailService')
@@ -71,6 +72,8 @@ app.use((req, res, next) => {
 })
 
 app.use('/api/v1/auth', authRouter)
+
+app.post('https://food-delivery-api-wucx.onrender.com', paymentWebHook)
 
 //ROUTE FOR USERS
 app.use('/api/v1/users', userRouter)

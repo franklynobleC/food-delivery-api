@@ -18,7 +18,7 @@ router.post(
   // authorizedPermissions('admin', 'user'),
   createPayment
 )
-router.post('https://food-delivery-api-wucx.onrender.com/webhook',paymentWebHook)
+
 router.get(
   '/getAllPayments',
   // authenticateUser,
