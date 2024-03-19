@@ -73,7 +73,36 @@ app.use((req, res, next) => {
 
 app.use('/api/v1/auth', authRouter)
 
-app.post('https://food-delivery-api-wucx.onrender.com', paymentWebHook)
+// app.post('https://food-delivery-api-wucx.onrender.com', paymentWebHook)
+app.post('/webhook', (req, res) => {
+  const { event, data } = req.body
+
+  // Handle different webhook events
+  switch (event) {
+    case 'charge.success':
+      console.log('payment  successful WEb Hook')
+      // Payment was successful, handle it accordingly
+      console.log('Payment successful:', data)
+      console.log('payment  successful WEb Hook')
+
+      break
+    case 'charge.failed':
+      console.log('payment  successful WEb Hook')
+
+      // Payment failed, handle it accordingly
+      console.log('Payment failed:', data)
+      console.log('payment  successful WEb Hook')
+
+      break
+    // Add more cases for other webhook events you want to handle
+
+    default:
+      console.log('Unhandled webhook event:', event)
+      break
+  }
+
+  res.sendStatus(200)
+})
 
 //ROUTE FOR USERS
 app.use('/api/v1/users', userRouter)
