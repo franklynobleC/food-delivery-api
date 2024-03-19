@@ -33,10 +33,8 @@ const makePayment = async (email, amount, orderId, paymentOption) => {
         email: email,
         amount: amount * 100,
         publicKey: process.env.PAYSTACK_API_PUBLICK_KEY,
-        callback_url: 'https://paystacktest.com'
+        callback_url: 'https://food-delivery-api-wucx.onrender.com'
       })
-      console.log('RESPONSE BODY', response.body)
-      console.log('FROM API EVENT  TEST >>??????????', response.event)
 
       const { reference } = await response.data
       console.log('from respons Data services', response)
@@ -128,7 +126,7 @@ const paymentWebHook = async (req, res) => {
     } else if (status === 'failed') {
       // Payment failed
       // Send a failure message to the frontend
-      console.log('THIS IS  FROM  PAYMENT  WEBHOOK reference',status)
+      console.log('THIS IS  FROM  PAYMENT  WEBHOOK reference', status)
 
       res.status(200).json({ message: 'Payment failed' })
     } else {
@@ -151,5 +149,5 @@ const verifyPaymentTransaction = async ref => {}
 module.exports = {
   makePayment,
   generateCheckoutUrl,
-  paymentWebHook,
+  paymentWebHook
 }
