@@ -145,11 +145,41 @@ const paymentWebHook = async (req, res) => {
   }
 }
 
+const checkPaymentFromWebHook = async (req, res) => {
+  const { event, data, reference } = req.body
+
+  // Handle different webhook events
+  switch (event) {
+    case 'charge.success':
+      console.log('payment  successful WEb Hook', event)
+      // Payment was successful, handle it accordingly
+      console.log('Payment successful:', data)
+      console.log('payment  successful WEb Hook')
+
+      break
+    case 'charge.failed':
+      console.log('payment  successful WEb Hook', event)
+
+      // Payment failed, handle it accordingly
+      console.log('Payment failed:', event)
+      console.log('payment  successful WEb Hook')
+
+      break
+    // Add more cases for other webhook events you want to handle
+
+    default:
+      console.log('Unhandled webhook event:', event)
+      break
+  }
+
+  res.sendStatus(200)
+}
 const thankYou = async (req, res) => {}
 
 const verifyPaymentTransaction = async ref => {}
 module.exports = {
   makePayment,
   generateCheckoutUrl,
-  paymentWebHook
+  paymentWebHook,
+  checkPaymentFromWebHook
 }

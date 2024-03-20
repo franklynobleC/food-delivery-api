@@ -1,7 +1,10 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 // parse application/json
-const { paymentWebHook } = require('./services/paymentService')
+const {
+  paymentWebHook,
+  checkPaymentFromWebHook
+} = require('./services/paymentService')
 
 require('dotenv').config()
 // const {sendEmail} = require('./service/mailService')
@@ -13,6 +16,7 @@ const cookieParser = require('cookie-parser')
 const app = express()
 
 //for  file Upload
+//TODO  IF        PAYMEMT  SUCCESSFUL,  SEND  MESSSAGE TO  THE CLIENT  THANK  YOU  MESSAGE AORDER  HAS  BEEN PLEASED
 
 const fileUpload = require('express-fileupload')
 const cloudinary = require('cloudinary').v2
@@ -74,35 +78,7 @@ app.use((req, res, next) => {
 app.use('/api/v1/auth', authRouter)
 
 // app.post('https://food-delivery-api-wucx.onrender.com', paymentWebHook)
-app.post('/webhook', (req, res) => {
-  const { event, data } = req.body
-
-  // Handle different webhook events
-  switch (event) {
-    case 'charge.success':
-      console.log('payment  successful WEb Hook')
-      // Payment was successful, handle it accordingly
-      console.log('Payment successful:', data)
-      console.log('payment  successful WEb Hook')
-
-      break
-    case 'charge.failed':
-      console.log('payment  successful WEb Hook')
-
-      // Payment failed, handle it accordingly
-      console.log('Payment failed:', data)
-      console.log('payment  successful WEb Hook')
-
-      break
-    // Add more cases for other webhook events you want to handle
-
-    default:
-      console.log('Unhandled webhook event:', event)
-      break
-  }
-
-  res.sendStatus(200)
-})
+app.post('/webhook', checkPaymentFromWebHook)
 app.get('/webhook', (req, res) => {
   res.send('Hello World!')
 })
