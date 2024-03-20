@@ -115,7 +115,8 @@ const generateCheckoutUrl = () => {
 const paymentWebHook = async (req, res) => {
   try {
     // Extract necessary information from the webhook payload
-    const { reference, status, event, data } = req.body
+    const { status, event, data } = req.body
+
     switch (event) {
     }
     // Handle the payment status
@@ -148,12 +149,12 @@ const paymentWebHook = async (req, res) => {
 }
 
 const checkPaymentFromWebHook = async (req, res) => {
-  const { event, data, reference } = req.body
+  const { event, data } = req.body
 
   // Handle different webhook events
   switch (event) {
     case 'charge.success':
-      console.log('referenceData', reference)
+      console.log('referenceData', data.reference)
 
       console.log('payment  successful WEb Hook from  Refactored Code!!!!!')
       // Payment was successful, handle it accordingly
@@ -181,10 +182,13 @@ const checkPaymentFromWebHook = async (req, res) => {
       console.log('Unhandled webhook event:', event)
       break
   }
-  const paymentData = await PaymentSchema.findOne({
-  transactionId: data.reference
-}).set({ paymentStatus: success })
-console.log('Checking Payment Model', paymentData)
+  const { reference } = data
+  console.log('From The Reference Data Check!!', reference)
+  // await PaymentSchema.transactionId = data.reference;
+  await PaymentSchema.updateOne({
+    transactionId: reference
+  })
+  console.log('Checking Payment Model', paymentData.transactionId)
 
   res.sendStatus(200)
 }
