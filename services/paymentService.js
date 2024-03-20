@@ -185,11 +185,14 @@ const checkPaymentFromWebHook = async (req, res) => {
   const { reference } = data
   console.log('From The Reference Data Check!!', reference)
   // await PaymentSchema.transactionId = data.reference;
-  await PaymentSchema.updateOne({
-    transactionId: reference
-  })
-  console.log('Checking Payment Model', paymentData.transactionId)
-
+  // await PaymentSchema.updateOne({
+  //   transactionId: reference
+  // })
+  await PaymentSchema.findOneAndUpdate(
+    { transactionId: reference },
+    { $set: { paymentStatus: 'success' } }
+  )
+  console.log('Checking Payment Model')
   res.sendStatus(200)
 }
 const thankYou = async (req, res) => {}
