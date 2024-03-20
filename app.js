@@ -103,7 +103,9 @@ app.post('/webhook', (req, res) => {
 
   res.sendStatus(200)
 })
-
+app.get('/webhook', (req, res) => {
+  res.send('Hello World!')
+})
 //ROUTE FOR USERS
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/foods', foodRouter)

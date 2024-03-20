@@ -33,7 +33,7 @@ const makePayment = async (email, amount, orderId, paymentOption) => {
         email: email,
         amount: amount * 100,
         publicKey: process.env.PAYSTACK_API_PUBLICK_KEY,
-        callback_url: 'https://food-delivery-api-wucx.onrender.com'
+        callback_url: 'https://food-delivery-api-wucx.onrender.com/webhook'
       })
 
       const { reference } = await response.data
@@ -144,6 +144,8 @@ const paymentWebHook = async (req, res) => {
     res.status(500).json({ message: 'Error processing webhook' })
   }
 }
+
+const thankYou = async (req, res) => {}
 
 const verifyPaymentTransaction = async ref => {}
 module.exports = {
