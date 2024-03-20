@@ -151,10 +151,10 @@ const checkPaymentFromWebHook = async (req, res) => {
   // Handle different webhook events
   switch (event) {
     case 'charge.success':
-      console.log('payment  successful WEb Hook', event)
+      console.log('payment  successful WEb Hook from  Refactored Code!!!!!')
       // Payment was successful, handle it accordingly
-      console.log('Payment successful:', data)
-      console.log('payment  successful WEb Hook')
+      console.log('Payment successful:,payment  successful WEb Hook from  Refactored Code!!!!!', data)
+      console.log('payment  successful WEb Hook,payment  successful WEb Hook from  Refactored Code!!!!!,check Event!!', event)
 
       break
     case 'charge.failed':
