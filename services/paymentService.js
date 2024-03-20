@@ -154,10 +154,6 @@ const checkPaymentFromWebHook = async (req, res) => {
   switch (event) {
     case 'charge.success':
       console.log('referenceData', reference)
-      const paymentData = await PaymentSchema.findOne({
-        transactionId: data.reference
-      }).set({ paymentStatus: success })
-      console.log('Checking Payment Model', paymentData)
 
       console.log('payment  successful WEb Hook from  Refactored Code!!!!!')
       // Payment was successful, handle it accordingly
@@ -185,6 +181,10 @@ const checkPaymentFromWebHook = async (req, res) => {
       console.log('Unhandled webhook event:', event)
       break
   }
+  const paymentData = await PaymentSchema.findOne({
+  transactionId: data.reference
+}).set({ paymentStatus: success })
+console.log('Checking Payment Model', paymentData)
 
   res.sendStatus(200)
 }
