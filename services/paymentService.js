@@ -116,15 +116,13 @@ const paymentWebHook = async (req, res) => {
   try {
     // Extract necessary information from the webhook payload
     const { reference, status, event, data } = req.body
-
+    switch (event) {
+    }
     // Handle the payment status
     if (status === 'success') {
       // Payment was successful
       // Send a success message to the frontend
-      const paymentData = await PaymentSchema.findOne({
-        transactionId: data.reference
-      }).set({ paymentStatus: success })
-      console.log('Checking Payment Model', paymentData)
+
       console.log('THIS IS  FROM  PAYMENT  WEBHOOK reference', reference)
       res.status(200).json({ message: 'Payment successful' })
     } else if (status === 'failed') {
@@ -155,6 +153,12 @@ const checkPaymentFromWebHook = async (req, res) => {
   // Handle different webhook events
   switch (event) {
     case 'charge.success':
+      console.log('referenceData', reference)
+      const paymentData = await PaymentSchema.findOne({
+        transactionId: data.reference
+      }).set({ paymentStatus: success })
+      console.log('Checking Payment Model', paymentData)
+
       console.log('payment  successful WEb Hook from  Refactored Code!!!!!')
       // Payment was successful, handle it accordingly
       console.log(
