@@ -188,7 +188,7 @@ const checkPaymentFromWebHook = async (req, res) => {
   // await PaymentSchema.updateOne({
   //   transactionId: reference
   // })
-  await PaymentSchema.findOneAndUpdate(
+  await PaymentSchema.updateOne(
     { transactionId: reference },
     { $set: { paymentStatus: 'success' } }
   )
