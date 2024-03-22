@@ -173,7 +173,7 @@ const uploadImage = async (req, res) => {
 }
 
 const searchFood = async (req, res) => {
-  const params = req.query.params
+  const {searchWord} = req.params
 
   consoel.log(params)
   //take a query from   req, use  the word to search  if  it  matches  any name  in  the,
