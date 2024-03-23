@@ -28,8 +28,8 @@ router.get(
   getSingleFood
 )
 router.get(
-  '/searchSingleItem/:searchWord',
-  // authenticateUser,
+  '/search/:searchWord',
+  // a
   // authorizedPermissions('admin', 'user'),
   searchFood
 )
