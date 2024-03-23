@@ -173,9 +173,10 @@ const uploadImage = async (req, res) => {
 }
 
 const searchFood = async (req, res) => {
-  const { searchWord } = req.params
+  // console.log(req)
+  const { searchWord } = req.query
 
-  console.log(searchWord)
+  console.log('searched  word', searchWord)
   //take a query from   req, use  the word to search  if  it  matches  any name  in  the,
   //  food name value,  if  match  is found,  return match, else return error
   const returnedSearch = await FoodSchema.find({
@@ -187,7 +188,7 @@ const searchFood = async (req, res) => {
       res.status(StatusCodes.BAD_REQUEST).json({ Error: 'Search Not Found' })
     }
     // const searchWord = req.query.searchWord
-    res.status(StatusCodes.OK).json( data )
+    res.status(StatusCodes.OK).json(data)
   })
 
   // try {
