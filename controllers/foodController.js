@@ -183,12 +183,12 @@ const searchFood = async (req, res) => {
     $text: { $search: searchWord }
   })
   console.log(returnedSearch)
-  returnedSearch.map(data => {
+  returnedSearch.forEach(data => {
     if (!data || data.length === null) {
       res.status(StatusCodes.BAD_REQUEST).json({ Error: 'Search Not Found' })
     }
     // const searchWord = req.query.searchWord
-    res.status(StatusCodes.OK).json(data)
+    res.status(StatusCodes.OK).json(returnedSearch)
   })
 
   // try {
